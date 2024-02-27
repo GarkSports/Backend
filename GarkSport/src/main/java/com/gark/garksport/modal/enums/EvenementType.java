@@ -1,0 +1,5 @@
+package com.gark.garksport.modal.enums;
+
+public enum EvenementType {
+    MATCH_AMICAL,EVENEMENT_PERSONNALISE,ENTRAINEMENT,MATCH_ENTRE_NOUS,TEST_EVALUATION,COMPETITION
+}
