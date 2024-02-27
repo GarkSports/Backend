@@ -1,0 +1,15 @@
+
+H
+java:S2160"+Override the "equals" method in this class.(òÊ†À8›ŒßŞ1
+N
+java:S1948",Make "discipline" transient or serializable.(ø¢ıÿÿÿÿ8øâ‹ßŞ1
+X
+java:S1948"6Make "informationMedicales" transient or serializable.(¥¢ñ‹şÿÿÿÿ8ùâ‹ßŞ1
+X
+java:S1948"6Make "informationSportives" transient or serializable.(Òáèøÿÿÿÿ8úâ‹ßŞ1
+H
+java:S1948"+Make "paiements" transient or serializable.(›ƒíñ8ûâ‹ßŞ1
+J
+java:S1948"(Make "equipe" transient or serializable.(ÏˆÃüÿÿÿÿ8ıâ‹ßŞ1
+R
+java:S1068	"5Remove this unused "informationParent" private field.(Õú´Ô8¢ŒßŞ1
