@@ -3,9 +3,13 @@ package com.gark.garksport.modal;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
 public class MatchEntreNous extends Evenement {
     private String nom;
