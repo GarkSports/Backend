@@ -5,8 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/AdminService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/5/35879752802bc0affdce6e09da4344d7f553aeb1" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/5/35879752802bc0affdce6e09da4344d7f553aeb1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/a/aaa996ed06e6019cc5b619ec053fd35521aca564" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/a/aaa996ed06e6019cc5b619ec053fd35521aca564" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/2/e2ec885800b7fadfdfbbc304c1f498722b440276" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/2/e2ec885800b7fadfdfbbc304c1f498722b440276" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/e/feab88132ac790330e56c6471dc3d13094e97071" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/e/feab88132ac790330e56c6471dc3d13094e97071" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/authentication/AuthenticationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/authentication/AuthenticationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/authentication/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/authentication/AuthenticationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/authentication/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/authentication/RegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +52,9 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2cv1wmenL2cZr7UQfqkF3aM1l8B" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -81,6 +101,7 @@
       <workItem from="1709059109362" duration="575000" />
       <workItem from="1709059736866" duration="3000" />
       <workItem from="1709060823288" duration="2103000" />
+      <workItem from="1709476081512" duration="9032000" />
     </task>
     <servers />
   </component>
