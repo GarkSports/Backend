@@ -1,11 +1,15 @@
 package com.gark.garksport.modal;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
-public class Adherent extends User{
+public class Adherent extends User {
     private String informationParent;
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -1,12 +1,12 @@
 package com.gark.garksport.modal;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
 public class Entraineur extends User {
     @ManyToOne(cascade = CascadeType.ALL)
