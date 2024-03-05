@@ -1,11 +1,13 @@
 
-g	java:S112Q"FDefine and throw a dedicated exception instead of using a generic one.(íþ·¯þÿÿÿÿ8¥»Ö¦à1
 _
 java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8§Ä°¨à1
-L	java:S106<"+Replace this use of System.out by a logger.(‰®Ñ…þÿÿÿÿ8µ»Ö¦à1
-L	java:S106>"+Replace this use of System.out by a logger.(ÐÐë©ùÿÿÿÿ8µ»Ö¦à1
-Q
-java:S2201B"/The return value of "orElseThrow" must be used.(“ƒ¿ùÿÿÿÿÿ8¶»Ö¦à1
-]	java:S125C"<This block of commented-out lines of code should be removed.(É†°ùøÿÿÿÿ8¶»Ö¦à1
-b
-java:S3252I"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(Ž¢é‘8·»Ö¦à1
+^
+java:S1128"<Remove this unused import 'jakarta.mail.MessagingException'.(´öáùýÿÿÿÿ8¨°ÿ÷à1
+_
+java:S1128"BRemove this unused import 'jakarta.mail.internet.InternetAddress'.(Ê•¬¾8©°ÿ÷à1
+[
+java:S1128">Remove this unused import 'jakarta.mail.internet.MimeMessage'.(š‹ÔÕ8©°ÿ÷à1
+Ž
+java:S1128"lRemove this unused import 'org.springframework.security.authentication.UsernamePasswordAuthenticationToken'.(ÖÆ„Ùüÿÿÿÿ8©°ÿ÷à1
+P
+java:S1128"4Remove this unused import 'java.security.Principal'.(’ÛÞ[8©°ÿ÷à1

@@ -34,6 +34,12 @@ public class AuthenticationController {
     @Autowired
     private JwtService jwtService;
 
+    @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request
+    ){
+        return ResponseEntity.ok(service.register(request));
+    }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
@@ -55,6 +61,5 @@ public class AuthenticationController {
     public String getHello(){
         return "hey from user controller";
     }
-
 
 }

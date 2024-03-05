@@ -1,4 +1,10 @@
 
-]	java:S1255"<This block of commented-out lines of code should be removed.(÷ĞÛùÿÿÿÿ8ù•–¨à1
+_
+java:S6813'"BRemove this field injection and use constructor injection instead.(êæÄŞ8Ñºµƒá1
+g
+java:S32521"EUse static access with "com.gark.garksport.modal.User" for "builder".(ÏÓşÔûÿÿÿÿ8®¨°ƒá1
+G	java:S106E"+Replace this use of System.out by a logger.(®µ€ó8û– şà1
+G	java:S106F"+Replace this use of System.out by a logger.(ö±–®8³Êÿÿà1
+]	java:S125H"<This block of commented-out lines of code should be removed.(÷ĞÛùÿÿÿÿ8üËàúà1
 [
-java:S1144I">Remove this unused private "storeRefreshTokenInCookie" method.(®Ç®8”––¨à1
+java:S1144\">Remove this unused private "storeRefreshTokenInCookie" method.(®Ç®8ÜÌàúà1

@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gark.garksport.dto.authentication.AuthenticationRequest;
 import com.gark.garksport.dto.authentication.AuthenticationResponse;
 import com.gark.garksport.dto.authentication.RegisterRequest;
+import com.gark.garksport.modal.Admin;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.modal.enums.Role;
+import com.gark.garksport.repository.AdminRepository;
 import com.gark.garksport.repository.UserRepository;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
@@ -34,6 +36,8 @@ import java.time.temporal.ChronoUnit;
 public class AuthenticationService {
 
     private final UserRepository repository;
+    @Autowired
+    private  AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -41,6 +45,18 @@ public class AuthenticationService {
     @Value("${application.security.jwt.expiration}")
     private long cookieExpiry;
 
+    public AuthenticationResponse register(RegisterRequest request){
+        var user = Admin.builder()
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(request.getRole())
+                .build();
+        adminRepository.save(user);
+        return AuthenticationResponse.builder()
+                .build();
+    }
     public AuthenticationResponse authenticate(AuthenticationRequest request, HttpServletResponse response){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -50,6 +66,9 @@ public class AuthenticationService {
         );
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
+        System.out.println("User authorities: " + user.getAuthorities());
+        System.out.println("User role: " + user.getRole());
+
 //        if (user.isBlocked()) {
 //            throw new LockedException("User is blocked");
 //        }

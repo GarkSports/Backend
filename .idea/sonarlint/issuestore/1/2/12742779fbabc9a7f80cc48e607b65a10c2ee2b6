@@ -1,0 +1,15 @@
+
+n
+java:S11922"QDefine a constant instead of duplicating this literal "/api/v1/admin/**" 4 times.(ÖÃµÃ8€Æ€ÿà1
+s
+java:S1192*"VDefine a constant instead of duplicating this literal "/api/v1/management/**" 4 times.(ÌÓ¢¯8ºÚ÷à1
+\
+java:S1128":Remove this unused import 'com.gark.garksport.modal.User'.(ë†¦·üÿÿÿÿ8ø¼íşà1
+y
+java:S1128"\Remove this unused import 'org.springframework.security.core.context.SecurityContextHolder'.(ŒÄæë8ø¼íşà1
+~
+java:S1128"aRemove this unused import 'org.springframework.security.web.authentication.logout.LogoutHandler'.(¶„İ€8ø¼íşà1
+b
+java:S1128"FRemove this unused import 'com.gark.garksport.modal.enums.Role.ADMIN'.(­ƒÀ8á®€ÿà1
+j
+java:S1128"HRemove this unused import 'com.gark.garksport.modal.enums.Role.MANAGER'.( —×üÿÿÿÿ8ø¼íşà1

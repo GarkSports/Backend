@@ -5,11 +5,9 @@ import com.gark.garksport.service.AdminService;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/admin")
@@ -17,6 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     private final AdminService adminService;
+
+    @GetMapping("/hello")
+
+    public String hello() {
+
+            return "Hello from Admin controller";
+
+    }
     @PostMapping("/add-manager")
     public String addManager(
             @RequestBody RegisterRequest request
