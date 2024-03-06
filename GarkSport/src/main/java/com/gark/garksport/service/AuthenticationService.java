@@ -74,9 +74,9 @@ public class AuthenticationService {
         System.out.println("User authorities: " + user.getAuthorities());
         System.out.println("User role: " + user.getRole());
 
-//        if (user.isBlocked()) {
-//            throw new LockedException("User is blocked");
-//        }
+        if (user.isBlocked()) {
+            throw new LockedException("User is blocked");
+        }
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         ResponseCookie cookie = ResponseCookie.from("accessToken", jwtToken)

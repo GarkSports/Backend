@@ -1,3 +1,8 @@
 
-W
-java:S2094"BRemove this empty class, write its code or make it an "interface".(Üá¦
+_
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ8ÔÚ×¤á1
+X	java:S125 "<This block of commented-out lines of code should be removed.(ƒ«¯8ÖÚ×¤á1
+o
+java:S1128"RRemove this unused import 'com.gark.garksport.dto.authentication.RegisterRequest'.(ƒ·‡¬8¶ø£¥á1
+^
+java:S1128"<Remove this unused import 'jakarta.mail.MessagingException'.(´öáùıÿÿÿÿ8¶ø£¥á1

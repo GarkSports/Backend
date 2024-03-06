@@ -57,8 +57,6 @@ AGarkSport/src/main/java/com/gark/garksport/config/CorsConfig.java,5\1\5143775e
 NGarkSport/src/main/java/com/gark/garksport/config/JwtAuthenticationFilter.java,2\d\2dc152be61f1c63520c9018a5212b48096f89c17
 x
 HGarkSport/src/main/java/com/gark/garksport/config/ApplicationConfig.java,5\6\5655fc1a0f5f0d65a1eae938542a9ec302cc70e4
-|
-LGarkSport/src/main/java/com/gark/garksport/config/SecurityConfiguration.java,d\b\db9898d16b03405c784dae582f149312c2f6c571
 s
 CGarkSport/src/main/java/com/gark/garksport/service/UserService.java,6\c\6c9bf551517fe689474a668a44e75ee141687a09
 ƒ
@@ -121,3 +119,17 @@ q
 AGarkSport/src/main/java/com/gark/garksport/config/MailConfig.java,f\c\fc5c571e72cac14bff9187769c36ba4a71eab545
 }
 MGarkSport/src/main/java/com/gark/garksport/repository/AdherentRepository.java,4\6\46e6c4e1f8a0d744ff7b82af79ed419ef7d825c0
+u
+EGarkSport/src/main/java/com/gark/garksport/config/SecurityConfig.java,1\2\12742779fbabc9a7f80cc48e607b65a10c2ee2b6
+}
+MGarkSport/src/main/java/com/gark/garksport/service/AuthenticationService.java,5\6\56d23143dcd85db5aa2a9a9c2fbaff15776104cf
+z
+JGarkSport/src/main/java/com/gark/garksport/repository/AdminRepository.java,6\8\68e14fdd9dc238fe3d11931d28592876fc639093
+z
+JGarkSport/src/main/java/com/gark/garksport/controller/AdminController.java,7\c\7cf06d9a095dd10db0d7d800a00a044ac93b5240
+y
+IGarkSport/src/main/java/com/gark/garksport/controller/UserController.java,6\b\6bb82601c6617b87cfe0d4af0152287e19fc4f84
+t
+DGarkSport/src/main/java/com/gark/garksport/service/AdminService.java,4\d\4d16cd591a10e45b6666e669c9ed84d5fd60b995
+v
+FGarkSport/src/main/java/com/gark/garksport/modal/enums/Permission.java,6\f\6fc0b77070de47bff77600968150b06cf7c8d6de

@@ -11,9 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import static com.gark.garksport.modal.enums.Role.ADMIN;
 import com.gark.garksport.repository.UserRepository;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 @SpringBootApplication
+@EnableScheduling
 public class GarkSportApplication {
 
 
