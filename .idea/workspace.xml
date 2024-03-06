@@ -15,6 +15,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -41,13 +42,25 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/yasse/Documents/GitHub/garkauth&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yasse/IdeaProjects/auth&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;342fbad231df4f91ba2cf533d728058e&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.gark.garksport.exception" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.gark.garksport.config" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="GarkSportApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="GarkSport" />
@@ -71,6 +84,22 @@
       <workItem from="1709059109362" duration="575000" />
       <workItem from="1709059736866" duration="3000" />
       <workItem from="1709060823288" duration="2103000" />
+      <workItem from="1709117849709" duration="15037000" />
+      <workItem from="1709142414165" duration="4118000" />
+      <workItem from="1709207291352" duration="403000" />
+      <workItem from="1709209648299" duration="12840000" />
+      <workItem from="1709291211420" duration="1419000" />
+      <workItem from="1709292980948" duration="9858000" />
+      <workItem from="1709380267417" duration="27000" />
+      <workItem from="1709484843717" duration="5673000" />
+      <workItem from="1709501404613" duration="1176000" />
+      <workItem from="1709551154171" duration="4441000" />
+      <workItem from="1709565325088" duration="678000" />
+      <workItem from="1709576968528" duration="231000" />
+      <workItem from="1709638642066" duration="3588000" />
+      <workItem from="1709672304072" duration="357000" />
+      <workItem from="1709674541490" duration="2669000" />
+      <workItem from="1709732063621" duration="652000" />
     </task>
     <servers />
   </component>

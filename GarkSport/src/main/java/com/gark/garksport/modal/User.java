@@ -7,10 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Builder
@@ -35,11 +32,14 @@ public class User implements UserDetails {
     private String nationalite;
     private String photo;
 
-    @ManyToOne
-    private Academie academie;
 
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "invites")
     private Set<Evenement> evenements;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);  // Use a unique field to calculate hashCode
+    }
 
 
     @Override

@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,6 +24,10 @@ public class Adherent extends User {
 
     @OneToOne
     private InformationSportives informationSportives;
+
+    @JsonIgnoreProperties("adherents")
+    @ManyToOne
+    private Academie academie;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Parent> parents;

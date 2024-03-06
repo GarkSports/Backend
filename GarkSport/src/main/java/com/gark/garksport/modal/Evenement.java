@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gark.garksport.modal.enums.Destinataire;
 import com.gark.garksport.modal.enums.EvenementType;
 import com.gark.garksport.modal.enums.Repetition;
@@ -21,6 +22,9 @@ public class Evenement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String nom;
+    private String description;
+
     //Destinataires
     @Enumerated(EnumType.STRING)
     private Destinataire destinataire;
@@ -43,8 +47,16 @@ public class Evenement {
 
     //Lieu
     private String adresse;
-    private String lieu;
 
+    //MatchAmical
+    private String nomAdversaire;
+    private String commentaire;
+
+    //MatchEntreNous
+    private String colorEquipe1;
+    private String colorEquipe2;
+
+    @JsonIgnoreProperties("evenements")
     @ManyToOne
     private Academie academie;
 
@@ -53,10 +65,4 @@ public class Evenement {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<User> invites;
-
-
-
-
-
-
 }
