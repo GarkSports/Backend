@@ -8,4 +8,5 @@ import lombok.EqualsAndHashCode;
 @Data
 @Entity
 public class Admin extends User {
+
 }
