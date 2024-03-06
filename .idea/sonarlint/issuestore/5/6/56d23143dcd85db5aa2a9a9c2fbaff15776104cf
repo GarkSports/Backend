@@ -10,7 +10,6 @@ java:S14816")Remove this unused "user" local variable.(ÏÓşÔûÿÿÿÿ8²ÏÎ£á1
 ]	java:S125="<This block of commented-out lines of code should be removed.(ŸöÇóøÿÿÿÿ8³ÏÎ£á1
 G	java:S106J"+Replace this use of System.out by a logger.(®µ€ó8­Èƒá1
 G	java:S106K"+Replace this use of System.out by a logger.(ö±–®8‘­Èƒá1
-]	java:S125M"<This block of commented-out lines of code should be removed.(÷ĞÛùÿÿÿÿ8’­Èƒá1
 Z
 java:S1128"=Remove this unused import 'com.gark.garksport.modal.Manager'.(Ê§ˆ¨8òÉÎ¤á1
 \
@@ -24,8 +23,6 @@ java:S1128"BRemove this unused import 'jakarta.mail.internet.InternetAddress'.
 java:S1128">Remove this unused import 'jakarta.mail.internet.MimeMessage'.(š‹ÔÕ8òÉÎ¤á1
 j
 java:S1128"MRemove this unused import 'org.springframework.mail.javamail.JavaMailSender'.(ÕÃ›8òÉÎ¤á1
-u
-java:S1128"XRemove this unused import 'org.springframework.security.authentication.LockedException'.(µŸÆ8òÉÎ¤á1
 Y
 java:S1128"7Remove this unused import 'java.security.SecureRandom'.(›éè™úÿÿÿÿ8òÉÎ¤á1
 [
