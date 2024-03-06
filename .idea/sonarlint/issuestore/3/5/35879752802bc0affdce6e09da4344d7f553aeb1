@@ -1,7 +1,7 @@
 
 L
-java:S1948*"*Make "academie" transient or serializable.(Ÿ»’ÿøÿÿÿÿ8¢ˆµ¦à1
+java:S1948*"*Make "academie" transient or serializable.(Ÿ»’ÿøÿÿÿÿ8¡ÑĞ£á1
 I
-java:S1948-",Make "evenements" transient or serializable.(ä™‰°8£ˆµ¦à1
+java:S1948-",Make "evenements" transient or serializable.(ä™‰°8£ÑĞ£á1
 
-java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8œÓËøà1
+java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8µÑĞ£á1

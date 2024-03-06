@@ -5,6 +5,7 @@ import com.gark.garksport.dto.authentication.AuthenticationRequest;
 import com.gark.garksport.dto.authentication.AuthenticationResponse;
 import com.gark.garksport.dto.authentication.RegisterRequest;
 import com.gark.garksport.modal.Admin;
+import com.gark.garksport.modal.Manager;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.modal.enums.Role;
 import com.gark.garksport.repository.AdminRepository;
@@ -45,6 +46,10 @@ public class AuthenticationService {
     @Value("${application.security.jwt.expiration}")
     private long cookieExpiry;
 
+    public Admin register2(Admin admin) {
+        return adminRepository.save(admin);
+    }
+
     public AuthenticationResponse register(RegisterRequest request){
         var user = Admin.builder()
                 .firstname(request.getFirstname())
@@ -53,7 +58,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
-        adminRepository.save(user);
+        //adminRepository.save(user);
         return AuthenticationResponse.builder()
                 .build();
     }
