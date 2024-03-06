@@ -7,8 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.*;
 
 @Data
@@ -33,25 +31,20 @@ public class User implements UserDetails {
     private String telephone;
     private String nationalite;
     private String photo;
-    private boolean blocked;
-    private Instant blockedTimestamp;
-    private Duration blockedDuration;
 
-
-    @ManyToOne
-    private Academie academie;
 
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "invites")
     private Set<Evenement> evenements;
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);  // Use a unique field to calculate hashCode
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (role != null) {
-            return role.getAuthorities();
-        } else {
-            return Collections.emptyList(); // or return null, depending on your use case
-        }
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

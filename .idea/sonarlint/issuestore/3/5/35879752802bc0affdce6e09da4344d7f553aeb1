@@ -1,7 +1,5 @@
 
-L
-java:S1948*"*Make "academie" transient or serializable.(Ÿ»’ÿøÿÿÿÿ8¡ÑĞ£á1
+m
+java:S1206("PThis class overrides "hashCode()" and should therefore also override "equals()".(ğÜşŠ8È³‰Ïß1
 I
-java:S1948-",Make "evenements" transient or serializable.(ä™‰°8£ÑĞ£á1
-
-java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8µÑĞ£á1
+java:S1948%",Make "evenements" transient or serializable.(ä™‰°8æüòÿŞ1
