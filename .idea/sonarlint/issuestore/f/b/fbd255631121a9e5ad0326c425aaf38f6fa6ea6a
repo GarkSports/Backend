@@ -1,0 +1,20 @@
+
+]	java:S125"<This block of commented-out lines of code should be removed.(«±Äëşÿÿÿÿ8ÇíÚ¢á1
+o
+java:S1128"RRemove this unused import 'com.gark.garksport.dto.authentication.RegisterRequest'.(ƒ·‡¬8 ĞĞ£á1
+X
+java:S1128";Remove this unused import 'com.gark.garksport.modal.Admin'.(ÔÔÕ²8¡ĞĞ£á1
+b
+java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8¡ĞĞ£á1
+;
+java:S1128"Remove this duplicated import.(íÊë‰8¡ĞĞ£á1
+j
+java:S1128"MRemove this unused import 'com.gark.garksport.service.AuthenticationService'.(Â´ªğ8¡ĞĞ£á1
+d
+java:S1128"GRemove this unused import 'org.springframework.boot.CommandLineRunner'.(È—ÿÅ8¡ĞĞ£á1
+e
+java:S1128"HRemove this unused import 'org.springframework.context.annotation.Bean'.(‚î‰Ş8¡ĞĞ£á1
+b
+java:S1128"FRemove this unused import 'com.gark.garksport.modal.enums.Role.ADMIN'.(­ƒÀ8¢ĞĞ£á1
+;
+java:S1128"Remove this duplicated import.(íÊë‰8¢ĞĞ£á1
