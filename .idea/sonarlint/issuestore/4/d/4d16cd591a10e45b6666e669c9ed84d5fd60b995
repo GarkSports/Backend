@@ -1,5 +1,8 @@
 
 _
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8‹Àøúà1
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8‹Àøúà1
 g
-java:S3252>"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".( ñœ€ûÿÿÿÿ8šÀøúà1
+java:S3252E"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".( ñœ€ûÿÿÿÿ8šÀøúà1
+L	java:S106^"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8¿µê§á1
+L	java:S106s"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8Ãµê§á1
+H	java:S106†"+Replace this use of System.out by a logger.(×ååÚ8†¥†©á1

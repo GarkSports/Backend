@@ -8,10 +8,17 @@ import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.security.SecureRandom;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -74,5 +81,64 @@ public class AdminService {
             return "An error occurred while processing the request";
         }
 
+    }
+
+    public User getProfil(Principal connectedUser) {
+        var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+        Optional<User> userOptional = repository.findById(user.getId());
+        return userOptional.orElse(null);
+    }
+
+    public String blockUser(Integer id) {
+        var userOptional = repository.findById(id);
+        System.out.println("id is : "+id);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            // Set the blocked status and other relevant information
+            user.setBlocked(true);
+            user.setBlockedTimestamp(Instant.now());
+            user.setBlockedDuration(Duration.ofDays(7)); // Example: Block for 7 days
+
+            repository.save(user);
+
+            return "User blocked successfully";
+        } else {
+            return "User not found";
+        }
+
+    }
+
+    public String unblockUser(Integer id){
+        var userOptional = repository.findById(id);
+        System.out.println("id is : "+id);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            // Set the blocked status and other relevant information
+            user.setBlocked(false);
+
+            repository.save(user);
+
+            return "User unblocked successfully";
+        } else {
+            return "User not found";
+        }
+
+    }
+    @Scheduled(fixedRate = 60 * 1000) // 1 min
+    public void unblockBlockedUsers() {
+        List<User> blockedUsers = repository.findByBlocked(true);
+        System.out.println("1 minute has passed");
+        for (User user : blockedUsers) {
+            Instant expirationTime = user.getBlockedTimestamp().plus(user.getBlockedDuration());
+            if (Instant.now().isAfter(expirationTime)) {
+                // Unlock the user
+                user.setBlocked(false);
+                repository.save(user);
+            }
+        }
     }
 }
