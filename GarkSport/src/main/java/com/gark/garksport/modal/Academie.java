@@ -31,6 +31,10 @@ public class Academie {
     private Etat etat;
     private String description;
     private Boolean isArchived=false;
+    private String rue;
+    private String ville;
+    private String codePostal;
+    private String pays;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "academie_disciplines", joinColumns = @JoinColumn(name = "academie_id"), inverseJoinColumns = @JoinColumn(name = "disciplines_id"))
@@ -40,8 +44,7 @@ public class Academie {
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
     private Set<Adherent> adherents;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Adresse adresse;
+
     @JsonIgnoreProperties("academie")
     @OneToOne(cascade = CascadeType.ALL)
     private Manager manager;

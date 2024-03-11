@@ -42,8 +42,8 @@ public class AcademieController {
         }
     }
 
-    @PutMapping("/deleteAcademie/{academieId}")
-    public ResponseEntity<String> deleteAcademie(@PathVariable Integer academieId) {
+    @PutMapping("/archiveAcademie/{academieId}")
+    public ResponseEntity<String> archiveAcademie(@PathVariable Integer academieId) {
         academieService.deleteAcademie(academieId);
         return ResponseEntity.ok("Academie deleted successfully");
     }
@@ -58,10 +58,8 @@ public class AcademieController {
         return academieService.getDisciplinesByAcademie(academieId);
     }
 
-
-
-
-
-
-
+    @GetMapping("/getAcademieById/{academieId}")
+    public Academie getAcademieById(@PathVariable Integer academieId) {
+        return academieService.getAcademieById(academieId);
+    }
 }

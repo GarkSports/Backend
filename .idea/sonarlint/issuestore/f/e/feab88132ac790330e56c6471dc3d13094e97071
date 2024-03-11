@@ -1,3 +1,6 @@
 
-W
-java:S2094"BRemove this empty class, write its code or make it an "interface".(‹·¶
+X	java:S125 "<This block of commented-out lines of code should be removed.(É´çØ8Ô∞õß·1
+o
+java:S1128"RRemove this unused import 'com.gark.garksport.dto.authentication.RegisterRequest'.(É∑á¨8Ù∞õß·1
+^
+java:S1128"<Remove this unused import 'jakarta.mail.MessagingException'.(¥ˆ·˘˝ˇˇˇˇ8Ù∞õß·1

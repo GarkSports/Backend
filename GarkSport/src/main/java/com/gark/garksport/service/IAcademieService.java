@@ -12,12 +12,7 @@ public interface IAcademieService {
     public Academie updateAcademie(Academie academie, Integer academieId);
     public Academie chanegeEtatAcademie(Integer academieId, Etat etat);
     public void deleteAcademie(Integer academieId);
-
+    public Academie getAcademieById(Integer academieId);
     public Manager getManagerDetails(Integer academieId);
     public Set<String> getDisciplinesByAcademie(Integer academieId);
-
-
-
-
-
 }

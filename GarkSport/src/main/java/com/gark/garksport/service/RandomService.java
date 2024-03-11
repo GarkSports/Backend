@@ -10,6 +10,10 @@ import com.gark.garksport.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 public class RandomService implements IRandomService {
     @Autowired
@@ -31,6 +35,14 @@ public class RandomService implements IRandomService {
         adherentRepository.save(adherent);
         academieRepository.save(academie);
         return adherent;
+    }
+
+    @Override
+    public Set<Manager> getManagers() {
+        return managerRepository.findAll()
+                .stream()
+                .filter(manager -> manager.getAcademie() == null)
+                .collect(Collectors.toSet());
     }
 
 }

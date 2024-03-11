@@ -47,8 +47,6 @@ l
 <GarkSport/src/main/java/com/gark/garksport/modal/Equipe.java,4\8\4802bf713df5a0d2f8ca3528f028943a63594911
 p
 @GarkSport/src/main/java/com/gark/garksport/modal/Discipline.java,6\9\69aa99506b0af9d10c5c3da20d37b13c55c55ba0
-m
-=GarkSport/src/main/java/com/gark/garksport/modal/Adresse.java,0\1\01cf7fc2a27ee9dadb23ffdb66f2b1dcf1a0be07
 k
 ;GarkSport/src/main/java/com/gark/garksport/modal/Admin.java,1\d\1d27ad4d2ec29b189f945d8014fa29428aa74919
 q
@@ -121,3 +119,9 @@ q
 AGarkSport/src/main/java/com/gark/garksport/config/MailConfig.java,f\c\fc5c571e72cac14bff9187769c36ba4a71eab545
 }
 MGarkSport/src/main/java/com/gark/garksport/repository/AdherentRepository.java,4\6\46e6c4e1f8a0d744ff7b82af79ed419ef7d825c0
+z
+JGarkSport/src/main/java/com/gark/garksport/controller/AdminController.java,7\c\7cf06d9a095dd10db0d7d800a00a044ac93b5240
+y
+IGarkSport/src/main/java/com/gark/garksport/controller/UserController.java,6\b\6bb82601c6617b87cfe0d4af0152287e19fc4f84
+{
+KGarkSport/src/main/java/com/gark/garksport/dto/request/AcademieRequest.java,0\6\06abf9ec51c43bfee0b07aeea669fbfcb551b101

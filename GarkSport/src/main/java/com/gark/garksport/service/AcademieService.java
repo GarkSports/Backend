@@ -58,7 +58,7 @@ public class AcademieService implements IAcademieService {
             academieNew.setLogo(academie.getLogo());
             academieNew.setAffiliation(academie.getAffiliation());
             academieNew.setDescription(academie.getDescription());
-            academieNew.setAdresse(academie.getAdresse());
+            academieNew.setManager(academie.getManager());
             return academieRepository.save(academieNew);
         } catch (Exception e) {
             throw new RuntimeException("Failed to update Academie", e);
@@ -91,6 +91,15 @@ public class AcademieService implements IAcademieService {
         }
     }
 
+    @Override
+    public Academie getAcademieById(Integer academieId) {
+        try {
+            return academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get Academie by Id", e);
+        }
+    }
+
     private void senDeleteNotificationEmail(String recipientEmail, String academieNom){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("centrenationaldelinformatiquec@gmail.com");
@@ -99,11 +108,6 @@ public class AcademieService implements IAcademieService {
         message.setText("Dear Adherent,\n\nThe academy '" + academieNom + "' has been deleted.\n\nSincerely,\nThe Management");
         javaMailSender.send(message);
     }
-
-
-
-
-
 
     @Override
     public Manager getManagerDetails(Integer academieId) {
