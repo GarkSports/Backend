@@ -1,9 +1,7 @@
 package com.gark.garksport.service;
-import com.gark.garksport.modal.Academie;
-import com.gark.garksport.modal.Adherent;
-import com.gark.garksport.modal.Discipline;
-import com.gark.garksport.modal.Manager;
+import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Etat;
+import com.gark.garksport.repository.AcademieHistoryRepository;
 import com.gark.garksport.repository.AcademieRepository;
 import com.gark.garksport.repository.DisciplineRepository;
 import com.gark.garksport.repository.ManagerRepository;
@@ -23,6 +21,8 @@ public class AcademieService implements IAcademieService {
     private DisciplineRepository disciplineRepository;
     @Autowired
     private ManagerRepository managerRepository;
+    @Autowired
+    private AcademieHistoryRepository academieHistoryRepository;
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -66,14 +66,15 @@ public class AcademieService implements IAcademieService {
     }
 
     @Override
-    public Academie chanegeEtatAcademie(Integer academieId, Etat etat) {
-        try {
-            Academie academie = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
-            academie.setEtat(etat);
-            return academieRepository.save(academie);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to change Academie state", e);
-        }
+    public Academie changeEtatAcademie(Integer academieId, Etat newEtat, String changeReason) {
+        Academie academie = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+        academie.updateEtat(newEtat, changeReason);
+        return academieRepository.save(academie);
+    }
+
+    @Override
+    public Set<AcademieHistory> getAcademieHistory(Integer academieId) {
+        return academieHistoryRepository.findByAcademie_IdOrderByChangeDateDesc(academieId);
     }
 
     @Override

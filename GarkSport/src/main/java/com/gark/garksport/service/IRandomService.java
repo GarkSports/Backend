@@ -1,6 +1,5 @@
 package com.gark.garksport.service;
 
-import com.gark.garksport.modal.Academie;
 import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.Manager;
 

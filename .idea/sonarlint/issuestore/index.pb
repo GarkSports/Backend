@@ -125,3 +125,7 @@ y
 IGarkSport/src/main/java/com/gark/garksport/controller/UserController.java,6\b\6bb82601c6617b87cfe0d4af0152287e19fc4f84
 {
 KGarkSport/src/main/java/com/gark/garksport/dto/request/AcademieRequest.java,0\6\06abf9ec51c43bfee0b07aeea669fbfcb551b101
+„
+TGarkSport/src/main/java/com/gark/garksport/repository/AcademieHistoryRepository.java,1\8\1861acfef9de8bf51bd23a91edfc889fa5810072
+u
+EGarkSport/src/main/java/com/gark/garksport/modal/AcademieHistory.java,4\8\48248bddbffaf758c305dc4349a883830bc99e88

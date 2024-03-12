@@ -4,6 +4,7 @@ import com.gark.garksport.dto.request.AcademieRequest;
 import com.gark.garksport.dto.request.EtatRequest;
 import com.gark.garksport.exception.InvalidEtatException;
 import com.gark.garksport.modal.Academie;
+import com.gark.garksport.modal.AcademieHistory;
 import com.gark.garksport.modal.Manager;
 import com.gark.garksport.service.IAcademieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,15 @@ public class AcademieController {
     @PutMapping("/changeEtat/{academieId}")
     public Academie changeEtat(@PathVariable Integer academieId, @RequestBody EtatRequest etatRequest) {
         try {
-            return academieService.chanegeEtatAcademie(academieId, etatRequest.getEtat());
+            return academieService.changeEtatAcademie(academieId, etatRequest.getEtat(), etatRequest.getChangeReason());
         } catch (IllegalArgumentException e) {
             throw new InvalidEtatException("Etat non valide");
         }
+    }
+
+    @GetMapping("/getAcademieHistory/{academieId}")
+    public Set<AcademieHistory> getAcademieHistory(@PathVariable Integer academieId) {
+        return academieService.getAcademieHistory(academieId);
     }
 
     @PutMapping("/archiveAcademie/{academieId}")
