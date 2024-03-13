@@ -129,3 +129,7 @@ KGarkSport/src/main/java/com/gark/garksport/dto/request/AcademieRequest.java,0\
 TGarkSport/src/main/java/com/gark/garksport/repository/AcademieHistoryRepository.java,1\8\1861acfef9de8bf51bd23a91edfc889fa5810072
 u
 EGarkSport/src/main/java/com/gark/garksport/modal/AcademieHistory.java,4\8\48248bddbffaf758c305dc4349a883830bc99e88
+~
+NGarkSport/src/main/java/com/gark/garksport/config/CloudinaryConfiguration.java,e\d\edf76fc9221c02a6c08ce52db43ce1410f361bf8
+}
+MGarkSport/src/main/java/com/gark/garksport/service/AuthenticationService.java,5\6\56d23143dcd85db5aa2a9a9c2fbaff15776104cf

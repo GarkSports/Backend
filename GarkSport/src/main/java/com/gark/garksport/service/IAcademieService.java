@@ -10,7 +10,7 @@ import java.util.Set;
 public interface IAcademieService {
     public Academie addAcademie(Academie academie,Set<Integer> disciplinesIds, Integer managerId);
     public Set<Academie> getAcademies();
-    public Academie updateAcademie(Academie academie, Integer academieId);
+    public Academie updateAcademie(Academie academie, Integer academieId, Set<Integer> disciplinesIds, Integer managerId);
     public Academie changeEtatAcademie(Integer academieId, Etat newEtat, String changeReason);
     public Set<AcademieHistory> getAcademieHistory(Integer academieId);
     public void deleteAcademie(Integer academieId);

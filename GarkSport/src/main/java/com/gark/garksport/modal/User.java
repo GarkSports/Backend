@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gark.garksport.modal.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -46,6 +47,7 @@ public class User implements UserDetails {
 
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (role != null) {
             return role.getAuthorities();

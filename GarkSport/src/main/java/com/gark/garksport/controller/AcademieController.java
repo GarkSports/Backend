@@ -29,9 +29,9 @@ public class AcademieController {
         return academieService.getAcademies();
     }
 
-    @PutMapping("/updateAcademie/{academieId}")
-    public Academie updateAcademie(@RequestBody Academie academie, @PathVariable Integer academieId) {
-        return academieService.updateAcademie(academie, academieId);
+    @PutMapping("/updateAcademie/{academieId}/{managerId}")
+    public Academie updateAcademie(@RequestBody AcademieRequest academieRequest, @PathVariable Integer managerId, @PathVariable Integer academieId) {
+        return academieService.updateAcademie(academieRequest.getAcademie(), academieId, academieRequest.getDisciplineIds(), managerId);
     }
 
     @PutMapping("/changeEtat/{academieId}")

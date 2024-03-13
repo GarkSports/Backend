@@ -49,16 +49,22 @@ public class AcademieService implements IAcademieService {
     }
 
     @Override
-    public Academie updateAcademie(Academie academie, Integer academieId) {
+    public Academie updateAcademie(Academie academie, Integer academieId, Set<Integer> disciplinesIds, Integer managerId) {
         try {
             Academie academieNew = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+            Set<Discipline> disciplines = new HashSet<>(disciplineRepository.findAllById(disciplinesIds));
+            Manager manager = managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found"));
             academieNew.setNom(academie.getNom());
             academieNew.setType(academie.getType());
             academieNew.setFraisAdhesion(academie.getFraisAdhesion());
-            academieNew.setLogo(academie.getLogo());
             academieNew.setAffiliation(academie.getAffiliation());
             academieNew.setDescription(academie.getDescription());
-            academieNew.setManager(academie.getManager());
+            academieNew.setRue(academie.getRue());
+            academieNew.setVille(academie.getVille());
+            academieNew.setCodePostal(academie.getCodePostal());
+            academieNew.setPays(academie.getPays());
+            academieNew.setDisciplines(disciplines);
+            academieNew.setManager(manager);
             return academieRepository.save(academieNew);
         } catch (Exception e) {
             throw new RuntimeException("Failed to update Academie", e);
