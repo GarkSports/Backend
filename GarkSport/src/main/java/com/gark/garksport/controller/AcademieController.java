@@ -5,6 +5,7 @@ import com.gark.garksport.dto.request.EtatRequest;
 import com.gark.garksport.exception.InvalidEtatException;
 import com.gark.garksport.modal.Academie;
 import com.gark.garksport.modal.AcademieHistory;
+import com.gark.garksport.modal.Discipline;
 import com.gark.garksport.modal.Manager;
 import com.gark.garksport.service.IAcademieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class AcademieController {
     }
 
     @GetMapping("/getDisciplinesByAcademie/{academieId}")
-    public Set<String> getDisciplinesByAcademie(@PathVariable Integer academieId) {
+    public Set<Discipline> getDisciplinesByAcademie(@PathVariable Integer academieId) {
         return academieService.getDisciplinesByAcademie(academieId);
     }
 

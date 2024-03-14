@@ -1,10 +1,20 @@
 
-b	java:S112&"FDefine and throw a dedicated exception instead of using a generic one.(¨Á°£8ÏÑíÁã1
-g	java:S112/"FDefine and throw a dedicated exception instead of using a generic one.(áèÓüşÿÿÿÿ8ĞÑíÁã1
-g	java:S112F"FDefine and throw a dedicated exception instead of using a generic one.(ª»¬øÿÿÿÿ8ĞÑíÁã1
-g	java:S112a"FDefine and throw a dedicated exception instead of using a generic one.(íŒ´Òşÿÿÿÿ8ÑÑíÁã1
-g	java:S112j"FDefine and throw a dedicated exception instead of using a generic one.(½—çÿÿÿÿÿ8ÒÑíÁã1
-b	java:S112}"FDefine and throw a dedicated exception instead of using a generic one.(–™õ”8ÒÑíÁã1
-c	java:S112‹"FDefine and throw a dedicated exception instead of using a generic one.(ŸŞçş8ÒÑíÁã1
+b	java:S112+"FDefine and throw a dedicated exception instead of using a generic one.(¨Á°£8¹Á¯éã1
+g	java:S1124"FDefine and throw a dedicated exception instead of using a generic one.(áèÓüşÿÿÿÿ8¹Á¯éã1
+g	java:S112L"FDefine and throw a dedicated exception instead of using a generic one.(ª»¬øÿÿÿÿ8¹Á¯éã1
+g	java:S112g"FDefine and throw a dedicated exception instead of using a generic one.(íŒ´Òşÿÿÿÿ8¹Á¯éã1
+g	java:S112p"FDefine and throw a dedicated exception instead of using a generic one.(½—çÿÿÿÿÿ8¹Á¯éã1
+c	java:S112ƒ"FDefine and throw a dedicated exception instead of using a generic one.(–™õ”8¹Á¯éã1
+c	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ŸŞçş8²ÃÚéã1
 p
-java:S11926"SDefine a constant instead of duplicating this literal "Academie not found" 6 times.(û½Äë8ÔÑíÁã1
+java:S1192;"SDefine a constant instead of duplicating this literal "Academie not found" 6 times.(û½Äë8»Á¯éã1
+S
+java:S1128"6Remove this unused import 'com.cloudinary.Cloudinary'.(ë‹§Ä8ÎÿÚéã1
+n
+java:S1128"LRemove this unused import 'org.springframework.web.multipart.MultipartFile'.(ôŸœÿÿÿÿÿ8ĞÿÚéã1
+R
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8ĞÿÚéã1
+P
+java:S1128".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8ĞÿÚéã1
+L
+java:S1128"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8ĞÿÚéã1

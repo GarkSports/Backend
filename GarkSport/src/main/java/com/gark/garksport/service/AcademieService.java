@@ -1,4 +1,5 @@
 package com.gark.garksport.service;
+import com.cloudinary.Cloudinary;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Etat;
 import com.gark.garksport.repository.AcademieHistoryRepository;
@@ -9,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -63,6 +68,7 @@ public class AcademieService implements IAcademieService {
             academieNew.setVille(academie.getVille());
             academieNew.setCodePostal(academie.getCodePostal());
             academieNew.setPays(academie.getPays());
+            academieNew.setLogo(academie.getLogo());
             academieNew.setDisciplines(disciplines);
             academieNew.setManager(manager);
             return academieRepository.save(academieNew);
@@ -127,14 +133,10 @@ public class AcademieService implements IAcademieService {
     }
 
     @Override
-    public Set<String> getDisciplinesByAcademie(Integer academieId) {
+    public Set<Discipline> getDisciplinesByAcademie(Integer academieId) {
         try {
             Academie academie = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
-            Set<String> disciplines = new HashSet<>();
-            for (Discipline discipline : academie.getDisciplines()) {
-                disciplines.add(discipline.getNom());
-            }
-            return disciplines;
+            return academie.getDisciplines();
         } catch (Exception e) {
             throw new RuntimeException("Failed to get Disciplines for Academie", e);
         }
