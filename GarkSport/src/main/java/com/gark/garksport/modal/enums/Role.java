@@ -13,6 +13,7 @@ import static com.gark.garksport.modal.enums.Permission.*;
 @RequiredArgsConstructor
 public enum Role {
     ADEHERANT(Collections.emptySet()),
+    USER(Collections.emptySet()),
 
     ADMIN(
             Set.of(

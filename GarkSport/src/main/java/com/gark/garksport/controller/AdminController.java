@@ -25,7 +25,7 @@ public class AdminController {
 
     @GetMapping("/hello")
 
-    public String hello() {
+    public String get() {
 
             return "Hello from Admin controller";
 

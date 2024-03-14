@@ -133,3 +133,5 @@ t
 DGarkSport/src/main/java/com/gark/garksport/service/AdminService.java,4\d\4d16cd591a10e45b6666e669c9ed84d5fd60b995
 v
 FGarkSport/src/main/java/com/gark/garksport/modal/enums/Permission.java,6\f\6fc0b77070de47bff77600968150b06cf7c8d6de
+{
+KGarkSport/src/main/java/com/gark/garksport/dto/request/AcademieRequest.java,0\6\06abf9ec51c43bfee0b07aeea669fbfcb551b101

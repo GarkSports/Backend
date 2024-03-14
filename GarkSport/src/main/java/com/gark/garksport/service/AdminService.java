@@ -3,6 +3,7 @@ package com.gark.garksport.service;
 import com.gark.garksport.dto.authentication.RegisterRequest;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.UserRepository;
+import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -50,8 +51,8 @@ public class AdminService {
         return randomPassword.toString();
     }
 
-    public String addManager(RegisterRequest request) {
-        try {
+    public String addManager(RegisterRequest request)throws MessagingException {
+
             String generatedPWD = generateRandomPassword();
 
             var user = User.builder()
@@ -72,14 +73,7 @@ public class AdminService {
 
             mailSender.send(message);
             return request.getRole() + " added successfully";
-        } catch(
-                Exception e)
 
-        {
-            // Handle the exception here
-            e.printStackTrace(); // Print the stack trace for debugging
-            return "An error occurred while processing the request";
-        }
 
     }
 
@@ -128,17 +122,17 @@ public class AdminService {
         }
 
     }
-    @Scheduled(fixedRate = 60 * 1000) // 1 min
-    public void unblockBlockedUsers() {
-        List<User> blockedUsers = repository.findByBlocked(true);
-        System.out.println("1 minute has passed");
-        for (User user : blockedUsers) {
-            Instant expirationTime = user.getBlockedTimestamp().plus(user.getBlockedDuration());
-            if (Instant.now().isAfter(expirationTime)) {
-                // Unlock the user
-                user.setBlocked(false);
-                repository.save(user);
-            }
-        }
-    }
+//    @Scheduled(fixedRate = 60 * 1000) // 1 min
+//    public void unblockBlockedUsers() {
+//        List<User> blockedUsers = repository.findByBlocked(true);
+//        System.out.println("1 minute has passed");
+//        for (User user : blockedUsers) {
+//            Instant expirationTime = user.getBlockedTimestamp().plus(user.getBlockedDuration());
+//            if (Instant.now().isAfter(expirationTime)) {
+//                // Unlock the user
+//                user.setBlocked(false);
+//                repository.save(user);
+//            }
+//        }
+//    }
 }

@@ -63,8 +63,6 @@ public class SecurityConfig {
                 .requestMatchers(PUT, "/discipline/**").hasAuthority(ADMIN_UPDATE.getPermission())
                 .requestMatchers(DELETE, "/discipline/**").hasAuthority(ADMIN_DELETE.getPermission())
 
-
-
                 .anyRequest()
                 .authenticated()
                 .and()

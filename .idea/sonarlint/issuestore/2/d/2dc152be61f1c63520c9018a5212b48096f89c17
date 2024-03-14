@@ -1,0 +1,9 @@
+
+t
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(–ø°¾øÿÿÿÿ8³«õÔã1
+X	java:S125&"<This block of commented-out lines of code should be removed.(ßýýö8º«õÔã1
+X	java:S125)"<This block of commented-out lines of code should be removed.(‰õÔˆ8¼«õÔã1
+G	java:S106E"+Replace this use of System.out by a logger.(™Æ«8†¤þÔã1
+G
+java:S3457F"%String contains no format specifiers.(”¥øòûÿÿÿÿ8‡¤þÔã1
+L	java:S106F"+Replace this use of System.out by a logger.(”¥øòûÿÿÿÿ8ˆ¤þÔã1

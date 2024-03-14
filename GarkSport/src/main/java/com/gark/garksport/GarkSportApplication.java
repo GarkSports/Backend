@@ -24,17 +24,17 @@ public class GarkSportApplication {
 	}
 
 
-//	@Bean
-//	public CommandLineRunner commandLineRunner(AuthenticationService service) {
-//		return args -> {
-//			var admin = RegisterRequest.builder()
-//					.firstname("Admin")
-//					.lastname("Admin")
-//					.email("adminaa2@gmail.com")
-//					.password("password")
-//					.role(ADMIN)
-//					.build();
-//			System.out.println("Admin token: " + service.register(admin));
-//		};
-//	}
+	@Bean
+	public CommandLineRunner commandLineRunner(AuthenticationService service) {
+		return args -> {
+			var admin = RegisterRequest.builder()
+					.firstname("AdminTest")
+					.lastname("AdminTest")
+					.email("admintest@gmail.com")
+					.password("password")
+					.role(ADMIN)
+					.build();
+			System.out.println("Admin token: " + service.register(admin));
+		};
+	}
 }
