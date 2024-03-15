@@ -1,6 +1,7 @@
 package com.gark.garksport.service;
 
 import com.gark.garksport.dto.authentication.RegisterRequest;
+import com.gark.garksport.modal.Manager;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.UserRepository;
 import jakarta.mail.MessagingException;
@@ -50,6 +51,10 @@ public class AdminService {
 
         return randomPassword.toString();
     }
+
+//    public Manager addManager(Manager manager) {
+//        return managerRepository.save(manager);
+//    }
 
     public String addManager(RegisterRequest request)throws MessagingException {
 

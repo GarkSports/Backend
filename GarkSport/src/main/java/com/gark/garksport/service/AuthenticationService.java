@@ -38,7 +38,7 @@ public class AuthenticationService {
 
     private final UserRepository repository;
     @Autowired
-    private  AdminRepository adminRepository;
+    private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -46,22 +46,12 @@ public class AuthenticationService {
     @Value("${application.security.jwt.expiration}")
     private long cookieExpiry;
 
-    public Admin register2(Admin admin) {
+    public Admin register(Admin admin) {
+        admin.setRole(Role.ADMIN);
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         return adminRepository.save(admin);
     }
 
-    public AuthenticationResponse register(RegisterRequest request){
-        var user = Admin.builder()
-                .firstname(request.getFirstname())
-                .lastname(request.getLastname())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole())
-                .build();
-        //adminRepository.save(user);
-        return AuthenticationResponse.builder()
-                .build();
-    }
     public AuthenticationResponse authenticate(AuthenticationRequest request, HttpServletResponse response){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

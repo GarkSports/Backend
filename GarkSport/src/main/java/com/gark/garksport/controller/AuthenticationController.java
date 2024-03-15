@@ -2,7 +2,6 @@ package com.gark.garksport.controller;
 
 import com.gark.garksport.dto.authentication.AuthenticationRequest;
 import com.gark.garksport.dto.authentication.AuthenticationResponse;
-import com.gark.garksport.dto.authentication.RegisterRequest;
 import com.gark.garksport.modal.Admin;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.UserRepository;
@@ -10,7 +9,6 @@ import com.gark.garksport.service.AdminService;
 import com.gark.garksport.service.AuthenticationService;
 import com.gark.garksport.service.JwtService;
 import com.gark.garksport.service.UserService;
-import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -36,10 +34,10 @@ public class AuthenticationController {
     private JwtService jwtService;
 
     @PostMapping("/register")
-    public Admin register2(
+    public ResponseEntity<Admin> register(
             @RequestBody Admin admin
             ){
-        return service.register2(admin);
+        return ResponseEntity.ok(service.register(admin));
     }
 
     @PostMapping("/authenticate")

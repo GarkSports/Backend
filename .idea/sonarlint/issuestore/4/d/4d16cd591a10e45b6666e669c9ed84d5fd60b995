@@ -1,12 +1,15 @@
 
 _
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ºâˆÅã1
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8éù×ä1
+X	java:S1257"<This block of commented-out lines of code should be removed.(¿û8¼‘Øä1
 g
-java:S3252F"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".( ñœ€ûÿÿÿÿ8ÍâˆÅã1
-L	java:S106X"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8ÖâˆÅã1
-L	java:S106m"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8İâˆÅã1
-]	java:S125~"<This block of commented-out lines of code should be removed.(£ôÚçıÿÿÿÿ8àâˆÅã1
+java:S3252K"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".( ñœ€ûÿÿÿÿ8ğù×ä1
+L	java:S106]"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8óù×ä1
+L	java:S106r"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8ôù×ä1
+^	java:S125ƒ"<This block of commented-out lines of code should be removed.(£ôÚçıÿÿÿÿ8õù×ä1
+Z
+java:S1128"=Remove this unused import 'com.gark.garksport.modal.Manager'.(Ê§ˆ¨8Æ‘Øä1
 r
-java:S1128"PRemove this unused import 'org.springframework.scheduling.annotation.Scheduled'.(‚¡®Üûÿÿÿÿ8àâˆÅã1
+java:S1128"PRemove this unused import 'org.springframework.scheduling.annotation.Scheduled'.(‚¡®Üûÿÿÿÿ8Æ‘Øä1
 M
-java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8àâˆÅã1
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8Æ‘Øä1
