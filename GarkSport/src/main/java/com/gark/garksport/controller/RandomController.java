@@ -26,9 +26,14 @@ public class RandomController {
         return randomService.addAndAffectAdherentToAcademie(adherent, academieId);
     }
 
-    @GetMapping("/getManagers")
+    @GetMapping("/getManagers/{academieId}")
+    public Set<Manager> getManagers(@PathVariable Integer academieId) {
+        return randomService.getManagersExceptAssigned(academieId);
+    }
+
+    @GetMapping("/getManagersNotAssigned")
     public Set<Manager> getManagers() {
-        return randomService.getManagers();
+        return randomService.getManagersNotAssigned();
     }
 
 

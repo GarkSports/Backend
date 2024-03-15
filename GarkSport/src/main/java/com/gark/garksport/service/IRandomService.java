@@ -10,5 +10,7 @@ public interface IRandomService {
 
     public Adherent addAndAffectAdherentToAcademie(Adherent adherent, Integer academieId);
 
-    public Set<Manager> getManagers();
+    public Set<Manager> getManagersExceptAssigned(Integer academieId);
+
+    public Set<Manager> getManagersNotAssigned();
 }

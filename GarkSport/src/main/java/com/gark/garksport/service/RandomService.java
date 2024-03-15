@@ -37,11 +37,21 @@ public class RandomService implements IRandomService {
     }
 
     @Override
-    public Set<Manager> getManagers() {
+    public Set<Manager> getManagersExceptAssigned(Integer academieId) {
+        Academie academie = academieRepository.findById(academieId).get();
+        Manager academieManager =academie.getManager();
+        Set<Manager> managers = managerRepository.findAll().stream().filter(manager -> manager.getAcademie() == null).collect(Collectors.toSet());
+        managers.add(academieManager);
+        return managers;
+    }
+
+    @Override
+    public Set<Manager> getManagersNotAssigned() {
         return managerRepository.findAll()
                 .stream()
                 .filter(manager -> manager.getAcademie() == null)
                 .collect(Collectors.toSet());
     }
+
 
 }
