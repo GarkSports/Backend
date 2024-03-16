@@ -127,6 +127,18 @@ public class AdminService {
         }
 
     }
+
+    public String archiveUser(Integer id) {
+        var user = repository.findById(id);
+        System.out.println("id is : "+id);
+        if (user.isPresent()) {
+
+            repository.delete(user.get());
+            return "User deleted successfully";
+        } else {
+            return "User not found";
+        }
+    }
 //    @Scheduled(fixedRate = 60 * 1000) // 1 min
 //    public void unblockBlockedUsers() {
 //        List<User> blockedUsers = repository.findByBlocked(true);

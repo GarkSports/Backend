@@ -45,11 +45,18 @@ public class AdminController {
         return adminService.getProfil(connectedUser);
     }
 
+//    @GetMapping("/get-all-users")
+//    @ResponseBody
+//    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
+//        var user = getProfil(connectedUser);
+//        List<User> userList = repository.findAllByIdNot(user.getId());
+//
+//        return ResponseEntity.ok(userList);
+//    }
     @GetMapping("/get-all-users")
     @ResponseBody
-    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
-        var user = getProfil(connectedUser);
-        List<User> userList = repository.findAllByIdNot(user.getId());
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> userList = repository.findAll();
         return ResponseEntity.ok(userList);
     }
 
@@ -61,6 +68,11 @@ public class AdminController {
     @PutMapping("/unblock-user")
     public String unblockUser(@RequestParam Integer id) {
         return adminService.unblockUser(id);
+    }
+
+    @DeleteMapping("/archive-user")
+    public String archiveUser(@RequestParam Integer id){
+        return adminService.archiveUser(id);
     }
 
 }
