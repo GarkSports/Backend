@@ -2,6 +2,7 @@ package com.gark.garksport.controller;
 
 import com.gark.garksport.dto.authentication.AuthenticationRequest;
 import com.gark.garksport.dto.authentication.AuthenticationResponse;
+import com.gark.garksport.dto.authentication.RegisterRequest;
 import com.gark.garksport.modal.Admin;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.UserRepository;
@@ -33,12 +34,27 @@ public class AuthenticationController {
     @Autowired
     private JwtService jwtService;
 
-    @PostMapping("/register")
-    public ResponseEntity<Admin> register(
+    @PostMapping("/registerAsAdmin")
+    public ResponseEntity<Admin> registerAsAdmin(
             @RequestBody Admin admin
             ){
-        return ResponseEntity.ok(service.register(admin));
+        return ResponseEntity.ok(service.registerAsAdmin(admin));
     }
+
+    @PostMapping("/registerAsUser")
+    public ResponseEntity<User> registerAsUser(
+            @RequestBody User user
+    ){
+        return ResponseEntity.ok(service.registerAsUser(user));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request
+    ){
+        return ResponseEntity.ok(service.register(request));
+    }
+
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(

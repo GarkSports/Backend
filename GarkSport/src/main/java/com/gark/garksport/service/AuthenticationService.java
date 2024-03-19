@@ -46,10 +46,30 @@ public class AuthenticationService {
     @Value("${application.security.jwt.expiration}")
     private long cookieExpiry;
 
-    public Admin register(Admin admin) {
+    public Admin registerAsAdmin(Admin admin) {
         admin.setRole(Role.ADMIN);
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         return adminRepository.save(admin);
+    }
+
+    public AuthenticationResponse register(RegisterRequest request){
+        var user = Admin.builder()
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(request.getRole())
+                .build();
+        repository.save(user);
+        return AuthenticationResponse.builder()
+                .build();
+    }
+    public User registerAsUser(User user) {
+
+            user.setRole(Role.ADEHERANT);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return repository.save(user);
+
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request, HttpServletResponse response){

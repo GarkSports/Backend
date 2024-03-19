@@ -1,8 +1,11 @@
 package com.gark.garksport.service;
 
 import com.gark.garksport.dto.authentication.RegisterRequest;
+import com.gark.garksport.modal.Admin;
 import com.gark.garksport.modal.Manager;
 import com.gark.garksport.modal.User;
+import com.gark.garksport.modal.enums.Role;
+import com.gark.garksport.repository.AdminRepository;
 import com.gark.garksport.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
@@ -30,6 +33,8 @@ public class AdminService {
 
     @Autowired
     private JavaMailSender mailSender;
+    @Autowired
+    private final AdminRepository adminRepository;
 
     public String generateRandomPassword(){
         // Define the character set for the password
@@ -56,10 +61,14 @@ public class AdminService {
 //        return managerRepository.save(manager);
 //    }
 
-    public String addManager(RegisterRequest request)throws MessagingException {
-
-            String generatedPWD = generateRandomPassword();
-
+    public String addManager(RegisterRequest request) throws MessagingException{
+//        String generatedPWD = generateRandomPassword();
+//
+//        admin.setRole(Role.ADMIN);
+//            admin.setPassword(passwordEncoder.encode(generatedPWD));
+//
+//            return adminRepository.save(admin);
+        String generatedPWD = generateRandomPassword();
             var user = User.builder()
                     .firstname(request.getFirstname())
                     .lastname(request.getLastname())
@@ -70,13 +79,13 @@ public class AdminService {
                     .build();
             repository.save(user);
 
-            MimeMessage message = mailSender.createMimeMessage();
-            message.setFrom(new InternetAddress("${spring.mail.username}"));
-            message.setRecipients(MimeMessage.RecipientType.TO, request.getEmail());
-            message.setSubject(request.getRole() + " Login");
-            message.setText("<div> Login using your email and this password: " + request.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
-
-            mailSender.send(message);
+//            MimeMessage message = mailSender.createMimeMessage();
+//            message.setFrom(new InternetAddress("${spring.mail.username}"));
+//            message.setRecipients(MimeMessage.RecipientType.TO, request.getEmail());
+//            message.setSubject(request.getRole() + " Login");
+//            message.setText("<div> Login using your email and this password: " + request.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
+//
+//            mailSender.send(message);
             return request.getRole() + " added successfully";
 
 

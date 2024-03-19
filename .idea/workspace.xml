@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/2/12742779fbabc9a7f80cc48e607b65a10c2ee2b6" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/2/12742779fbabc9a7f80cc48e607b65a10c2ee2b6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/d/1d27ad4d2ec29b189f945d8014fa29428aa74919" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/d/1d27ad4d2ec29b189f945d8014fa29428aa74919" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/d/4d16cd591a10e45b6666e669c9ed84d5fd60b995" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/d/4d16cd591a10e45b6666e669c9ed84d5fd60b995" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/6/56d23143dcd85db5aa2a9a9c2fbaff15776104cf" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/6/56d23143dcd85db5aa2a9a9c2fbaff15776104cf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/8/68e14fdd9dc238fe3d11931d28592876fc639093" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/8/68e14fdd9dc238fe3d11931d28592876fc639093" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/b/6bb82601c6617b87cfe0d4af0152287e19fc4f84" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/b/6bb82601c6617b87cfe0d4af0152287e19fc4f84" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/c/7cf06d9a095dd10db0d7d800a00a044ac93b5240" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/c/7cf06d9a095dd10db0d7d800a00a044ac93b5240" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/d/9d9e078f28e1bd33a308b1d3f88e42617e696765" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/d/9d9e078f28e1bd33a308b1d3f88e42617e696765" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/b/fbd255631121a9e5ad0326c425aaf38f6fa6ea6a" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/b/fbd255631121a9e5ad0326c425aaf38f6fa6ea6a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/e/feab88132ac790330e56c6471dc3d13094e97071" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/e/feab88132ac790330e56c6471dc3d13094e97071" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/config/CorsConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/AdminRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/AdminService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/AuthenticationService.java" afterDir="false" />
     </list>
@@ -122,7 +135,8 @@
       <workItem from="1710378976830" duration="2294000" />
       <workItem from="1710433560086" duration="9035000" />
       <workItem from="1710546169147" duration="3385000" />
-      <workItem from="1710580749927" duration="3351000" />
+      <workItem from="1710580749927" duration="7063000" />
+      <workItem from="1710683267609" duration="19211000" />
     </task>
     <servers />
   </component>

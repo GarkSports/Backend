@@ -1,6 +1,7 @@
 package com.gark.garksport.controller;
 
 import com.gark.garksport.dto.authentication.RegisterRequest;
+import com.gark.garksport.modal.Admin;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.UserRepository;
 import com.gark.garksport.service.AdminService;
@@ -37,6 +38,12 @@ public class AdminController {
         return adminService.addManager(request);
     }
 
+//    @PostMapping("/add-manager")
+//    public ResponseEntity<Admin> addManager(
+//            @RequestBody Admin admin
+//    ) throws MessagingException {
+//        return ResponseEntity.ok(adminService.addManager(admin));
+//    }
     @GetMapping("/get-profil")
     @ResponseBody
     public User getProfil(

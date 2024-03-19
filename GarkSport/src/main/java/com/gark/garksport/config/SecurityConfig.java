@@ -39,8 +39,27 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/admin/**").permitAll()
+                .requestMatchers("/admin/**").hasRole(ADMIN.name())
 
+                .requestMatchers(GET, "/admin/**").hasAuthority(ADMIN_READ.getPermission())
+                .requestMatchers(POST, "/admin/**").hasAuthority(ADMIN_CREATE.getPermission())
+                .requestMatchers(PUT, "/admin/**").hasAuthority(ADMIN_UPDATE.getPermission())
+                .requestMatchers(DELETE, "/admin/**").hasAuthority(ADMIN_DELETE.getPermission())
+
+                .requestMatchers(GET, "/random/**").hasAuthority(ADMIN_READ.getPermission())
+                .requestMatchers(POST, "/random/**").hasAuthority(ADMIN_CREATE.getPermission())
+                .requestMatchers(PUT, "/random/**").hasAuthority(ADMIN_UPDATE.getPermission())
+                .requestMatchers(DELETE, "/random/**").hasAuthority(ADMIN_DELETE.getPermission())
+
+                .requestMatchers(GET, "/academie/**").hasAuthority(ADMIN_READ.getPermission())
+                .requestMatchers(POST, "/academie/**").hasAuthority(ADMIN_CREATE.getPermission())
+                .requestMatchers(PUT, "/academie/**").hasAuthority(ADMIN_UPDATE.getPermission())
+                .requestMatchers(DELETE, "/academie/**").hasAuthority(ADMIN_DELETE.getPermission())
+
+                .requestMatchers(GET, "/discipline/**").hasAuthority(ADMIN_READ.getPermission())
+                .requestMatchers(POST, "/discipline/**").hasAuthority(ADMIN_CREATE.getPermission())
+                .requestMatchers(PUT, "/discipline/**").hasAuthority(ADMIN_UPDATE.getPermission())
+                .requestMatchers(DELETE, "/discipline/**").hasAuthority(ADMIN_DELETE.getPermission())
 
                 .anyRequest().authenticated()
                 .and()
@@ -49,7 +68,7 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-        ;
+
         return http.build();
 
     }
