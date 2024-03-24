@@ -1,3 +1,10 @@
 
+]	java:S125""<This block of commented-out lines of code should be removed.(ã¬Ó¢ùÿÿÿÿ8¦ªÚæ1
+Z
+java:S1128"=Remove this unused import 'com.gark.garksport.modal.Manager'.(Ê§ˆ¨8”ƒÛæ1
+c
+java:S1128"FRemove this unused import 'com.gark.garksport.modal.enums.Permission'.(°¹À”8”ƒÛæ1
 f
-java:S1128"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8¢¿¬øà1
+java:S1128	"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8•ƒÛæ1
+T
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8•ƒÛæ1

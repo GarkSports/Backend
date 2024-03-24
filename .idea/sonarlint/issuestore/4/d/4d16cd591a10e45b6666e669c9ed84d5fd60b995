@@ -1,32 +1,24 @@
 
+g	java:S112c"FDefine and throw a dedicated exception instead of using a generic one.(‰öşÕşÿÿÿÿ8ìƒĞ‹ç1
 l
-java:S1192t"ODefine a constant instead of duplicating this literal "User not found" 3 times.(¢ •Ä8Ç„¬èä1
+java:S1192~"ODefine a constant instead of duplicating this literal "User not found" 3 times.(¢ •Ä8ñƒĞ‹ç1
 k
-java:S1192f"IDefine a constant instead of duplicating this literal "id is : " 3 times.(»”Ùºúÿÿÿÿ8Ç„¬èä1
+java:S1192p"IDefine a constant instead of duplicating this literal "id is : " 3 times.(»”Ùºúÿÿÿÿ8ñƒĞ‹ç1
 _
-java:S6813""BRemove this field injection and use constructor injection instead.(êæÄŞ8Ù„¬èä1
+java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄŞ8‹„Ğ‹ç1
 _
-java:S6813$"BRemove this field injection and use constructor injection instead.(êæÄŞ8Ù„¬èä1
-•
-java:S1130@"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(şÏ€Ã8Ï›Öèä1
-X	java:S125<"<This block of commented-out lines of code should be removed.(¿û8ß„¬èä1
-]	java:S125A"<This block of commented-out lines of code should be removed.(î”Š†øÿÿÿÿ8‹şĞèä1
-X	java:S125R"<This block of commented-out lines of code should be removed.(üæ§Î8×›Öèä1
-L	java:S106f"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8ã„¬èä1
-L	java:S106{"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8å„¬èä1
-M	java:S106"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8ç„¬èä1
-^	java:S125˜"<This block of commented-out lines of code should be removed.(£ôÚçıÿÿÿÿ8é„¬èä1
-X
-java:S1128";Remove this unused import 'com.gark.garksport.modal.Admin'.(ÔÔÕ²8İ™Õèä1
-Z
-java:S1128"=Remove this unused import 'com.gark.garksport.modal.Manager'.(Ê§ˆ¨8İ™Õèä1
+java:S6813""BRemove this field injection and use constructor injection instead.(êæÄŞ8‹„Ğ‹ç1
 b
-java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8İ™Õèä1
-_
-java:S1128"BRemove this unused import 'jakarta.mail.internet.InternetAddress'.(Ê•¬¾8ã›Öèä1
-[
-java:S1128">Remove this unused import 'jakarta.mail.internet.MimeMessage'.(š‹ÔÕ8ã›Öèä1
-r
-java:S1128"PRemove this unused import 'org.springframework.scheduling.annotation.Scheduled'.(‚¡®Üûÿÿÿÿ8İ™Õèä1
-M
-java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8İ™Õèä1
+java:S1854>"@Remove this useless assignment to local variable "generatedPWD".(Ï¡®¨şÿÿÿÿ8“„Ğ‹ç1
+•
+java:S1130<"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(É¡Ç8•„Ğ‹ç1
+S
+java:S1481>"1Remove this unused "generatedPWD" local variable.(Ï¡®¨şÿÿÿÿ8–„Ğ‹ç1
+]	java:S125A"<This block of commented-out lines of code should be removed.(›£¤­ùÿÿÿÿ8–„Ğ‹ç1
+X	java:S125I"<This block of commented-out lines of code should be removed.(üæ§Î8—„Ğ‹ç1
+L	java:S106p"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8œ„Ğ‹ç1
+M	java:S106…"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8£„Ğ‹ç1
+M	java:S106˜"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8§„Ğ‹ç1
+^	java:S125¤"<This block of commented-out lines of code should be removed.(£ôÚçıÿÿÿÿ8§„Ğ‹ç1
+Q
+java:S1128"/Remove this unused import 'java.time.Duration'.(ëá¯‰üÿÿÿÿ8«¢İ‹ç1

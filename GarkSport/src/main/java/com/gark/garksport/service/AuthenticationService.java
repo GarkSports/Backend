@@ -90,9 +90,9 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         ResponseCookie cookie = ResponseCookie.from("accessToken", jwtToken)
-                .httpOnly(true)
+                .httpOnly(false)
                 .secure(false)
-                .sameSite("None")
+                .sameSite("Strict")
                 .path("/")
                 .maxAge(cookieExpiry)
                 .build();
@@ -103,7 +103,6 @@ public class AuthenticationService {
                 .build();
 
     }
-
     private void storeRefreshTokenInCookie(HttpServletResponse response, String refreshToken) {
         ResponseCookie cookie = ResponseCookie.from("authToken", refreshToken)
                 .domain("localhost")

@@ -1,19 +1,15 @@
 package com.gark.garksport.service;
 
-import com.gark.garksport.dto.authentication.RegisterRequest;
-import com.gark.garksport.modal.Admin;
 import com.gark.garksport.modal.Manager;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.modal.enums.Role;
 import com.gark.garksport.repository.AdminRepository;
+import com.gark.garksport.repository.ManagerRepository;
 import com.gark.garksport.repository.UserRepository;
 import jakarta.mail.MessagingException;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,7 +18,6 @@ import java.security.Principal;
 import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,11 +25,15 @@ import java.util.Optional;
 public class AdminService {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
+    private final ManagerRepository managerRepository;
+
+
 
     @Autowired
     private JavaMailSender mailSender;
     @Autowired
     private final AdminRepository adminRepository;
+
 
     public String generateRandomPassword(){
         // Define the character set for the password
@@ -57,27 +56,19 @@ public class AdminService {
         return randomPassword.toString();
     }
 
-//    public Manager addManager(Manager manager) {
-//        return managerRepository.save(manager);
-//    }
 
-    public String addManager(RegisterRequest request) throws MessagingException{
-//        String generatedPWD = generateRandomPassword();
-//
-//        admin.setRole(Role.ADMIN);
-//            admin.setPassword(passwordEncoder.encode(generatedPWD));
-//
-//            return adminRepository.save(admin);
+    public Manager addManager(Manager manager) throws MessagingException{
+
         String generatedPWD = generateRandomPassword();
-            var user = User.builder()
-                    .firstname(request.getFirstname())
-                    .lastname(request.getLastname())
-                    .email(request.getEmail())
-                    .password(passwordEncoder.encode(generatedPWD))
-                    .role(request.getRole())
+
+                    manager.setRole(Role.MANAGER);
+                    //manager.setPassword(passwordEncoder.encode(generatedPWD));
+                    //manager.setPassword(passwordEncoder.encode(manager.getPassword()));
+                    //manager.setRoleName(manager.getRoleName());
+
                     //.permissions(request.getPermissions())
-                    .build();
-            repository.save(user);
+
+            return repository.save(manager);
 
 //            MimeMessage message = mailSender.createMimeMessage();
 //            message.setFrom(new InternetAddress("${spring.mail.username}"));
@@ -86,10 +77,29 @@ public class AdminService {
 //            message.setText("<div> Login using your email and this password: " + request.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
 //
 //            mailSender.send(message);
-            return request.getRole() + " added successfully";
 
 
     }
+    public Manager updateManager(Integer id, Manager manager) {
+        Optional<Manager> existingManager = managerRepository.findById(id);
+
+        if (existingManager.isPresent()) {
+            Manager managerToUpdate = existingManager.get();
+
+            // Update the manager properties
+            managerToUpdate.setFirstname(manager.getFirstname());
+            managerToUpdate.setLastname(manager.getLastname());
+            managerToUpdate.setEmail(manager.getEmail());
+            managerToUpdate.setAdresse(manager.getAdresse());
+
+            // Save the updated manager
+            return managerRepository.save(managerToUpdate);
+        } else {
+            // Manager not found, handle the case accordingly
+            throw new RuntimeException("Manager not found with ID: " + id);
+        }
+    }
+
 
     public User getProfil(Principal connectedUser) {
         var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
@@ -107,7 +117,7 @@ public class AdminService {
             // Set the blocked status and other relevant information
             user.setBlocked(true);
             user.setBlockedTimestamp(Instant.now());
-            user.setBlockedDuration(Duration.ofDays(7)); // Example: Block for 7 days
+            //user.setBlockedDuration(Duration.ofDays(7)); // Example: Block for 7 days
 
             repository.save(user);
 
@@ -142,12 +152,14 @@ public class AdminService {
         System.out.println("id is : "+id);
         if (user.isPresent()) {
 
-            repository.delete(user.get());
+            repository.delete(user.get()); //turn it to archive we don't want to delete any data !!!!
             return "User deleted successfully";
         } else {
             return "User not found";
         }
     }
+
+
 //    @Scheduled(fixedRate = 60 * 1000) // 1 min
 //    public void unblockBlockedUsers() {
 //        List<User> blockedUsers = repository.findByBlocked(true);

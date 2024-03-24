@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.gark.garksport.modal.enums.Permission;
 import com.gark.garksport.modal.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,6 +28,9 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+    private String roleName; //added y manager
+//    @Enumerated(EnumType.STRING)
+//    private Permission permissions;
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
     private String adresse;
@@ -40,10 +44,16 @@ public class User implements UserDetails {
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "invites")
     private Set<Evenement> evenements;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);  // Use a unique field to calculate hashCode
-    }
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private Set<Permission> permissions = new HashSet<>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+//    private Set<Permission> permissions = new HashSet<>();
+
+    @ElementCollection(targetClass = Permission.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_permissions", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "permission")
+    private Set<Permission> permissions = new HashSet<>();
 
 
     @Override
