@@ -1,15 +1,13 @@
 package com.gark.garksport.service;
 
 
-import com.gark.garksport.modal.Academie;
-import com.gark.garksport.modal.Adherent;
-import com.gark.garksport.modal.Manager;
-import com.gark.garksport.repository.AcademieRepository;
-import com.gark.garksport.repository.AdherentRepository;
-import com.gark.garksport.repository.ManagerRepository;
+import com.gark.garksport.modal.*;
+import com.gark.garksport.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,6 +19,12 @@ public class RandomService implements IRandomService {
     private AcademieRepository academieRepository;
     @Autowired
     private AdherentRepository adherentRepository;
+    @Autowired
+    private EquipeRepository equipeRepository;
+    @Autowired
+    private EntraineurRepository entraineurRepository;
+    @Autowired
+    private DisciplineRepository disciplineRepository;
     @Override
     public Manager addManager(Manager manager) {
         return managerRepository.save(manager);
@@ -51,6 +55,68 @@ public class RandomService implements IRandomService {
                 .stream()
                 .filter(manager -> manager.getAcademie() == null)
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Equipe addEquipe(Equipe equipe, Integer academieId, Integer entraineurId, Set<Integer> adherentIds,Integer disciplineId) {
+        Academie academie = academieRepository.findById(academieId).get();
+        Entraineur entraineur = entraineurRepository.findById(entraineurId).get();
+        Set<Adherent> adherents = adherentIds.stream().map(adherentRepository::findById).map(adherent -> adherent.orElse(null)).collect(Collectors.toSet());
+        Discipline discipline = disciplineRepository.findById(disciplineId).get();
+        equipe.setAcademie(academie);
+        equipe.setEntraineur(entraineur);
+        equipe.setAdherents(adherents);
+        equipe.setDiscipline(discipline);
+        return equipeRepository.save(equipe);
+    }
+
+    @Override
+    public Entraineur addEntraineur(Entraineur entraineur) {
+        return entraineurRepository.save(entraineur);
+    }
+
+    @Override
+    public Set<Equipe> getEquipesByAcademie(Integer academieId) {
+        return equipeRepository.findByAcademieId(academieId);
+    }
+
+    @Override
+    public Set<Adherent> getAdherentsByAcademie(Integer academieId) {
+        // Get all adherents for the academie
+        Set<Adherent> allAdherents = adherentRepository.findByAcademieId(academieId);
+
+        // Get the IDs of adherents assigned to any equipe for the academie
+        Set<Integer> assignedAdherentIds = equipeRepository.findByAcademieId(academieId).stream()
+                .flatMap(equipe -> equipe.getAdherents().stream().map(Adherent::getId))
+                .collect(Collectors.toSet());
+
+        // Filter out adherents who are not assigned to any equipe
+        return allAdherents.stream()
+                .filter(adherent -> !assignedAdherentIds.contains(adherent.getId()))
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<Entraineur> getEntraineursByAcademie(Integer academieId) {
+        // Get all entraineurs for the academie
+        Set<Entraineur> allEntraineurs = entraineurRepository.findByAcademieId(academieId);
+
+        // Get the IDs of entraineurs assigned to any equipe for the academie
+        Set<Integer> assignedEntraineurIds = equipeRepository.findByAcademieId(academieId).stream()
+                .map(Equipe::getEntraineur)
+                .filter(Objects::nonNull)
+                .map(Entraineur::getId)
+                .collect(Collectors.toSet());
+
+        // Filter out entraineurs who are not assigned to any equipe
+        return allEntraineurs.stream()
+                .filter(entraineur -> !assignedEntraineurIds.contains(entraineur.getId()))
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public void deleteEquipe(Integer equipeId) {
+        equipeRepository.deleteById(equipeId);
     }
 
 

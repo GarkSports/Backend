@@ -1,5 +1,4 @@
 package com.gark.garksport.service;
-import com.cloudinary.Cloudinary;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Etat;
 import com.gark.garksport.repository.AcademieHistoryRepository;
@@ -10,12 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -141,4 +136,34 @@ public class AcademieService implements IAcademieService {
             throw new RuntimeException("Failed to get Disciplines for Academie", e);
         }
     }
+
+    @Override
+    public Set<Academie> getArchivedAcademies() {
+        try {
+            return academieRepository.findByIsArchivedTrue();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get Academies", e);
+        }
+    }
+
+    @Override
+    public void deleteArchivedAcademie(Integer academieId) {
+        try {
+            academieRepository.deleteById(academieId);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete Academie", e);
+        }
+    }
+
+    @Override
+    public void restoreArchivedAcademie(Integer academieId) {
+        try {
+            Academie academie = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+            academie.setIsArchived(false);
+            academieRepository.save(academie);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to restore Academie", e);
+        }
+    }
+
 }

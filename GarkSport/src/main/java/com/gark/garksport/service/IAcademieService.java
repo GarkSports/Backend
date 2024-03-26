@@ -18,4 +18,7 @@ public interface IAcademieService {
     public Academie getAcademieById(Integer academieId);
     public Manager getManagerDetails(Integer academieId);
     public Set<Discipline> getDisciplinesByAcademie(Integer academieId);
+    public Set<Academie> getArchivedAcademies();
+    public void deleteArchivedAcademie(Integer academieId);
+    public void restoreArchivedAcademie(Integer academieId);
 }

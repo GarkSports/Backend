@@ -1,0 +1,10 @@
+
+{
+java:S1104"YMake academieCount a static final constant or non-public and provide accessors if needed.(ÑÆÕÐúÿÿÿÿ8Êçúæä1
+q
+java:S1104"UMake clubCount a static final constant or non-public and provide accessors if needed.(×¨Ž<8™ûæä1
+{
+java:S1104	"^Make academiePercentage a static final constant or non-public and provide accessors if needed.(¨›¨Š8™ûæä1
+v
+java:S1104
+"ZMake clubPercentage a static final constant or non-public and provide accessors if needed.(ï”ñL8™ûæä1

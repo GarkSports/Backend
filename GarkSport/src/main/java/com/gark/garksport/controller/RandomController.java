@@ -1,7 +1,10 @@
 package com.gark.garksport.controller;
 
 
+import com.gark.garksport.dto.request.EquipeRequest;
 import com.gark.garksport.modal.Adherent;
+import com.gark.garksport.modal.Entraineur;
+import com.gark.garksport.modal.Equipe;
 import com.gark.garksport.modal.Manager;
 import com.gark.garksport.service.IRandomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,37 @@ public class RandomController {
     @GetMapping("/getManagersNotAssigned")
     public Set<Manager> getManagers() {
         return randomService.getManagersNotAssigned();
+    }
+
+    @PostMapping("/addEquipe/{academieId}")
+    public Equipe addEquipe(@RequestBody EquipeRequest equipeRequest, @PathVariable Integer academieId) {
+        return randomService.addEquipe(equipeRequest.getEquipe(), academieId, equipeRequest.getEntraineurId(), equipeRequest.getAdherentIds(), equipeRequest.getDisciplineId());
+    }
+
+
+    @PostMapping("/addEntraineur")
+    public Entraineur addEntraineur(@RequestBody Entraineur entraineur) {
+        return randomService.addEntraineur(entraineur);
+    }
+
+    @GetMapping("/getEquipes/{academieId}")
+    public Set<Equipe> getEquipes(@PathVariable Integer academieId) {
+        return randomService.getEquipesByAcademie(academieId);
+    }
+
+    @GetMapping("/getAdherents/{academieId}")
+    public Set<Adherent> getAdherents(@PathVariable Integer academieId) {
+        return randomService.getAdherentsByAcademie(academieId);
+    }
+
+    @GetMapping("/getEntraineurs/{academieId}")
+    public Set<Entraineur> getEntraineurs(@PathVariable Integer academieId) {
+        return randomService.getEntraineursByAcademie(academieId);
+    }
+
+    @DeleteMapping("/deleteEquipe/{equipeId}")
+    public void deleteEquipe(@PathVariable Integer equipeId) {
+        randomService.deleteEquipe(equipeId);
     }
 
 

@@ -37,9 +37,6 @@ public class User implements UserDetails {
     private Instant blockedTimestamp;
     private Duration blockedDuration;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "invites")
-    private Set<Evenement> evenements;
-
     @Override
     public int hashCode() {
         return Objects.hash(id);  // Use a unique field to calculate hashCode
