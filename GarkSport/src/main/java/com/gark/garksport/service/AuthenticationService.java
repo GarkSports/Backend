@@ -90,7 +90,7 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         ResponseCookie cookie = ResponseCookie.from("accessToken", jwtToken)
-                .httpOnly(false)
+                .httpOnly(true)
                 .secure(false)
                 .sameSite("Strict")
                 .path("/")

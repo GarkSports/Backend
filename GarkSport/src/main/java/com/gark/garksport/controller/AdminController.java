@@ -83,8 +83,9 @@ public class AdminController {
 //    }
     @GetMapping("/get-all-users")
     @ResponseBody
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> userList = repository.findAll();
+    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
+        var user = getProfil(connectedUser);
+        List<User> userList = repository.findAllByIdNot(user.getId());
         return ResponseEntity.ok(userList);
     }
 
