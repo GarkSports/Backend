@@ -1,6 +1,7 @@
 package com.gark.garksport.modal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.gark.garksport.modal.enums.StatutAdherent;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,4 +40,9 @@ public class Adherent extends User {
     @JsonIgnoreProperties("membres")
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "membres")
     private Set<Evenement> evenements;
+
+    private String nomEquipe;
+
+    @Enumerated(EnumType.STRING)
+    private StatutAdherent statutAdherent=StatutAdherent.Non_Payé;
 }

@@ -119,5 +119,50 @@ public class RandomService implements IRandomService {
         equipeRepository.deleteById(equipeId);
     }
 
+    @Override
+    public Equipe affectAdherentToEquipe(Integer equipeId, List<Integer> adherentIds) {
+        Equipe equipe = equipeRepository.findById(equipeId)
+                .orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
+
+        List<Adherent> adherents = adherentRepository.findAllById(adherentIds);
+        equipe.getAdherents().addAll(adherents);
+
+        return equipeRepository.save(equipe);
+    }
+
+
+    @Override
+    public Academie updateAcademie(Academie academie, Integer academieId) {
+        Academie academieNew = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+        if (academie.getNom() != null) {
+            academieNew.setNom(academie.getNom());
+        }
+        if (academie.getFraisAdhesion() != null) {
+            academieNew.setFraisAdhesion(academie.getFraisAdhesion());
+        }
+        if (academie.getAffiliation() != null) {
+            academieNew.setAffiliation(academie.getAffiliation());
+        }
+        if (academie.getDescription() != null) {
+            academieNew.setDescription(academie.getDescription());
+        }
+        if (academie.getRue() != null) {
+            academieNew.setRue(academie.getRue());
+        }
+        if (academie.getVille() != null) {
+            academieNew.setVille(academie.getVille());
+        }
+        if (academie.getCodePostal() != null) {
+            academieNew.setCodePostal(academie.getCodePostal());
+        }
+        if (academie.getPays() != null) {
+            academieNew.setPays(academie.getPays());
+        }
+        if (academie.getLogo() != null) {
+            academieNew.setLogo(academie.getLogo());
+        }
+        return academieRepository.save(academieNew);
+    }
+
 
 }

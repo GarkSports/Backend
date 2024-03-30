@@ -1,10 +1,8 @@
 package com.gark.garksport.service;
 
-import com.gark.garksport.modal.Adherent;
-import com.gark.garksport.modal.Entraineur;
-import com.gark.garksport.modal.Equipe;
-import com.gark.garksport.modal.Manager;
+import com.gark.garksport.modal.*;
 
+import java.util.List;
 import java.util.Set;
 
 public interface IRandomService {
@@ -27,4 +25,8 @@ public interface IRandomService {
     public Set<Entraineur> getEntraineursByAcademie(Integer academieId);
 
     public void deleteEquipe(Integer equipeId);
+
+    public Equipe affectAdherentToEquipe(Integer equipeId, List<Integer> adherentIds);
+
+    public Academie updateAcademie(Academie academie, Integer academieId);
 }

@@ -2,14 +2,12 @@ package com.gark.garksport.controller;
 
 
 import com.gark.garksport.dto.request.EquipeRequest;
-import com.gark.garksport.modal.Adherent;
-import com.gark.garksport.modal.Entraineur;
-import com.gark.garksport.modal.Equipe;
-import com.gark.garksport.modal.Manager;
+import com.gark.garksport.modal.*;
 import com.gark.garksport.service.IRandomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -69,6 +67,19 @@ public class RandomController {
     public void deleteEquipe(@PathVariable Integer equipeId) {
         randomService.deleteEquipe(equipeId);
     }
+
+    @PostMapping("/affectAdherentsToEquipe/{equipeId}")
+    public Equipe affectAdherentsToEquipe(@PathVariable Integer equipeId, @RequestBody List<Integer> adherentIds) {
+        return randomService.affectAdherentToEquipe(equipeId, adherentIds);
+    }
+
+
+    @PutMapping("/updateAcademie/{academieId}")
+    public Academie updateAcademie(@RequestBody Academie academie, @PathVariable Integer academieId) {
+        return randomService.updateAcademie(academie, academieId);
+    }
+
+
 
 
 }

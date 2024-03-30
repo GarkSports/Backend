@@ -151,3 +151,15 @@ v
 FGarkSport/src/main/java/com/gark/garksport/modal/enums/Permission.java,6\f\6fc0b77070de47bff77600968150b06cf7c8d6de
 w
 GGarkSport/src/main/java/com/gark/garksport/modal/enums/GenreEquipe.java,3\c\3cea7a79343ccde400b19b72e9fc88ac9012d887
+z
+JGarkSport/src/main/java/com/gark/garksport/modal/enums/StatutAdherent.java,6\7\6731a5f6025759ec6ec1fee37f46ac333cc1bdbe
+}
+MGarkSport/src/main/java/com/gark/garksport/repository/PaiementRepository.java,e\5\e5cf8d6c3d243c305f62e71079d8f6613989a23f
+x
+HGarkSport/src/main/java/com/gark/garksport/service/IPaiementService.java,3\b\3bb9253cd03e525d998a757871b865dafc815fba
+w
+GGarkSport/src/main/java/com/gark/garksport/service/PaiementService.java,2\9\29b076c21a5d08e45408a220a386ace62c2dcbed
+z
+JGarkSport/src/main/java/com/gark/garksport/modal/enums/TypeAbonnement.java,4\4\44a78ea095a19bbb612989219e84695a938ac510
+}
+MGarkSport/src/main/java/com/gark/garksport/controller/PaiementController.java,7\4\74e28bde1954f6d7fd09a27de44f69093dfb2f29
