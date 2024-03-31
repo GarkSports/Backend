@@ -14,7 +14,7 @@ public interface IRandomService {
 
     public Set<Manager> getManagersNotAssigned();
 
-    public Equipe addEquipe(Equipe equipe, Integer academieId, Integer entraineurId, Set<Integer> adherentIds, Integer disciplineId);
+    public Equipe addEquipe(Equipe equipe, Integer academieId, Set<Integer> entraineurIds, Integer disciplineId);
 
     public Entraineur addEntraineur(Entraineur entraineur);
 
@@ -28,5 +28,9 @@ public interface IRandomService {
 
     public Equipe affectAdherentToEquipe(Integer equipeId, List<Integer> adherentIds);
 
+    public Equipe affectEntraineurToEquipe(Integer equipeId, List<Integer> entraineurIds);
+
     public Academie updateAcademie(Academie academie, Integer academieId);
+
+    public Set<Entraineur> getEntraineursByEquipe(Integer equipeId);
 }

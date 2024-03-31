@@ -6,6 +6,8 @@ import com.gark.garksport.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -58,16 +60,25 @@ public class RandomService implements IRandomService {
     }
 
     @Override
-    public Equipe addEquipe(Equipe equipe, Integer academieId, Integer entraineurId, Set<Integer> adherentIds,Integer disciplineId) {
+    public Equipe addEquipe(Equipe equipe, Integer academieId, Set<Integer> entraineurIds, Integer disciplineId) {
         Academie academie = academieRepository.findById(academieId).get();
-        Entraineur entraineur = entraineurRepository.findById(entraineurId).get();
-        Set<Adherent> adherents = adherentIds.stream().map(adherentRepository::findById).map(adherent -> adherent.orElse(null)).collect(Collectors.toSet());
+        Set<Entraineur> entraineurs = entraineurIds.stream().map(entraineurRepository::findById).map(entraineur -> entraineur.orElse(null)).collect(Collectors.toSet());
         Discipline discipline = disciplineRepository.findById(disciplineId).get();
         equipe.setAcademie(academie);
-        equipe.setEntraineur(entraineur);
-        equipe.setAdherents(adherents);
+        equipe.setEntraineurs(entraineurs);
         equipe.setDiscipline(discipline);
+        // Generate random code for the equipe
+        String randomCode = generateRandomCode();
+        equipe.setCodeEquipe(randomCode);
         return equipeRepository.save(equipe);
+    }
+
+    private String generateRandomCode() {
+        // Generate a random code
+        SecureRandom random = new SecureRandom();
+        byte[] codeBytes = new byte[6]; // Adjust the length of the code as needed
+        random.nextBytes(codeBytes);
+        return Base64.getUrlEncoder().encodeToString(codeBytes).substring(0, 6).toUpperCase(); // Adjust the substring range and case as needed
     }
 
     @Override
@@ -103,8 +114,7 @@ public class RandomService implements IRandomService {
 
         // Get the IDs of entraineurs assigned to any equipe for the academie
         Set<Integer> assignedEntraineurIds = equipeRepository.findByAcademieId(academieId).stream()
-                .map(Equipe::getEntraineur)
-                .filter(Objects::nonNull)
+                .flatMap(equipe -> equipe.getEntraineurs().stream()) // FlatMap to handle multiple entraineurs per equipe
                 .map(Entraineur::getId)
                 .collect(Collectors.toSet());
 
@@ -130,6 +140,16 @@ public class RandomService implements IRandomService {
         return equipeRepository.save(equipe);
     }
 
+    @Override
+    public Equipe affectEntraineurToEquipe(Integer equipeId, List<Integer> entraineurIds) {
+        Equipe equipe = equipeRepository.findById(equipeId)
+                .orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
+
+        List<Entraineur> entraineurs = entraineurRepository.findAllById(entraineurIds);
+        equipe.getEntraineurs().addAll(entraineurs);
+
+        return equipeRepository.save(equipe);
+    }
 
     @Override
     public Academie updateAcademie(Academie academie, Integer academieId) {
@@ -162,6 +182,13 @@ public class RandomService implements IRandomService {
             academieNew.setLogo(academie.getLogo());
         }
         return academieRepository.save(academieNew);
+    }
+
+    @Override
+    public Set<Entraineur> getEntraineursByEquipe(Integer equipeId) {
+        return equipeRepository.findById(equipeId)
+                .map(Equipe::getEntraineurs)
+                .orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
     }
 
 

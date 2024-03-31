@@ -1,11 +1,11 @@
 
+o
+java:S1192‡"QDefine a constant instead of duplicating this literal "Equipe not found" 3 times.(¸íÂ†8úöœµé1
 m
-java:S3655#"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8Â‹¶Ûç1
+java:S3655@"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8Ñª›µé1
 m
-java:S3655-"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8Â‹¶Ûç1
+java:S3655/"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8­Îÿ´é1
 m
-java:S3655>"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8Á‹¶Ûç1
+java:S3655%"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8¬Îÿ´é1
 m
-java:S3655A"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8Â‹¶Ûç1
-r
-java:S3655?"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¼ª°äÿÿÿÿÿ8Â‹¶Ûç1
+java:S3655B"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8Ñª›µé1

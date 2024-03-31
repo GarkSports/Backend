@@ -24,6 +24,7 @@ public class Equipe {
     private GenreEquipe genre;
     private String groupeAge;
     private String couleur;
+    private String codeEquipe;
 
     @ManyToOne
     private Discipline discipline;
@@ -31,9 +32,9 @@ public class Equipe {
     @OneToMany
     private Set<Adherent> adherents;
 
-    @JsonIgnoreProperties("equipe")
-    @ManyToOne
-    private Entraineur entraineur;
+    @OneToMany
+    private Set<Entraineur> entraineurs;
+
 
     @ManyToOne
     private Academie academie;
@@ -41,4 +42,6 @@ public class Equipe {
     @JsonIgnoreProperties("equipe")
     @OneToMany(mappedBy = "equipe")
     private Set<Evenement> evenements;
+
+
 }
