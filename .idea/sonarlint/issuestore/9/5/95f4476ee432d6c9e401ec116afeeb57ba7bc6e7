@@ -1,0 +1,10 @@
+
+_
+java:S6813!"BRemove this field injection and use constructor injection instead.(êæÄŞ8¹µı¤é1
+o
+java:S6204B"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ã¤£’8Ãî„¥é1
+H
+java:S1452k"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8Áµı¤é1
+H
+java:S1452u"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8Âµı¤é1
+^	java:S125"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8Ãµı¤é1

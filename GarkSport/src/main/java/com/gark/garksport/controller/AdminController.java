@@ -31,7 +31,6 @@ public class AdminController {
 
     @PreAuthorize("hasAuthority('management:read')")
     @GetMapping("/hello")
-
     public String get() {
 
             return "Hello from Admin controller";

@@ -20,20 +20,11 @@ public class UserController {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
 
-    @PreAuthorize("hasAuthority('management:read')")
+    //@PreAuthorize("hasAuthority('management:read')")
     @GetMapping("/hello")
         public String sayHello(){
             return "Hello from secured endpoint";
         }
 
-    @PostMapping("/add-staff")
-    public Staff addStaff(@RequestBody Staff staff){
-        staff.setRole(Role.STAFF);
-        staff.setRoleName(staff.getRoleName());
-        staff.setPassword(passwordEncoder.encode(staff.getPassword()));
-        //staff.setPermissions(Collections.singleton(Permission.MANAGER_READ));
-        staff.setPermissions(staff.getPermissions());
 
-        return repository.save(staff);
-    }
 }

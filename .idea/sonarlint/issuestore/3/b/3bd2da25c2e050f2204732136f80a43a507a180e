@@ -1,0 +1,32 @@
+
+l
+java:S1192^"ODefine a constant instead of duplicating this literal "User not found" 3 times.(¢ •Ä8‘›Ø¦ê1
+k
+java:S1192P"IDefine a constant instead of duplicating this literal "id is : " 3 times.(»”Ùºúÿÿÿÿ8‘›Ø¦ê1
+h
+java:S2259J"FA "NullPointerException" could be thrown; "academie" is nullable here.(ô®‹¨ýÿÿÿÿ8Øåæªê1
+Z
+java:S2589‰"7Remove this expression which always evaluates to "true"(à•‹¼ýÿÿÿÿ8Øåæªê1
+_
+java:S6813'"BRemove this field injection and use constructor injection instead.(êæÄÞ8«›Ø¦ê1
+e
+java:S6201D"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8±›Ø¦ê1
+L	java:S106P"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8²›Ø¦ê1
+L	java:S106e"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8³›Ø¦ê1
+L	java:S106x"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8´›Ø¦ê1
+f
+java:S6201…"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8´›Ø¦ê1
+f
+java:S6201“"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8¶›Ø¦ê1
+^	java:S125¡"<This block of commented-out lines of code should be removed.(ï×û¯þÿÿÿÿ8·›Ø¦ê1
+^	java:S125°"<This block of commented-out lines of code should be removed.(ŽµÑ€ýÿÿÿÿ8çœÏªê1
+Y	java:S125µ"<This block of commented-out lines of code should be removed.(×ß„°8¹›Ø¦ê1
+c
+java:S3252Á"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(Ð¨±â8»›Ø¦ê1
+X	java:S125Ë"<This block of commented-out lines of code should be removed.(€ÑÕ~8¼›Ø¦ê1
+l
+java:S1128"ORemove this unused import 'org.springframework.security.core.GrantedAuthority'.(½Á±ÿ8ÊÄðªê1
+
+java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8ÊÄðªê1
+Z
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8ÊÄðªê1

@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .requestMatchers(PUT, "/admin/**").hasAuthority(ADMIN_UPDATE.getPermission())
                 .requestMatchers(DELETE, "/admin/**").hasAuthority(ADMIN_DELETE.getPermission())
 
-                .requestMatchers(GET, "/user/**").hasAnyAuthority(ADMIN_READ.getPermission(),MANAGER_READ.getPermission())
+                .requestMatchers(GET, "/user/**").hasAuthority(ADMIN_READ.getPermission())
                 .requestMatchers(POST, "/user/**").hasAuthority(ADMIN_CREATE.getPermission())
                 .requestMatchers(PUT, "/user/**").hasAuthority(ADMIN_UPDATE.getPermission())
                 .requestMatchers(DELETE, "/user/**").hasAuthority(ADMIN_DELETE.getPermission())
@@ -67,6 +67,12 @@ public class SecurityConfig {
                 .requestMatchers(POST, "/discipline/**").hasAuthority(ADMIN_CREATE.getPermission())
                 .requestMatchers(PUT, "/discipline/**").hasAuthority(ADMIN_UPDATE.getPermission())
                 .requestMatchers(DELETE, "/discipline/**").hasAuthority(ADMIN_DELETE.getPermission())
+
+                .requestMatchers(GET, "/staff/hello").hasAnyAuthority(STAFF_READ.getPermission(), MANAGER_READ.getPermission())
+                .requestMatchers(GET, "/staff/hello2").hasAuthority(STAFF_SECOND_READ.getPermission())
+                .requestMatchers(POST, "/staff/**").hasAuthority(STAFF_CREATE.getPermission())
+                .requestMatchers(PUT, "/staff/**").hasAuthority(STAFF_UPDATE.getPermission())
+                .requestMatchers(DELETE, "/staff/**").hasAuthority(STAFF_DELETE.getPermission())
 
                 .anyRequest().authenticated()
                 .and()

@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.awt.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,6 +33,8 @@ public class Academie {
     private Etat etat;
     private String description;
     private Boolean isArchived=false;
+    @ElementCollection
+    private Set<String> roleNames = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "academie_disciplines", joinColumns = @JoinColumn(name = "academie_id"), inverseJoinColumns = @JoinColumn(name = "disciplines_id"))
