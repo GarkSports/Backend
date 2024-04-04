@@ -1,5 +1,11 @@
 
 ]	java:S125"<This block of commented-out lines of code should be removed.(¤“¬ªşÿÿÿÿ8®»÷ªê1
-]	java:S125"<This block of commented-out lines of code should be removed.(«±Äëşÿÿÿÿ8üÙ²Ÿå1
+L	java:S106'"+Replace this use of System.out by a logger.(éâØúüÿÿÿÿ8¦à…Ñê1
+X
+java:S1128";Remove this unused import 'com.gark.garksport.modal.Admin'.(ÔÔÕ²8ò‹ï´ê1
+b
+java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8ò‹ï´ê1
 ;
-java:S1128"Remove this duplicated import.(íÊë‰8Ò‘ÌŠé1
+java:S1128"Remove this duplicated import.(íÊë‰8Ò‘ÌŠé1
+;
+java:S1128"Remove this duplicated import.(íÊë‰8ô‹ï´ê1

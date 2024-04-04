@@ -19,11 +19,9 @@ java:S6201…"HReplace this instanceof check and cast with 'instanceof Manager m
 f
 java:S6201“"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8¶›Ø¦ê1
 ^	java:S125¡"<This block of commented-out lines of code should be removed.(ï×û¯þÿÿÿÿ8·›Ø¦ê1
-^	java:S125°"<This block of commented-out lines of code should be removed.(ŽµÑ€ýÿÿÿÿ8çœÏªê1
-Y	java:S125µ"<This block of commented-out lines of code should be removed.(×ß„°8¹›Ø¦ê1
 c
-java:S3252Á"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(Ð¨±â8»›Ø¦ê1
-X	java:S125Ë"<This block of commented-out lines of code should be removed.(€ÑÕ~8¼›Ø¦ê1
+java:S3252²"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(Ð¨±â8»›Ø¦ê1
+X	java:S125¼"<This block of commented-out lines of code should be removed.(€ÑÕ~8¼›Ø¦ê1
 l
 java:S1128"ORemove this unused import 'org.springframework.security.core.GrantedAuthority'.(½Á±ÿ8ÊÄðªê1
 

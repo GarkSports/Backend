@@ -161,7 +161,7 @@ public class ManagerService {
         // user.setRoleNames(this.roleNames);
     }
 
-    Set<Permission> permissions = new HashSet<>();
+
     public Staff addStaff(Staff staff, Set<Permission> permissions) throws MessagingException {
         String generatedPWD = generateRandomPassword();
 
@@ -169,22 +169,7 @@ public class ManagerService {
         staff.setRole(Role.STAFF);
         staff.setPassword(passwordEncoder.encode(staff.getPassword()));
         staff.setRoleName(staff.getRoleName());
-
-        staff.getPermissions().addAll(permissions); // Use getPermissions() instead of getAuthorities()
-//        Set<String> authorityStrings = staff.getPermissions().stream()
-//                .map(Permission::getPermission)
-//                .collect(Collectors.toSet());
-//        staff.setAuthorities(authorityStrings);
-
-
-
-//        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-//        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
-//        permissions.forEach(p -> authorities.add(new SimpleGrantedAuthority(p)));
-//        staff.setAuthorities(authorities);
-//        Set<String> authoritiesString = new HashSet<>();
-//        permissions.forEach(p -> authoritiesString.add(p.getPermission()));
-//        staff.setAuthorities(new HashSet<>(staff.getAuthorities()));
+        staff.setPermissions(permissions); // Set the permissions for the staff
 
 
 

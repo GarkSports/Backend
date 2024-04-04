@@ -1,9 +1,19 @@
 
+W	java:S125"<This block of commented-out lines of code should be removed.(ÁŞa8”¤Ô´ê1
 G
-java:S1128"*Remove this unused import 'lombok.Getter'.(ùÒµÙ8„Øöªê1
+java:S1128"*Remove this unused import 'lombok.Getter'.(ùÒµÙ8•¤Ô´ê1
+
+java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8•¤Ô´ê1
 T
-java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8…Øöªê1
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8•¤Ô´ê1
 J
-java:S1128".Remove this unused import 'java.util.HashSet'.(Ê‚êX8…Øöªê1
+java:S1128".Remove this unused import 'java.util.HashSet'.(Ê‚êX8˜¤Ô´ê1
+M
+java:S1128	"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8™¤Ô´ê1
+L
+java:S1128
+"*Remove this unused import 'java.util.Set'.(ö²„¤şÿÿÿÿ8š¤Ô´ê1
+Z
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8œ¤Ô´ê1
 c
-java:S1128"FRemove this unused import 'com.gark.garksport.modal.enums.Permission'.(ÎÊËÃ8…Øöªê1
+java:S1128"FRemove this unused import 'com.gark.garksport.modal.enums.Permission'.(ÎÊËÃ8œ¤Ô´ê1

@@ -30,8 +30,6 @@
         @Enumerated(EnumType.STRING)
         private Role role;
         private String roleName; //added y manager
-    //    @Enumerated(EnumType.STRING)
-    //    private Permission permissions;
         @Temporal(TemporalType.DATE)
         private Date dateNaissance;
         private String adresse;
@@ -51,30 +49,15 @@
         @Column(name = "permission")
         private Set<Permission> permissions = new HashSet<>();
 
-    //    @ElementCollection(targetClass = Permission.class)
-    //    @Enumerated(EnumType.STRING)
-    //    @CollectionTable(name = "user_permissions", joinColumns = @JoinColumn(name = "user_id"))
-    //    @Column(name = "permission")
-    @ElementCollection
-    @CollectionTable(name = "user_authorities", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "authority")
-    private Set<Permission> authorities = new HashSet<>();
-
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            return authorities.stream()
+            var authorities = permissions.stream()
                     .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toList());
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
+            return authorities;
         }
-//        @Override
-//        public Collection<? extends GrantedAuthority> getAuthorities() {
-//            return authorities.stream()
-//                    .map(SimpleGrantedAuthority::new)
-//                    .collect(Collectors.toSet());
-//        }
-
 
         @Override
         public String getUsername() {
