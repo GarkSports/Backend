@@ -39,7 +39,7 @@ public class RandomController {
 
     @PostMapping("/addEquipe/{academieId}")
     public Equipe addEquipe(@RequestBody EquipeRequest equipeRequest, @PathVariable Integer academieId) {
-        return randomService.addEquipe(equipeRequest.getEquipe(), academieId, equipeRequest.getEntraineurIds(), equipeRequest.getDisciplineId());
+        return randomService.addEquipe(equipeRequest.getEquipe(), academieId, equipeRequest.getDisciplineId());
     }
 
 
@@ -86,6 +86,11 @@ public class RandomController {
     @GetMapping("/getEntraineursByEquipe/{equipeId}")
     public Set<Entraineur> getEntraineursByEquipe(@PathVariable Integer equipeId) {
         return randomService.getEntraineursByEquipe(equipeId);
+    }
+
+    @GetMapping("/getMembersByAcademie/{academieId}")
+    public Set<Adherent> getMembersByAcademie(@PathVariable Integer academieId) {
+        return randomService.getMembersByAcademie(academieId);
     }
 
 

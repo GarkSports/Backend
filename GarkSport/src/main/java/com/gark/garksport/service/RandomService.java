@@ -60,12 +60,10 @@ public class RandomService implements IRandomService {
     }
 
     @Override
-    public Equipe addEquipe(Equipe equipe, Integer academieId, Set<Integer> entraineurIds, Integer disciplineId) {
+    public Equipe addEquipe(Equipe equipe, Integer academieId, Integer disciplineId) {
         Academie academie = academieRepository.findById(academieId).get();
-        Set<Entraineur> entraineurs = entraineurIds.stream().map(entraineurRepository::findById).map(entraineur -> entraineur.orElse(null)).collect(Collectors.toSet());
         Discipline discipline = disciplineRepository.findById(disciplineId).get();
         equipe.setAcademie(academie);
-        equipe.setEntraineurs(entraineurs);
         equipe.setDiscipline(discipline);
         // Generate random code for the equipe
         String randomCode = generateRandomCode();
@@ -189,6 +187,11 @@ public class RandomService implements IRandomService {
         return equipeRepository.findById(equipeId)
                 .map(Equipe::getEntraineurs)
                 .orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
+    }
+
+    @Override
+    public Set<Adherent> getMembersByAcademie(Integer academieId) {
+        return adherentRepository.findByAcademieId(academieId);
     }
 
 

@@ -163,3 +163,7 @@ z
 JGarkSport/src/main/java/com/gark/garksport/modal/enums/TypeAbonnement.java,4\4\44a78ea095a19bbb612989219e84695a938ac510
 }
 MGarkSport/src/main/java/com/gark/garksport/controller/PaiementController.java,7\4\74e28bde1954f6d7fd09a27de44f69093dfb2f29
+„
+TGarkSport/src/main/java/com/gark/garksport/repository/PaiementHistoryRepository.java,0\c\0c28c522904dc5e8f31171407ee92a4b3f859c7b
+u
+EGarkSport/src/main/java/com/gark/garksport/modal/PaiementHistory.java,3\a\3a5147a0a38548e77411160ce8b42ad7992358c3

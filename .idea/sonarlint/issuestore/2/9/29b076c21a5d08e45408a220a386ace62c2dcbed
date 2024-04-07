@@ -1,8 +1,7 @@
 
-r
-java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(«Éùÿÿÿÿ8ŒŞ€«è1
-J
-java:S1128	".Remove this unused import 'java.util.HashSet'.(Ê‚êX8íŞØè1
-M
-java:S1128
-"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8íŞØè1
+o
+java:S1192 "SDefine a constant instead of duplicating this literal "Adherent not found" 4 times.(âõ¸d8€ ¦¡ê1
+t
+java:S3776Q"RRefactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.(ç¿‚¡ûÿÿÿÿ8³Î¯ñê1
+I
+java:S1168"+Return an empty collection instead of null.(¥¹ï8ÊŸæóê1

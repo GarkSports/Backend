@@ -5,10 +5,12 @@ import com.gark.garksport.modal.enums.StatutAdherent;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.Date;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"paiement"})
 @Data
 @Entity
 public class Adherent extends User {
@@ -34,8 +36,9 @@ public class Adherent extends User {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Parent> parents;
 
-    @OneToMany(mappedBy = "adherent", cascade = CascadeType.ALL)
-    private Set<Paiement> paiements;
+    @JsonIgnoreProperties("adherent")
+    @OneToOne(mappedBy = "adherent")
+    private Paiement paiement;
 
     @JsonIgnoreProperties("membres")
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "membres")
@@ -44,5 +47,9 @@ public class Adherent extends User {
     private String nomEquipe;
 
     @Enumerated(EnumType.STRING)
-    private StatutAdherent statutAdherent=StatutAdherent.Non_Payé;
+    private StatutAdherent statutAdherent=StatutAdherent.Payé;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
 }
