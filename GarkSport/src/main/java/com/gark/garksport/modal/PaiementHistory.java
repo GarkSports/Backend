@@ -20,6 +20,12 @@ public class PaiementHistory {
     private Integer id;
 
     @Temporal(TemporalType.DATE)
+    private Date dateDebut;
+
+    @Temporal(TemporalType.DATE)
+    private Date dateFin;
+
+    @Temporal(TemporalType.DATE)
     private Date datePaiement;
     private Float montant;
     private Float reste;

@@ -44,12 +44,26 @@ public class Adherent extends User {
     @ManyToMany(cascade = CascadeType.ALL,mappedBy = "membres")
     private Set<Evenement> evenements;
 
-    private String nomEquipe;
+    private String nomEquipe="non affecté";
 
+    @Column(length = 50)
     @Enumerated(EnumType.STRING)
-    private StatutAdherent statutAdherent=StatutAdherent.Payé;
+    private StatutAdherent statutAdherent;
+
+    @Temporal(TemporalType.DATE)
+    private Date paiementDate = new Date();
 
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
     private Date creationDate;
+
+
+
+
+
+
+
+
+
+
 }

@@ -29,7 +29,8 @@ public class PaiementService implements IPaiementService {
     @Override
     public Paiement addPaiement(Paiement paiement, Integer idAdherent) {
         if (adherentRepository.existsById(idAdherent)) {
-            Adherent adherent = adherentRepository.findById(idAdherent).orElseThrow(() -> new IllegalArgumentException("Adherent not found"));
+            Adherent adherent = adherentRepository.findById(idAdherent)
+                    .orElseThrow(() -> new IllegalArgumentException("Adherent not found"));
 
             // Check if there is an existing payment for the same adherent
             Paiement existingPaiement = paiementRepository.findByAdherent(adherent);
@@ -54,14 +55,31 @@ public class PaiementService implements IPaiementService {
             // Set retardPaiement in the newPaiement
             paiement.setRetardPaiement(retardPaiement);
 
+            if (paiement.getReste() == null) {
+                paiement.setReste(0f);
+            }
+
+            if (paiement.getReste() != 0) {
+                adherent.setStatutAdherent(StatutAdherent.Payé_Partiellement);
+            } else {
+                adherent.setStatutAdherent(StatutAdherent.Payé);
+            }
+
             // Set the adherent for the newPaiement
             paiement.setAdherent(adherent);
 
             // Save the new paiement
             Paiement savedPaiement = paiementRepository.save(paiement);
 
+            // Update paiementDate of the adherent to dateFin
+            adherent.setPaiementDate(paiement.getDateFin());
+            // Save the updated adherent
+            adherentRepository.save(adherent);
+
             // Create a new paiement history entry
             PaiementHistory paiementHistory = PaiementHistory.builder()
+                    .dateDebut(paiement.getDateDebut())
+                    .dateFin(paiement.getDateFin())
                     .datePaiement(datePaiement)
                     .montant(paiement.getMontant())
                     .reste(paiement.getReste())
@@ -76,6 +94,7 @@ public class PaiementService implements IPaiementService {
         }
         return null;
     }
+
 
     @Override
     public Paiement updatePaiement(Paiement updatedPaiement, Integer idPaiement) {
@@ -105,9 +124,20 @@ public class PaiementService implements IPaiementService {
             if (updatedPaiement.getMontant() != null) {
                 existingPaiement.setMontant(updatedPaiement.getMontant());
             }
+            if (updatedPaiement.getReste() == null || updatedPaiement.getReste() == 0f) {
+                updatedPaiement.setReste(0f);
+                // Update the adherent status based on the updated reste
+                Adherent adherent = existingPaiement.getAdherent();
+                adherent.setStatutAdherent(StatutAdherent.Payé);
+            } else {
+                // Update the adherent status based on the updated reste
+                Adherent adherent = existingPaiement.getAdherent();
+                adherent.setStatutAdherent(StatutAdherent.Payé_Partiellement);
+            }
             if (updatedPaiement.getReste() != null) {
                 existingPaiement.setReste(updatedPaiement.getReste());
             }
+
             if (updatedPaiement.getRemarque() != null) {
                 existingPaiement.setRemarque(updatedPaiement.getRemarque());
             }
@@ -115,8 +145,14 @@ public class PaiementService implements IPaiementService {
             // Save the updated Paiement
             Paiement updatedPaiementEntity = paiementRepository.save(existingPaiement);
 
+            Adherent adherent = existingPaiement.getAdherent();
+            adherent.setPaiementDate(existingPaiement.getDateFin());
+            adherentRepository.save(adherent);
+
             // Create a new paiement history entry for the updated paiement
             PaiementHistory paiementHistory = PaiementHistory.builder()
+                    .dateDebut(updatedPaiement.getDateDebut())
+                    .dateFin(updatedPaiement.getDateFin())
                     .datePaiement(updatedPaiement.getDatePaiement()) // Use updated datePaiement
                     .montant(updatedPaiement.getMontant())
                     .reste(updatedPaiement.getReste())

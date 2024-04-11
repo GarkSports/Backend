@@ -135,8 +135,13 @@ public class RandomService implements IRandomService {
         List<Adherent> adherents = adherentRepository.findAllById(adherentIds);
         equipe.getAdherents().addAll(adherents);
 
+        // Update the nomEquipe property of each adherent
+        for (Adherent adherent : adherents) {
+            adherent.setNomEquipe(equipe.getNom());
+        }
         return equipeRepository.save(equipe);
     }
+
 
     @Override
     public Equipe affectEntraineurToEquipe(Integer equipeId, List<Integer> entraineurIds) {
