@@ -1,10 +1,8 @@
 package com.gark.garksport.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.gark.garksport.modal.Academie;
-import com.gark.garksport.modal.Manager;
-import com.gark.garksport.modal.Staff;
-import com.gark.garksport.modal.User;
+import com.gark.garksport.dto.request.AddRoleNameRequest;
+import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Permission;
 import com.gark.garksport.repository.AcademieRepository;
 import com.gark.garksport.repository.ManagerRepository;
@@ -34,6 +32,7 @@ public class ManagerController {
     private AcademieRepository academieRepository;
 
 
+
     @GetMapping("/hello")
     public String getHello(){
         return "hello manager";
@@ -48,7 +47,7 @@ public class ManagerController {
     }
 
     @GetMapping("/get-role-names")
-    public ResponseEntity<Set<String>> getRoleNames(Principal connectedUser, Integer managerId) {
+    public ResponseEntity<Set<RoleName>> getRoleNames(Principal connectedUser) {
         User user = managerService.getProfil(connectedUser);
         Academie academie = academieRepository.findByManagerId(user.getId());
         if (academie != null) {
@@ -58,41 +57,67 @@ public class ManagerController {
         }
     }
 
-    @GetMapping("/get-permissions")
-    public ResponseEntity<List<String>> getStaffPermissions() {
-        return ResponseEntity.ok(Arrays.stream(Permission.values())
-                .filter(permission -> permission.name().startsWith("STAFF"))
-                .map(Enum::name)
-                .collect(Collectors.toList()));
-    }
-
     @PostMapping("/add-role-name")
-    public ResponseEntity<Set<String>> addRoleName(@RequestBody JsonNode requestBody, Principal connectedUser) {
+    public ResponseEntity<Set<RoleName>> addRoleName(@RequestBody AddRoleNameRequest request, Principal connectedUser) {
         User user = getProfil(connectedUser);
         Academie academie = academieRepository.findByManagerId(user.getId());
 
         if (academie != null) {
-            Set<String> roleNames = academie.getRoleNames();
-            JsonNode roleNamesNode = requestBody.get("roleNames");
-            if (roleNamesNode != null && roleNamesNode.isArray()) {
-                for (JsonNode roleNameNode : roleNamesNode) {
-                    roleNames.add(roleNameNode.asText());
-                }
-                academieRepository.save(academie);
-                return ResponseEntity.ok(roleNames);
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
+            RoleName roleName = new RoleName();
+            roleName.setName(request.getRoleName());
+            roleName.setPermissions(request.getPermissions().stream()
+                    .map(Permission::valueOf)
+                    .collect(Collectors.toSet()));
+            roleName.setAcademie(academie);
+            academie.getRoleNames().add(roleName);
+            academieRepository.save(academie);
+            return ResponseEntity.ok(academie.getRoleNames());
         }
+
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/get-permissions")
+    public ResponseEntity<List<String>> getPermissions() {
+        List<String> permissionNames = Arrays.stream(Permission.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(permissionNames);
+    }
+
+
+
+
+//    @PostMapping("/add-staff")
+//    public Staff addStaff(
+//            @RequestBody Staff staff
+//    ) throws MessagingException {
+//        return managerService.addStaff(staff);
+//    }
+
     @PostMapping("/add-staff")
-    public Staff addStaff(
-            @RequestBody Staff staff
+    public Staff addStaff(@RequestBody Staff request) throws MessagingException {
+        return managerService.addStaff(request);
+    }
+    @PostMapping("/add-coach")
+    public Entraineur addCoach(
+            @RequestBody Entraineur entraineur
     ) throws MessagingException {
-        Set<Permission> permissions = new HashSet<>(); // Initialize permissions set if needed
-        return managerService.addStaff(staff, permissions);
+        return managerService.addCoach(entraineur);
+    }
+
+    @PostMapping("/add-parent")
+    public Parent addParent(
+            @RequestBody Parent parent
+    ) throws MessagingException {
+        return managerService.addParent(parent);
+    }
+
+    @PostMapping("/add-adherent")
+        public Adherent addAdherent(
+            @RequestBody Adherent adherent
+    ) throws MessagingException {
+        return managerService.addAdherent(adherent);
     }
 
 

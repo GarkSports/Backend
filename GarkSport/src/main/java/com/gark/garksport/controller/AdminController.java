@@ -3,6 +3,7 @@ package com.gark.garksport.controller;
 import com.gark.garksport.dto.authentication.RegisterRequest;
 import com.gark.garksport.modal.Admin;
 import com.gark.garksport.modal.Manager;
+import com.gark.garksport.modal.Staff;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.ManagerRepository;
 import com.gark.garksport.repository.UserRepository;
@@ -29,11 +30,18 @@ public class AdminController {
     private final UserRepository repository;
     private final ManagerRepository managerRepository;
 
-    @PreAuthorize("hasAuthority('management:read')")
+    @PreAuthorize("hasAuthority('READ')")
     @GetMapping("/hello")
     public String get() {
 
             return "Hello from Admin controller";
+
+    }
+
+    @GetMapping("/hello2")
+    public String gethello() {
+
+        return "Hello from Admin controller";
 
     }
     @PostMapping("/add-manager")
@@ -43,12 +51,7 @@ public class AdminController {
         return adminService.addManager(manager);
     }
 
-//    @PostMapping("/add-manager")
-//    public ResponseEntity<Admin> addManager(
-//            @RequestBody Admin admin
-//    ) throws MessagingException {
-//        return ResponseEntity.ok(adminService.addManager(admin));
-//    }
+
     @GetMapping("/get-profil")
     @ResponseBody
     public User getProfil(

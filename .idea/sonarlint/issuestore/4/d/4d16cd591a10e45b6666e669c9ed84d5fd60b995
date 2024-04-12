@@ -1,24 +1,26 @@
 
-g	java:S112c"FDefine and throw a dedicated exception instead of using a generic one.(‰öþÕþÿÿÿÿ8ìƒÐ‹ç1
+g	java:S112c"FDefine and throw a dedicated exception instead of using a generic one.(‰öþÕþÿÿÿÿ8ÚëŽüì1
 l
-java:S1192~"ODefine a constant instead of duplicating this literal "User not found" 3 times.(¢ •Ä8ñƒÐ‹ç1
+java:S1192~"ODefine a constant instead of duplicating this literal "User not found" 3 times.(¢ •Ä8ÝëŽüì1
 k
-java:S1192p"IDefine a constant instead of duplicating this literal "id is : " 3 times.(»”Ùºúÿÿÿÿ8ñƒÐ‹ç1
+java:S1192p"IDefine a constant instead of duplicating this literal "id is : " 3 times.(»”Ùºúÿÿÿÿ8ÞëŽüì1
 _
-java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄÞ8‹„Ð‹ç1
+java:S6813&"BRemove this field injection and use constructor injection instead.(êæÄÞ8Áßøûì1
 _
-java:S6813""BRemove this field injection and use constructor injection instead.(êæÄÞ8‹„Ð‹ç1
-b
-java:S1854>"@Remove this useless assignment to local variable "generatedPWD".(Ï¡®¨þÿÿÿÿ8“„Ð‹ç1
-•
-java:S1130<"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(ÉŽ¡Ç8•„Ð‹ç1
-S
-java:S1481>"1Remove this unused "generatedPWD" local variable.(Ï¡®¨þÿÿÿÿ8–„Ð‹ç1
-]	java:S125A"<This block of commented-out lines of code should be removed.(›£¤­ùÿÿÿÿ8–„Ð‹ç1
-X	java:S125I"<This block of commented-out lines of code should be removed.(üæ§Î8—„Ð‹ç1
-L	java:S106p"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8œ„Ð‹ç1
-M	java:S106…"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8£„Ð‹ç1
-M	java:S106˜"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8§„Ð‹ç1
-^	java:S125¤"<This block of commented-out lines of code should be removed.(£ôÚçýÿÿÿÿ8§„Ð‹ç1
+java:S6813("BRemove this field injection and use constructor injection instead.(êæÄÞ8Áßøûì1
+g
+java:S3252J"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(ÝÿþÛþÿÿÿÿ8›ìŽüì1
+L	java:S106p"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8¦ìŽüì1
+M	java:S106…"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8©ìŽüì1
+M	java:S106˜"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8¬ìŽüì1
+^	java:S125¤"<This block of commented-out lines of code should be removed.(£ôÚçýÿÿÿÿ8¯ìŽüì1
+]
+java:S1128";Remove this unused import 'com.gark.garksport.modal.Staff'.(¤™å†ÿÿÿÿÿ8ð¡üì1
+c
+java:S1128"FRemove this unused import 'com.gark.garksport.modal.enums.Permission'.(°¹À”8ñ¡üì1
 Q
-java:S1128"/Remove this unused import 'java.time.Duration'.(ëá¯‰üÿÿÿÿ8«¢Ý‹ç1
+java:S1128"/Remove this unused import 'java.time.Duration'.(ëá¯‰üÿÿÿÿ8ñ¡üì1
+J
+java:S1128".Remove this unused import 'java.util.HashSet'.(Ê‚êX8ñ¡üì1
+L
+java:S1128"*Remove this unused import 'java.util.Set'.(ö²„¤þÿÿÿÿ8ñ¡üì1

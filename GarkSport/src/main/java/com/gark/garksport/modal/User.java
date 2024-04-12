@@ -8,6 +8,7 @@
     import org.springframework.security.core.authority.SimpleGrantedAuthority;
     import org.springframework.security.core.userdetails.UserDetails;
 
+    import java.security.Permissions;
     import java.time.Duration;
     import java.time.Instant;
     import java.util.*;
@@ -43,21 +44,41 @@
         @ManyToMany(cascade = CascadeType.ALL,mappedBy = "invites")
         private Set<Evenement> evenements;
 
-        @ElementCollection(targetClass = Permission.class)
+        @ElementCollection(targetClass = Permission.class, fetch = FetchType.EAGER)
         @Enumerated(EnumType.STRING)
         @CollectionTable(name = "user_permissions", joinColumns = @JoinColumn(name = "user_id"))
         @Column(name = "permission")
-        private Set<Permission> permissions = new HashSet<>();
+        private Set<Permission> permissions;
+
+
+//        @Override
+//        public Collection<? extends GrantedAuthority> getAuthorities() {
+//            var authorities = permissions.stream()
+//                    .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
+//                    .collect(Collectors.toList());
+//            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
+//            return authorities;
+//        }
 
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            var authorities = permissions.stream()
-                    .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
-                    .collect(Collectors.toList());
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
-            return authorities;
+            List<SimpleGrantedAuthority> auths = new ArrayList<>();
+            auths.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
+            for (Permission permission : permissions) {
+                auths.add(new SimpleGrantedAuthority(permission.name()));
+            }
+            return auths;
         }
+//        @Override
+//        public Collection<? extends GrantedAuthority> getAuthorities() {
+//            if (role != null) {
+//                return role.getAuthorities();
+//
+//            } else {
+//                return Collections.emptyList(); // or return null, depending on your use case
+//            }
+//        }
 
         @Override
         public String getUsername() {

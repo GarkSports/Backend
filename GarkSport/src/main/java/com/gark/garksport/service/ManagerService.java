@@ -1,15 +1,15 @@
 package com.gark.garksport.service;
 
-import com.gark.garksport.modal.Academie;
-import com.gark.garksport.modal.Manager;
-import com.gark.garksport.modal.Staff;
-import com.gark.garksport.modal.User;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.gark.garksport.dto.request.AddRoleNameRequest;
+import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Permission;
 import com.gark.garksport.modal.enums.Role;
 import com.gark.garksport.repository.AcademieRepository;
 import com.gark.garksport.repository.ManagerRepository;
 import com.gark.garksport.repository.UserRepository;
 import jakarta.mail.MessagingException;
+import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +20,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.security.Principal;
 import java.security.SecureRandom;
@@ -128,14 +129,20 @@ public class ManagerService {
     }
 
 
-    public void addRoleName(Set<String> roleNames, Principal connectedUser ) {
+    public void addRoleName(AddRoleNameRequest request, Principal connectedUser) {
         User user = getProfil(connectedUser);
         if (user instanceof Manager) {
             Manager manager = (Manager) user;
-            Academie academie = manager.getAcademie(); // Assuming a relationship between Manager and Academy
-            academie.setRoleNames(roleNames);
+            Academie academie = manager.getAcademie(); // Assuming a relationship between Manager and Academie
+
             if (academie != null) {
-                academie.getRoleNames().add(roleNames.toString());
+                RoleName roleName = new RoleName();
+                roleName.setName(request.getRoleName());
+                roleName.setPermissions(request.getPermissions().stream()
+                        .map(Permission::valueOf)
+                        .collect(Collectors.toSet()));
+                roleName.setAcademie(academie);
+                academie.getRoleNames().add(roleName);
                 academieRepository.save(academie);
             }
         }
@@ -162,16 +169,17 @@ public class ManagerService {
     }
 
 
-    public Staff addStaff(Staff staff, Set<Permission> permissions) throws MessagingException {
+    public Staff addStaff(Staff request) throws MessagingException {
         String generatedPWD = generateRandomPassword();
 
-        staff.setEmail(staff.getEmail());
+        Staff staff = new Staff();
+        staff.setEmail(request.getEmail());
         staff.setRole(Role.STAFF);
-        staff.setPassword(passwordEncoder.encode(staff.getPassword()));
-        staff.setRoleName(staff.getRoleName());
-        staff.setPermissions(permissions); // Set the permissions for the staff
+        staff.setPassword(passwordEncoder.encode(request.getPassword()));
+        staff.setRoleName(request.getRoleName());
 
-
+        Set<Permission> permissions = request.getPermissions();
+        staff.setPermissions(permissions);
 
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
@@ -182,6 +190,63 @@ public class ManagerService {
         mailSender.send(message);
 
         return repository.save(staff);
+    }
+    public Entraineur addCoach(Entraineur entraineur) throws MessagingException {
+        String generatedPWD = generateRandomPassword();
+
+        entraineur.setEmail(entraineur.getEmail());
+        entraineur.setRole(Role.ENTRAINEUR);
+        entraineur.setPassword(passwordEncoder.encode(entraineur.getPassword()));
+        entraineur.setRoleName(entraineur.getRoleName());// Set the permissions for the staff
+
+
+        MimeMessage message = mailSender.createMimeMessage();
+        message.setFrom(new InternetAddress("${spring.mail.username}"));
+        message.setRecipients(MimeMessage.RecipientType.TO, entraineur.getEmail());
+        message.setSubject(entraineur.getRoleName() + " Login");
+        message.setText("<div> Login using your email and this password: " + entraineur.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
+
+        mailSender.send(message);
+
+        return repository.save(entraineur);
+    }
+
+    public Parent addParent(Parent parent) throws MessagingException {
+        String generatedPWD = generateRandomPassword();
+
+        parent.setEmail(parent.getEmail());
+        parent.setRole(Role.PARENT);
+        parent.setPassword(passwordEncoder.encode(parent.getPassword()));
+
+
+        MimeMessage message = mailSender.createMimeMessage();
+        message.setFrom(new InternetAddress("${spring.mail.username}"));
+        message.setRecipients(MimeMessage.RecipientType.TO, parent.getEmail());
+        message.setSubject(parent.getRoleName() + " Login");
+        message.setText("<div> Login using your email and this password: " + parent.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
+
+        mailSender.send(message);
+
+        return repository.save(parent);
+    }
+
+    public Adherent addAdherent(Adherent adherent) throws MessagingException {
+        String generatedPWD = generateRandomPassword();
+
+        adherent.setEmail(adherent.getEmail());
+        adherent.setRole(Role.ADEHERANT);
+        adherent.setPassword(passwordEncoder.encode(adherent.getPassword()));
+
+
+        MimeMessage message = mailSender.createMimeMessage();
+        message.setFrom(new InternetAddress("${spring.mail.username}"));
+        message.setRecipients(MimeMessage.RecipientType.TO, adherent.getEmail());
+        message.setSubject(adherent.getRoleName() + " Login");
+        message.setText("<div> Login using your email and this password: " + adherent.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
+
+        mailSender.send(message);
+
+        return repository.save(adherent);
     }
 
 

@@ -1,12 +1,16 @@
 package com.gark.garksport.service;
 
 import com.gark.garksport.modal.Manager;
+import com.gark.garksport.modal.Staff;
 import com.gark.garksport.modal.User;
+import com.gark.garksport.modal.enums.Permission;
 import com.gark.garksport.modal.enums.Role;
 import com.gark.garksport.repository.AdminRepository;
 import com.gark.garksport.repository.ManagerRepository;
 import com.gark.garksport.repository.UserRepository;
 import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,7 +22,9 @@ import java.security.Principal;
 import java.security.SecureRandom;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -56,29 +62,23 @@ public class AdminService {
         return randomPassword.toString();
     }
 
-
     public Manager addManager(Manager manager) throws MessagingException{
-
         String generatedPWD = generateRandomPassword();
-
+                    manager.setEmail(manager.getEmail());
                     manager.setRole(Role.MANAGER);
-                    //manager.setPassword(passwordEncoder.encode(generatedPWD));
-                    //manager.setPassword(passwordEncoder.encode(manager.getPassword()));
-                    //manager.setRoleName(manager.getRoleName());
-
-                    //.permissions(request.getPermissions())
-
-            return repository.save(manager);
-
-//            MimeMessage message = mailSender.createMimeMessage();
-//            message.setFrom(new InternetAddress("${spring.mail.username}"));
-//            message.setRecipients(MimeMessage.RecipientType.TO, request.getEmail());
-//            message.setSubject(request.getRole() + " Login");
-//            message.setText("<div> Login using your email and this password: " + request.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
-//
-//            mailSender.send(message);
+                    manager.setPassword(passwordEncoder.encode(generatedPWD));
 
 
+            MimeMessage message = mailSender.createMimeMessage();
+            message.setFrom(new InternetAddress("${spring.mail.username}"));
+            message.setRecipients(MimeMessage.RecipientType.TO, manager.getEmail());
+            message.setSubject(manager.getRole() + " Login");
+            message.setText("<div> Login using your email and this password: " + manager.getEmail() + generatedPWD +
+                    "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
+
+            mailSender.send(message);
+
+        return repository.save(manager);
     }
     public Manager updateManager(Integer id, Manager manager) {
         Optional<Manager> existingManager = managerRepository.findById(id);

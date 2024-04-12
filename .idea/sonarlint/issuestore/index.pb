@@ -143,3 +143,7 @@ t
 DGarkSport/src/main/java/com/gark/garksport/service/StaffService.java,2\9\2905ce3cee9ee67e3158d9d1f214f88fbb7fd9ac
 z
 JGarkSport/src/main/java/com/gark/garksport/controller/StaffController.java,b\7\b7138cff336cfdc65d295a9d30182be720745c0f
+n
+>GarkSport/src/main/java/com/gark/garksport/modal/RoleName.java,a\7\a7df0378db14e3881f650262682739cec2fd01f4
+~
+NGarkSport/src/main/java/com/gark/garksport/dto/request/AddRoleNameRequest.java,b\8\b870d816a1dd909d7e88aebe8bf7d6d7055207f8
