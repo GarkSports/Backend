@@ -31,7 +31,7 @@ public class AuthenticationService {
 
     private final UserRepository repository;
     @Autowired
-    private  AdminRepository adminRepository;
+    private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -39,7 +39,9 @@ public class AuthenticationService {
     @Value("${application.security.jwt.expiration}")
     private long cookieExpiry;
 
-    public Admin register2(Admin admin) {
+    public Admin registerAsAdmin(Admin admin) {
+        admin.setRole(Role.ADMIN);
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         return adminRepository.save(admin);
     }
 
@@ -51,10 +53,18 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
-        //adminRepository.save(user);
+        repository.save(user);
         return AuthenticationResponse.builder()
                 .build();
     }
+    public User registerAsUser(User user) {
+
+            user.setRole(Role.ADEHERANT);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return repository.save(user);
+
+    }
+
     public AuthenticationResponse authenticate(AuthenticationRequest request, HttpServletResponse response){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -75,7 +85,7 @@ public class AuthenticationService {
         ResponseCookie cookie = ResponseCookie.from("accessToken", jwtToken)
                 .httpOnly(true)
                 .secure(false)
-                .sameSite("Lax")
+                .sameSite("Strict")
                 .path("/")
                 .maxAge(cookieExpiry)
                 .build();
@@ -86,7 +96,6 @@ public class AuthenticationService {
                 .build();
 
     }
-
     private void storeRefreshTokenInCookie(HttpServletResponse response, String refreshToken) {
         ResponseCookie cookie = ResponseCookie.from("authToken", refreshToken)
                 .domain("localhost")

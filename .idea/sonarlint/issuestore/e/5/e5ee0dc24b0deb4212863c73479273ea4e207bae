@@ -1,0 +1,16 @@
+
+G
+java:S1128"*Remove this unused import 'lombok.Getter'.(ùÒµÙ8Õ–ÊÉë1
+
+java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8Ö–ÊÉë1
+T
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓşÿÿÿÿ8Ö–ÊÉë1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8Ö–ÊÉë1
+L
+java:S1128	"*Remove this unused import 'java.util.Set'.(ö²„¤şÿÿÿÿ8Ö–ÊÉë1
+Z
+java:S1128
+"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8×–ÊÉë1
+c
+java:S1128"FRemove this unused import 'com.gark.garksport.modal.enums.Permission'.(ÎÊËÃ8×–ÊÉë1

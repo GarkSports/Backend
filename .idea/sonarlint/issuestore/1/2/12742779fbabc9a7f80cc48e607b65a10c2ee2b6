@@ -1,23 +1,19 @@
 
-g
-java:S1192,"JDefine a constant instead of duplicating this literal "/admin/**" 5 times.(ÿö¦Ö8ö¼š§á1
-q
-java:S1192="ODefine a constant instead of duplicating this literal "/discipline/**" 4 times.(ø€™Èúÿÿÿÿ8ö¼š§á1
-m
-java:S11923"KDefine a constant instead of duplicating this literal "/random/**" 4 times.(˜Ëï®øÿÿÿÿ8ö¼š§á1
-j
-java:S11928"MDefine a constant instead of duplicating this literal "/academie/**" 4 times.(ÄÔ­8ö¼š§á1
+l
+java:S1192*"JDefine a constant instead of duplicating this literal "/admin/**" 4 times.(Å¼ºêùÿÿÿÿ8ÇÙÔ÷ê1
 \
-java:S1128":Remove this unused import 'com.gark.garksport.modal.User'.(ë†¦·üÿÿÿÿ8®½š§á1
+java:S1128":Remove this unused import 'com.gark.garksport.modal.User'.(ë†¦·üÿÿÿÿ8óİêÉë1
 b
-java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8¯½š§á1
+java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8õİêÉë1
 t
-java:S1128"WRemove this unused import 'org.springframework.scheduling.annotation.EnableScheduling'.(‹æ¬‹8­Èµ¨á1
+java:S1128"WRemove this unused import 'org.springframework.scheduling.annotation.EnableScheduling'.(‹æ¬‹8öİêÉë1
 y
-java:S1128"\Remove this unused import 'org.springframework.security.core.context.SecurityContextHolder'.(ŒÄæë8¯½š§á1
+java:S1128"\Remove this unused import 'org.springframework.security.core.context.SecurityContextHolder'.(ŒÄæë8÷İêÉë1
 ~
-java:S1128"aRemove this unused import 'org.springframework.security.web.authentication.logout.LogoutHandler'.(¶„İ€8¯½š§á1
+java:S1128"aRemove this unused import 'org.springframework.security.web.authentication.logout.LogoutHandler'.(¶„İ€8ùİêÉë1
 }
-java:S1128"`Remove this unused import 'org.springframework.security.web.util.matcher.AntPathRequestMatcher'.(¼¸ö8¯½š§á1
+java:S1128"`Remove this unused import 'org.springframework.security.web.util.matcher.AntPathRequestMatcher'.(¼¸ö8úİêÉë1
 j
-java:S1128"HRemove this unused import 'com.gark.garksport.modal.enums.Role.MANAGER'.( —×üÿÿÿÿ8¯½š§á1
+java:S1128"HRemove this unused import 'com.gark.garksport.modal.enums.Role.MANAGER'.( —×üÿÿÿÿ8úİêÉë1
+i
+java:S1128"GRemove this unused import 'org.springframework.http.HttpMethod.DELETE'.(…İ“÷ıÿÿÿÿ8úİêÉë1
