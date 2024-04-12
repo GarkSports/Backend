@@ -1,5 +1,11 @@
     package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gark.garksport.modal.enums.Role;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
     import com.gark.garksport.modal.enums.Permission;
     import com.gark.garksport.modal.enums.Role;
     import jakarta.persistence.*;
@@ -41,6 +47,19 @@
         private Instant blockedTimestamp;
         private Duration blockedDuration;
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);  // Use a unique field to calculate hashCode
+    }
+
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role != null) {
+            return role.getAuthorities();
+        } else {
+            return Collections.emptyList(); // or return null, depending on your use case
         @ManyToMany(cascade = CascadeType.ALL,mappedBy = "invites")
         private Set<Evenement> evenements;
 

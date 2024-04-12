@@ -9,6 +9,4 @@ public interface IDisciplineService {
     public Set<Discipline> getDisciplines();
     public Discipline updateDiscipline(Integer id, Discipline updatedDiscipline);
     public void deleteDiscipline(Integer id);
-
-
 }

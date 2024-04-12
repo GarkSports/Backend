@@ -19,4 +19,5 @@ public class Discipline {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
+    private String description;
 }

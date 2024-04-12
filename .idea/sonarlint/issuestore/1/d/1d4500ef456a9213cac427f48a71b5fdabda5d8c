@@ -1,0 +1,11 @@
+
+
+java:S1488m"lImmediately return this expression instead of assigning it to the temporary variable "academieEtatRequests".(ƒš‘–ùÿÿÿÿ8­Àúèä1
+b
+java:S3518R"@Make sure "totalCount" can't be zero before doing this division.(ûû‡ûÿÿÿÿ8õãèä1
+o
+java:S6204o"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8×Àúèä1
+p
+java:S6204š"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8¼Ïó“å1
+u
+java:S6204"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ÖŸ–øşÿÿÿÿ8ÿ˜ô“å1

@@ -1,9 +1,13 @@
 
+o
+java:S1192…"QDefine a constant instead of duplicating this literal "Equipe not found" 3 times.(¸íÂ†8†Ä—ÿë1
 m
-java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8 ×äŸá1
-_
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8‚…îœä1
-_
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8ƒ…îœä1
-_
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8ƒ…îœä1
+java:S3655A"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8®í„ñê1
+m
+java:S3655@"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8®í„ñê1
+m
+java:S3655%"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8¬Îÿ´é1
+m
+java:S3655/"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8­Îÿ´é1
+K
+java:S1128".Remove this unused import 'java.util.Objects'.(¼¸õ›8úíÆñê1

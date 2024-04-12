@@ -2,7 +2,6 @@ package com.gark.garksport.controller;
 
 import com.gark.garksport.dto.authentication.AuthenticationRequest;
 import com.gark.garksport.dto.authentication.AuthenticationResponse;
-import com.gark.garksport.dto.authentication.RegisterRequest;
 import com.gark.garksport.modal.Admin;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.UserRepository;

@@ -1,13 +1,13 @@
 
 N
-java:S1948",Make "discipline" transient or serializable.(ø¢ıÿÿÿÿ8øâ‹ßŞ1
+java:S1948",Make "discipline" transient or serializable.(ø¢ıÿÿÿÿ8ÈèÛëë1
 X
-java:S1948"6Make "informationMedicales" transient or serializable.(¥¢ñ‹şÿÿÿÿ8ùâ‹ßŞ1
+java:S1948"6Make "informationMedicales" transient or serializable.(¥¢ñ‹şÿÿÿÿ8ÊèÛëë1
 X
-java:S1948"6Make "informationSportives" transient or serializable.(Òáèøÿÿÿÿ8úâ‹ßŞ1
+java:S1948"6Make "informationSportives" transient or serializable.(Òáèøÿÿÿÿ8ÊèÛëë1
 L
-java:S1948"*Make "academie" transient or serializable.(Ÿ»’ÿøÿÿÿÿ8ßÌ¶¬ß1
-H
-java:S1948$"+Make "paiements" transient or serializable.(›ƒíñ8ûâ‹ßŞ1
-J
-java:S1948'"(Make "equipe" transient or serializable.(ÏˆÃüÿÿÿÿ8ıâ‹ßŞ1
+java:S1948""*Make "academie" transient or serializable.(Ÿ»’ÿøÿÿÿÿ8ÊèÛëë1
+L
+java:S1948)"*Make "paiement" transient or serializable.(–Šìùÿÿÿÿ8ÊèÛëë1
+I
+java:S1948-",Make "evenements" transient or serializable.(ä™‰°8ÊèÛëë1

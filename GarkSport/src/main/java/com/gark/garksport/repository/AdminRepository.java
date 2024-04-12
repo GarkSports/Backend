@@ -1,10 +1,9 @@
 package com.gark.garksport.repository;
 
 import com.gark.garksport.modal.Admin;
-import com.gark.garksport.modal.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
-public interface AdminRepository extends JpaRepository<User, Integer> {
+@Repository
+public interface AdminRepository extends JpaRepository<Admin, Integer> {
 }

@@ -9,12 +9,9 @@ import com.gark.garksport.repository.ManagerRepository;
 import com.gark.garksport.repository.UserRepository;
 import com.gark.garksport.service.AdminService;
 import jakarta.mail.MessagingException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;

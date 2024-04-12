@@ -1,19 +1,12 @@
 
-_
-java:S6813("BRemove this field injection and use constructor injection instead.(êæÄŞ8ÎÎ»œå1
-g
-java:S32528"EUse static access with "com.gark.garksport.modal.User" for "builder".(ÏÓşÔûÿÿÿÿ8æ¼·æ1
-G	java:S106T"+Replace this use of System.out by a logger.(®µ€ó8ÖÎ»œå1
-G	java:S106U"+Replace this use of System.out by a logger.(ö±–®8ÖÎ»œå1
 Z
-java:S1128"=Remove this unused import 'com.gark.garksport.modal.Manager'.(Ê§ˆ¨8ãîÄ¿ç1
-_
-java:S1128"BRemove this unused import 'jakarta.mail.internet.InternetAddress'.(Ê•¬¾8ãîÄ¿ç1
+java:S1854/"8Remove this useless assignment to local variable "user".(ÏÓşÔûÿÿÿÿ8«ÏÎ£á1
+g
+java:S3252/"EUse static access with "com.gark.garksport.modal.User" for "builder".(ÏÓşÔûÿÿÿÿ8ÈËĞ£á1
+K
+java:S1481/")Remove this unused "user" local variable.(ÏÓşÔûÿÿÿÿ8²ÏÎ£á1
+]	java:S1256"<This block of commented-out lines of code should be removed.(ŸöÇóøÿÿÿÿ8³ÏÎ£á1
+G	java:S106C"+Replace this use of System.out by a logger.(®µ€ó8­Èƒá1
+G	java:S106D"+Replace this use of System.out by a logger.(ö±–®8‘­Èƒá1
 [
-java:S1128">Remove this unused import 'jakarta.mail.internet.MimeMessage'.(š‹ÔÕ8ãîÄ¿ç1
-j
-java:S1128"MRemove this unused import 'org.springframework.mail.javamail.JavaMailSender'.(ÕÃ›8äîÄ¿ç1
-Y
-java:S1128"7Remove this unused import 'java.security.SecureRandom'.(›éè™úÿÿÿÿ8äîÄ¿ç1
-[
-java:S1144j">Remove this unused private "storeRefreshTokenInCookie" method.(®Ç®8Ï»œå1
+java:S1144Z">Remove this unused private "storeRefreshTokenInCookie" method.(®Ç®8¾­Èƒá1

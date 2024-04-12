@@ -1,9 +1,7 @@
 package com.gark.garksport.service;
-import com.gark.garksport.modal.Academie;
-import com.gark.garksport.modal.Adherent;
-import com.gark.garksport.modal.Discipline;
-import com.gark.garksport.modal.Manager;
+import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Etat;
+import com.gark.garksport.repository.AcademieHistoryRepository;
 import com.gark.garksport.repository.AcademieRepository;
 import com.gark.garksport.repository.DisciplineRepository;
 import com.gark.garksport.repository.ManagerRepository;
@@ -23,6 +21,8 @@ public class AcademieService implements IAcademieService {
     private DisciplineRepository disciplineRepository;
     @Autowired
     private ManagerRepository managerRepository;
+    @Autowired
+    private AcademieHistoryRepository academieHistoryRepository;
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -49,16 +49,23 @@ public class AcademieService implements IAcademieService {
     }
 
     @Override
-    public Academie updateAcademie(Academie academie, Integer academieId) {
+    public Academie updateAcademie(Academie academie, Integer academieId, Set<Integer> disciplinesIds, Integer managerId) {
         try {
             Academie academieNew = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+            Set<Discipline> disciplines = new HashSet<>(disciplineRepository.findAllById(disciplinesIds));
+            Manager manager = managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found"));
             academieNew.setNom(academie.getNom());
             academieNew.setType(academie.getType());
             academieNew.setFraisAdhesion(academie.getFraisAdhesion());
-            academieNew.setLogo(academie.getLogo());
             academieNew.setAffiliation(academie.getAffiliation());
             academieNew.setDescription(academie.getDescription());
-            academieNew.setAdresse(academie.getAdresse());
+            academieNew.setRue(academie.getRue());
+            academieNew.setVille(academie.getVille());
+            academieNew.setCodePostal(academie.getCodePostal());
+            academieNew.setPays(academie.getPays());
+            academieNew.setLogo(academie.getLogo());
+            academieNew.setDisciplines(disciplines);
+            academieNew.setManager(manager);
             return academieRepository.save(academieNew);
         } catch (Exception e) {
             throw new RuntimeException("Failed to update Academie", e);
@@ -66,14 +73,15 @@ public class AcademieService implements IAcademieService {
     }
 
     @Override
-    public Academie chanegeEtatAcademie(Integer academieId, Etat etat) {
-        try {
-            Academie academie = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
-            academie.setEtat(etat);
-            return academieRepository.save(academie);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to change Academie state", e);
-        }
+    public Academie changeEtatAcademie(Integer academieId, Etat newEtat, String changeReason) {
+        Academie academie = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+        academie.updateEtat(newEtat, changeReason);
+        return academieRepository.save(academie);
+    }
+
+    @Override
+    public Set<AcademieHistory> getAcademieHistory(Integer academieId) {
+        return academieHistoryRepository.findByAcademie_IdOrderByChangeDateDesc(academieId);
     }
 
     @Override
@@ -91,6 +99,15 @@ public class AcademieService implements IAcademieService {
         }
     }
 
+    @Override
+    public Academie getAcademieById(Integer academieId) {
+        try {
+            return academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get Academie by Id", e);
+        }
+    }
+
     private void senDeleteNotificationEmail(String recipientEmail, String academieNom){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("centrenationaldelinformatiquec@gmail.com");
@@ -99,11 +116,6 @@ public class AcademieService implements IAcademieService {
         message.setText("Dear Adherent,\n\nThe academy '" + academieNom + "' has been deleted.\n\nSincerely,\nThe Management");
         javaMailSender.send(message);
     }
-
-
-
-
-
 
     @Override
     public Manager getManagerDetails(Integer academieId) {
@@ -116,16 +128,42 @@ public class AcademieService implements IAcademieService {
     }
 
     @Override
-    public Set<String> getDisciplinesByAcademie(Integer academieId) {
+    public Set<Discipline> getDisciplinesByAcademie(Integer academieId) {
         try {
             Academie academie = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
-            Set<String> disciplines = new HashSet<>();
-            for (Discipline discipline : academie.getDisciplines()) {
-                disciplines.add(discipline.getNom());
-            }
-            return disciplines;
+            return academie.getDisciplines();
         } catch (Exception e) {
             throw new RuntimeException("Failed to get Disciplines for Academie", e);
         }
     }
+
+    @Override
+    public Set<Academie> getArchivedAcademies() {
+        try {
+            return academieRepository.findByIsArchivedTrue();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get Academies", e);
+        }
+    }
+
+    @Override
+    public void deleteArchivedAcademie(Integer academieId) {
+        try {
+            academieRepository.deleteById(academieId);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete Academie", e);
+        }
+    }
+
+    @Override
+    public void restoreArchivedAcademie(Integer academieId) {
+        try {
+            Academie academie = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+            academie.setIsArchived(false);
+            academieRepository.save(academie);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to restore Academie", e);
+        }
+    }
+
 }

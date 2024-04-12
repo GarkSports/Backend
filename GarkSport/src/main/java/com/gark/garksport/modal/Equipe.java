@@ -1,5 +1,8 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.gark.garksport.modal.enums.GenreEquipe;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,16 +21,27 @@ public class Equipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
-
-    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
-    private Set<Adherent> adherents;
+    private GenreEquipe genre;
+    private String groupeAge;
+    private String couleur;
+    private String codeEquipe;
 
     @ManyToOne
-    private Entraineur entraineur;
+    private Discipline discipline;
 
-    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
+    @OneToMany
+    private Set<Adherent> adherents;
+
+    @OneToMany
+    private Set<Entraineur> entraineurs;
+
+
+    @ManyToOne
+    private Academie academie;
+
+    @JsonIgnoreProperties("equipe")
+    @OneToMany(mappedBy = "equipe")
     private Set<Evenement> evenements;
-
 
 
 }
