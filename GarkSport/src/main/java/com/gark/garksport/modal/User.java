@@ -53,13 +53,6 @@ import org.springframework.security.core.userdetails.UserDetails;
     }
 
 
-    @Override
-    @JsonIgnore
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (role != null) {
-            return role.getAuthorities();
-        } else {
-            return Collections.emptyList(); // or return null, depending on your use case
         @ManyToMany(cascade = CascadeType.ALL,mappedBy = "invites")
         private Set<Evenement> evenements;
 

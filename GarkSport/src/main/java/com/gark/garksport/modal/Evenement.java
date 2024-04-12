@@ -61,5 +61,8 @@ public class Evenement {
     private String adresse;
     private String lieu;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<User> invites;
+
 
 }

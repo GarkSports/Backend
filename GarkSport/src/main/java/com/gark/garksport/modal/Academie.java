@@ -59,6 +59,9 @@ public class Academie {
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
     private Set<Evenement> evenements;
 
+    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RoleName> roleNames = new HashSet<>();
+
     @Override
     public int hashCode() {
         return Objects.hash(id);  // Use a unique field to calculate hashCode
