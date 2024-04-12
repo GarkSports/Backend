@@ -47,10 +47,10 @@ import org.springframework.security.core.userdetails.UserDetails;
         private Instant blockedTimestamp;
         private Duration blockedDuration;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);  // Use a unique field to calculate hashCode
-    }
+        @Override
+        public int hashCode() {
+            return Objects.hash(id);  // Use a unique field to calculate hashCode
+        }
 
 
         @ManyToMany(cascade = CascadeType.ALL,mappedBy = "invites")
@@ -63,17 +63,8 @@ import org.springframework.security.core.userdetails.UserDetails;
         private Set<Permission> permissions;
 
 
-//        @Override
-//        public Collection<? extends GrantedAuthority> getAuthorities() {
-//            var authorities = permissions.stream()
-//                    .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
-//                    .collect(Collectors.toList());
-//            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
-//            return authorities;
-//        }
-
-
         @Override
+        @JsonIgnore
         public Collection<? extends GrantedAuthority> getAuthorities() {
             List<SimpleGrantedAuthority> auths = new ArrayList<>();
             auths.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
@@ -82,15 +73,6 @@ import org.springframework.security.core.userdetails.UserDetails;
             }
             return auths;
         }
-//        @Override
-//        public Collection<? extends GrantedAuthority> getAuthorities() {
-//            if (role != null) {
-//                return role.getAuthorities();
-//
-//            } else {
-//                return Collections.emptyList(); // or return null, depending on your use case
-//            }
-//        }
 
         @Override
         public String getUsername() {
