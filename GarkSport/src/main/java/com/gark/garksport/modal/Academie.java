@@ -9,8 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Objects;
-import java.util.Set;
+import java.awt.*;
+import java.util.*;
 
 @Data
 @Builder
@@ -31,6 +31,8 @@ public class Academie {
     private Etat etat;
     private String description;
     private Boolean isArchived=false;
+    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RoleName> roleNames = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "academie_disciplines", joinColumns = @JoinColumn(name = "academie_id"), inverseJoinColumns = @JoinColumn(name = "disciplines_id"))

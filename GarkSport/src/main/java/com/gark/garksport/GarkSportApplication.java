@@ -21,6 +21,8 @@ public class GarkSportApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GarkSportApplication.class, args);
+	//	Role.ADMIN.printPermissions();
+
 	}
 
 
@@ -28,9 +30,9 @@ public class GarkSportApplication {
 //	public CommandLineRunner commandLineRunner(AuthenticationService service) {
 //		return args -> {
 //			var admin = RegisterRequest.builder()
-//					.firstname("Admin")
-//					.lastname("Admin")
-//					.email("adminaa2@gmail.com")
+//					.firstname("AdminTest")
+//					.lastname("AdminTest")
+//					.email("admintest@gmail.com")
 //					.password("password")
 //					.role(ADMIN)
 //					.build();

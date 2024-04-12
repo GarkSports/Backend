@@ -8,3 +8,11 @@ b	java:S112r"FDefine and throw a dedicated exception instead of using a generi
 c	java:S112€"FDefine and throw a dedicated exception instead of using a generic one.(ŸŞçş8¨È·óà1
 p
 java:S11926"SDefine a constant instead of duplicating this literal "Academie not found" 5 times.(û½Äë8“ä³óà1
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8òíœä1
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8òíœä1
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8òíœä1
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8òíœä1

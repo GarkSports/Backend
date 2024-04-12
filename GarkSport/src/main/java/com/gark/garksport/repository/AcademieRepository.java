@@ -9,4 +9,5 @@ import java.util.Set;
 @Repository
 public interface AcademieRepository extends JpaRepository<Academie, Integer> {
     Set<Academie> findByIsArchivedFalse();
+    Academie findByManagerId(Integer managerId);
 }

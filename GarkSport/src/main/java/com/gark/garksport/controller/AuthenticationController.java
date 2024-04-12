@@ -10,7 +10,6 @@ import com.gark.garksport.service.AdminService;
 import com.gark.garksport.service.AuthenticationService;
 import com.gark.garksport.service.JwtService;
 import com.gark.garksport.service.UserService;
-import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -35,12 +34,27 @@ public class AuthenticationController {
     @Autowired
     private JwtService jwtService;
 
-    @PostMapping("/register")
-    public Admin register2(
+    @PostMapping("/registerAsAdmin")
+    public ResponseEntity<Admin> registerAsAdmin(
             @RequestBody Admin admin
             ){
-        return service.register2(admin);
+        return ResponseEntity.ok(service.registerAsAdmin(admin));
     }
+
+    @PostMapping("/registerAsUser")
+    public ResponseEntity<User> registerAsUser(
+            @RequestBody User user
+    ){
+        return ResponseEntity.ok(service.registerAsUser(user));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request
+    ){
+        return ResponseEntity.ok(service.register(request));
+    }
+
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(

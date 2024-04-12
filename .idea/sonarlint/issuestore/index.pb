@@ -133,3 +133,17 @@ t
 DGarkSport/src/main/java/com/gark/garksport/service/AdminService.java,4\d\4d16cd591a10e45b6666e669c9ed84d5fd60b995
 v
 FGarkSport/src/main/java/com/gark/garksport/modal/enums/Permission.java,6\f\6fc0b77070de47bff77600968150b06cf7c8d6de
+{
+KGarkSport/src/main/java/com/gark/garksport/dto/request/AcademieRequest.java,0\6\06abf9ec51c43bfee0b07aeea669fbfcb551b101
+v
+FGarkSport/src/main/java/com/gark/garksport/service/ManagerService.java,3\b\3bd2da25c2e050f2204732136f80a43a507a180e
+|
+LGarkSport/src/main/java/com/gark/garksport/controller/ManagerController.java,9\5\95f4476ee432d6c9e401ec116afeeb57ba7bc6e7
+t
+DGarkSport/src/main/java/com/gark/garksport/service/StaffService.java,2\9\2905ce3cee9ee67e3158d9d1f214f88fbb7fd9ac
+z
+JGarkSport/src/main/java/com/gark/garksport/controller/StaffController.java,b\7\b7138cff336cfdc65d295a9d30182be720745c0f
+n
+>GarkSport/src/main/java/com/gark/garksport/modal/RoleName.java,a\7\a7df0378db14e3881f650262682739cec2fd01f4
+~
+NGarkSport/src/main/java/com/gark/garksport/dto/request/AddRoleNameRequest.java,b\8\b870d816a1dd909d7e88aebe8bf7d6d7055207f8

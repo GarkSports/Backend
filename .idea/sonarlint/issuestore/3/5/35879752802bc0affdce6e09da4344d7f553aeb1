@@ -1,7 +1,9 @@
 
-m
-java:S1206,"PThis class overrides "hashCode()" and should therefore also override "equals()".(ğÜşŠ8À™Ó¥á1
 I
-java:S1948)",Make "evenements" transient or serializable.(ä™‰°8Â™Ó¥á1
-
-java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8Ä¹§á1
+java:S1948-",Make "evenements" transient or serializable.(ä™‰°8Ş ’Êë1
+]	java:S1257"<This block of commented-out lines of code should be removed.(µœªıÿÿÿÿ8é ’Êë1
+]	java:S125J"<This block of commented-out lines of code should be removed.(µœªıÿÿÿÿ8î ’Êë1
+S
+java:S1128"6Remove this unused import 'java.security.Permissions'.(ÜÕ»8è÷Š×ì1
+Z
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8è÷Š×ì1

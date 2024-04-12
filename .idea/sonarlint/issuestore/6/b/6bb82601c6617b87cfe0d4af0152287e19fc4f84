@@ -1,3 +1,13 @@
 
+Z
+java:S1128"=Remove this unused import 'com.gark.garksport.modal.Manager'.(Ê§ˆ¨8’†ï´ê1
+]
+java:S1128";Remove this unused import 'com.gark.garksport.modal.Staff'.(¤™å†ÿÿÿÿÿ8’†ï´ê1
+c
+java:S1128"FRemove this unused import 'com.gark.garksport.modal.enums.Permission'.(°¹À”8’†ï´ê1
+b
+java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(Ž»ÔÕüÿÿÿÿ8’†ï´ê1
 f
-java:S1128"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8¢¿¬øà1
+java:S1128	"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8“†ï´ê1
+T
+java:S1128"2Remove this unused import 'java.util.Collections'.(¢³ïÓþÿÿÿÿ8“†ï´ê1

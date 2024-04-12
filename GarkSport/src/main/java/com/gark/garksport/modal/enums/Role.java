@@ -12,42 +12,16 @@ import static com.gark.garksport.modal.enums.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {
-    ADEHERANT(Collections.emptySet()),
+    ADEHERANT,
 
-    ADMIN(
-            Set.of(
-                    ADMIN_READ,
-                    ADMIN_CREATE,
-                    ADMIN_UPDATE,
-                    ADMIN_DELETE,
-                    MANAGER_READ,
-                    MANAGER_CREATE,
-                    MANAGER_UPDATE,
-                    MANAGER_DELETE
-            )
-    ),
+    ADMIN,
 
-    ENTRAINEUR(Collections.emptySet()),
-    MANAGER(
-            Set.of(
-                    MANAGER_READ,
-                    MANAGER_CREATE,
-                    MANAGER_UPDATE,
-                    MANAGER_DELETE
-            )
-    ),
-    PARENT(Collections.emptySet()),
-    STAFF(Collections.emptySet());
+    ENTRAINEUR,
+    MANAGER,
+    PARENT,
+    STAFF;
 
-    @Getter
-    private final Set<Permission> permissions;
 
-    public List<SimpleGrantedAuthority> getAuthorities() {
-        var authorities = getPermissions()
-                .stream()
-                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
-                .collect(Collectors.toList());
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
-        return authorities;
-    }
+
+
 }
