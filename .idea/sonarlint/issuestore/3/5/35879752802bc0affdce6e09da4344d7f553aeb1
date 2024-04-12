@@ -1,3 +1,24 @@
 
 m
-java:S1206)"PThis class overrides "hashCode()" and should therefore also override "equals()".(ğÜşŠ8–ÒÖá1
+java:S12063"PThis class overrides "hashCode()" and should therefore also override "equals()".(ğÜşŠ8Óş§˜í1
+I
+java:S19489",Make "evenements" transient or serializable.(ä™‰°8×ş§˜í1
+]	java:S125C"<This block of commented-out lines of code should be removed.(µœªıÿÿÿÿ8åş§˜í1
+]	java:S125V"<This block of commented-out lines of code should be removed.(µœªıÿÿÿÿ8îş§˜í1
+e
+java:S1128"HRemove this unused import 'com.fasterxml.jackson.annotation.JsonIgnore'.(ş‘‹„8òş§˜í1
+@
+java:S1128
+"Remove this duplicated import.(»ÔÕüÿÿÿÿ8òş§˜í1
+R
+java:S1128"0Remove this unused import 'jakarta.persistence'.(Î«Ô§úÿÿÿÿ8òş§˜í1
+E
+java:S1128"#Remove this unused import 'lombok'.(â—‡‘şÿÿÿÿ8óş§˜í1
+;
+java:S1128"Remove this duplicated import.(½Á±ÿ8óş§˜í1
+;
+java:S1128"Remove this duplicated import.(ÊÁ¥8óş§˜í1
+S
+java:S1128"6Remove this unused import 'java.security.Permissions'.(ÜÕ»8óş§˜í1
+Z
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8óş§˜í1

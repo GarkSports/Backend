@@ -167,3 +167,15 @@ MGarkSport/src/main/java/com/gark/garksport/controller/PaiementController.java,
 TGarkSport/src/main/java/com/gark/garksport/repository/PaiementHistoryRepository.java,0\c\0c28c522904dc5e8f31171407ee92a4b3f859c7b
 u
 EGarkSport/src/main/java/com/gark/garksport/modal/PaiementHistory.java,3\a\3a5147a0a38548e77411160ce8b42ad7992358c3
+n
+>GarkSport/src/main/java/com/gark/garksport/modal/RoleName.java,a\7\a7df0378db14e3881f650262682739cec2fd01f4
+t
+DGarkSport/src/main/java/com/gark/garksport/service/AdminService.java,4\d\4d16cd591a10e45b6666e669c9ed84d5fd60b995
+~
+NGarkSport/src/main/java/com/gark/garksport/dto/request/AddRoleNameRequest.java,b\8\b870d816a1dd909d7e88aebe8bf7d6d7055207f8
+v
+FGarkSport/src/main/java/com/gark/garksport/service/ManagerService.java,3\b\3bd2da25c2e050f2204732136f80a43a507a180e
+|
+LGarkSport/src/main/java/com/gark/garksport/controller/ManagerController.java,9\5\95f4476ee432d6c9e401ec116afeeb57ba7bc6e7
+u
+EGarkSport/src/main/java/com/gark/garksport/config/SecurityConfig.java,1\2\12742779fbabc9a7f80cc48e607b65a10c2ee2b6

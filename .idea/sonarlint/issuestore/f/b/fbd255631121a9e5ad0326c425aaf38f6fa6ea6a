@@ -1,21 +1,13 @@
 
-]	java:S125"<This block of commented-out lines of code should be removed.(¤“¬ªşÿÿÿÿ8®»÷ªê1
-]	java:S125"<This block of commented-out lines of code should be removed.(«±Äëşÿÿÿÿ8ö¼úÙê1
+]	java:S125"<This block of commented-out lines of code should be removed.(¤“¬ªşÿÿÿÿ8®»÷ªê1
+]	java:S125"<This block of commented-out lines of code should be removed.(«±Äëşÿÿÿÿ8ú†İ˜í1
 o
-java:S1128"RRemove this unused import 'com.gark.garksport.dto.authentication.RegisterRequest'.(ƒ·‡¬8÷¼úÙê1
-X
-java:S1128";Remove this unused import 'com.gark.garksport.modal.Admin'.(ÔÔÕ²8ò‹ï´ê1
+java:S1128"RRemove this unused import 'com.gark.garksport.dto.authentication.RegisterRequest'.(ƒ·‡¬8ú†İ˜í1
 b
-java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8ò‹ï´ê1
-;
-java:S1128"Remove this duplicated import.(íÊë‰8Ò‘ÌŠé1
+java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8ú†İ˜í1
 j
-java:S1128"MRemove this unused import 'com.gark.garksport.service.AuthenticationService'.(Â´ªğ8ù¼úÙê1
+java:S1128"MRemove this unused import 'com.gark.garksport.service.AuthenticationService'.(Â´ªğ8ú†İ˜í1
 d
-java:S1128"GRemove this unused import 'org.springframework.boot.CommandLineRunner'.(È—ÿÅ8ù¼úÙê1
+java:S1128"GRemove this unused import 'org.springframework.boot.CommandLineRunner'.(È—ÿÅ8ú†İ˜í1
 e
-java:S1128"HRemove this unused import 'org.springframework.context.annotation.Bean'.(‚î‰Ş8ù¼úÙê1
-b
-java:S1128"FRemove this unused import 'com.gark.garksport.modal.enums.Role.ADMIN'.(­ƒÀ8ú¼úÙê1
-;
-java:S1128"Remove this duplicated import.(íÊë‰8ô‹ï´ê1
+java:S1128	"HRemove this unused import 'org.springframework.context.annotation.Bean'.(‚î‰Ş8ú†İ˜í1
