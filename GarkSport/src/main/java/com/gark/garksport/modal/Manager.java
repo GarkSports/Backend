@@ -22,7 +22,7 @@ public class Manager extends User {
     }
 
     @JsonIgnoreProperties("manager")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "manager")
     private Academie academie;
 
 }
