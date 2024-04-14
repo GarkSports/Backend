@@ -64,13 +64,13 @@ public class AdminService {
                     .build();
             repository.save(user);
 
-            MimeMessage message = mailSender.createMimeMessage();
-            message.setFrom(new InternetAddress("${spring.mail.username}"));
-            message.setRecipients(MimeMessage.RecipientType.TO, request.getEmail());
-            message.setSubject(request.getRole() + " Login");
-            message.setText("<div> Login using your email and this password: " + request.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
-
-            mailSender.send(message);
+//            MimeMessage message = mailSender.createMimeMessage();
+//            message.setFrom(new InternetAddress("${spring.mail.username}"));
+//            message.setRecipients(MimeMessage.RecipientType.TO, request.getEmail());
+//            message.setSubject(request.getRole() + " Login");
+//            message.setText("<div> Login using your email and this password: " + request.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
+//
+//            mailSender.send(message);
             return request.getRole() + " added successfully";
         } catch(
                 Exception e)
