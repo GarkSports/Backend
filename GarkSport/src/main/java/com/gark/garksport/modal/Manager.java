@@ -16,10 +16,6 @@ import java.util.Objects;
 public class Manager extends User {
     private String telephone2;
 
-    @JsonIgnoreProperties("manager")
-    @OneToOne(cascade = CascadeType.ALL)
-    private Manager manager;
-
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), telephone2);
