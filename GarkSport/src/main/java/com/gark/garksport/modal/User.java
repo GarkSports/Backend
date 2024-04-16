@@ -47,21 +47,16 @@ import org.springframework.security.core.userdetails.UserDetails;
         private Instant blockedTimestamp;
         private Duration blockedDuration;
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(id);  // Use a unique field to calculate hashCode
-        }
-
-
-        @ManyToMany(cascade = CascadeType.ALL,mappedBy = "invites")
-        private Set<Evenement> evenements;
-
         @ElementCollection(targetClass = Permission.class, fetch = FetchType.EAGER)
         @Enumerated(EnumType.STRING)
         @CollectionTable(name = "user_permissions", joinColumns = @JoinColumn(name = "user_id"))
         @Column(name = "permission")
         private Set<Permission> permissions;
 
+        @Override
+        public int hashCode() {
+            return Objects.hash(id);
+        }
 
         @Override
         @JsonIgnore
