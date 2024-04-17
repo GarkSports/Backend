@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -60,7 +61,9 @@ public class Academie {
     private Set<Evenement> evenements;
 
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<RoleName> roleNames = new HashSet<>();
+    private List<RoleName> roleNames ;
+
+
 
     @Override
     public int hashCode() {
@@ -78,6 +81,15 @@ public class Academie {
         Academie academie = (Academie) obj;
         return Objects.equals(id, academie.id);
     }
+    @Override
+    public String toString() {
+        return "Academie{" +
+                "id=" + id +
+                ", name='" + nom + '\'' +
+                '}';
+    }
+
+
 
     public void updateEtat (Etat newEtat, String changeReason) {
         AcademieHistory academieHistory = new AcademieHistory();

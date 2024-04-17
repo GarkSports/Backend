@@ -1,36 +1,62 @@
 
+h	java:S112¬"FDefine and throw a dedicated exception instead of using a generic one.(„Âáÿúÿÿÿÿ8ã €ªî1
+h	java:S112¯"FDefine and throw a dedicated exception instead of using a generic one.(÷ÇÕÌúÿÿÿÿ8ä €ªî1
+h	java:S112Ì"FDefine and throw a dedicated exception instead of using a generic one.(¼¡Òøüÿÿÿÿ8ä €ªî1
+h	java:S112Ñ"FDefine and throw a dedicated exception instead of using a generic one.(¾ÆÀ‚ÿÿÿÿÿ8ä €ªî1
+h	java:S112ü"FDefine and throw a dedicated exception instead of using a generic one.(‰öşÕşÿÿÿÿ8ä €ªî1
 l
-java:S1192_"ODefine a constant instead of duplicating this literal "User not found" 3 times.(¢ •Ä8úŞşí1
-k
-java:S1192Q"IDefine a constant instead of duplicating this literal "id is : " 3 times.(»”Ùºúÿÿÿÿ8ûŞşí1
-e
-java:S1192»"GDefine a constant instead of duplicating this literal " Login" 4 times.(¥äÎƒ8‚ÿ£×ì1
-q
-java:S1192¼"SDefine a constant instead of duplicating this literal "\">Login</a></div>" 4 times.(—î¼Û8ûŞşí1
+java:S1192`"ODefine a constant instead of duplicating this literal "User not found" 3 times.(¢ •Ä8å €ªî1
 
-java:S1192¼"qDefine a constant instead of duplicating this literal "<div> Login using your email and this password: " 4 times.(—î¼Û8ûŞşí1
-„
-java:S1192¼"fDefine a constant instead of duplicating this literal "<a href=\"http://localhost:8080/login" 4 times.(—î¼Û8üŞşí1
+java:S1192ã"qDefine a constant instead of duplicating this literal "<div> Login using your email and this password: " 4 times.(—î¼Û8å €ªî1
 v
-java:S1192¹"XDefine a constant instead of duplicating this literal "${spring.mail.username}" 4 times.(õË±÷8üŞşí1
-_
-java:S6813("BRemove this field injection and use constructor injection instead.(êæÄŞ8­ßşí1
+java:S1192à"XDefine a constant instead of duplicating this literal "${spring.mail.username}" 4 times.(õË±÷8å €ªî1
+k
+java:S1192R"IDefine a constant instead of duplicating this literal "id is : " 3 times.(»”Ùºúÿÿÿÿ8å €ªî1
 e
-java:S6201E"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8µßşí1
-L	java:S106Q"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8·ßşí1
-L	java:S106f"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8¹ßşí1
-L	java:S106y"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8»ßşí1
-f
-java:S6201†"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8½ßşí1
-f
-java:S6201š"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8Åßşí1
-^	java:S125¨"<This block of commented-out lines of code should be removed.(ï×û¯şÿÿÿÿ8Çßşí1
-c
-java:S3252º"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(Ğ¨±â8Ëßşí1
-b
-java:S3252Í"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(§—½A8Ñßşí1
-c
-java:S3252à"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(‰Çï8×ßşí1
+java:S1192â"GDefine a constant instead of duplicating this literal " Login" 4 times.(¥äÎƒ8å €ªî1
+q
+java:S1192ã"SDefine a constant instead of duplicating this literal "\">Login</a></div>" 4 times.(—î¼Û8å €ªî1
+„
+java:S1192ã"fDefine a constant instead of duplicating this literal "<a href=\"http://localhost:8080/login" 4 times.(—î¼Û8å €ªî1
 h
-java:S3252ó"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(µËúÿÿÿÿ8Üßşí1
-X	java:S125ı"<This block of commented-out lines of code should be removed.(€ÑÕ~8ßßşí1
+java:S2259L"FA "NullPointerException" could be thrown; "academie" is nullable here.(ô®‹¨ıÿÿÿÿ8„¡€ªî1
+_
+java:S6813)"BRemove this field injection and use constructor injection instead.(êæÄŞ8…¡€ªî1
+e
+java:S6201F"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8Š¡€ªî1
+L	java:S106R"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8‹¡€ªî1
+L	java:S106g"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8Œ¡€ªî1
+L	java:S106z"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8¡€ªî1
+f
+java:S6201‡"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8¡€ªî1
+Y	java:S125¢"<This block of commented-out lines of code should be removed.(ñß­Ê8ÇÈåÆî1
+f
+java:S6201¶"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8”¡€ªî1
+P
+java:S2175º"-A "List<RoleName>" cannot contain a "String".(©‚ş…úÿÿÿÿ8”¡€ªî1
+Z
+java:S1854É"<Remove this useless assignment to local variable "rolename".(×©—8‰¤ªî1
+K
+java:S1481É"-Remove this unused "rolename" local variable.(×©—8‘Û¤ªî1
+c
+java:S3252á"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(Ğ¨±â8š¡€ªî1
+›
+java:S1130ê"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(Â—‚õıÿÿÿÿ8›¡€ªî1
+b
+java:S3252‹"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(§—½A8¡€ªî1
+c
+java:S3252"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(‰Çï8Ÿ¡€ªî1
+h
+java:S3252±"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(µËúÿÿÿÿ8¡¡€ªî1
+X	java:S125Ê"<This block of commented-out lines of code should be removed.(€ÑÕ~8£¡€ªî1
+a
+java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8‚æåÆî1
+`
+java:S1128
+"CRemove this unused import 'jakarta.mail.internet.AddressException'.(ŞÁ¿É8ƒæåÆî1
+l
+java:S1128"ORemove this unused import 'org.springframework.security.core.GrantedAuthority'.(½Á±ÿ8ƒæåÆî1
+
+java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8ƒæåÆî1
+r
+java:S1128"PRemove this unused import 'org.springframework.web.bind.annotation.RequestBody'.(â­½Àıÿÿÿÿ8„æåÆî1

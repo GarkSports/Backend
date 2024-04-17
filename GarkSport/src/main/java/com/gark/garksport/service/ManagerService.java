@@ -5,15 +5,14 @@ import com.gark.garksport.dto.request.AddRoleNameRequest;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Permission;
 import com.gark.garksport.modal.enums.Role;
-import com.gark.garksport.repository.AcademieRepository;
-import com.gark.garksport.repository.ManagerRepository;
-import com.gark.garksport.repository.UserRepository;
+import com.gark.garksport.repository.*;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,7 +34,9 @@ public class ManagerService {
     private final PasswordEncoder passwordEncoder;
     private final ManagerRepository managerRepository;
     private final AcademieRepository academieRepository;
-
+    private final StaffRepository staffRepository;
+    private final RoleNameRepository roleNameRepository;
+    private final UserService userService;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -137,7 +138,7 @@ public class ManagerService {
 
             if (academie != null) {
                 RoleName roleName = new RoleName();
-                roleName.setName(request.getRoleName());
+                roleName.setRoleName(request.getRoleName());
                 roleName.setPermissions(request.getPermissions().stream()
                         .map(Permission::valueOf)
                         .collect(Collectors.toSet()));
@@ -148,7 +149,34 @@ public class ManagerService {
         }
     }
 
-    // Method to remove a role name from the academy
+    public RoleName updateRoleName(Integer id, RoleName request, Manager manager) {
+        Academie academie = academieRepository.findByManagerId(manager.getId());
+        if (academie != null) {
+            Optional<RoleName> existingRoleName = roleNameRepository.findById(id);
+            if (existingRoleName.isPresent()) {
+                RoleName roleNameToUpdate = existingRoleName.get();
+                roleNameToUpdate.setRoleName(request.getRoleName());
+                roleNameToUpdate.setPermissions(request.getPermissions());
+                roleNameToUpdate.setAcademie(academie);
+
+                //List<User> usersToUpdate = repository.findByRoleName(existingRoleName);
+//                for (User user : usersToUpdate) {
+//                    user.setPermissions(request.getPermissions());
+//                    repository.save(user);
+//                }
+               // System.out.println("this is rolename: " + usersToUpdate);
+
+
+                return roleNameRepository.save(roleNameToUpdate);
+            } else {
+                throw new RuntimeException("RoleName not found with ID: " + id);
+            }
+        } else {
+            throw new RuntimeException("Academie not found for manager with ID: " + manager.getId());
+        }
+    }
+
+
     public void removeRoleName(String roleName, Principal connectedUser) {
         User user = getProfil(connectedUser);
         if (user instanceof Manager) {
@@ -161,15 +189,8 @@ public class ManagerService {
         }
     }
 
-    // Method to assign role names to a new user added to the academy
-    public void assignRoleNamesToUser(User user) {
-        // Implement your logic to assign role names to the user
-        // For example:
-        // user.setRoleNames(this.roleNames);
-    }
 
-
-    public Staff addStaff(Staff request) throws MessagingException {
+    public Staff addStaff(Staff request, Principal connectedUser) throws MessagingException {
         String generatedPWD = generateRandomPassword();
 
         Staff staff = new Staff();
@@ -177,9 +198,27 @@ public class ManagerService {
         staff.setRole(Role.STAFF);
         staff.setPassword(passwordEncoder.encode(request.getPassword()));
         staff.setRoleName(request.getRoleName());
+        var rolename = request.getRoleName();
+        User user = getProfil(connectedUser);
+        if (!(user instanceof Manager)) {
+            throw new RuntimeException("Only managers can add staff.");
+        }
 
-        Set<Permission> permissions = request.getPermissions();
+        Academie academie = academieRepository.findByManagerId(user.getId());
+        if (academie == null) {
+            throw new RuntimeException("Academie not found for the current manager.");
+        }
+
+        RoleName roleNameEntity = academie.getRoleNames().stream()
+                .filter(roleName -> roleName.getRoleName().equals(request.getRoleName()))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("RoleName not found for roleName: " + request.getRoleName()));
+
+        Set<Permission> permissions = roleNameEntity.getPermissions().stream()
+                .map(permissionName -> Permission.valueOf(String.valueOf(permissionName)))
+                .collect(Collectors.toSet());
         staff.setPermissions(permissions);
+
 
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
@@ -191,6 +230,29 @@ public class ManagerService {
 
         return repository.save(staff);
     }
+
+    public Staff updateStaff(Integer id, Staff request) throws MessagingException {
+        Optional<Staff> existingStaff = staffRepository.findById(id);
+
+        if (existingStaff.isPresent()) {
+            Staff staffToUpdate = existingStaff.get();
+
+            staffToUpdate.setEmail(request.getEmail());
+            staffToUpdate.setRoleName(request.getRoleName());
+
+            Set<Permission> permissions = request.getPermissions();
+            staffToUpdate.setPermissions(permissions);
+
+
+
+            return staffRepository.save(staffToUpdate);
+        }
+     else {
+        // Manager not found, handle the case accordingly
+        throw new RuntimeException("Manager not found with ID: " + id);
+    }
+    }
+
     public Entraineur addCoach(Entraineur entraineur) throws MessagingException {
         String generatedPWD = generateRandomPassword();
 
@@ -247,6 +309,21 @@ public class ManagerService {
         mailSender.send(message);
 
         return repository.save(adherent);
+    }
+
+    public ResponseEntity<Academie> getAcademie(Integer id) {
+        Academie academie = academieRepository.findByManagerId(id);
+        if (academie != null) {
+            return ResponseEntity.ok(academie);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    public User getProfilById(Integer id) {
+        Optional<User> userOptional = repository.findById(id);
+
+        return userOptional.orElse(null);
     }
 
 

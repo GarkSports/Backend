@@ -5,20 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/2/12742779fbabc9a7f80cc48e607b65a10c2ee2b6" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/2/12742779fbabc9a7f80cc48e607b65a10c2ee2b6" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/RoleNameRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/StaffRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/0/2033d384424e77df18c47decc29a9ddfdeda77b8" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/0/2033d384424e77df18c47decc29a9ddfdeda77b8" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/5/35879752802bc0affdce6e09da4344d7f553aeb1" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/5/35879752802bc0affdce6e09da4344d7f553aeb1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/6/56d23143dcd85db5aa2a9a9c2fbaff15776104cf" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/6/56d23143dcd85db5aa2a9a9c2fbaff15776104cf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/c/7cf06d9a095dd10db0d7d800a00a044ac93b5240" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/c/7cf06d9a095dd10db0d7d800a00a044ac93b5240" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/db9898d16b03405c784dae582f149312c2f6c571" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/db9898d16b03405c784dae582f149312c2f6c571" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/a/ea56690a37e850bef4c4b84d00c49062c0b11337" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/a/ea56690a37e850bef4c4b84d00c49062c0b11337" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/b/3bd2da25c2e050f2204732136f80a43a507a180e" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/b/3bd2da25c2e050f2204732136f80a43a507a180e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/c/6c9bf551517fe689474a668a44e75ee141687a09" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/c/6c9bf551517fe689474a668a44e75ee141687a09" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/70b4765774f576b9707dcb1c0c38177976ca32e0" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/70b4765774f576b9707dcb1c0c38177976ca32e0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/5/95f4476ee432d6c9e401ec116afeeb57ba7bc6e7" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/5/95f4476ee432d6c9e401ec116afeeb57ba7bc6e7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/7/a7df0378db14e3881f650262682739cec2fd01f4" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/7/a7df0378db14e3881f650262682739cec2fd01f4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/8/b870d816a1dd909d7e88aebe8bf7d6d7055207f8" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/8/b870d816a1dd909d7e88aebe8bf7d6d7055207f8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/8/c89f49e866e994560d832fee420340cb5f9f5708" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/8/c89f49e866e994560d832fee420340cb5f9f5708" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/db9898d16b03405c784dae582f149312c2f6c571" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e5f358604fed8f8c0822f9307ab2724f234553ed" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e5f358604fed8f8c0822f9307ab2724f234553ed" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/b/fbd255631121a9e5ad0326c425aaf38f6fa6ea6a" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/b/fbd255631121a9e5ad0326c425aaf38f6fa6ea6a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/b/db9898d16b03405c784dae582f149312c2f6c571" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/GarkSportApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/GarkSportApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/config/SecurityConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/ManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/ManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/request/AddRoleNameRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/request/AddRoleNameRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Academie.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Academie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/RoleName.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/RoleName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/AcademieRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/AcademieRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/ManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/ManagerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +43,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -43,6 +57,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2cv1wmenL2cZr7UQfqkF3aM1l8B" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -51,21 +68,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Amen",
-    "last_opened_file_path": "C:/Users/yasse/Documents/GitHub/GarkDevops",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "spring.configuration.checksum": "342fbad231df4f91ba2cf533d728058e"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Amen&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yasse/Documents/GitHub/GarkDevops&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;342fbad231df4f91ba2cf533d728058e&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.gark.garksport.exception" />
@@ -178,6 +198,11 @@
       <workItem from="1712839256410" duration="1817000" />
       <workItem from="1712920447186" duration="1346000" />
       <workItem from="1712936200009" duration="3785000" />
+      <workItem from="1712961854779" duration="2199000" />
+      <workItem from="1713023788545" duration="8667000" />
+      <workItem from="1713137194297" duration="6471000" />
+      <workItem from="1713208651587" duration="18300000" />
+      <workItem from="1713302580186" duration="4751000" />
     </task>
     <servers />
   </component>
@@ -194,5 +219,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.StackOverflowError" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
