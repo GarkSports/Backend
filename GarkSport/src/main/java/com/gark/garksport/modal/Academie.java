@@ -61,7 +61,7 @@ public class Academie {
     private Set<Evenement> evenements;
 
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RoleName> roleNames ;
+    private Set<RoleName> roleNames ;
 
 
 

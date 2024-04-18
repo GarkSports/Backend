@@ -3,3 +3,5 @@ m
 java:S1206"PThis class overrides "hashCode()" and should therefore also override "equals()".(ğÜşŠ8ĞÚŠÏß1
 L
 java:S1948"*Make "academie" transient or serializable.(Ÿ»’ÿøÿÿÿÿ8ğéÕÄâ1
+^
+java:S1128"<Remove this unused import 'jakarta.persistence.CascadeType'.(ÃÃÊŠúÿÿÿÿ8 Ü®ãî1

@@ -155,17 +155,18 @@ public class ManagerService {
             Optional<RoleName> existingRoleName = roleNameRepository.findById(id);
             if (existingRoleName.isPresent()) {
                 RoleName roleNameToUpdate = existingRoleName.get();
+                String oldRoleName = roleNameToUpdate.getRoleName();
                 roleNameToUpdate.setRoleName(request.getRoleName());
                 roleNameToUpdate.setPermissions(request.getPermissions());
                 roleNameToUpdate.setAcademie(academie);
 
-                //List<User> usersToUpdate = repository.findByRoleName(existingRoleName);
-//                for (User user : usersToUpdate) {
-//                    user.setPermissions(request.getPermissions());
-//                    repository.save(user);
+//                List<Staff> usersToUpdate = staffRepository.findByRoleName(existingRoleName);
+//                for (Staff staff : usersToUpdate) {
+//                    staff.setPermissions(request.getPermissions());
+//                    staffRepository.save(staff);
 //                }
-               // System.out.println("this is rolename: " + usersToUpdate);
-
+//                System.out.println("this is rolename: " + usersToUpdate);
+                updateUserRoleNames(oldRoleName, request.getRoleName());
 
                 return roleNameRepository.save(roleNameToUpdate);
             } else {
@@ -176,6 +177,13 @@ public class ManagerService {
         }
     }
 
+    private void updateUserRoleNames(String oldRoleName, String newRoleName) {
+        List<Staff> usersToUpdate = staffRepository.findByRoleName(oldRoleName);
+        for (Staff staff : usersToUpdate) {
+            staff.setRoleName(newRoleName);
+            staffRepository.save(staff);
+        }
+    }
 
     public void removeRoleName(String roleName, Principal connectedUser) {
         User user = getProfil(connectedUser);
@@ -194,11 +202,18 @@ public class ManagerService {
         String generatedPWD = generateRandomPassword();
 
         Staff staff = new Staff();
+        staff.setFirstname(request.getFirstname()); //dyja
+        staff.setLastname(request.getLastname());
         staff.setEmail(request.getEmail());
-        staff.setRole(Role.STAFF);
-        staff.setPassword(passwordEncoder.encode(request.getPassword()));
+        staff.setAdresse(request.getAdresse());
         staff.setRoleName(request.getRoleName());
-        var rolename = request.getRoleName();
+        if(request.getRole()==Role.ENTRAINEUR) {
+            staff.setRole(Role.ENTRAINEUR);
+        }
+        else
+            staff.setRole(Role.STAFF);
+        staff.setPassword(passwordEncoder.encode(generatedPWD));
+
         User user = getProfil(connectedUser);
         if (!(user instanceof Manager)) {
             throw new RuntimeException("Only managers can add staff.");

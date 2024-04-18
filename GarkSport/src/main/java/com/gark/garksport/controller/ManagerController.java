@@ -55,7 +55,7 @@ public class ManagerController {
     }
 
     @GetMapping("/get-role-names")
-    public ResponseEntity<List<RoleName>> getRoleNames(Principal connectedUser) {
+    public ResponseEntity<Set<RoleName>> getRoleNames(Principal connectedUser) {
         User user = managerService.getProfil(connectedUser);
         Academie academie = academieRepository.findByManagerId(user.getId());
         if (academie != null) {
@@ -64,6 +64,21 @@ public class ManagerController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/get-only-role-names")
+    public ResponseEntity<Set<String>> getOnlyRoleNames(Principal connectedUser) {
+        User user = managerService.getProfil(connectedUser);
+        Academie academie = academieRepository.findByManagerId(user.getId());
+        if (academie != null) {
+            Set<String> roleNames = academie.getRoleNames().stream()
+                    .map(RoleName::getRoleName) // Map RoleName objects to roleName strings
+                    .collect(Collectors.toSet()); // Collect the roleName strings into a set
+            return ResponseEntity.ok(roleNames);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     @PostMapping("/add-role-name")
     public ResponseEntity<RoleName> addRoleName(@RequestBody RoleName request, Principal connectedUser) {
@@ -118,7 +133,7 @@ public class ManagerController {
 
     @PostMapping("/add-staff")
     public Staff addStaff(@RequestBody Staff request,
-                          Principal connectedUser
+                                       Principal connectedUser
     ) throws MessagingException {
         return managerService.addStaff(request, connectedUser);
     }

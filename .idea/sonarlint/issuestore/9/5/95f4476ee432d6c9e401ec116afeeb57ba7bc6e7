@@ -2,11 +2,11 @@
 _
 java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄŞ8ÊÛó©î1
 e
-java:S6201H"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ÏÛó©î1
+java:S6201W"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ÏÛó©î1
 e
-java:S6201`"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ĞÛó©î1
-o
-java:S6204r"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ÑÛó©î1
+java:S6201o"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ĞÛó©î1
+p
+java:S6204"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ÑÛó©î1
 I
-java:S1452«"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8ÕÛó©î1
-^	java:S125Í"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8×Ûó©î1
+java:S1452º"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8ÕÛó©î1
+^	java:S125Ü"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8×Ûó©î1
