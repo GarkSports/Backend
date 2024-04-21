@@ -5,8 +5,13 @@ import com.gark.garksport.dto.authentication.AuthenticationRequest;
 import com.gark.garksport.dto.authentication.AuthenticationResponse;
 import com.gark.garksport.dto.authentication.RegisterRequest;
 import com.gark.garksport.modal.Admin;
+import com.gark.garksport.modal.Manager;
+import com.gark.garksport.modal.User;
+import com.gark.garksport.modal.enums.Role;
 import com.gark.garksport.repository.AdminRepository;
 import com.gark.garksport.repository.UserRepository;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,8 +28,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
+//import java.time.temporal.ChronoUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +38,7 @@ public class AuthenticationService {
 
     private final UserRepository repository;
     @Autowired
-    private  AdminRepository adminRepository;
+    private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -39,7 +46,9 @@ public class AuthenticationService {
     @Value("${application.security.jwt.expiration}")
     private long cookieExpiry;
 
-    public Admin register2(Admin admin) {
+    public Admin registerAsAdmin(Admin admin) {
+        admin.setRole(Role.ADMIN);
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         return adminRepository.save(admin);
     }
 
@@ -51,10 +60,18 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
-        //adminRepository.save(user);
+        repository.save(user);
         return AuthenticationResponse.builder()
                 .build();
     }
+    public User registerAsUser(User user) {
+
+        user.setRole(Role.ADEHERANT);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return repository.save(user);
+
+    }
+
     public AuthenticationResponse authenticate(AuthenticationRequest request, HttpServletResponse response){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -75,7 +92,7 @@ public class AuthenticationService {
         ResponseCookie cookie = ResponseCookie.from("accessToken", jwtToken)
                 .httpOnly(true)
                 .secure(false)
-                .sameSite("Lax")
+                .sameSite("Strict")
                 .path("/")
                 .maxAge(cookieExpiry)
                 .build();
@@ -86,8 +103,7 @@ public class AuthenticationService {
                 .build();
 
     }
-
-    private void storeRefreshTokenInCookie(HttpServletResponse response, String refreshToken) {
+    /*private void storeRefreshTokenInCookie(HttpServletResponse response, String refreshToken) {
         ResponseCookie cookie = ResponseCookie.from("authToken", refreshToken)
                 .domain("localhost")
                 .maxAge(Duration.of(14, ChronoUnit.DAYS)) // Set your desired expiration time
@@ -98,7 +114,7 @@ public class AuthenticationService {
 
         // Add the cookie to the response
         response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
-    }
+    }*/
 
     public void refreshToken(
             HttpServletRequest request,

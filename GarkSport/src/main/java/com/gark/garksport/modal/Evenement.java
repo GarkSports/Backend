@@ -22,6 +22,10 @@ public class Evenement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    //Type d'evenement
+    @Enumerated(EnumType.STRING)
+    private EvenementType type;
     private String nom;
     private String description;
 
@@ -29,9 +33,16 @@ public class Evenement {
     @Enumerated(EnumType.STRING)
     private Destinataire destinataire;
 
-    //Type d'evenement
-    @Enumerated(EnumType.STRING)
-    private EvenementType type;
+    @JsonIgnoreProperties("evenements")
+    @ManyToOne
+    private Academie academie;
+
+    @JsonIgnoreProperties("evenements")
+    @ManyToOne
+    private Equipe equipe;
+    @JsonIgnoreProperties("evenements")
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Adherent> membres;
 
     //Date evenement
     @Temporal(TemporalType.DATE)
@@ -41,28 +52,17 @@ public class Evenement {
     @Temporal(TemporalType.TIME)
     private Date heur;
     private Boolean repetition;
+
     @Enumerated(EnumType.STRING)
     private Repetition chaque;
     private Integer numero;
 
     //Lieu
     private String adresse;
-
-    //MatchAmical
-    private String nomAdversaire;
-    private String commentaire;
-
-    //MatchEntreNous
-    private String colorEquipe1;
-    private String colorEquipe2;
-
-    @JsonIgnoreProperties("evenements")
-    @ManyToOne
-    private Academie academie;
-
-    @ManyToOne
-    private Equipe equipe;
+    private String lieu;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<User> invites;
+
+
 }

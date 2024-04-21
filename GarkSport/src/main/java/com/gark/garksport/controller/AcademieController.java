@@ -69,4 +69,21 @@ public class AcademieController {
     public Academie getAcademieById(@PathVariable Integer academieId) {
         return academieService.getAcademieById(academieId);
     }
+
+    @GetMapping("/getArchivedAcademies")
+    public Set<Academie> getArchivedAcademies() {
+        return academieService.getArchivedAcademies();
+    }
+
+    @DeleteMapping("/deleteArchivedAcademie/{academieId}")
+    public ResponseEntity<String> deleteArchivedAcademie(@PathVariable Integer academieId) {
+        academieService.deleteArchivedAcademie(academieId);
+        return ResponseEntity.ok("Archived Academie deleted successfully");
+    }
+
+    @PutMapping("/restoreArchivedAcademie/{academieId}")
+    public ResponseEntity<String> restoreArchivedAcademie(@PathVariable Integer academieId) {
+        academieService.restoreArchivedAcademie(academieId);
+        return ResponseEntity.ok("Archived Academie restored successfully");
+    }
 }

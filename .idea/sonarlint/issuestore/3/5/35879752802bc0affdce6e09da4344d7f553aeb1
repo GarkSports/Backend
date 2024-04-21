@@ -1,5 +1,3 @@
 
 m
-java:S1206,"PThis class overrides "hashCode()" and should therefore also override "equals()".(ğÜşŠ8–ÒÖá1
-I
-java:S1948)",Make "evenements" transient or serializable.(ä™‰°8š–ÒÖá1
+java:S1206)"PThis class overrides "hashCode()" and should therefore also override "equals()".(ğÜşŠ8–ÒÖá1

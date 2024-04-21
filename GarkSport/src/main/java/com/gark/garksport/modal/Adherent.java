@@ -1,13 +1,16 @@
 package com.gark.garksport.modal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.gark.garksport.modal.enums.StatutAdherent;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.Date;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"paiement"})
 @Data
 @Entity
 public class Adherent extends User {
@@ -16,6 +19,7 @@ public class Adherent extends User {
     @ManyToOne(cascade = CascadeType.ALL)
     private Discipline discipline;
 
+    @JsonIgnoreProperties("adherents")
     @ManyToOne
     private Entraineur entraineur;
 
@@ -32,9 +36,34 @@ public class Adherent extends User {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Parent> parents;
 
-    @OneToMany(mappedBy = "adherent", cascade = CascadeType.ALL)
-    private Set<Paiement> paiements;
+    @JsonIgnoreProperties("adherent")
+    @OneToOne(mappedBy = "adherent")
+    private Paiement paiement;
 
-    @ManyToOne
-    private Equipe equipe;
+    @JsonIgnoreProperties("membres")
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "membres")
+    private Set<Evenement> evenements;
+
+    private String nomEquipe="non affecté";
+
+    @Column(length = 50)
+    @Enumerated(EnumType.STRING)
+    private StatutAdherent statutAdherent;
+
+    @Temporal(TemporalType.DATE)
+    private Date paiementDate = new Date();
+
+    @CreationTimestamp
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
+
+
+
+
+
+
+
+
+
+
 }
