@@ -16,6 +16,7 @@ public class DisciplineService implements IDisciplineService {
     @Override
     public Discipline addDiscipline(Discipline discipline) {
         try {
+            discipline.setProtectedDiscipline(true);
             return disciplineRepository.save(discipline);
         } catch (Exception e) {
             throw new RuntimeException("Failed to add Discipline", e);
@@ -25,7 +26,7 @@ public class DisciplineService implements IDisciplineService {
     @Override
     public Set<Discipline> getDisciplines() {
         try {
-            return new HashSet<>(disciplineRepository.findAll());
+            return new HashSet<>(disciplineRepository.findByProtectedDisciplineTrue());
         } catch (Exception e) {
             throw new RuntimeException("Failed to get Disciplines", e);
         }
@@ -50,6 +51,25 @@ public class DisciplineService implements IDisciplineService {
             return disciplineRepository.save(updatedDiscipline);
         } catch (Exception e) {
             throw new RuntimeException("Failed to update Discipline", e);
+        }
+    }
+
+    @Override
+    public Discipline addDisciplineManager(Discipline discipline) {
+        try {
+            discipline.setProtectedDiscipline(false);
+            return disciplineRepository.save(discipline);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to add Discipline", e);
+        }
+    }
+
+    @Override
+    public Set<Discipline> getAllDisciplines() {
+        try {
+            return new HashSet<>(disciplineRepository.findAll());
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get Disciplines", e);
         }
     }
 }

@@ -1,13 +1,12 @@
 
+c	java:S112Â"FDefine and throw a dedicated exception instead of using a generic one.(€ß¸Å8íõ·ï1
 o
-java:S1192…"QDefine a constant instead of duplicating this literal "Equipe not found" 3 times.(¸íÂ†8†Ä—ÿë1
+java:S1192‚"QDefine a constant instead of duplicating this literal "Equipe not found" 3 times.(¸íÂ†8†Ä—ÿë1
 m
-java:S3655A"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8®í„ñê1
+java:S3655""PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8¬Îÿ´é1
 m
-java:S3655@"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8®í„ñê1
+java:S3655,"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8­Îÿ´é1
 m
-java:S3655%"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8¬Îÿ´é1
+java:S3655>"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8®í„ñê1
 m
-java:S3655/"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8­Îÿ´é1
-K
-java:S1128".Remove this unused import 'java.util.Objects'.(¼¸õ›8úíÆñê1
+java:S3655="PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8®í„ñê1

@@ -15,7 +15,6 @@ public class DisciplineController {
 
     @PostMapping("/addDiscipline")
     public Discipline addDiscipline(@RequestBody Discipline discipline) {
-        discipline.setNom(discipline.getNom());
         return disciplineService.addDiscipline(discipline);
     }
 
@@ -32,5 +31,15 @@ public class DisciplineController {
     @PutMapping("/updateDiscipline/{id}")
     public Discipline updateDiscipline(@PathVariable Integer id, @RequestBody Discipline updatedDiscipline) {
         return disciplineService.updateDiscipline(id, updatedDiscipline);
+    }
+
+    @PostMapping("/addDisciplineManager")
+    public Discipline addDisciplineManager(@RequestBody Discipline discipline) {
+        return disciplineService.addDisciplineManager(discipline);
+    }
+
+    @GetMapping("/getAllDisciplines")
+    public Set<Discipline> getAllDisciplines() {
+        return disciplineService.getAllDisciplines();
     }
 }

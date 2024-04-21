@@ -5,6 +5,7 @@ import com.gark.garksport.dto.request.EquipeRequest;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.service.IRandomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -83,6 +84,12 @@ public class RandomController {
         return randomService.updateAcademie(academie, academieId);
     }
 
+    @PutMapping("/updateAcademieBackground/{academieId}")
+    public ResponseEntity<String> updateAcademieBackground(@PathVariable Integer academieId, @RequestBody String background) {
+        randomService.updateAcademieBackground(academieId, background);
+        return ResponseEntity.ok("Academie background updated successfully");
+    }
+
     @GetMapping("/getEntraineursByEquipe/{equipeId}")
     public Set<Entraineur> getEntraineursByEquipe(@PathVariable Integer equipeId) {
         return randomService.getEntraineursByEquipe(equipeId);
@@ -92,8 +99,4 @@ public class RandomController {
     public Set<Adherent> getMembersByAcademie(@PathVariable Integer academieId) {
         return randomService.getMembersByAcademie(academieId);
     }
-
-
-
-
 }
