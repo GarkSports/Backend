@@ -32,6 +32,8 @@ public interface IRandomService {
 
     public Academie updateAcademie(Academie academie, Integer academieId);
 
+    public void updateAcademieBackground(Integer academieId, String background);
+
     public Set<Entraineur> getEntraineursByEquipe(Integer equipeId);
 
     public Set<Adherent> getMembersByAcademie(Integer academieId);

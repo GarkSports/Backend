@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -188,6 +185,17 @@ public class RandomService implements IRandomService {
     }
 
     @Override
+    public void updateAcademieBackground(Integer academieId, String background) {
+        try {
+            Academie academie = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+            academie.setBackgroundImage(background);
+            academieRepository.save(academie);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to update Academie background", e);
+        }
+    }
+
+    @Override
     public Set<Entraineur> getEntraineursByEquipe(Integer equipeId) {
         return equipeRepository.findById(equipeId)
                 .map(Equipe::getEntraineurs)
@@ -198,6 +206,4 @@ public class RandomService implements IRandomService {
     public Set<Adherent> getMembersByAcademie(Integer academieId) {
         return adherentRepository.findByAcademieId(academieId);
     }
-
-
 }

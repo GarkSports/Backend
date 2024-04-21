@@ -3,22 +3,18 @@ import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Etat;
 import com.gark.garksport.repository.AcademieHistoryRepository;
 import com.gark.garksport.repository.AcademieRepository;
-import com.gark.garksport.repository.DisciplineRepository;
 import com.gark.garksport.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class AcademieService implements IAcademieService {
     @Autowired
     private AcademieRepository academieRepository;
-    @Autowired
-    private DisciplineRepository disciplineRepository;
     @Autowired
     private ManagerRepository managerRepository;
     @Autowired
@@ -27,11 +23,9 @@ public class AcademieService implements IAcademieService {
     private JavaMailSender javaMailSender;
 
     @Override
-    public Academie addAcademie(Academie academie, Set<Integer> disciplinesIds, Integer managerId) {
+    public Academie addAcademie(Academie academie, Integer managerId) {
         try {
-            Set<Discipline> disciplines = new HashSet<>(disciplineRepository.findAllById(disciplinesIds));
             Manager manager = managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found"));
-            academie.setDisciplines(disciplines);
             academie.setManager(manager);
             return academieRepository.save(academie);
         } catch (Exception e) {
@@ -49,10 +43,9 @@ public class AcademieService implements IAcademieService {
     }
 
     @Override
-    public Academie updateAcademie(Academie academie, Integer academieId, Set<Integer> disciplinesIds, Integer managerId) {
+    public Academie updateAcademie(Academie academie, Integer academieId, Integer managerId) {
         try {
             Academie academieNew = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
-            Set<Discipline> disciplines = new HashSet<>(disciplineRepository.findAllById(disciplinesIds));
             Manager manager = managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found"));
             academieNew.setNom(academie.getNom());
             academieNew.setType(academie.getType());
@@ -64,7 +57,6 @@ public class AcademieService implements IAcademieService {
             academieNew.setCodePostal(academie.getCodePostal());
             academieNew.setPays(academie.getPays());
             academieNew.setLogo(academie.getLogo());
-            academieNew.setDisciplines(disciplines);
             academieNew.setManager(manager);
             return academieRepository.save(academieNew);
         } catch (Exception e) {
@@ -128,16 +120,6 @@ public class AcademieService implements IAcademieService {
     }
 
     @Override
-    public Set<Discipline> getDisciplinesByAcademie(Integer academieId) {
-        try {
-            Academie academie = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
-            return academie.getDisciplines();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to get Disciplines for Academie", e);
-        }
-    }
-
-    @Override
     public Set<Academie> getArchivedAcademies() {
         try {
             return academieRepository.findByIsArchivedTrue();
@@ -165,5 +147,4 @@ public class AcademieService implements IAcademieService {
             throw new RuntimeException("Failed to restore Academie", e);
         }
     }
-
 }

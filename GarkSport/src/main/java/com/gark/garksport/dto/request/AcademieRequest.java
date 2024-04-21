@@ -13,8 +13,4 @@ public class AcademieRequest {
     public Academie getAcademie() {
         return academie;
     }
-
-    public Set<Integer> getDisciplineIds() {
-        return disciplineIds;
-    }
 }
