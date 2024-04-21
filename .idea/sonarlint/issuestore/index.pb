@@ -169,3 +169,5 @@ u
 EGarkSport/src/main/java/com/gark/garksport/modal/PaiementHistory.java,3\a\3a5147a0a38548e77411160ce8b42ad7992358c3
 t
 DGarkSport/src/main/java/com/gark/garksport/service/AdminService.java,4\d\4d16cd591a10e45b6666e669c9ed84d5fd60b995
+t
+DGarkSport/src/main/java/com/gark/garksport/service/StaffService.java,2\9\2905ce3cee9ee67e3158d9d1f214f88fbb7fd9ac

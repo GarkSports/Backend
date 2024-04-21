@@ -28,6 +28,7 @@ public class Academie {
     private AcademieType type;
     private Float fraisAdhesion;
     private String logo;
+    private String backgroundImage;
     private String affiliation;
     @Enumerated(EnumType.STRING)
     private Etat etat;
@@ -42,14 +43,9 @@ public class Academie {
     private String codePostal;
     private String pays;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "academie_disciplines", joinColumns = @JoinColumn(name = "academie_id"), inverseJoinColumns = @JoinColumn(name = "disciplines_id"))
-    private Set<Discipline> disciplines;
-
     @JsonIgnoreProperties("academie")
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
     private Set<Adherent> adherents;
-
 
     @JsonIgnoreProperties("academie")
     @OneToOne(cascade = CascadeType.ALL)
