@@ -57,8 +57,8 @@ public class RandomService implements IRandomService {
     }
 
     @Override
-    public Equipe addEquipe(Equipe equipe, Integer academieId, Integer disciplineId) {
-        Academie academie = academieRepository.findById(academieId).get();
+    public Equipe addEquipe(Equipe equipe, Integer managerId, Integer disciplineId) {
+        Academie academie = academieRepository.findById(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId()).get();
         Discipline discipline = disciplineRepository.findById(disciplineId).get();
         equipe.setAcademie(academie);
         equipe.setDiscipline(discipline);
@@ -82,17 +82,17 @@ public class RandomService implements IRandomService {
     }
 
     @Override
-    public Set<Equipe> getEquipesByAcademie(Integer academieId) {
-        return equipeRepository.findByAcademieId(academieId);
+    public Set<Equipe> getEquipesByAcademie(Integer managerId) {
+        return equipeRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
     }
 
     @Override
-    public Set<Adherent> getAdherentsByAcademie(Integer academieId) {
+    public Set<Adherent> getAdherentsByAcademie(Integer managerId) {
         // Get all adherents for the academie
-        Set<Adherent> allAdherents = adherentRepository.findByAcademieId(academieId);
+        Set<Adherent> allAdherents = adherentRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
 
         // Get the IDs of adherents assigned to any equipe for the academie
-        Set<Integer> assignedAdherentIds = equipeRepository.findByAcademieId(academieId).stream()
+        Set<Integer> assignedAdherentIds = equipeRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId()).stream()
                 .flatMap(equipe -> equipe.getAdherents().stream().map(Adherent::getId))
                 .collect(Collectors.toSet());
 
@@ -103,12 +103,12 @@ public class RandomService implements IRandomService {
     }
 
     @Override
-    public Set<Entraineur> getEntraineursByAcademie(Integer academieId) {
+    public Set<Entraineur> getEntraineursByAcademie(Integer managerId) {
         // Get all entraineurs for the academie
-        Set<Entraineur> allEntraineurs = entraineurRepository.findByAcademieId(academieId);
+        Set<Entraineur> allEntraineurs = entraineurRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
 
         // Get the IDs of entraineurs assigned to any equipe for the academie
-        Set<Integer> assignedEntraineurIds = equipeRepository.findByAcademieId(academieId).stream()
+        Set<Integer> assignedEntraineurIds = equipeRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId()).stream()
                 .flatMap(equipe -> equipe.getEntraineurs().stream()) // FlatMap to handle multiple entraineurs per equipe
                 .map(Entraineur::getId)
                 .collect(Collectors.toSet());
@@ -152,8 +152,8 @@ public class RandomService implements IRandomService {
     }
 
     @Override
-    public Academie updateAcademie(Academie academie, Integer academieId) {
-        Academie academieNew = academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+    public Academie updateAcademie(Academie academie, Integer managerId) {
+        Academie academieNew = academieRepository.findById(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId()).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
         if (academie.getNom() != null) {
             academieNew.setNom(academie.getNom());
         }
