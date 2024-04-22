@@ -10,3 +10,5 @@ h	java:S112ˆ"FDefine and throw a dedicated exception instead of using a gener
 b	java:S112“"FDefine and throw a dedicated exception instead of using a generic one.(¨Œòr8·Ïìï1
 p
 java:S11920"SDefine a constant instead of duplicating this literal "Academie not found" 6 times.(û½Äë8øÜ­‹æ1
+t
+java:S1192"RDefine a constant instead of duplicating this literal "Manager not found" 3 times.(Ôú¬»ÿÿÿÿÿ8™·²µğ1

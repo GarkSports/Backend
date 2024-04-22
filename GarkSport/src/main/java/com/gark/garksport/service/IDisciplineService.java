@@ -9,6 +9,6 @@ public interface IDisciplineService {
     public Set<Discipline> getDisciplines();
     public Discipline updateDiscipline(Integer id, Discipline updatedDiscipline);
     public void deleteDiscipline(Integer id);
-    public Discipline addDisciplineManager(Discipline discipline);
-    public Set<Discipline> getAllDisciplines();
+    public Discipline addDisciplineManager(Discipline discipline, Integer managerId);
+    public Set<Discipline> getAllDisciplines(Integer managerId);
 }
