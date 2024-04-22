@@ -14,7 +14,7 @@ public interface IAcademieService {
     public Academie changeEtatAcademie(Integer academieId, Etat newEtat, String changeReason);
     public Set<AcademieHistory> getAcademieHistory(Integer academieId);
     public void deleteAcademie(Integer academieId);
-    public Academie getAcademieById(Integer academieId);
+    public Academie getAcademieById(Integer managerId);
     public Manager getManagerDetails(Integer academieId);
     public Set<Academie> getArchivedAcademies();
     public void deleteArchivedAcademie(Integer academieId);

@@ -171,3 +171,5 @@ t
 DGarkSport/src/main/java/com/gark/garksport/service/AdminService.java,4\d\4d16cd591a10e45b6666e669c9ed84d5fd60b995
 t
 DGarkSport/src/main/java/com/gark/garksport/service/StaffService.java,2\9\2905ce3cee9ee67e3158d9d1f214f88fbb7fd9ac
+v
+FGarkSport/src/main/java/com/gark/garksport/service/ManagerService.java,3\b\3bd2da25c2e050f2204732136f80a43a507a180e

@@ -92,9 +92,9 @@ public class AcademieService implements IAcademieService {
     }
 
     @Override
-    public Academie getAcademieById(Integer academieId) {
+    public Academie getAcademieById(Integer managerId) {
         try {
-            return academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+            return academieRepository.findById(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId()).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
         } catch (Exception e) {
             throw new RuntimeException("Failed to get Academie by Id", e);
         }

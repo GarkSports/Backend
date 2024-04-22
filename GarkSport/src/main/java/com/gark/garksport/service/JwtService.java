@@ -1,11 +1,15 @@
 package com.gark.garksport.service;
 
+import com.gark.garksport.modal.User;
+import com.gark.garksport.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.mail.MessagingException;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
+
 public class JwtService {
 
     @Value("${application.security.jwt.secret-key}")
@@ -27,7 +32,7 @@ public class JwtService {
 
     @Value("${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
-
+    
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
