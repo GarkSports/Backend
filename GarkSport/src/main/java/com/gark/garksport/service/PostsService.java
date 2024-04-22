@@ -1,13 +1,20 @@
 package com.gark.garksport.service;
 
+import com.gark.garksport.modal.Academie;
 import com.gark.garksport.modal.Posts;
+import com.gark.garksport.modal.User;
+import com.gark.garksport.repository.AcademieRepository;
 import com.gark.garksport.repository.PostsRepository;
+import com.gark.garksport.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,15 +23,22 @@ import java.util.List;
 public class PostsService {
 
 
+
     @Autowired
     private PostsRepository postsRepository;
 
-    // Create operation
-    public Posts createPost(Posts post) {
-        System.out.println("Inside createPost method");
-        System.out.println("Original imageUrl: " + post.getImageUrl());
-        System.out.println("Category: " + post.getCategory());
+    @Autowired
+    private AcademieRepository academieRepository;
+    private final UserRepository repository;
 
+    public User getProfil(Principal connectedUser) {
+        var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+        Optional<User> userOptional = repository.findById(user.getId());
+
+        return userOptional.orElse(null);
+    }
+    // Create operation
+    public Posts createPost(Posts post,Principal connectedUser) {
         if (post.getImageUrl() == null || post.getImageUrl().isEmpty()) {
             switch (post.getCategory().toLowerCase()) {
                 case "football":
@@ -39,9 +53,12 @@ public class PostsService {
 
             }
         }
-        System.out.println("Updated imageUrl: " + post.getImageUrl());
-        post.setCreatedAt(new Date());
+        User user = getProfil(connectedUser);
+        Academie academie = academieRepository.findByManagerId(user.getId());
 
+        post.setCreatedAt(new Date());
+        post.setAuthor(user.getFirstname());
+        post.setAcademie(academie);
         return postsRepository.save(post);
     }
 
@@ -62,7 +79,6 @@ public class PostsService {
             existingPost.setSubtitle(post.getSubtitle());
             existingPost.setBody(post.getBody());
             existingPost.setAuthor(post.getAuthor());
-            existingPost.setAuthorImageUrl(post.getAuthorImageUrl());
             existingPost.setCategory(post.getCategory());
             existingPost.setImageUrl(post.getImageUrl());
             existingPost.setViews(post.getViews());
