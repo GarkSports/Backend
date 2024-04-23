@@ -38,5 +38,5 @@ public interface IRandomService {
 
     public Set<Adherent> getMembersByAcademie(Integer academieId);
 
-    public Set<Adherent> getAllAdherentsByAcademie(Integer academieId);
+    public Set<Adherent> getAllAdherentsByAcademie(Integer managerId);
 }

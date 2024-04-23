@@ -104,8 +104,8 @@ public class RandomController {
         return randomService.getMembersByAcademie(academieId);
     }
 
-    @GetMapping("/getAllAdherents/{academieId}")
-    public Set<Adherent> getAllAdherents(@PathVariable Integer academieId) {
-        return randomService.getAllAdherentsByAcademie(academieId);
+    @GetMapping("/getAllAdherents")
+    public Set<Adherent> getAllAdherents(Principal connectedUser) {
+        return randomService.getAllAdherentsByAcademie(userService.getUserId(connectedUser.getName()));
     }
 }

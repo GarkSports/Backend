@@ -33,10 +33,6 @@ p
 @GarkSport/src/main/java/com/gark/garksport/modal/enums/Etat.java,3\0\306a4f83f93bcc0d67c309bd83a8c570e1f7b0d4
 x
 HGarkSport/src/main/java/com/gark/garksport/modal/enums/AcademieType.java,4\0\408836a4d5d3bb61d85e47808e7f5eea8beaa37b
-x
-HGarkSport/src/main/java/com/gark/garksport/modal/enums/Destinataire.java,b\d\bd657ade161267d69d0126df71acd9c2d5ab737f
-v
-FGarkSport/src/main/java/com/gark/garksport/modal/enums/Repetition.java,9\8\985aea3d21a2d7cebbc3bd6d048db6d4c7e9b1b8
 y
 IGarkSport/src/main/java/com/gark/garksport/modal/enums/EvenementType.java,7\9\79d187ef096a22515455beeb02387ba7f03d9013
 t
