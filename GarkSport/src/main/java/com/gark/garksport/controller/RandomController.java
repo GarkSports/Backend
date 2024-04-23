@@ -103,4 +103,9 @@ public class RandomController {
     public Set<Adherent> getMembersByAcademie(@PathVariable Integer academieId) {
         return randomService.getMembersByAcademie(academieId);
     }
+
+    @GetMapping("/getAllAdherents/{academieId}")
+    public Set<Adherent> getAllAdherents(@PathVariable Integer academieId) {
+        return randomService.getAllAdherentsByAcademie(academieId);
+    }
 }

@@ -206,4 +206,9 @@ public class RandomService implements IRandomService {
     public Set<Adherent> getMembersByAcademie(Integer academieId) {
         return adherentRepository.findByAcademieId(academieId);
     }
+
+    @Override
+    public Set<Adherent> getAllAdherentsByAcademie(Integer academieId) {
+        return adherentRepository.findByAcademieId(academieId);
+    }
 }

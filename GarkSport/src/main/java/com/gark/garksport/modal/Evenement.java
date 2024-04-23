@@ -1,9 +1,6 @@
 package com.gark.garksport.modal;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.gark.garksport.modal.enums.Destinataire;
 import com.gark.garksport.modal.enums.EvenementType;
-import com.gark.garksport.modal.enums.Repetition;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,43 +20,30 @@ public class Evenement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //Type d'evenement
     @Enumerated(EnumType.STRING)
     private EvenementType type;
-    private String nom;
+    private String nomEvent;
+    private String lieu;
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    @Temporal(TemporalType.TIME)
+    private Date heure;
     private String description;
 
-    //Destinataires
-    @Enumerated(EnumType.STRING)
-    private Destinataire destinataire;
+    //Evenement personnalisé+Test evaulation
+    @OneToOne
+    private Equipe convocationEquipe;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Adherent> convocationMembres;
 
-    @JsonIgnoreProperties("evenements")
-    @ManyToOne
+    //Test evaulation
+    private String test;
+
+    //Match Amical
+    private String nomAdversaire;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Equipe> convocationEquipes;
+
+    @OneToOne
     private Academie academie;
-
-    @JsonIgnoreProperties("evenements")
-    @ManyToOne
-    private Equipe equipe;
-    @JsonIgnoreProperties("evenements")
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Adherent> membres;
-
-    //Date evenement
-    @Temporal(TemporalType.DATE)
-    private Date dateDebut;
-    @Temporal(TemporalType.DATE)
-    private Date dateFin;
-    @Temporal(TemporalType.TIME)
-    private Date heur;
-    private Boolean repetition;
-
-    @Enumerated(EnumType.STRING)
-    private Repetition chaque;
-    private Integer numero;
-
-    //Lieu
-    private String adresse;
-    private String lieu;
-
-
 }
