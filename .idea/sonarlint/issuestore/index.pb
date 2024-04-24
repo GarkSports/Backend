@@ -183,3 +183,5 @@ t
 DGarkSport/src/main/java/com/gark/garksport/service/PostsService.java,f\3\f3f4f991da6fe5bee1fd9a9677b358ab809f3a10
 |
 LGarkSport/src/main/java/com/gark/garksport/controller/ManagerController.java,9\5\95f4476ee432d6c9e401ec116afeeb57ba7bc6e7
+z
+JGarkSport/src/main/java/com/gark/garksport/repository/PostsRepository.java,c\9\c9c03914bab49322d564bc9985b02b59b4249d11

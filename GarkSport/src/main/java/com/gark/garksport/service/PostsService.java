@@ -29,14 +29,9 @@ public class PostsService {
 
     @Autowired
     private AcademieRepository academieRepository;
-    private final UserRepository repository;
+    private final UserService userService;
 
-    public User getProfil(Principal connectedUser) {
-        var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
-        Optional<User> userOptional = repository.findById(user.getId());
 
-        return userOptional.orElse(null);
-    }
     // Create operation
     public Posts createPost(Posts post,Principal connectedUser) {
         if (post.getImageUrl() == null || post.getImageUrl().isEmpty()) {
@@ -53,19 +48,32 @@ public class PostsService {
 
             }
         }
-        User user = getProfil(connectedUser);
-        Academie academie = academieRepository.findByManagerId(user.getId());
+        if (post.getAuthorImageUrl() == null || post.getAuthorImageUrl().isEmpty()){
+            post.setAuthorImageUrl("https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1224184972.1713830400&semt=ais");
+
+        }
+        Academie academie = academieRepository.findByManagerId(userService.getUserId(connectedUser.getName()));
 
         post.setCreatedAt(new Date());
-        post.setAuthor(user.getFirstname());
+        post.setAuthor(userService.getUserFullName(connectedUser.getName()));
         post.setAcademie(academie);
         return postsRepository.save(post);
     }
 
     // Read operation
-    public List<Posts> getAllPosts() {
-        return postsRepository.findAllByOrderByCreatedAtDesc();
+    public List<Posts> getAcademiePosts(Principal connectedUser
+
+    ) {
+
+        Integer managerAcademieId = academieRepository.findByManagerId(userService.getUserId(connectedUser.getName())).getId();
+
+        return postsRepository.findAllByAcademieIdOrderByCreatedAtDescIdDesc(managerAcademieId);
     }
+    public List<Posts> getPublicPosts() {
+
+        return postsRepository.findAllByPublicAudienceIsTrueOrderByCreatedAtDescIdDesc();
+    }
+
 
     public Posts getPostById(Integer id) {
         return postsRepository.findById(id).orElse(null);
@@ -81,7 +89,7 @@ public class PostsService {
             existingPost.setAuthor(post.getAuthor());
             existingPost.setCategory(post.getCategory());
             existingPost.setImageUrl(post.getImageUrl());
-            existingPost.setViews(post.getViews());
+            existingPost.setPublicAudience(post.getPublicAudience());
             existingPost.setCreatedAt(new Date());
             return postsRepository.save(existingPost);
         }

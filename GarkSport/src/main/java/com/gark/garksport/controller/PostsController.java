@@ -31,10 +31,15 @@ public class PostsController {
     }
 
 
-    // Read operation
-    @GetMapping
-    public List<Posts> getAllPosts() {
-        return postsService.getAllPosts();
+    @GetMapping("/getacademiePosts")
+    public List<Posts> getacademiePosts(
+            Principal connectedUser
+    ) {
+        return postsService.getAcademiePosts(connectedUser);
+    }
+    @GetMapping("/getpublicPosts")
+    public List<Posts> getpublicPosts() {
+        return postsService.getPublicPosts();
     }
 
     // Create operation

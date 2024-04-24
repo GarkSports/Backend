@@ -28,4 +28,13 @@ public class UserService {
     }
 
 
+    public String getUserFullName(String email){
+        User user = repository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getFirstname() + " " + user.getLastname();
+    }
+
+
+
+
+
 }

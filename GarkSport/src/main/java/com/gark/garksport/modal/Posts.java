@@ -23,9 +23,10 @@ public class Posts {
     private String subtitle;
     private String body;
     private String author;
+    private String authorImageUrl;
     private String category;
     private String imageUrl;
-    private Integer views;
+    private Boolean publicAudience = false;
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 

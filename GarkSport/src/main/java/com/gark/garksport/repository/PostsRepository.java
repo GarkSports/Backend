@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface PostsRepository extends JpaRepository<Posts,Integer> {
 
-    List<Posts> findAllByOrderByCreatedAtDesc();
+    List<Posts> findAllByAcademieIdOrderByCreatedAtDescIdDesc(Integer academieId);
+    List<Posts> findAllByPublicAudienceIsTrueOrderByCreatedAtDescIdDesc();
+
 }
