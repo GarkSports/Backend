@@ -108,4 +108,9 @@ public class RandomController {
     public Set<Adherent> getAllAdherents(Principal connectedUser) {
         return randomService.getAllAdherentsByAcademie(userService.getUserId(connectedUser.getName()));
     }
+
+    @PostMapping("/addAdherent/{codeequipe}")
+    public Adherent addAdherent(@RequestBody Adherent adherent, @PathVariable String codeequipe) {
+        return randomService.addAdherent(adherent, codeequipe);
+    }
 }

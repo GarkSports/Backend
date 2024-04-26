@@ -211,4 +211,18 @@ public class RandomService implements IRandomService {
     public Set<Adherent> getAllAdherentsByAcademie(Integer managerId) {
         return adherentRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
     }
+
+    @Override
+    public Adherent addAdherent(Adherent adherent, String CodeEquipe) {
+        Equipe equipe = equipeRepository.findByCodeEquipe(CodeEquipe);
+
+        adherent.setNomEquipe(equipe.getNom());
+
+        Academie academie = equipe.getAcademie();
+        academie.getAdherents().add(adherent);
+        adherent.setAcademie(academie);
+        adherentRepository.save(adherent);
+        academieRepository.save(academie);
+        return adherent;
+    }
 }
