@@ -2,16 +2,22 @@ package com.gark.garksport.service;
 
 import com.gark.garksport.modal.Discipline;
 import com.gark.garksport.repository.DisciplineRepository;
+import com.gark.garksport.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class DisciplineService implements IDisciplineService {
     @Autowired
     private DisciplineRepository disciplineRepository;
+    @Autowired
+    private ManagerRepository managerRepository;
 
     @Override
     public Discipline addDiscipline(Discipline discipline) {
@@ -55,8 +61,9 @@ public class DisciplineService implements IDisciplineService {
     }
 
     @Override
-    public Discipline addDisciplineManager(Discipline discipline) {
+    public Discipline addDisciplineManager(Discipline discipline, Integer managerId) {
         try {
+            discipline.setAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
             discipline.setProtectedDiscipline(false);
             return disciplineRepository.save(discipline);
         } catch (Exception e) {
@@ -65,9 +72,21 @@ public class DisciplineService implements IDisciplineService {
     }
 
     @Override
-    public Set<Discipline> getAllDisciplines() {
+    public Set<Discipline> getAllDisciplines(Integer managerId) {
         try {
-            return new HashSet<>(disciplineRepository.findAll());
+            List<Discipline> protectedDisciplines = disciplineRepository.findAll().stream()
+                    .filter(Discipline::getProtectedDiscipline)
+                    .collect(Collectors.toList());
+
+            List<Discipline> academieDisciplines = new ArrayList<>();
+            if (managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId() != null) {
+                academieDisciplines = disciplineRepository.findAll().stream()
+                        .filter(discipline -> managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId().equals(discipline.getAcademieId()))
+                        .collect(Collectors.toList());
+            }
+
+            protectedDisciplines.addAll(academieDisciplines);
+            return new HashSet<>(protectedDisciplines);
         } catch (Exception e) {
             throw new RuntimeException("Failed to get Disciplines", e);
         }

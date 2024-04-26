@@ -138,19 +138,7 @@ public class RandomService implements IRandomService {
         }
         return equipeRepository.save(equipe);
     }
-    @Override
-    public Adherent addAdherent(Adherent adherent, String CodeEquipe) {
-        Equipe equipe = equipeRepository.findByCodeEquipe(CodeEquipe);
 
-        adherent.setNomEquipe(equipe.getNom());
-
-        Academie academie = equipe.getAcademie();
-        academie.getAdherents().add(adherent);
-        adherent.setAcademie(academie);
-        adherentRepository.save(adherent);
-        academieRepository.save(academie);
-        return adherent;
-    }
 
     @Override
     public Equipe affectEntraineurToEquipe(Integer equipeId, List<Integer> entraineurIds) {
@@ -219,5 +207,22 @@ public class RandomService implements IRandomService {
         return adherentRepository.findByAcademieId(academieId);
     }
 
+    @Override
+    public Set<Adherent> getAllAdherentsByAcademie(Integer managerId) {
+        return adherentRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
+    }
 
+    @Override
+    public Adherent addAdherent(Adherent adherent, String CodeEquipe) {
+        Equipe equipe = equipeRepository.findByCodeEquipe(CodeEquipe);
+
+        adherent.setNomEquipe(equipe.getNom());
+
+        Academie academie = equipe.getAcademie();
+        academie.getAdherents().add(adherent);
+        adherent.setAcademie(academie);
+        adherentRepository.save(adherent);
+        academieRepository.save(academie);
+        return adherent;
+    }
 }

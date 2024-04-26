@@ -49,10 +49,6 @@ public class Academie {
     @OneToOne(cascade = CascadeType.ALL)
     private Manager manager;
 
-    @JsonIgnoreProperties("academie")
-    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
-    private Set<Evenement> evenements;
-
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RoleName> roleNames = new HashSet<>();
 

@@ -1,3 +1,5 @@
 
-r
-java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(£üà¸øÿÿÿÿ8Øˆ»å1
+[
+java:S1128">Remove this unused import 'com.gark.garksport.modal.Academie'.(œòÄ8ÏƒŠºñ1
+j
+java:S1128"MRemove this unused import 'com.gark.garksport.repository.AcademieRepository'.(èšµ8ÑƒŠºñ1

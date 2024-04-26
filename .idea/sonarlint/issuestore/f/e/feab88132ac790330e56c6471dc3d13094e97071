@@ -1,2 +1,6 @@
 
-X	java:S125"<This block of commented-out lines of code should be removed.(ƒ«¯8ï°›§á1
+X	java:S125""<This block of commented-out lines of code should be removed.(ƒ«¯8Û¾úÓñ1
+c
+java:S1126]"AReplace this if-then-else statement by a single return statement.(àÀü·şÿÿÿÿ8á¾úÓñ1
+P
+java:S1128"4Remove this unused import 'java.security.Principal'.(’ÛŞ[8ôäËÔñ1

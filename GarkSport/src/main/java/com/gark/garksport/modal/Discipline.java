@@ -21,4 +21,5 @@ public class Discipline {
     private String nom;
     private String description;
     private Boolean protectedDiscipline;
+    private Integer academieId;
 }

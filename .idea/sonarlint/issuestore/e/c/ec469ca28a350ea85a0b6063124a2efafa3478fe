@@ -1,8 +1,12 @@
 
-g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(÷Ñ‰ùÿÿÿÿ8çÆ´²ï1
-g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Áêƒ‰şÿÿÿÿ8èÆ´²ï1
-b	java:S112("FDefine and throw a dedicated exception instead of using a generic one.(ƒºœ’8éÆ´²ï1
-g	java:S112/"FDefine and throw a dedicated exception instead of using a generic one.(³³ĞØúÿÿÿÿ8éÆ´²ï1
-b	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(Ó²„å8êÆ´²ï1
-g	java:S112?"FDefine and throw a dedicated exception instead of using a generic one.(÷Ñ‰ùÿÿÿÿ8Œ®¤³ï1
-g	java:S112H"FDefine and throw a dedicated exception instead of using a generic one.(Áêƒ‰şÿÿÿÿ8°ÔÕ³ï1
+g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(÷Ñ‰ùÿÿÿÿ8Åëµğ1
+g	java:S112%"FDefine and throw a dedicated exception instead of using a generic one.(Áêƒ‰şÿÿÿÿ8Æëµğ1
+b	java:S112."FDefine and throw a dedicated exception instead of using a generic one.(ƒºœ’8Æëµğ1
+g	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(³³ĞØúÿÿÿÿ8Æëµğ1
+b	java:S112;"FDefine and throw a dedicated exception instead of using a generic one.(Ó²„å8Æëµğ1
+g	java:S112F"FDefine and throw a dedicated exception instead of using a generic one.(÷Ñ‰ùÿÿÿÿ8Æëµğ1
+g	java:S112["FDefine and throw a dedicated exception instead of using a generic one.(Áêƒ‰şÿÿÿÿ8‘©¤¶ğ1
+t
+java:S1192B"RDefine a constant instead of duplicating this literal "Manager not found" 3 times.(‹¨ÉÊıÿÿÿÿ8æ¸¶¶ğ1
+o
+java:S6204U"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8´©¤¶ğ1

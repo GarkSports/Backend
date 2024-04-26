@@ -40,10 +40,6 @@ public class Adherent extends User {
     @OneToOne(mappedBy = "adherent")
     private Paiement paiement;
 
-    @JsonIgnoreProperties("membres")
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "membres")
-    private Set<Evenement> evenements;
-
     private String nomEquipe="non affecté";
 
     @Column(length = 50)
