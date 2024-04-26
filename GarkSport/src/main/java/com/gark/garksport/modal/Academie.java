@@ -10,9 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Builder
@@ -53,6 +51,10 @@ public class Academie {
 
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RoleName> roleNames = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
+    private Set<Posts> PostsList = new HashSet<>();
 
     @Override
     public int hashCode() {

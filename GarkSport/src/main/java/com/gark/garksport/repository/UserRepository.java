@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> findAllByIdNot(Integer id);
     List<User> findByBlocked(boolean blocked);
 
+
+
+
 }
