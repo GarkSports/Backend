@@ -90,6 +90,18 @@ public class AcademieController {
         return ResponseEntity.ok("Archived Academie restored successfully");
     }
 
+    @GetMapping("/checkIfManager")
+    public boolean checkIfManager(Principal connectedUser) {
+        Integer userId = userService.getUserId(connectedUser.getName());
+        return academieService.isManager(userId);
+    }
+
+    @GetMapping("/checkIfAdmin")
+    public boolean checkIfAdmin(Principal connectedUser) {
+        Integer userId = userService.getUserId(connectedUser.getName());
+        return academieService.isAdmin(userId);
+    }
+
     @GetMapping("/get-profil")
     @ResponseBody
     public User getProfil(

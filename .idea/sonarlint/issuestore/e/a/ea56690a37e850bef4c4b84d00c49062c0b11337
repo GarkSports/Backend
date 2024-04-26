@@ -1,14 +1,14 @@
 
-b	java:S112 "FDefine and throw a dedicated exception instead of using a generic one.(¨Á°£8÷Ü­‹æ1
-g	java:S112)"FDefine and throw a dedicated exception instead of using a generic one.(áèÓüşÿÿÿÿ8÷Ü­‹æ1
-g	java:S112?"FDefine and throw a dedicated exception instead of using a generic one.(ª»¬øÿÿÿÿ8÷Ü­‹æ1
-g	java:S112Z"FDefine and throw a dedicated exception instead of using a generic one.(íŒ´Òşÿÿÿÿ8÷Ü­‹æ1
-g	java:S112c"FDefine and throw a dedicated exception instead of using a generic one.(½—çÿÿÿÿÿ8÷Ü­‹æ1
-b	java:S112v"FDefine and throw a dedicated exception instead of using a generic one.(–™õ”8÷Ü­‹æ1
-g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(áèÓüşÿÿÿÿ8õ…´ìï1
-h	java:S112ˆ"FDefine and throw a dedicated exception instead of using a generic one.(íŒ´Òşÿÿÿÿ8š½ìï1
-b	java:S112“"FDefine and throw a dedicated exception instead of using a generic one.(¨Œòr8·Ïìï1
-p
-java:S11920"SDefine a constant instead of duplicating this literal "Academie not found" 6 times.(û½Äë8øÜ­‹æ1
+b	java:S112#"FDefine and throw a dedicated exception instead of using a generic one.(¨Á°£8âğÍÔñ1
+g	java:S112,"FDefine and throw a dedicated exception instead of using a generic one.(áèÓüşÿÿÿÿ8ãğÍÔñ1
+g	java:S112B"FDefine and throw a dedicated exception instead of using a generic one.(ª»¬øÿÿÿÿ8ãğÍÔñ1
+g	java:S112]"FDefine and throw a dedicated exception instead of using a generic one.(íŒ´Òşÿÿÿÿ8ãğÍÔñ1
+g	java:S112f"FDefine and throw a dedicated exception instead of using a generic one.(½—çÿÿÿÿÿ8ãğÍÔñ1
+b	java:S112y"FDefine and throw a dedicated exception instead of using a generic one.(–™õ”8ãğÍÔñ1
+h	java:S112‚"FDefine and throw a dedicated exception instead of using a generic one.(áèÓüşÿÿÿÿ8ãğÍÔñ1
+h	java:S112‹"FDefine and throw a dedicated exception instead of using a generic one.(íŒ´Òşÿÿÿÿ8äğÍÔñ1
+b	java:S112–"FDefine and throw a dedicated exception instead of using a generic one.(¨Œòr8äğÍÔñ1
 t
-java:S1192"RDefine a constant instead of duplicating this literal "Manager not found" 3 times.(Ôú¬»ÿÿÿÿÿ8™·²µğ1
+java:S1192"RDefine a constant instead of duplicating this literal "Manager not found" 4 times.(Ôú¬»ÿÿÿÿÿ8åğÍÔñ1
+p
+java:S11923"SDefine a constant instead of duplicating this literal "Academie not found" 6 times.(û½Äë8åğÍÔñ1

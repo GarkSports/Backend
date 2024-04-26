@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gark.garksport.modal.enums.EvenementType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,7 @@ public class Evenement {
 
     //Match Amical
     private String nomAdversaire;
+    @JsonIgnoreProperties({"academie", "adherents"})
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Equipe> convocationEquipes;
 

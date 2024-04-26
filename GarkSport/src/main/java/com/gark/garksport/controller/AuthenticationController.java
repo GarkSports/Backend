@@ -10,6 +10,7 @@ import com.gark.garksport.service.AdminService;
 import com.gark.garksport.service.AuthenticationService;
 import com.gark.garksport.service.JwtService;
 import com.gark.garksport.service.UserService;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/auth")
@@ -78,6 +80,25 @@ public class AuthenticationController {
         SecurityContextHolder.clearContext();
         return ResponseEntity.ok("Logout successful");
     }
+
+    @GetMapping("/checkAccessToken")
+    public boolean checkAccessToken(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("accessToken".equals(cookie.getName())) {
+                    String accessTokenValue = cookie.getValue();
+                    // Perform validation of the accessTokenValue here
+                    if (jwtService.isTokenExpired(accessTokenValue)){
+                        return false;
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+}
 
     @GetMapping("/hello")
     public String getHello(){

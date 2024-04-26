@@ -19,4 +19,6 @@ public interface IAcademieService {
     public Set<Academie> getArchivedAcademies();
     public void deleteArchivedAcademie(Integer academieId);
     public void restoreArchivedAcademie(Integer academieId);
+    public boolean isManager(Integer userId);
+    public boolean isAdmin(Integer userId);
 }

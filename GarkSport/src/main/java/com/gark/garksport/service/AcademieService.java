@@ -4,6 +4,7 @@ import com.gark.garksport.modal.enums.Etat;
 import com.gark.garksport.repository.AcademieHistoryRepository;
 import com.gark.garksport.repository.AcademieRepository;
 import com.gark.garksport.repository.ManagerRepository;
+import com.gark.garksport.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -21,6 +22,8 @@ public class AcademieService implements IAcademieService {
     private AcademieHistoryRepository academieHistoryRepository;
     @Autowired
     private JavaMailSender javaMailSender;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Academie addAcademie(Academie academie, Integer managerId) {
@@ -146,5 +149,23 @@ public class AcademieService implements IAcademieService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to restore Academie", e);
         }
+
     }
+
+    public boolean isManager(Integer userId) {
+        String role = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Manager not found"))
+                .getRole()
+                .toString();
+        return role.equals("MANAGER");
+    }
+
+    public boolean isAdmin(Integer userId) {
+        String role = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Admin not found"))
+                .getRole()
+                .toString();
+        return role.equals("ADMIN");
+    }
+
 }
