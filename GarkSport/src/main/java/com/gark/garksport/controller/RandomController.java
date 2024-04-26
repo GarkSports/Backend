@@ -33,6 +33,11 @@ public class RandomController {
         return randomService.addAndAffectAdherentToAcademie(adherent, academieId);
     }
 
+    @PostMapping("/addAdherent/{codeequipe}")
+    public Adherent addAdherent(@RequestBody Adherent adherent, @PathVariable String codeequipe) {
+        return randomService.addAdherent(adherent, codeequipe);
+    }
+
     @GetMapping("/getManagers/{academieId}")
     public Set<Manager> getManagers(@PathVariable Integer academieId) {
         return randomService.getManagersExceptAssigned(academieId);
@@ -103,4 +108,6 @@ public class RandomController {
     public Set<Adherent> getMembersByAcademie(@PathVariable Integer academieId) {
         return randomService.getMembersByAcademie(academieId);
     }
+
+
 }
