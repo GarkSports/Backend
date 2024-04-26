@@ -138,7 +138,19 @@ public class RandomService implements IRandomService {
         }
         return equipeRepository.save(equipe);
     }
+    @Override
+    public Adherent addAdherent(Adherent adherent, String CodeEquipe) {
+        Equipe equipe = equipeRepository.findByCodeEquipe(CodeEquipe);
 
+        adherent.setNomEquipe(equipe.getNom());
+
+        Academie academie = equipe.getAcademie();
+        academie.getAdherents().add(adherent);
+        adherent.setAcademie(academie);
+        adherentRepository.save(adherent);
+        academieRepository.save(academie);
+        return adherent;
+    }
 
     @Override
     public Equipe affectEntraineurToEquipe(Integer equipeId, List<Integer> entraineurIds) {
@@ -206,4 +218,6 @@ public class RandomService implements IRandomService {
     public Set<Adherent> getMembersByAcademie(Integer academieId) {
         return adherentRepository.findByAcademieId(academieId);
     }
+
+
 }

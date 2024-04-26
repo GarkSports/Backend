@@ -37,4 +37,6 @@ public interface IRandomService {
     public Set<Entraineur> getEntraineursByEquipe(Integer equipeId);
 
     public Set<Adherent> getMembersByAcademie(Integer academieId);
+
+    Adherent addAdherent(Adherent adherent, String CodeEquipe);
 }
