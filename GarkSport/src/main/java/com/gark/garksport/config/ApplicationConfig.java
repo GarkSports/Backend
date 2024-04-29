@@ -1,5 +1,9 @@
 package com.gark.garksport.config;
 
+import com.gark.garksport.modal.Admin;
+import com.gark.garksport.modal.User;
+import com.gark.garksport.modal.enums.Role;
+import com.gark.garksport.repository.AdminRepository;
 import com.gark.garksport.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
     private final UserRepository repository;
+    private final AdminRepository adminRepository;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -25,7 +30,7 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
@@ -33,12 +38,26 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public User addAdmin() {
+        if (repository.findByEmail("garktn.assistance@gmail.com").isEmpty()) {
+            Admin admin = new Admin();
+            admin.setEmail("garktn.assistance@gmail.com");
+            admin.setPassword(passwordEncoder().encode("Vaider123456@"));
+            admin.setFirstname("Gark");
+            admin.setLastname("Assistance");
+            admin.setRole(Role.ADMIN);
+            adminRepository.save(admin);
+        }
+        return null;
     }
 }
