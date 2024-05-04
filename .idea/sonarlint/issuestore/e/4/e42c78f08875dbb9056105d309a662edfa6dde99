@@ -4,11 +4,12 @@ o
 java:S1192="RDefine a constant instead of duplicating this literal "Manager not found" 8 times.(ÿö¶ú8Ç‰ÎÚð1
 o
 java:S1192‚"QDefine a constant instead of duplicating this literal "Equipe not found" 3 times.(¸íÂ†8†Ä—ÿë1
+s	java:S117Ø"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ÍÈÝÿÿÿÿÿ8çûäöñ1
 m
-java:S3655>"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8®í„ñê1
+java:S3655,"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8­Îÿ´é1
 m
 java:S3655""PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8¬Îÿ´é1
 m
 java:S3655="PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ÿö¶ú8®í„ñê1
 m
-java:S3655,"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8­Îÿ´é1
+java:S3655>"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8®í„ñê1

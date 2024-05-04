@@ -13,9 +13,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -50,6 +50,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/yasse/IdeaProjects/auth&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;342fbad231df4f91ba2cf533d728058e&quot;
   }
 }</component>
@@ -184,6 +185,13 @@
       <workItem from="1714082168759" duration="4591000" />
       <workItem from="1714135811820" duration="7199000" />
       <workItem from="1714168335242" duration="729000" />
+      <workItem from="1714429208175" duration="2599000" />
+      <workItem from="1714480873065" duration="2742000" />
+      <workItem from="1714499712051" duration="2129000" />
+      <workItem from="1714562973402" duration="4594000" />
+      <workItem from="1714651500290" duration="5310000" />
+      <workItem from="1714689275159" duration="1580000" />
+      <workItem from="1714738762250" duration="3680000" />
     </task>
     <servers />
   </component>

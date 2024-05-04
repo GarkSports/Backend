@@ -1,5 +1,31 @@
 
+t
+java:S1192#"RDefine a constant instead of duplicating this literal "Manager not found" 5 times.(Â…­øÿÿÿÿ8Ò¨®Ëó1
+Y
+java:S4973:"<Strings and Boxed types should be compared using "equals()".(òèƒ8Ö¨®Ëó1
+Y
+java:S4973Z"<Strings and Boxed types should be compared using "equals()".(òèƒ8Ö¨®Ëó1
+Y
+java:S4973z"<Strings and Boxed types should be compared using "equals()".(’¢Íã8Ö¨®Ëó1
+Z
+java:S4973š"<Strings and Boxed types should be compared using "equals()".(’¢Íã8Ö¨®Ëó1
+Z
+java:S4973º"<Strings and Boxed types should be compared using "equals()".(òèƒ8úùÛËó1
+n
+java:S3655Ì"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8õ¨®Ëó1
+n
+java:S3655Ã"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8ÂÒËó1
+n
+java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8õ¨®Ëó1
+n
+java:S3655ö"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8âò·Ëó1
 [
-java:S1128">Remove this unused import 'com.gark.garksport.modal.Academie'.(œòÄ8ÏƒŠºñ1
-j
-java:S1128"MRemove this unused import 'com.gark.garksport.repository.AcademieRepository'.(èšµ8ÑƒŠºñ1
+java:S1128">Remove this unused import 'com.gark.garksport.modal.Academie'.(œòÄ8Õèùó1
+N
+java:S1128"1Remove this unused import 'java.text.DateFormat'.(÷Œá¼8Õèùó1
+R
+java:S1128"5Remove this unused import 'java.text.ParseException'.(ñ®ï•8Öèùó1
+T
+java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ8Öèùó1
+R
+java:S1128"0Remove this unused import 'java.time.LocalTime'.(à®øÃùÿÿÿÿ8Öèùó1

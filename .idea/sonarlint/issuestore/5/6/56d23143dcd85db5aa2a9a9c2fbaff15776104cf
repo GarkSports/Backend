@@ -5,15 +5,3 @@ java:S32528"EUse static access with "com.gark.garksport.modal.User" for "builde
 G	java:S106T"+Replace this use of System.out by a logger.(®µ€ó8‚ïôÓñ1
 G	java:S106U"+Replace this use of System.out by a logger.(ö±–®8ƒïôÓñ1
 X	java:S125j"<This block of commented-out lines of code should be removed.(Òóà¾8ˆïôÓñ1
-Z
-java:S1128"=Remove this unused import 'com.gark.garksport.modal.Manager'.(Ê§ˆ¨8èÍÀÔñ1
-_
-java:S1128"BRemove this unused import 'jakarta.mail.internet.InternetAddress'.(Ê•¬¾8èÍÀÔñ1
-[
-java:S1128">Remove this unused import 'jakarta.mail.internet.MimeMessage'.(š‹ÔÕ8éÍÀÔñ1
-j
-java:S1128"MRemove this unused import 'org.springframework.mail.javamail.JavaMailSender'.(ÕÃ›8éÍÀÔñ1
-Y
-java:S1128"7Remove this unused import 'java.security.SecureRandom'.(›éè™úÿÿÿÿ8éÍÀÔñ1
-Q
-java:S1128 "/Remove this unused import 'java.time.Duration'.(ëá¯‰üÿÿÿÿ8éÍÀÔñ1

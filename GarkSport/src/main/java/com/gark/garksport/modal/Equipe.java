@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -39,8 +40,7 @@ public class Equipe {
     @ManyToOne
     private Academie academie;
 
-    @Temporal(TemporalType.TIME)
-    private Date dateMatchAmical;
+    private LocalTime dateMatchAmical;
 
 
 
