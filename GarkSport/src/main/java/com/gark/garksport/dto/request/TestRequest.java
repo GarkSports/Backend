@@ -3,20 +3,23 @@ package com.gark.garksport.dto.request;
 import com.gark.garksport.modal.Evenement;
 import lombok.Data;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Data
-public class MatchAmicalRequest {
+public class TestRequest {
     private Evenement evenement;
-    private List<EquipeHoraireDTO> equipesHoraire;
+    private List<Integer> idEquipe;
+    private List<Integer> idMembres;
 
     public Evenement getEvenement() {
         return evenement;
     }
 
-    public List<EquipeHoraireDTO> getEquipesHoraire() {
-        return equipesHoraire;
+    public List<Integer> getIdEquipe() {
+        return idEquipe;
+    }
+
+    public List<Integer> getIdMembres() {
+        return idMembres;
     }
 }
