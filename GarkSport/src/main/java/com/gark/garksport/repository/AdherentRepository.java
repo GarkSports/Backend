@@ -10,4 +10,7 @@ import java.util.Set;
 @Repository
 public interface AdherentRepository extends JpaRepository<Adherent,Integer> {
     public Set<Adherent> findByAcademieId(Integer academieId);
+
+    public Integer findAcademieIdById(Integer adherentId);
+
 }

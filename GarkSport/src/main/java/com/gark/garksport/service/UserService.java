@@ -1,6 +1,7 @@
 package com.gark.garksport.service;
 
 import com.gark.garksport.modal.User;
+import com.gark.garksport.repository.AdherentRepository;
 import com.gark.garksport.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

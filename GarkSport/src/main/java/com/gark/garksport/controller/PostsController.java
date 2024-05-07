@@ -37,10 +37,21 @@ public class PostsController {
     ) {
         return postsService.getAcademiePosts(connectedUser);
     }
+
+    @GetMapping("/getadherentPosts")
+    public List<Posts> getadherentPosts(
+            Principal connectedUser
+    ) {
+        return postsService.getadherentPosts(connectedUser);
+    }
+
+
     @GetMapping("/getpublicPosts")
     public List<Posts> getpublicPosts() {
         return postsService.getPublicPosts();
     }
+
+
 
     // Create operation
     @PostMapping("/addpost")
