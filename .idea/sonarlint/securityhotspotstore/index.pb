@@ -173,3 +173,11 @@ FGarkSport/src/main/java/com/gark/garksport/service/ManagerService.java,3\b\3bd
 LGarkSport/src/main/java/com/gark/garksport/dto/request/EquipeHoraireDTO.java,4\3\4306a81ae8dd9018620c51436a3ed27e56b43571
 ~
 NGarkSport/src/main/java/com/gark/garksport/dto/request/MatchAmicalRequest.java,6\9\698ce969185f63d444aa9c20b465d3703292df0b
+D
+GarkSport/Dockerfile,c\4\c4a08f56648adaf8c1362446eca89c75a67d1404
+
+OGarkSport/src/main/java/com/gark/garksport/dto/request/PersonnaliseRequest.java,8\2\820c61ff8ed863bc2487338fabdf730c7b51bf84
+w
+GGarkSport/src/main/java/com/gark/garksport/dto/request/TestRequest.java,c\5\c56e709eafd8098cb035c4742d7e19a11a3dd9c6
+}
+MGarkSport/src/main/java/com/gark/garksport/modal/enums/StatutEvenenement.java,3\2\3297bdb53f1a7ec7b23313e844df1ebe4ddc0410
