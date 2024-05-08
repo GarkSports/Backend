@@ -1,9 +1,7 @@
 package com.gark.garksport.controller;
 
-import com.gark.garksport.dto.request.EquipeHoraireDTO;
-import com.gark.garksport.dto.request.MatchAmicalRequest;
-import com.gark.garksport.dto.request.PersonnaliseRequest;
-import com.gark.garksport.dto.request.TestRequest;
+import com.gark.garksport.dto.request.*;
+import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.Equipe;
 import com.gark.garksport.modal.Evenement;
 import com.gark.garksport.modal.enums.StatutEvenenement;
@@ -23,30 +21,6 @@ public class EvenementController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/getEquipesMatchAmical")
-    public Integer getEquipesMatchAmical(Principal connectedUser) {
-        return evenementService.getEquipesMatchAmical(userService.getUserId(connectedUser.getName()));
-    }
-
-    @GetMapping("/getEquipesTest")
-    public Integer getEquipesTest(Principal connectedUser) {
-        return evenementService.getEquipesTest(userService.getUserId(connectedUser.getName()));
-    }
-
-    @GetMapping("/getMembersTest")
-    public Integer getMembersTest(Principal connectedUser) {
-        return evenementService.getMembersTest(userService.getUserId(connectedUser.getName()));
-    }
-
-    @GetMapping("/getMembersPersonnalise")
-    public Integer getMembersPersonnalise(Principal connectedUser) {
-        return evenementService.getMembersPersonnalise(userService.getUserId(connectedUser.getName()));
-    }
-
-    @GetMapping("/getEquipesPersonnalise")
-    public Integer getEquipesPersonnalise(Principal connectedUser) {
-        return evenementService.getEquipesPersonnalise(userService.getUserId(connectedUser.getName()));
-    }
 
     @PostMapping("/addCompetition")
     public Evenement addCompetition(@RequestBody Evenement evenement, Principal connectedUser) {
@@ -74,32 +48,32 @@ public class EvenementController {
     @PostMapping("/addTest")
     public Evenement addTest(@RequestBody TestRequest request, Principal connectedUser) {
         Evenement evenement = request.getEvenement();
-        List<Integer> idEquipe = request.getIdEquipe();
+        Integer idEquipe = request.getIdEquipe();
         List<Integer> idMembres = request.getIdMembres();
 
-        if (idEquipe != null && !idEquipe.isEmpty()) {
+        if (idEquipe != null) {
             // If idEquipe is provided, call the service method with idEquipe
-            return evenementService.addTest(evenement, idEquipe, Collections.emptyList(), userService.getUserId(connectedUser.getName()));
+            return evenementService.addPersonnalisé(evenement, idEquipe, Collections.emptyList(), userService.getUserId(connectedUser.getName()));
         } else if (idMembres != null && !idMembres.isEmpty()) {
             // If idMembres are provided, call the service method with idMembres
-            return evenementService.addTest(evenement, null, idMembres, userService.getUserId(connectedUser.getName()));
+            return evenementService.addPersonnalisé(evenement, null, idMembres, userService.getUserId(connectedUser.getName()));
         } else {
             // Handle the situation where neither idEquipe nor idMembres are provided
             throw new IllegalArgumentException("Either idEquipe or idMembres must be provided.");
         }
     }
 
-    @PostMapping("/addMatchAmical")
-    public Evenement addMatchAmical(@RequestBody MatchAmicalRequest request, Principal connectedUser) {
-        Evenement evenement = request.getEvenement();
-        List<EquipeHoraireDTO> equipesHoraire = request.getEquipesHoraire();
-
-        if (equipesHoraire != null && !equipesHoraire.isEmpty()) {
-            return evenementService.addMatchAmical(evenement, equipesHoraire, userService.getUserId(connectedUser.getName()));
-        } else {
-            throw new IllegalArgumentException("EquipesHoraire must be provided.");
-        }
-    }
+//    @PostMapping("/addMatchAmical")
+//    public Evenement addMatchAmical(@RequestBody MatchAmicalRequest request, Principal connectedUser) {
+//        Evenement evenement = request.getEvenement();
+//        List<EquipeHoraireDTO> equipesHoraire = request.getEquipesHoraire();
+//
+//        if (equipesHoraire != null && !equipesHoraire.isEmpty()) {
+//            return evenementService.addMatchAmical(evenement, equipesHoraire, userService.getUserId(connectedUser.getName()));
+//        } else {
+//            throw new IllegalArgumentException("EquipesHoraire must be provided.");
+//        }
+//    }
 
     @GetMapping("/getAllEvenements")
     public List<Evenement> getAllEvenements() {
@@ -114,5 +88,10 @@ public class EvenementController {
     @PutMapping("/changeStatutEvenement/{id}")
     public Evenement changeStatutEvenement(@PathVariable Integer id, @RequestBody StatutEvenenement statut) {
         return evenementService.changeStatutEvenement(id, statut);
+    }
+
+    @GetMapping("/getMembersByEquipe/{idEquipe}")
+    public List<Adherent> getMembersByEquipe(@PathVariable Integer idEquipe) {
+        return evenementService.getMembersByEquipe(idEquipe);
     }
 }

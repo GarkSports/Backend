@@ -8,14 +8,14 @@ import java.util.List;
 @Data
 public class TestRequest {
     private Evenement evenement;
-    private List<Integer> idEquipe;
+    private Integer idEquipe;
     private List<Integer> idMembres;
 
     public Evenement getEvenement() {
         return evenement;
     }
 
-    public List<Integer> getIdEquipe() {
+    public Integer getIdEquipe() {
         return idEquipe;
     }
 

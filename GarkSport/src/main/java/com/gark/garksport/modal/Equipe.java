@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -42,6 +43,8 @@ public class Equipe {
 
     private LocalTime dateMatchAmical;
 
-
+    @JsonIgnoreProperties("convocationEquipe")
+    @OneToMany(mappedBy = "convocationEquipe")
+    private List<Evenement> evenements;
 
 }
