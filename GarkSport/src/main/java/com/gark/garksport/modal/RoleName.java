@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gark.garksport.modal.enums.Permission;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,15 +17,15 @@ public class RoleName {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String roleName;
 
-    @ElementCollection(targetClass = Permission.class, fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Permission.class)
     @CollectionTable(name = "role_permissions", joinColumns = @JoinColumn(name = "role_id"))
-    @Column(name = "permission")
+    @Enumerated(EnumType.STRING)
     private Set<Permission> permissions;
 
     @ManyToOne
-    @JoinColumn(name = "academie_id")
+    @JsonIgnoreProperties("roleNames")
     private Academie academie;
+
 }
