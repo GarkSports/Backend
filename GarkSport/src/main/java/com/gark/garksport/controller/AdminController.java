@@ -58,6 +58,22 @@ public class AdminController {
         return adminService.getProfil(connectedUser);
     }
 
+
+    @GetMapping("/get-managers")
+    @ResponseBody
+    public ResponseEntity<List<Manager>> getManagers() {
+        List<Manager> userList = managerRepository.findAll();
+        return ResponseEntity.ok(userList);
+    }
+
+    @GetMapping("/get-all-users")
+    @ResponseBody
+    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
+        var user = getProfil(connectedUser);
+        List<User> userList = repository.findAllByIdNot(user.getId());
+        return ResponseEntity.ok(userList);
+    }
+
     @PutMapping("/update-manager")
     public ResponseEntity<Manager> updateManager(@RequestParam Integer id, @RequestBody Manager manager) {
         try {
@@ -73,30 +89,33 @@ public class AdminController {
         }
     }
 
-//    @GetMapping("/get-all-users")
-//    @ResponseBody
-//    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
-//        var user = getProfil(connectedUser);
-//        List<User> userList = repository.findAllByIdNot(user.getId());
-//
-//        return ResponseEntity.ok(userList);
-//    }
-    @GetMapping("/get-all-users")
-    @ResponseBody
-    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
-        var user = getProfil(connectedUser);
-        List<User> userList = repository.findAllByIdNot(user.getId());
-        return ResponseEntity.ok(userList);
-    }
-
     @PutMapping("/block-user")
-    public String blockUser(@RequestParam Integer id) {
-        return adminService.blockUser(id);
+    public ResponseEntity<String> blockUser(@RequestParam Integer id) {
+        try {
+            String blocked = adminService.blockUser(id);
+            if (blocked.equals("User blocked successfully")) {
+                return ResponseEntity.ok(blocked);
+            } else {
+                return ResponseEntity.badRequest().body(blocked);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PutMapping("/unblock-user")
-    public String unblockUser(@RequestParam Integer id) {
-        return adminService.unblockUser(id);
+    public ResponseEntity<String> unblockUser(@RequestParam Integer id) {
+        try {
+            String unblocked = adminService.unblockUser(id);
+            if (unblocked.equals("User unblocked successfully")) {
+                return ResponseEntity.ok(unblocked);
+            } else {
+                return ResponseEntity.badRequest().body(unblocked);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 
     @DeleteMapping("/archive-user")

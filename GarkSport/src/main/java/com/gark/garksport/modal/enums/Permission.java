@@ -9,7 +9,7 @@ public enum Permission {
     READ("read"),
     UPDATE("update"),
     CREATE("create"),
-    DELETE("delete"),
+    DELETE("delete")
 
 
     ;

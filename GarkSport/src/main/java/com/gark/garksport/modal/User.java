@@ -20,32 +20,32 @@ import org.springframework.security.core.userdetails.UserDetails;
     import java.util.*;
     import java.util.stream.Collectors;
 
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Entity
-    public class User implements UserDetails {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
-        private String firstname;
-        private String lastname;
-        @Column(unique = true)
-        private String email;
-        private String password;
-        @Enumerated(EnumType.STRING)
-        private Role role;
-        private String roleName; //added y manager
-        @Temporal(TemporalType.DATE)
-        private Date dateNaissance;
-        private String adresse;
-        private String telephone;
-        private String nationalite;
-        private String photo;
-        private boolean blocked;
-        private Instant blockedTimestamp;
-        private Duration blockedDuration;
+        @Data
+        @Builder
+        @NoArgsConstructor
+        @AllArgsConstructor
+        @Entity
+        public class User implements UserDetails {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private Integer id;
+            private String firstname;
+            private String lastname;
+            @Column(unique = true)
+            private String email;
+            private String password;
+            @Enumerated(EnumType.STRING)
+            private Role role;
+            private String roleName; //added y manager
+            @Temporal(TemporalType.DATE)
+            private Date dateNaissance;
+            private String adresse;
+            private String telephone;
+            private String nationalite;
+            private String photo;
+            private boolean blocked;
+            private Instant blockedTimestamp;
+            private Duration blockedDuration;
 
         @ElementCollection(targetClass = Permission.class, fetch = FetchType.EAGER)
         @Enumerated(EnumType.STRING)
