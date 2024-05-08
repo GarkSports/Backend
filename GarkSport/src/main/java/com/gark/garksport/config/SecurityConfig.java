@@ -57,10 +57,10 @@ public class SecurityConfig {
                 .requestMatchers(PUT, "/random/**").hasAuthority(UPDATE.getPermission())
                 .requestMatchers(DELETE, "/random/**").hasAuthority(Permission.DELETE.getPermission())
 
-                .requestMatchers(GET, "/academie/**").hasAuthority(READ.getPermission())
-                .requestMatchers(POST, "/academie/**").hasAuthority(CREATE.getPermission())
-                .requestMatchers(PUT, "/academie/**").hasAuthority(UPDATE.getPermission())
-                .requestMatchers(DELETE, "/academie/**").hasAuthority(Permission.DELETE.getPermission())
+                .requestMatchers(GET, "/academie/**").hasAnyRole(ADMIN.name(),MANAGER.name())
+                .requestMatchers(POST, "/academie/**").hasAnyRole(ADMIN.name(),MANAGER.name())
+                .requestMatchers(PUT, "/academie/**").hasAnyRole(ADMIN.name(),MANAGER.name())
+                .requestMatchers(DELETE, "/academie/**").hasAnyRole(ADMIN.name(),MANAGER.name())
 
 //                .requestMatchers(GET, "/discipline/**").hasAuthority(ADMIN_READ.getPermission())
 //                .requestMatchers(POST, "/discipline/**").hasAuthority(ADMIN_CREATE.getPermission())

@@ -181,3 +181,9 @@ w
 GGarkSport/src/main/java/com/gark/garksport/dto/request/TestRequest.java,c\5\c56e709eafd8098cb035c4742d7e19a11a3dd9c6
 }
 MGarkSport/src/main/java/com/gark/garksport/modal/enums/StatutEvenenement.java,3\2\3297bdb53f1a7ec7b23313e844df1ebe4ddc0410
+z
+JGarkSport/src/main/java/com/gark/garksport/repository/StaffRepository.java,9\9\995858300e684ebb10c51b3cf0121abfba08e500
+|
+LGarkSport/src/main/java/com/gark/garksport/controller/ManagerController.java,9\5\95f4476ee432d6c9e401ec116afeeb57ba7bc6e7
+u
+EGarkSport/src/main/java/com/gark/garksport/config/SecurityConfig.java,1\2\12742779fbabc9a7f80cc48e607b65a10c2ee2b6

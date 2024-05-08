@@ -1,11 +1,16 @@
 
-o
-java:S6204T"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8¸¨íí1
-X	java:S125^"<This block of commented-out lines of code should be removed.(©ïÙ8¾¨íí1
+_
+java:S6813!"BRemove this field injection and use constructor injection instead.(êæÄŞ8è½„ñ1
+e
+java:S6201_"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ó½„ñ1
+e
+java:S6201w"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8÷½„ñ1
+D
+java:S1452„"&Remove usage of generic wildcard type.(üÀ¥Ÿ8‡½„ñ1
+f
+java:S6201‡"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8·¹Â„ñ1
+p
+java:S6204™"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ş½„ñ1
 I
-java:S1452„"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8Ç¨íí1
-I
-java:S1452"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8Ë¨íí1
-^	java:S125©"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8Î¨íí1
-a
-java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8Øş®‚í1
+java:S1452Ñ"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8½¹Â„ñ1
+^	java:S125ó"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8‰½„ñ1

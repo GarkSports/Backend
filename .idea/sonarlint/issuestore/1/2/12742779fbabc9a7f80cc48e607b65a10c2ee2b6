@@ -2,16 +2,16 @@
 h
 java:S11927"KDefine a constant instead of duplicating this literal "/random/**" 4 times.(Å¨Ş8Öÿß«ò1
 j
-java:S1192<"MDefine a constant instead of duplicating this literal "/academie/**" 4 times.(ç°İ•8ìÂÈãî1
+java:S1192<"MDefine a constant instead of duplicating this literal "/academie/**" 4 times.(àÊÃ–8„ïÇõ1
 \
-java:S1128":Remove this unused import 'com.gark.garksport.modal.User'.(ë†¦·üÿÿÿÿ8‰Ïãî1
+java:S1128":Remove this unused import 'com.gark.garksport.modal.User'.(ë†¦·üÿÿÿÿ8‰ğÇõ1
 b
-java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8‰Ïãî1
+java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8ŠğÇõ1
 t
-java:S1128	"WRemove this unused import 'org.springframework.scheduling.annotation.EnableScheduling'.(‹æ¬‹8‰Ïãî1
+java:S1128	"WRemove this unused import 'org.springframework.scheduling.annotation.EnableScheduling'.(‹æ¬‹8ŠğÇõ1
 y
-java:S1128"\Remove this unused import 'org.springframework.security.core.context.SecurityContextHolder'.(ŒÄæë8‰Ïãî1
+java:S1128"\Remove this unused import 'org.springframework.security.core.context.SecurityContextHolder'.(ŒÄæë8ŠğÇõ1
 ~
-java:S1128"aRemove this unused import 'org.springframework.security.web.authentication.logout.LogoutHandler'.(¶„İ€8‰Ïãî1
+java:S1128"aRemove this unused import 'org.springframework.security.web.authentication.logout.LogoutHandler'.(¶„İ€8‹ğÇõ1
 }
-java:S1128"`Remove this unused import 'org.springframework.security.web.util.matcher.AntPathRequestMatcher'.(¼¸ö8‰Ïãî1
+java:S1128"`Remove this unused import 'org.springframework.security.web.util.matcher.AntPathRequestMatcher'.(¼¸ö8‹ğÇõ1
