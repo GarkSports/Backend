@@ -20,4 +20,6 @@ public class Discipline {
     private Integer id;
     private String nom;
     private String description;
+    private Boolean protectedDiscipline;
+    private Integer academieId;
 }

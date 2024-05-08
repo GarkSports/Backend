@@ -3,23 +3,31 @@ package com.gark.garksport.controller;
 import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.Paiement;
 import com.gark.garksport.modal.PaiementHistory;
+import com.gark.garksport.modal.User;
 import com.gark.garksport.modal.enums.StatutAdherent;
+import com.gark.garksport.service.AdminService;
 import com.gark.garksport.service.IPaiementService;
+import com.gark.garksport.service.JwtService;
+import com.gark.garksport.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Set;
 
 
 @RestController
 @RequestMapping("/paiement")
+@RequiredArgsConstructor
 public class PaiementController {
     @Autowired
     private IPaiementService paiementService;
+    private final UserService userService;
 
-    @GetMapping("getAllPaiements/{academieId}")
-    public Set<Paiement> getAllPaiementsByAcademie(@PathVariable Integer academieId){
-        return paiementService.getAllPaiementsByAcademie(academieId);
+    @GetMapping("getAllPaiements")
+    public Set<Paiement> getAllPaiementsByAcademie(Principal connectedUser){
+        return paiementService.getAllPaiementsByAcademie(userService.getUserId(connectedUser.getName()));
     }
 
     @PostMapping("addPaiement/{idAdherent}")
@@ -52,8 +60,8 @@ public class PaiementController {
         paiementService.deletePaiement(idPaiement);
     }
 
-    @GetMapping("getAdherents/{academieId}")
-    public Set<Adherent> getAdherentsByAcademie(@PathVariable Integer academieId){
-        return paiementService.getAdherentsByAcademie(academieId);
+    @GetMapping("getAdherents")
+    public Set<Adherent> getAdherentsByAcademie(Principal connectedUser){
+        return paiementService.getAdherentsByAcademie(userService.getUserId(connectedUser.getName()));
     }
 }

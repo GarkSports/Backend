@@ -18,11 +18,23 @@ public class UserService {
     @Autowired
     private JavaMailSender mailSender;
 
-
     public User findByEmail(String email) {
         return repository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
+
+    public Integer getUserId(String email){
+        return repository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found")).getId();
+    }
+
+
+    public String getUserFullName(String email){
+        User user = repository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getFirstname() + " " + user.getLastname();
+    }
+
+
+
 
 
 

@@ -9,7 +9,7 @@ import com.gark.garksport.modal.enums.StatutAdherent;
 import java.util.Set;
 
 public interface IPaiementService {
-    public Set<Paiement> getAllPaiementsByAcademie(Integer academieId);
+    public Set<Paiement> getAllPaiementsByAcademie(Integer managerId);
 
     public Paiement addPaiement(Paiement paiement, Integer idAdherent);
 
@@ -23,6 +23,6 @@ public interface IPaiementService {
 
     public void deletePaiement(Integer idPaiement);
 
-    public Set<Adherent> getAdherentsByAcademie(Integer academieId);
+    public Set<Adherent> getAdherentsByAcademie(Integer managerId);
 
 }

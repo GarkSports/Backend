@@ -4,4 +4,4 @@ java:S1206"PThis class overrides "hashCode()" and should therefore also overri
 L
 java:S1948"*Make "academie" transient or serializable.(Ÿ»’ÿøÿÿÿÿ8ğéÕÄâ1
 ^
-java:S1128"<Remove this unused import 'jakarta.persistence.CascadeType'.(ÃÃÊŠúÿÿÿÿ8ì¡î õ1
+java:S1128"<Remove this unused import 'jakarta.persistence.CascadeType'.(ÃÃÊŠúÿÿÿÿ8ìÀŸìï1

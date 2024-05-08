@@ -1,5 +1,4 @@
 
+p	java:S1169"TRename this field "PostsList" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(σχ8―ΐΞς1
 e
-java:S1117_"CRename "academieHistory" which hides the field declared at line 35.(™οπΰώÿÿÿÿ8Η„Ο—ν1
-M
-java:S1128"+Remove this unused import 'java.util.List'.(Υλ±Δψÿÿÿÿ8ξϋγγξ1
+java:S1117M"CRename "academieHistory" which hides the field declared at line 33.(™οπΰώÿÿÿÿ8ώέµο1

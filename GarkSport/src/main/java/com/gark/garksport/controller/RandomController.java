@@ -4,17 +4,23 @@ package com.gark.garksport.controller;
 import com.gark.garksport.dto.request.EquipeRequest;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.service.IRandomService;
+import com.gark.garksport.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 
 @RestController
 @RequestMapping("/random")
+@RequiredArgsConstructor
 public class RandomController {
     @Autowired
     private IRandomService randomService;
+    private final UserService userService;
 
 
     @PostMapping("/addManager")
@@ -37,30 +43,29 @@ public class RandomController {
         return randomService.getManagersNotAssigned();
     }
 
-    @PostMapping("/addEquipe/{academieId}")
-    public Equipe addEquipe(@RequestBody EquipeRequest equipeRequest, @PathVariable Integer academieId) {
-        return randomService.addEquipe(equipeRequest.getEquipe(), academieId, equipeRequest.getDisciplineId());
+    @PostMapping("/addEquipe")
+    public Equipe addEquipe(@RequestBody EquipeRequest equipeRequest, Principal connectedUser) {
+        return randomService.addEquipe(equipeRequest.getEquipe(), userService.getUserId(connectedUser.getName()), equipeRequest.getDisciplineId());
     }
-
 
     @PostMapping("/addEntraineur")
     public Entraineur addEntraineur(@RequestBody Entraineur entraineur) {
         return randomService.addEntraineur(entraineur);
     }
 
-    @GetMapping("/getEquipes/{academieId}")
-    public Set<Equipe> getEquipes(@PathVariable Integer academieId) {
-        return randomService.getEquipesByAcademie(academieId);
+    @GetMapping("/getEquipes")
+    public Set<Equipe> getEquipes(Principal connectedUser) {
+        return randomService.getEquipesByAcademie(userService.getUserId(connectedUser.getName()));
     }
 
-    @GetMapping("/getAdherents/{academieId}")
-    public Set<Adherent> getAdherents(@PathVariable Integer academieId) {
-        return randomService.getAdherentsByAcademie(academieId);
+    @GetMapping("/getAdherents")
+    public Set<Adherent> getAdherents(Principal connectedUser) {
+        return randomService.getAdherentsByAcademie(userService.getUserId(connectedUser.getName()));
     }
 
-    @GetMapping("/getEntraineurs/{academieId}")
-    public Set<Entraineur> getEntraineurs(@PathVariable Integer academieId) {
-        return randomService.getEntraineursByAcademie(academieId);
+    @GetMapping("/getEntraineurs")
+    public Set<Entraineur> getEntraineurs(Principal connectedUser) {
+        return randomService.getEntraineursByAcademie(userService.getUserId(connectedUser.getName()));
     }
 
     @DeleteMapping("/deleteEquipe/{equipeId}")
@@ -78,9 +83,15 @@ public class RandomController {
         return randomService.affectEntraineurToEquipe(equipeId, entraineurIds);
     }
 
-    @PutMapping("/updateAcademie/{academieId}")
-    public Academie updateAcademie(@RequestBody Academie academie, @PathVariable Integer academieId) {
-        return randomService.updateAcademie(academie, academieId);
+    @PutMapping("/updateAcademie")
+    public Academie updateAcademie(@RequestBody Academie academie, Principal connectedUser) {
+        return randomService.updateAcademie(academie, userService.getUserId(connectedUser.getName()));
+    }
+
+    @PutMapping("/updateAcademieBackground/{academieId}")
+    public ResponseEntity<String> updateAcademieBackground(@PathVariable Integer academieId, @RequestBody String background) {
+        randomService.updateAcademieBackground(academieId, background);
+        return ResponseEntity.ok("Academie background updated successfully");
     }
 
     @GetMapping("/getEntraineursByEquipe/{equipeId}")
@@ -93,7 +104,13 @@ public class RandomController {
         return randomService.getMembersByAcademie(academieId);
     }
 
+    @GetMapping("/getAllAdherents")
+    public Set<Adherent> getAllAdherents(Principal connectedUser) {
+        return randomService.getAllAdherentsByAcademie(userService.getUserId(connectedUser.getName()));
+    }
 
-
-
+    @PostMapping("/addAdherent/{codeequipe}")
+    public Adherent addAdherent(@RequestBody Adherent adherent, @PathVariable String codeequipe) {
+        return randomService.addAdherent(adherent, codeequipe);
+    }
 }

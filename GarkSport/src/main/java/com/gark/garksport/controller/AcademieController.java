@@ -5,24 +5,32 @@ import com.gark.garksport.dto.request.EtatRequest;
 import com.gark.garksport.exception.InvalidEtatException;
 import com.gark.garksport.modal.Academie;
 import com.gark.garksport.modal.AcademieHistory;
-import com.gark.garksport.modal.Discipline;
 import com.gark.garksport.modal.Manager;
+import com.gark.garksport.modal.User;
+import com.gark.garksport.service.AdminService;
 import com.gark.garksport.service.IAcademieService;
+import com.gark.garksport.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Set;
+
 
 @RestController
 @RequestMapping("/academie")
+@RequiredArgsConstructor
 public class AcademieController {
     @Autowired
     private IAcademieService academieService;
+    private final AdminService adminService;
+    private final UserService userService;
 
     @PostMapping("/addAcademie/{managerId}")
     public Academie addAcademie(@RequestBody AcademieRequest academieRequest, @PathVariable Integer managerId) {
-        return academieService.addAcademie(academieRequest.getAcademie(), academieRequest.getDisciplineIds(), managerId);
+        return academieService.addAcademie(academieRequest.getAcademie(), managerId);
     }
 
     @GetMapping("/getAcademies")
@@ -32,7 +40,7 @@ public class AcademieController {
 
     @PutMapping("/updateAcademie/{academieId}/{managerId}")
     public Academie updateAcademie(@RequestBody AcademieRequest academieRequest, @PathVariable Integer managerId, @PathVariable Integer academieId) {
-        return academieService.updateAcademie(academieRequest.getAcademie(), academieId, academieRequest.getDisciplineIds(), managerId);
+        return academieService.updateAcademie(academieRequest.getAcademie(), academieId, managerId);
     }
 
     @PutMapping("/changeEtat/{academieId}")
@@ -60,14 +68,9 @@ public class AcademieController {
         return academieService.getManagerDetails(academieId);
     }
 
-    @GetMapping("/getDisciplinesByAcademie/{academieId}")
-    public Set<Discipline> getDisciplinesByAcademie(@PathVariable Integer academieId) {
-        return academieService.getDisciplinesByAcademie(academieId);
-    }
-
-    @GetMapping("/getAcademieById/{academieId}")
-    public Academie getAcademieById(@PathVariable Integer academieId) {
-        return academieService.getAcademieById(academieId);
+    @GetMapping("/getAcademieById")
+    public Academie getAcademieById(Principal connectedUser) {
+        return academieService.getAcademieById(userService.getUserId(connectedUser.getName()));
     }
 
     @GetMapping("/getArchivedAcademies")
@@ -85,5 +88,25 @@ public class AcademieController {
     public ResponseEntity<String> restoreArchivedAcademie(@PathVariable Integer academieId) {
         academieService.restoreArchivedAcademie(academieId);
         return ResponseEntity.ok("Archived Academie restored successfully");
+    }
+
+    @GetMapping("/checkIfManager")
+    public boolean checkIfManager(Principal connectedUser) {
+        Integer userId = userService.getUserId(connectedUser.getName());
+        return academieService.isManager(userId);
+    }
+
+    @GetMapping("/checkIfAdmin")
+    public boolean checkIfAdmin(Principal connectedUser) {
+        Integer userId = userService.getUserId(connectedUser.getName());
+        return academieService.isAdmin(userId);
+    }
+
+    @GetMapping("/get-profil")
+    @ResponseBody
+    public User getProfil(
+            Principal connectedUser
+    ) {
+        return adminService.getProfil(connectedUser);
     }
 }

@@ -1,15 +1,15 @@
 package com.gark.garksport.modal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.gark.garksport.modal.enums.Destinataire;
 import com.gark.garksport.modal.enums.EvenementType;
-import com.gark.garksport.modal.enums.Repetition;
+import com.gark.garksport.modal.enums.StatutEvenenement;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -22,44 +22,40 @@ public class Evenement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    //Type d'evenement
     @Enumerated(EnumType.STRING)
     private EvenementType type;
-    private String nom;
+    private String nomEvent;
+    private String lieu;
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    private LocalTime heure;
     private String description;
+    private StatutEvenenement statut = StatutEvenenement.Activé;
 
-    //Destinataires
-    @Enumerated(EnumType.STRING)
-    private Destinataire destinataire;
+    //Match Amical
+    @JsonIgnoreProperties({"academie", "adherents"})
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Equipe> convocationEquipesMatchAmical;
 
-    @JsonIgnoreProperties("evenements")
-    @ManyToOne
+    //Evenement personnalisé
+    @OneToOne
+    private Equipe convocationEquipePersonnalise;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Adherent> convocationMembresPersonnalise;
+
+
+
+    //Test evaulation
+    @JsonIgnoreProperties({"academie", "adherents"})
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Equipe> convocationEquipesTest;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Adherent> convocationMembresTest;
+
+
+    @OneToOne
     private Academie academie;
 
-    @JsonIgnoreProperties("evenements")
-    @ManyToOne
-    private Equipe equipe;
-    @JsonIgnoreProperties("evenements")
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Adherent> membres;
-
-    //Date evenement
-    @Temporal(TemporalType.DATE)
-    private Date dateDebut;
-    @Temporal(TemporalType.DATE)
-    private Date dateFin;
-    @Temporal(TemporalType.TIME)
-    private Date heur;
-    private Boolean repetition;
-
-    @Enumerated(EnumType.STRING)
-    private Repetition chaque;
-    private Integer numero;
-
-    //Lieu
-    private String adresse;
-    private String lieu;
 
 
 }

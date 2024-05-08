@@ -5,6 +5,7 @@ import com.gark.garksport.modal.Paiement;
 import com.gark.garksport.modal.PaiementHistory;
 import com.gark.garksport.modal.enums.StatutAdherent;
 import com.gark.garksport.repository.AdherentRepository;
+import com.gark.garksport.repository.ManagerRepository;
 import com.gark.garksport.repository.PaiementHistoryRepository;
 import com.gark.garksport.repository.PaiementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,12 @@ public class PaiementService implements IPaiementService {
     @Autowired
     private PaiementHistoryRepository paiementHistoryRepository;
 
+    @Autowired
+    private ManagerRepository managerRepository;
+
     @Override
-    public Set<Paiement> getAllPaiementsByAcademie(Integer academieId) {
-        return paiementRepository.findByAdherentAcademieId(academieId);
+    public Set<Paiement> getAllPaiementsByAcademie(Integer managerId) {
+        return paiementRepository.findByAdherentAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
     }
 
     @Override
@@ -202,8 +206,8 @@ public class PaiementService implements IPaiementService {
     }
 
     @Override
-    public Set<Adherent> getAdherentsByAcademie(Integer academieId) {
-        return adherentRepository.findByAcademieId(academieId);
+    public Set<Adherent> getAdherentsByAcademie(Integer managerId) {
+        return adherentRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
     }
 
 

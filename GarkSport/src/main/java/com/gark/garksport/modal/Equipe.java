@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -35,13 +37,11 @@ public class Equipe {
     @OneToMany
     private Set<Entraineur> entraineurs;
 
-
     @ManyToOne
     private Academie academie;
 
-    @JsonIgnoreProperties("equipe")
-    @OneToMany(mappedBy = "equipe")
-    private Set<Evenement> evenements;
+    private LocalTime dateMatchAmical;
+
 
 
 }

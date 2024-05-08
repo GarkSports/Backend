@@ -10,10 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Builder
@@ -29,6 +26,7 @@ public class Academie {
     private AcademieType type;
     private Float fraisAdhesion;
     private String logo;
+    private String backgroundImage;
     private String affiliation;
     @Enumerated(EnumType.STRING)
     private Etat etat;
@@ -43,27 +41,22 @@ public class Academie {
     private String codePostal;
     private String pays;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "academie_disciplines", joinColumns = @JoinColumn(name = "academie_id"), inverseJoinColumns = @JoinColumn(name = "disciplines_id"))
-    private Set<Discipline> disciplines;
-
     @JsonIgnoreProperties("academie")
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
     private Set<Adherent> adherents;
-
 
     @JsonIgnoreProperties("academie")
     @OneToOne(cascade = CascadeType.ALL)
     private Manager manager;
 
-    @JsonIgnoreProperties("academie")
-    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
-    private Set<Evenement> evenements;
-
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RoleName> roleNames ;
 
 
+
+
+    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
+    private Set<Posts> PostsList = new HashSet<>();
 
     @Override
     public int hashCode() {
