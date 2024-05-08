@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -34,8 +35,15 @@ public class ManagerController {
 
 
 
+    @PreAuthorize("hasAuthority('READ')")
     @GetMapping("/hello")
     public String getHello(){
+        return "hello manager";
+    }
+
+    @PreAuthorize("hasAuthority('DELETE')")
+    @GetMapping("/hello2")
+    public String getHello2(){
         return "hello manager";
     }
 
@@ -120,7 +128,23 @@ public class ManagerController {
         }
     }
 
-
+    @DeleteMapping("/delete-role-name")
+    public ResponseEntity<?> deleteRoleName(@RequestParam Integer id, Principal connectedUser) {
+        try {
+            User user = getProfil(connectedUser);
+            if (user instanceof Manager) {
+                Manager manager = (Manager) user;
+                managerService.deleteRoleName(id, manager);
+                return ResponseEntity.ok().build();
+            } else {
+                return ResponseEntity.badRequest().body("Only managers can delete role names.");
+            }
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while deleting the role name.");
+        }
+    }
 
     @GetMapping("/get-permissions")
     public ResponseEntity<List<String>> getPermissions() {
@@ -153,11 +177,11 @@ public class ManagerController {
         }
     }
 
-    @PostMapping("/add-coach")
-    public Entraineur addCoach(
+    @PostMapping("/add-entraineur")
+    public Entraineur addEntraineur(
             @RequestBody Entraineur entraineur
     ) throws MessagingException {
-        return managerService.addCoach(entraineur);
+        return managerService.addEntraineur(entraineur);
     }
 
     @PostMapping("/add-parent")
@@ -169,11 +193,10 @@ public class ManagerController {
 
     @PostMapping("/add-adherent")
         public Adherent addAdherent(
-            @RequestBody Adherent adherent
+            @RequestBody Adherent adherent, Principal connectedUser
     ) throws MessagingException {
-        return managerService.addAdherent(adherent);
+        return managerService.addAdherent(adherent, connectedUser);
     }
-
 
     @GetMapping("/get-all-users")
     @ResponseBody

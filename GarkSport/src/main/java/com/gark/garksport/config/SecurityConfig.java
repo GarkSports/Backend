@@ -40,27 +40,18 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**").permitAll()
+
                 .requestMatchers("/admin/**")
-                //.permitAll()
                 .hasRole(ADMIN.name())
 
-                .requestMatchers(GET, "/admin/**").hasAuthority(READ.getPermission())
-                .requestMatchers(POST, "/admin/**").hasAuthority(CREATE.getPermission())
-                .requestMatchers(DELETE, "/admin/**").hasAuthority(Permission.DELETE.getPermission())
-                .requestMatchers(PUT, "/admin/**").hasAuthority(UPDATE.getPermission())
+                .requestMatchers("/manager/**")
+                .hasAnyRole(ADMIN.name(), MANAGER.name())
 
-//
-//
-//                .requestMatchers(GET, "/manager/**").hasAnyAuthority(ADMIN_READ.getPermission(), MANAGER_READ.getPermission())
-//                .requestMatchers(POST, "/manager/**").hasAnyAuthority(ADMIN_CREATE.getPermission(), MANAGER_CREATE.getPermission())
-//                .requestMatchers(PUT, "/manager/**").hasAnyAuthority(ADMIN_UPDATE.getPermission(), MANAGER_UPDATE.getPermission())
-//                .requestMatchers(DELETE, "/manager/**").hasAnyAuthority(ADMIN_DELETE.getPermission(), MANAGER_DELETE.getPermission())
-//
 //                .requestMatchers(GET, "/user/**").hasAuthority(ADMIN_READ.getPermission())
 //                .requestMatchers(POST, "/user/**").hasAuthority(ADMIN_CREATE.getPermission())
 //                .requestMatchers(PUT, "/user/**").hasAuthority(ADMIN_UPDATE.getPermission())
 //                .requestMatchers(DELETE, "/user/**").hasAuthority(ADMIN_DELETE.getPermission())
-//
+
                 .requestMatchers(GET, "/random/**").hasAuthority(READ.getPermission())
                 .requestMatchers(POST, "/random/**").hasAuthority(CREATE.getPermission())
                 .requestMatchers(PUT, "/random/**").hasAuthority(UPDATE.getPermission())
@@ -70,7 +61,7 @@ public class SecurityConfig {
                 .requestMatchers(POST, "/academie/**").hasAuthority(CREATE.getPermission())
                 .requestMatchers(PUT, "/academie/**").hasAuthority(UPDATE.getPermission())
                 .requestMatchers(DELETE, "/academie/**").hasAuthority(Permission.DELETE.getPermission())
-//
+
 //                .requestMatchers(GET, "/discipline/**").hasAuthority(ADMIN_READ.getPermission())
 //                .requestMatchers(POST, "/discipline/**").hasAuthority(ADMIN_CREATE.getPermission())
 //                .requestMatchers(PUT, "/discipline/**").hasAuthority(ADMIN_UPDATE.getPermission())

@@ -152,23 +152,30 @@ public class ManagerService {
     public RoleName updateRoleName(Integer id, RoleName request, Manager manager) {
         Academie academie = academieRepository.findByManagerId(manager.getId());
         if (academie != null) {
-            Optional<RoleName> existingRoleName = roleNameRepository.findById(id);
-            if (existingRoleName.isPresent()) {
-                RoleName roleNameToUpdate = existingRoleName.get();
-                String oldRoleName = roleNameToUpdate.getRoleName();
-                roleNameToUpdate.setRoleName(request.getRoleName());
-                roleNameToUpdate.setPermissions(request.getPermissions());
-                roleNameToUpdate.setAcademie(academie);
 
-//                List<Staff> usersToUpdate = staffRepository.findByRoleName(existingRoleName);
-//                for (Staff staff : usersToUpdate) {
-//                    staff.setPermissions(request.getPermissions());
-//                    staffRepository.save(staff);
-//                }
-//                System.out.println("this is rolename: " + usersToUpdate);
-                updateUserRoleNames(oldRoleName, request.getRoleName());
+            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
+            if (existingRoleNameOptional.isPresent()) {
+                RoleName existingRoleName = existingRoleNameOptional.get();
+                String oldRoleName = existingRoleName.getRoleName();
+                existingRoleName.setRoleName(request.getRoleName());
+                existingRoleName.setPermissions(request.getPermissions());
+                existingRoleName.setAcademie(academie);
+                System.out.println("this is rolename: " + existingRoleName);
+                System.out.println("this is rolename: " + existingRoleName.getRoleName());
+                System.out.println("this is rolename: " + existingRoleNameOptional.get());
 
-                return roleNameRepository.save(roleNameToUpdate);
+                List<User> usersToUpdate = repository.findByRoleName(oldRoleName);
+                for (User user : usersToUpdate) {
+                    user.setRoleName(request.getRoleName());
+                    user.setPermissions(request.getPermissions());
+                    repository.saveAll(usersToUpdate);
+                }
+                System.out.println("this is rolename: " + usersToUpdate);
+
+
+                //updateUserRoleNames(oldRoleName, request.getRoleName());
+
+                return roleNameRepository.save(existingRoleName);
             } else {
                 throw new RuntimeException("RoleName not found with ID: " + id);
             }
@@ -177,25 +184,40 @@ public class ManagerService {
         }
     }
 
-    private void updateUserRoleNames(String oldRoleName, String newRoleName) {
-        List<Staff> usersToUpdate = staffRepository.findByRoleName(oldRoleName);
-        for (Staff staff : usersToUpdate) {
-            staff.setRoleName(newRoleName);
-            staffRepository.save(staff);
+    public void deleteRoleName(Integer id, Manager manager) {
+        Academie academie = academieRepository.findByManagerId(manager.getId());
+        if (academie != null) {
+            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
+            if (existingRoleNameOptional.isPresent()) {
+                RoleName existingRoleName = existingRoleNameOptional.get();
+                String oldRoleName = existingRoleName.getRoleName();
+                // Remove the RoleName from the Academie
+                academie.getRoleNames().remove(existingRoleName);
+                academieRepository.save(academie);
+
+//                // Find all users with the given RoleName
+//                List<User> usersToUpdate = repository.findByRoleName(oldRoleName);
+//
+//                // Remove the RoleName and associated permissions from the users
+//                for (User user : usersToUpdate) {
+//                    user.setRoleName(null);
+//                    user.setPermissions(null);
+//                }
+//
+//                // Save the updated users
+//                repository.saveAll(usersToUpdate);
+
+                // Delete the RoleName from the repository
+                roleNameRepository.delete(existingRoleName);
+            } else {
+                throw new RuntimeException("RoleName not found with ID: " + id);
+            }
+        } else {
+            throw new RuntimeException("Academie not found for manager with ID: " + manager.getId());
         }
     }
 
-    public void removeRoleName(String roleName, Principal connectedUser) {
-        User user = getProfil(connectedUser);
-        if (user instanceof Manager) {
-            Manager manager = (Manager) user;
-            Academie academie = manager.getAcademie();
-            if (academie != null) {
-                academie.getRoleNames().remove(roleName);
-                academieRepository.save(academie);
-            }
-        }
-    }
+
 
 
     public Staff addStaff(Staff request, Principal connectedUser) throws MessagingException {
@@ -268,13 +290,15 @@ public class ManagerService {
     }
     }
 
-    public Entraineur addCoach(Entraineur entraineur) throws MessagingException {
+    public Entraineur addEntraineur(Entraineur entraineur) throws MessagingException {
         String generatedPWD = generateRandomPassword();
 
         entraineur.setEmail(entraineur.getEmail());
         entraineur.setRole(Role.ENTRAINEUR);
-        entraineur.setPassword(passwordEncoder.encode(entraineur.getPassword()));
-        entraineur.setRoleName(entraineur.getRoleName());// Set the permissions for the staff
+        entraineur.setRoleName(entraineur.getRoleName());
+        entraineur.setPassword(passwordEncoder.encode(generatedPWD));
+        entraineur.setPhoto(entraineur.getPhoto());
+
 
 
         MimeMessage message = mailSender.createMimeMessage();
@@ -293,8 +317,8 @@ public class ManagerService {
 
         parent.setEmail(parent.getEmail());
         parent.setRole(Role.PARENT);
-        parent.setPassword(passwordEncoder.encode(parent.getPassword()));
-
+        parent.setPassword(passwordEncoder.encode(generatedPWD));
+        //parent.setPhoto(parent.getPhoto());
 
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
@@ -307,23 +331,38 @@ public class ManagerService {
         return repository.save(parent);
     }
 
-    public Adherent addAdherent(Adherent adherent) throws MessagingException {
-        String generatedPWD = generateRandomPassword();
+    public Adherent addAdherent(Adherent adherent, Principal connectedUser) throws MessagingException {
+        User user = getProfil(connectedUser);
+        if (user instanceof Manager) {
+            Manager manager = (Manager) user;
+            Academie academie = academieRepository.findByManagerId(manager.getId());
 
-        adherent.setEmail(adherent.getEmail());
-        adherent.setRole(Role.ADEHERANT);
-        adherent.setPassword(passwordEncoder.encode(adherent.getPassword()));
+            if (academie != null) {
+                String generatedPWD = generateRandomPassword();
+
+                adherent.setEmail(adherent.getEmail());
+                adherent.setRole(Role.ADHERENT);
+                adherent.setAcademie(academie);
+                adherent.setPassword(passwordEncoder.encode(generatedPWD));
+                adherent.setPhoto(adherent.getPhoto());
 
 
-        MimeMessage message = mailSender.createMimeMessage();
-        message.setFrom(new InternetAddress("${spring.mail.username}"));
-        message.setRecipients(MimeMessage.RecipientType.TO, adherent.getEmail());
-        message.setSubject(adherent.getRoleName() + " Login");
-        message.setText("<div> Login using your email and this password: " + adherent.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
+                academieRepository.save(academie);
+                repository.save(adherent);
 
-        mailSender.send(message);
+                MimeMessage message = mailSender.createMimeMessage();
+                message.setFrom(new InternetAddress("${spring.mail.username}"));
+                message.setRecipients(MimeMessage.RecipientType.TO, adherent.getEmail());
+                message.setSubject(adherent.getRoleName() + " Login");
+                message.setText("<div> Login using your email and this password: " + adherent.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
 
-        return repository.save(adherent);
+                mailSender.send(message);
+            }
+        }
+
+
+
+        return adherent;
     }
 
     public ResponseEntity<Academie> getAcademie(Integer id) {

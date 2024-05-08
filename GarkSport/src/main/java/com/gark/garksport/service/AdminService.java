@@ -33,13 +33,10 @@ public class AdminService {
     private final PasswordEncoder passwordEncoder;
     private final ManagerRepository managerRepository;
 
-
-
     @Autowired
     private JavaMailSender mailSender;
     @Autowired
     private final AdminRepository adminRepository;
-
 
     public String generateRandomPassword(){
         // Define the character set for the password
@@ -64,10 +61,12 @@ public class AdminService {
 
     public Manager addManager(Manager manager) throws MessagingException{
         String generatedPWD = generateRandomPassword();
+                    manager.setFirstname(manager.getFirstname());
+                    manager.setLastname(manager.getLastname());
                     manager.setEmail(manager.getEmail());
+                    manager.setTelephone(manager.getTelephone());
                     manager.setRole(Role.MANAGER);
                     manager.setPassword(passwordEncoder.encode(generatedPWD));
-
 
             MimeMessage message = mailSender.createMimeMessage();
             message.setFrom(new InternetAddress("${spring.mail.username}"));
@@ -109,7 +108,7 @@ public class AdminService {
 
     public String blockUser(Integer id) {
         var userOptional = repository.findById(id);
-        System.out.println("id is : "+id);
+        System.out.println("id is : " + id);
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -125,7 +124,6 @@ public class AdminService {
         } else {
             return "User not found";
         }
-
     }
 
     public String unblockUser(Integer id){
@@ -137,6 +135,7 @@ public class AdminService {
 
             // Set the blocked status and other relevant information
             user.setBlocked(false);
+            user.setBlockedTimestamp(null);
 
             repository.save(user);
 

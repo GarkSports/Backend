@@ -1,10 +1,8 @@
 
-l
-java:S1192+"JDefine a constant instead of duplicating this literal "/admin/**" 5 times.(Å¼ºêùÿÿÿÿ8ìÂÈãî1
 h
-java:S1192@"KDefine a constant instead of duplicating this literal "/random/**" 4 times.(Å¨Ş8ìÂÈãî1
+java:S11927"KDefine a constant instead of duplicating this literal "/random/**" 4 times.(Å¨Ş8Öÿß«ò1
 j
-java:S1192E"MDefine a constant instead of duplicating this literal "/academie/**" 4 times.(ç°İ•8ìÂÈãî1
+java:S1192<"MDefine a constant instead of duplicating this literal "/academie/**" 4 times.(ç°İ•8ìÂÈãî1
 \
 java:S1128":Remove this unused import 'com.gark.garksport.modal.User'.(ë†¦·üÿÿÿÿ8‰Ïãî1
 b
@@ -17,5 +15,3 @@ java:S1128"\Remove this unused import 'org.springframework.security.core.conte
 java:S1128"aRemove this unused import 'org.springframework.security.web.authentication.logout.LogoutHandler'.(¶„İ€8‰Ïãî1
 }
 java:S1128"`Remove this unused import 'org.springframework.security.web.util.matcher.AntPathRequestMatcher'.(¼¸ö8‰Ïãî1
-j
-java:S1128"HRemove this unused import 'com.gark.garksport.modal.enums.Role.MANAGER'.( —×üÿÿÿÿ8Ÿ‰Ïãî1
