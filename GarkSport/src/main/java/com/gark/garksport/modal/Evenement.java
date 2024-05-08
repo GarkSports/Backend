@@ -32,30 +32,14 @@ public class Evenement {
     private String description;
     private StatutEvenenement statut = StatutEvenenement.Activé;
 
-    //Match Amical
-    @JsonIgnoreProperties({"academie", "adherents"})
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Equipe> convocationEquipesMatchAmical;
 
-    //Evenement personnalisé
-    @OneToOne
-    private Equipe convocationEquipePersonnalise;
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Adherent> convocationMembresPersonnalise;
+    @JsonIgnoreProperties("evenements")
+    @ManyToOne
+    private Equipe convocationEquipe;
+    @ManyToMany
+    private Set<Adherent> convocationMembres;
 
 
-
-    //Test evaulation
-    @JsonIgnoreProperties({"academie", "adherents"})
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Equipe> convocationEquipesTest;
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Adherent> convocationMembresTest;
-
-
-    @OneToOne
+    @ManyToOne
     private Academie academie;
-
-
-
 }
