@@ -68,6 +68,29 @@ public class RandomService implements IRandomService {
         return equipeRepository.save(equipe);
     }
 
+    @Override
+    public Equipe updateEquipe(Equipe equipe, Integer equipeId) {
+        Equipe equipeNew = equipeRepository.findById(equipeId).orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
+        if (equipe.getNom() != null) {
+            equipeNew.setNom(equipe.getNom());
+        }
+        if (equipe.getGenre() != null) {
+            equipeNew.setGenre(equipe.getGenre());
+        }
+        if (equipe.getGroupeAge() != null) {
+            equipeNew.setGroupeAge(equipe.getGroupeAge());
+        }
+        if (equipe.getCouleur() != null) {
+            equipeNew.setCouleur(equipe.getCouleur());
+        }
+        if (equipe.getLogo() != null) {
+            equipeNew.setLogo(equipe.getLogo());
+        }
+
+        return equipeRepository.save(equipeNew);
+
+    }
+
     private String generateRandomCode() {
         // Generate a random code
         SecureRandom random = new SecureRandom();
@@ -135,6 +158,7 @@ public class RandomService implements IRandomService {
         // Update the nomEquipe property of each adherent
         for (Adherent adherent : adherents) {
             adherent.setNomEquipe(equipe.getNom());
+            adherent.setEquipeId(equipe.getId());
         }
         return equipeRepository.save(equipe);
     }
@@ -148,6 +172,10 @@ public class RandomService implements IRandomService {
         List<Entraineur> entraineurs = entraineurRepository.findAllById(entraineurIds);
         equipe.getEntraineurs().addAll(entraineurs);
 
+        for (Entraineur entraineur : entraineurs) {
+            entraineur.setNomEquipe(equipe.getNom());
+            entraineur.setEquipeId(equipe.getId());
+        }
         return equipeRepository.save(equipe);
     }
 
@@ -159,9 +187,6 @@ public class RandomService implements IRandomService {
         }
         if (academie.getFraisAdhesion() != null) {
             academieNew.setFraisAdhesion(academie.getFraisAdhesion());
-        }
-        if (academie.getAffiliation() != null) {
-            academieNew.setAffiliation(academie.getAffiliation());
         }
         if (academie.getDescription() != null) {
             academieNew.setDescription(academie.getDescription());
@@ -224,5 +249,27 @@ public class RandomService implements IRandomService {
         adherentRepository.save(adherent);
         academieRepository.save(academie);
         return adherent;
+    }
+
+    @Override
+    public void removeAdherentFromEquipe(Integer adherentId) {
+        Adherent adherent = adherentRepository.findById(adherentId).orElseThrow(() -> new IllegalArgumentException("Adherent not found"));
+        Equipe equipe = equipeRepository.findById(adherent.getEquipeId()).orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
+        equipe.getAdherents().remove(adherent);
+        adherent.setNomEquipe("non affecté");
+        adherent.setEquipeId(null);
+        adherentRepository.save(adherent);
+        equipeRepository.save(equipe);
+    }
+
+    @Override
+    public void removeEntraineurFromEquipe(Integer entraineurId) {
+        Entraineur entraineur = entraineurRepository.findById(entraineurId).orElseThrow(() -> new IllegalArgumentException("Entraineur not found"));
+        Equipe equipe = equipeRepository.findById(entraineur.getEquipeId()).orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
+        equipe.getEntraineurs().remove(entraineur);
+        entraineur.setNomEquipe("non affecté");
+        entraineur.setEquipeId(null);
+        entraineurRepository.save(entraineur);
+        equipeRepository.save(equipe);
     }
 }

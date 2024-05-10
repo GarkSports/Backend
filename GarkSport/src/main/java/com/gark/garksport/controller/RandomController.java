@@ -48,6 +48,11 @@ public class RandomController {
         return randomService.addEquipe(equipeRequest.getEquipe(), userService.getUserId(connectedUser.getName()), equipeRequest.getDisciplineId());
     }
 
+    @PutMapping("/updateEquipe/{equipeId}")
+    public Equipe updateEquipe(@RequestBody Equipe equipe, @PathVariable Integer equipeId) {
+        return randomService.updateEquipe(equipe, equipeId);
+    }
+
     @PostMapping("/addEntraineur")
     public Entraineur addEntraineur(@RequestBody Entraineur entraineur) {
         return randomService.addEntraineur(entraineur);
@@ -112,5 +117,15 @@ public class RandomController {
     @PostMapping("/addAdherent/{codeequipe}")
     public Adherent addAdherent(@RequestBody Adherent adherent, @PathVariable String codeequipe) {
         return randomService.addAdherent(adherent, codeequipe);
+    }
+
+    @DeleteMapping("/removeAdherentFromEquipe/{adherentId}")
+    public void removeAdherentFromEquipe(@PathVariable Integer adherentId) {
+        randomService.removeAdherentFromEquipe(adherentId);
+    }
+
+    @DeleteMapping("/removeEntraineurFromEquipe/{entraineurId}")
+    public void removeEntraineurFromEquipe(@PathVariable Integer entraineurId) {
+        randomService.removeEntraineurFromEquipe(entraineurId);
     }
 }

@@ -58,9 +58,8 @@ public class AcademieController {
     }
 
     @PutMapping("/archiveAcademie/{academieId}")
-    public ResponseEntity<String> archiveAcademie(@PathVariable Integer academieId) {
+    public void archiveAcademie(@PathVariable Integer academieId) {
         academieService.deleteAcademie(academieId);
-        return ResponseEntity.ok("Academie deleted successfully");
     }
 
     @GetMapping("/getManagerDetails/{academieId}")
@@ -79,15 +78,13 @@ public class AcademieController {
     }
 
     @DeleteMapping("/deleteArchivedAcademie/{academieId}")
-    public ResponseEntity<String> deleteArchivedAcademie(@PathVariable Integer academieId) {
+    public void deleteArchivedAcademie(@PathVariable Integer academieId) {
         academieService.deleteArchivedAcademie(academieId);
-        return ResponseEntity.ok("Archived Academie deleted successfully");
     }
 
     @PutMapping("/restoreArchivedAcademie/{academieId}")
-    public ResponseEntity<String> restoreArchivedAcademie(@PathVariable Integer academieId) {
+    public void restoreArchivedAcademie(@PathVariable Integer academieId) {
         academieService.restoreArchivedAcademie(academieId);
-        return ResponseEntity.ok("Archived Academie restored successfully");
     }
 
     @GetMapping("/checkIfManager")
@@ -108,5 +105,10 @@ public class AcademieController {
             Principal connectedUser
     ) {
         return adminService.getProfil(connectedUser);
+    }
+
+    @GetMapping("/getDetailAcademie/{academieId}")
+    public Academie getDetailAcademie(@PathVariable Integer academieId) {
+        return academieService.getDetailAcademie(academieId);
     }
 }

@@ -21,4 +21,6 @@ public interface IAcademieService {
     public void restoreArchivedAcademie(Integer academieId);
     public boolean isManager(Integer userId);
     public boolean isAdmin(Integer userId);
+
+    public Academie getDetailAcademie(Integer academieId);
 }
