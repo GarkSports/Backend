@@ -187,8 +187,6 @@ IGarkSport/src/main/java/com/gark/garksport/modal/NotificationMessage.java,0\7\
 QGarkSport/src/main/java/com/gark/garksport/controller/NotificationController.java,5\d\5d5643b1a26206261dabc9cd7483fcfdbfbbf8b4
 |
 LGarkSport/src/main/java/com/gark/garksport/config/FirebaseConfiguration.java,5\c\5c82f28d31e4997c4408fb386e14b696ba92dda9
-€
-PGarkSport/src/main/java/com/gark/garksport/service/FirebaseMessagingService.java,2\3\2377b2e85eb9c01c9ec0a4474b2a7dcf3587e8fb
 n
 >GarkSport/src/main/java/com/gark/garksport/modal/RoleName.java,a\7\a7df0378db14e3881f650262682739cec2fd01f4
 |
@@ -201,3 +199,15 @@ GGarkSport/src/main/java/com/gark/garksport/modal/NotificationToken.java,1\9\19
 KGarkSport/src/main/java/com/gark/garksport/service/NotificationService.java,e\4\e4c4218144ae0675adb878d2fa70a1f4a0aa2468
 †
 VGarkSport/src/main/java/com/gark/garksport/repository/NotificationTokenRepository.java,0\5\05dd130ea509633f22c081b96cdca90ed9e00451
+j
+:GarkSport/src/main/java/com/gark/garksport/modal/Chat.java,f\f\ff11e958d82a20435d0a7ac89a97b37229dc0acd
+y
+IGarkSport/src/main/java/com/gark/garksport/repository/ChatRepository.java,4\c\4c59e0b77e74dc22071a818a6097792e72165722
+k
+;GarkSport/src/main/java/com/gark/garksport/dto/ChatDTO.java,7\0\709ae34823b699cc7ce90facb5d694de3422758a
+s
+CGarkSport/src/main/java/com/gark/garksport/service/ChatService.java,6\8\68310adb00a58f4094a38640af67c47cead36c31
+y
+IGarkSport/src/main/java/com/gark/garksport/controller/ChatController.java,4\c\4c2c89332964a6a1c9ba59702e3262d96bbc1603
+r
+BGarkSport/src/main/java/com/gark/garksport/dto/ChatContactDTO.java,d\4\d43518d60051f09f7ef96a006bf11b6538d2611f
