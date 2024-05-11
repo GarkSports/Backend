@@ -49,9 +49,7 @@ public class Academie {
     private Manager manager;
 
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<RoleName> roleNames ;
-
-
+    private Set<RoleName> roleNames = new HashSet<>();
 
 
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
@@ -73,15 +71,6 @@ public class Academie {
         Academie academie = (Academie) obj;
         return Objects.equals(id, academie.id);
     }
-    @Override
-    public String toString() {
-        return "Academie{" +
-                "id=" + id +
-                ", name='" + nom + '\'' +
-                '}';
-    }
-
-
 
     public void updateEtat (Etat newEtat, String changeReason) {
         AcademieHistory academieHistory = new AcademieHistory();
@@ -93,7 +82,7 @@ public class Academie {
         this.etat = newEtat;
         if(this.academieHistory == null){
             this.academieHistory = new HashSet<>();
-    }
+        }
         this.academieHistory.add(academieHistory);
     }
 }

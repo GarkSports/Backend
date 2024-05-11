@@ -1,19 +1,18 @@
 package com.gark.garksport.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.gark.garksport.dto.request.AddRoleNameRequest;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Permission;
 import com.gark.garksport.repository.AcademieRepository;
 import com.gark.garksport.repository.ManagerRepository;
-import com.gark.garksport.repository.StaffRepository;
 import com.gark.garksport.repository.UserRepository;
 import com.gark.garksport.service.AdminService;
 import com.gark.garksport.service.ManagerService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -28,22 +27,14 @@ public class ManagerController {
     private final ManagerRepository managerRepository;
     private final ManagerService managerService;
     private final AdminService adminService;
-    private final StaffRepository staffRepository;
 
     @Autowired
     private AcademieRepository academieRepository;
 
 
 
-    @PreAuthorize("hasAuthority('READ')")
     @GetMapping("/hello")
     public String getHello(){
-        return "hello manager";
-    }
-
-    @PreAuthorize("hasAuthority('DELETE')")
-    @GetMapping("/hello2")
-    public String getHello2(){
         return "hello manager";
     }
 
@@ -53,13 +44,6 @@ public class ManagerController {
             Principal connectedUser
     ) {
         return managerService.getProfil(connectedUser);
-    }
-
-    @GetMapping("/get-profil-by-id")
-    public User getProfilById(
-            @RequestParam Integer id
-    ) {
-        return managerService.getProfilById(id);
     }
 
     @GetMapping("/get-role-names")
@@ -73,77 +57,24 @@ public class ManagerController {
         }
     }
 
-    @GetMapping("/get-only-role-names")
-    public ResponseEntity<Set<String>> getOnlyRoleNames(Principal connectedUser) {
-        User user = managerService.getProfil(connectedUser);
-        Academie academie = academieRepository.findByManagerId(user.getId());
-        if (academie != null) {
-            Set<String> roleNames = academie.getRoleNames().stream()
-                    .map(RoleName::getRoleName) // Map RoleName objects to roleName strings
-                    .collect(Collectors.toSet()); // Collect the roleName strings into a set
-            return ResponseEntity.ok(roleNames);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-
     @PostMapping("/add-role-name")
-    public ResponseEntity<RoleName> addRoleName(@RequestBody RoleName request, Principal connectedUser) {
-
+    public ResponseEntity<Set<RoleName>> addRoleName(@RequestBody AddRoleNameRequest request, Principal connectedUser) {
         User user = getProfil(connectedUser);
-        if (user instanceof Manager) {
-            Manager manager = (Manager) user;
-            Academie academie = academieRepository.findByManagerId(manager.getId());
+        Academie academie = academieRepository.findByManagerId(user.getId());
 
-            if (academie != null) {
-                RoleName roleName = new RoleName();
-                roleName.setRoleName(request.getRoleName());
-                roleName.setPermissions(request.getPermissions());
-                roleName.setAcademie(academie);
-                academie.getRoleNames().add(roleName);
-
-                academieRepository.save(academie);
-                return ResponseEntity.ok(roleName);
-            }
+        if (academie != null) {
+            RoleName roleName = new RoleName();
+            roleName.setName(request.getRoleName());
+            roleName.setPermissions(request.getPermissions().stream()
+                    .map(Permission::valueOf)
+                    .collect(Collectors.toSet()));
+            roleName.setAcademie(academie);
+            academie.getRoleNames().add(roleName);
+            academieRepository.save(academie);
+            return ResponseEntity.ok(academie.getRoleNames());
         }
 
-        return ResponseEntity.badRequest().build();
-    }
-
-
-    @PutMapping("/update-role-name")
-    public ResponseEntity<RoleName> updateRoleName(@RequestParam Integer id, @RequestBody RoleName request, Principal connectedUser) {
-        try {
-            User user = getProfil(connectedUser);
-            if (user instanceof Manager) {
-                Manager manager = (Manager) user;
-                RoleName updatedRoleName = managerService.updateRoleName(id, request, manager);
-                return ResponseEntity.ok(updatedRoleName);
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @DeleteMapping("/delete-role-name")
-    public ResponseEntity<?> deleteRoleName(@RequestParam Integer id, Principal connectedUser) {
-        try {
-            User user = getProfil(connectedUser);
-            if (user instanceof Manager) {
-                Manager manager = (Manager) user;
-                managerService.deleteRoleName(id, manager);
-                return ResponseEntity.ok().build();
-            } else {
-                return ResponseEntity.badRequest().body("Only managers can delete role names.");
-            }
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while deleting the role name.");
-        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/get-permissions")
@@ -155,33 +86,24 @@ public class ManagerController {
     }
 
 
+
+
+//    @PostMapping("/add-staff")
+//    public Staff addStaff(
+//            @RequestBody Staff staff
+//    ) throws MessagingException {
+//        return managerService.addStaff(staff);
+//    }
+
     @PostMapping("/add-staff")
-    public Staff addStaff(@RequestBody Staff request,
-                                       Principal connectedUser
-    ) throws MessagingException {
-        return managerService.addStaff(request, connectedUser);
+    public Staff addStaff(@RequestBody Staff request) throws MessagingException {
+        return managerService.addStaff(request);
     }
-
-    @PutMapping("/update-staff")
-    public ResponseEntity<Staff> updateStaff(@RequestParam Integer id, @RequestBody Staff request) throws MessagingException {
-        try {
-            Optional<Staff> existingStaff = staffRepository.findById(id);
-            if (existingStaff.isPresent()) {
-                Staff updateStaff = managerService.updateStaff(id, request);
-                return ResponseEntity.ok(updateStaff);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @PostMapping("/add-entraineur")
-    public Entraineur addEntraineur(
+    @PostMapping("/add-coach")
+    public Entraineur addCoach(
             @RequestBody Entraineur entraineur
     ) throws MessagingException {
-        return managerService.addEntraineur(entraineur);
+        return managerService.addCoach(entraineur);
     }
 
     @PostMapping("/add-parent")
@@ -192,11 +114,12 @@ public class ManagerController {
     }
 
     @PostMapping("/add-adherent")
-        public Adherent addAdherent(
-            @RequestBody Adherent adherent, Principal connectedUser
+    public Adherent addAdherent(
+            @RequestBody Adherent adherent
     ) throws MessagingException {
-        return managerService.addAdherent(adherent, connectedUser);
+        return managerService.addAdherent(adherent);
     }
+
 
     @GetMapping("/get-all-users")
     @ResponseBody
@@ -216,15 +139,18 @@ public class ManagerController {
     }
 
     @GetMapping("/get-academie")
-    public ResponseEntity<Academie> getAcademie(Principal connectedUser){
+    public ResponseEntity<?> getAcademie(Principal connectedUser){
         User user = managerService.getProfil(connectedUser);
-        return managerService.getAcademie(user.getId());
-
+        Academie academie = academieRepository.findByManagerId(user.getId());
+        if (academie != null) {
+            return ResponseEntity.ok(academie);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/block-user")
     public String blockUser(@RequestParam Integer id) {
-
         return managerService.blockUser(id);
     }
 
