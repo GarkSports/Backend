@@ -203,11 +203,13 @@ j
 :GarkSport/src/main/java/com/gark/garksport/modal/Chat.java,f\f\ff11e958d82a20435d0a7ac89a97b37229dc0acd
 y
 IGarkSport/src/main/java/com/gark/garksport/repository/ChatRepository.java,4\c\4c59e0b77e74dc22071a818a6097792e72165722
-k
-;GarkSport/src/main/java/com/gark/garksport/dto/ChatDTO.java,7\0\709ae34823b699cc7ce90facb5d694de3422758a
 s
 CGarkSport/src/main/java/com/gark/garksport/service/ChatService.java,6\8\68310adb00a58f4094a38640af67c47cead36c31
 y
 IGarkSport/src/main/java/com/gark/garksport/controller/ChatController.java,4\c\4c2c89332964a6a1c9ba59702e3262d96bbc1603
-r
-BGarkSport/src/main/java/com/gark/garksport/dto/ChatContactDTO.java,d\4\d43518d60051f09f7ef96a006bf11b6538d2611f
+p
+@GarkSport/src/main/java/com/gark/garksport/dto/chat/ChatDTO.java,3\4\3410d57c1df990087e35e58bc927b79f05dc5d93
+w
+GGarkSport/src/main/java/com/gark/garksport/dto/chat/ChatContactDTO.java,f\c\fc191f2113a86f9a493600a45f5e041efda4fb50
+{
+KGarkSport/src/main/java/com/gark/garksport/dto/chat/SendMessageRequest.java,2\8\28034d49da2495fb2d63f19b27a61b1a99073c90

@@ -5,14 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/4/04529b3996e62978ca99a3224831d5cc5778018a" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/4/04529b3996e62978ca99a3224831d5cc5778018a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/3/2377b2e85eb9c01c9ec0a4474b2a7dcf3587e8fb" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/chat/SendMessageRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/709ae34823b699cc7ce90facb5d694de3422758a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/4/d43518d60051f09f7ef96a006bf11b6538d2611f" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e42c78f08875dbb9056105d309a662edfa6dde99" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e42c78f08875dbb9056105d309a662edfa6dde99" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/2/3/2377b2e85eb9c01c9ec0a4474b2a7dcf3587e8fb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/0/709ae34823b699cc7ce90facb5d694de3422758a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/4/d43518d60051f09f7ef96a006bf11b6538d2611f" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/FirebaseMessagingService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/ChatContactDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/chat/ChatContactDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/ChatDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/chat/ChatDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/ChatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/ChatService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +226,11 @@
       <workItem from="1715242796108" duration="5097000" />
       <workItem from="1715260535355" duration="4363000" />
       <workItem from="1715275668310" duration="2691000" />
-      <workItem from="1715334640314" duration="362000" />
+      <workItem from="1715334640314" duration="1878000" />
+      <workItem from="1715351771973" duration="4270000" />
+      <workItem from="1715378744506" duration="1713000" />
+      <workItem from="1715416532973" duration="8770000" />
+      <workItem from="1715448125797" duration="341000" />
     </task>
     <servers />
   </component>

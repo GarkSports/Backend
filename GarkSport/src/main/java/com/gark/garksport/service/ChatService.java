@@ -1,7 +1,7 @@
 package com.gark.garksport.service;
 
-import com.gark.garksport.dto.ChatContactDTO;
-import com.gark.garksport.dto.ChatDTO;
+import com.gark.garksport.dto.chat.ChatContactDTO;
+import com.gark.garksport.dto.chat.ChatDTO;
 import com.gark.garksport.modal.Chat;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.ChatRepository;
@@ -88,7 +88,7 @@ public class ChatService {
     private ChatContactDTO convertToDTO(User user) {
         ChatContactDTO chatUserDTO = new ChatContactDTO();
         chatUserDTO.setUserId(user.getId());
-        chatUserDTO.setUsername(user.getUsername());
+        chatUserDTO.setUsername(user.getFirstname() + " " + user.getLastname());
         // Add other fields as needed
         return chatUserDTO;
     }

@@ -6,10 +6,10 @@ o
 java:S1192‚"QDefine a constant instead of duplicating this literal "Equipe not found" 3 times.(¸íÂ†8ÆØŸõ1
 s	java:S117Ø"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ÍÈİÿÿÿÿÿ8ÈØŸõ1
 m
+java:S3655,"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8ûßŸõ1
+m
 java:S3655="PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ÿö¶ú8üßŸõ1
 m
 java:S3655>"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8ıßŸõ1
 m
 java:S3655""PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8ıßŸõ1
-m
-java:S3655,"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8ûßŸõ1

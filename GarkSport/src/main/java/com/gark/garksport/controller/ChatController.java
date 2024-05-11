@@ -1,7 +1,8 @@
 package com.gark.garksport.controller;
 
-import com.gark.garksport.dto.ChatContactDTO;
-import com.gark.garksport.dto.ChatDTO;
+import com.gark.garksport.dto.chat.ChatContactDTO;
+import com.gark.garksport.dto.chat.ChatDTO;
+import com.gark.garksport.dto.chat.SendMessageRequest;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.UserRepository;
 import com.gark.garksport.service.ChatService;
@@ -31,7 +32,9 @@ public class ChatController {
     }
 
     @PostMapping("/send")
-    public ResponseEntity<ChatDTO> sendMessage(Principal currentUser, @RequestParam Integer receiverId, @RequestParam String message) {
+    public ResponseEntity<ChatDTO> sendMessage(Principal currentUser, @RequestBody SendMessageRequest request) {
+        Integer receiverId = request.getReceiverId();
+        String message = request.getMessage();
         User receiver = userRepository.findById(receiverId).orElse(null);
         if (currentUser == null || receiver == null || message == null) {
             return ResponseEntity.badRequest().build();

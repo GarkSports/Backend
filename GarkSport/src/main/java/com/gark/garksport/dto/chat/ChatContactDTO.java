@@ -1,4 +1,4 @@
-package com.gark.garksport.dto;
+package com.gark.garksport.dto.chat;
 
 import lombok.Data;
 
