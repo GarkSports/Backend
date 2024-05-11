@@ -1,7 +1,12 @@
 package com.gark.garksport;
 
+import com.gark.garksport.dto.authentication.RegisterRequest;
+import com.gark.garksport.modal.enums.Role;
+import com.gark.garksport.service.AuthenticationService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 
@@ -25,7 +30,7 @@ public class GarkSportApplication {
 //					.lastname("AdminTest")
 //					.email("admintest@gmail.com")
 //					.password("password")
-//					.role(ADMIN)
+//					.role(Role.ADMIN)
 //					.build();
 //			System.out.println("Admin token: " + service.register(admin));
 //		};
