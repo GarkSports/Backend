@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/d/4d16cd591a10e45b6666e669c9ed84d5fd60b995" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/d/4d16cd591a10e45b6666e669c9ed84d5fd60b995" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/6/56d23143dcd85db5aa2a9a9c2fbaff15776104cf" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/6/56d23143dcd85db5aa2a9a9c2fbaff15776104cf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/db9898d16b03405c784dae582f149312c2f6c571" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/chat/SendMessageRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/0/709ae34823b699cc7ce90facb5d694de3422758a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/4/d43518d60051f09f7ef96a006bf11b6538d2611f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e42c78f08875dbb9056105d309a662edfa6dde99" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e42c78f08875dbb9056105d309a662edfa6dde99" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/0/709ae34823b699cc7ce90facb5d694de3422758a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/4/d43518d60051f09f7ef96a006bf11b6538d2611f" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/ChatContactDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/chat/ChatContactDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/ChatDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/dto/chat/ChatDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/ChatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/ChatService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -36,13 +42,14 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="2cv1wmenL2cZr7UQfqkF3aM1l8B" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
+  <component name="ProjectId" id="2cv1wmenL2cZr7UQfqkF3aM1l8B" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -56,14 +63,9 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Amen&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Projects/Platform/Platform_Backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PFE_ESPRIT/backend/GarkAcademy2024-Back/GarkSport/src/main/resources&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;342fbad231df4f91ba2cf533d728058e&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+    &quot;spring.configuration.checksum&quot;: &quot;342fbad231df4f91ba2cf533d728058e&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -71,6 +73,7 @@
       <recent name="com.gark.garksport.exception" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PFE_ESPRIT\backend\GarkAcademy2024-Back\GarkSport\src\main\resources" />
       <recent name="C:\Users\yasse\Documents\GitHub\GarkAcademy2024-Back\GarkSport\src\main\java\com\gark\garksport\config" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -197,26 +200,37 @@
       <workItem from="1714082168759" duration="4591000" />
       <workItem from="1714135811820" duration="7199000" />
       <workItem from="1714168335242" duration="729000" />
-      <workItem from="1714429208175" duration="2599000" />
-      <workItem from="1714480873065" duration="2742000" />
-      <workItem from="1714499712051" duration="2129000" />
-      <workItem from="1714562973402" duration="4594000" />
-      <workItem from="1714651500290" duration="5310000" />
-      <workItem from="1714689275159" duration="1580000" />
-      <workItem from="1714738762250" duration="3680000" />
-      <workItem from="1714912417943" duration="1302000" />
-      <workItem from="1714925235245" duration="88000" />
-      <workItem from="1714925710943" duration="1209000" />
-      <workItem from="1714942462547" duration="1611000" />
-      <workItem from="1714994403002" duration="4668000" />
-      <workItem from="1715076586554" duration="2356000" />
-      <workItem from="1715080598318" duration="6702000" />
-      <workItem from="1715165621185" duration="9372000" />
-      <workItem from="1715255551120" duration="691000" />
-      <workItem from="1715259965544" duration="1496000" />
-      <workItem from="1715422981892" duration="30000" />
-      <workItem from="1715429126287" duration="946000" />
-      <workItem from="1715433251341" duration="1924000" />
+      <workItem from="1714193070847" duration="2009000" />
+      <workItem from="1714211000690" duration="601000" />
+      <workItem from="1714392938182" duration="372000" />
+      <workItem from="1714587034314" duration="1103000" />
+      <workItem from="1714645425119" duration="1818000" />
+      <workItem from="1714653099946" duration="9194000" />
+      <workItem from="1714729226216" duration="3779000" />
+      <workItem from="1714764807005" duration="729000" />
+      <workItem from="1714812101233" duration="9064000" />
+      <workItem from="1714834725050" duration="3421000" />
+      <workItem from="1714881807834" duration="5674000" />
+      <workItem from="1714906165925" duration="502000" />
+      <workItem from="1714914875479" duration="552000" />
+      <workItem from="1714923817781" duration="3762000" />
+      <workItem from="1714983394762" duration="17671000" />
+      <workItem from="1715029519147" duration="4172000" />
+      <workItem from="1715075905568" duration="1830000" />
+      <workItem from="1715087557411" duration="7195000" />
+      <workItem from="1715127152482" duration="907000" />
+      <workItem from="1715159339171" duration="621000" />
+      <workItem from="1715164940520" duration="6076000" />
+      <workItem from="1715179976850" duration="11913000" />
+      <workItem from="1715207489385" duration="1229000" />
+      <workItem from="1715242796108" duration="5097000" />
+      <workItem from="1715260535355" duration="4363000" />
+      <workItem from="1715275668310" duration="2691000" />
+      <workItem from="1715334640314" duration="1878000" />
+      <workItem from="1715351771973" duration="4270000" />
+      <workItem from="1715378744506" duration="1713000" />
+      <workItem from="1715416532973" duration="8770000" />
+      <workItem from="1715448125797" duration="341000" />
     </task>
     <servers />
   </component>

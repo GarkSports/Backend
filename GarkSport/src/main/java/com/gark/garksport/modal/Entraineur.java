@@ -13,6 +13,10 @@ public class Entraineur extends User {
     @ManyToOne(cascade = CascadeType.ALL)
     private Discipline discipline;
 
+    private Integer equipeId;
+
+    private String nomEquipe="non affecté";
+
     @JsonIgnoreProperties("entraineur")
     @OneToMany(mappedBy = "entraineur", cascade = CascadeType.ALL)
     private Set<Adherent> adherents;

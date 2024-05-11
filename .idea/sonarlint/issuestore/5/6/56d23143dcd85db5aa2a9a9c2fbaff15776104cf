@@ -8,14 +8,14 @@ G	java:S106T"+Replace this use of System.out by a logger.(®µ€ó8‚ïôÓñ1
 G	java:S106U"+Replace this use of System.out by a logger.(ö±–®8ƒïôÓñ1
 X	java:S125j"<This block of commented-out lines of code should be removed.(Òóà¾8ˆïôÓñ1
 Z
-java:S1128"=Remove this unused import 'com.gark.garksport.modal.Manager'.(Ê§ˆ¨8¾ÊÆÇô1
+java:S1128"=Remove this unused import 'com.gark.garksport.modal.Manager'.(Ê§ˆ¨8‘âê¼ö1
 _
-java:S1128"BRemove this unused import 'jakarta.mail.internet.InternetAddress'.(Ê•¬¾8¾ÊÆÇô1
+java:S1128"BRemove this unused import 'jakarta.mail.internet.InternetAddress'.(Ê•¬¾8‘âê¼ö1
 [
-java:S1128">Remove this unused import 'jakarta.mail.internet.MimeMessage'.(š‹ÔÕ8¾ÊÆÇô1
+java:S1128">Remove this unused import 'jakarta.mail.internet.MimeMessage'.(š‹ÔÕ8‘âê¼ö1
 j
-java:S1128"MRemove this unused import 'org.springframework.mail.javamail.JavaMailSender'.(ÕÃ›8¿ÊÆÇô1
+java:S1128"MRemove this unused import 'org.springframework.mail.javamail.JavaMailSender'.(ÕÃ›8‘âê¼ö1
 Y
-java:S1128"7Remove this unused import 'java.security.SecureRandom'.(›éè™úÿÿÿÿ8¿ÊÆÇô1
+java:S1128"7Remove this unused import 'java.security.SecureRandom'.(›éè™úÿÿÿÿ8‘âê¼ö1
 Q
-java:S1128 "/Remove this unused import 'java.time.Duration'.(ëá¯‰üÿÿÿÿ8¿ÊÆÇô1
+java:S1128 "/Remove this unused import 'java.time.Duration'.(ëá¯‰üÿÿÿÿ8‘âê¼ö1

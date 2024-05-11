@@ -66,7 +66,7 @@ public class AuthenticationService {
     }
     public User registerAsUser(User user) {
 
-        user.setRole(Role.ADHERENT);
+        user.setRole(Role.ADEHERANT);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return repository.save(user);
 

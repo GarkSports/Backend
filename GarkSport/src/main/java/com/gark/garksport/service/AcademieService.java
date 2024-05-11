@@ -53,7 +53,6 @@ public class AcademieService implements IAcademieService {
             academieNew.setNom(academie.getNom());
             academieNew.setType(academie.getType());
             academieNew.setFraisAdhesion(academie.getFraisAdhesion());
-            academieNew.setAffiliation(academie.getAffiliation());
             academieNew.setDescription(academie.getDescription());
             academieNew.setRue(academie.getRue());
             academieNew.setVille(academie.getVille());
@@ -166,6 +165,15 @@ public class AcademieService implements IAcademieService {
                 .getRole()
                 .toString();
         return role.equals("ADMIN");
+    }
+
+    @Override
+    public Academie getDetailAcademie(Integer academieId) {
+        try {
+            return academieRepository.findById(academieId).orElseThrow(() -> new IllegalArgumentException("Academie not found"));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get Academie", e);
+        }
     }
 
 }

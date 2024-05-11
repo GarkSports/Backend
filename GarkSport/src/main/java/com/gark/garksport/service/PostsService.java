@@ -2,19 +2,17 @@ package com.gark.garksport.service;
 
 import com.gark.garksport.modal.Academie;
 import com.gark.garksport.modal.Posts;
-import com.gark.garksport.modal.User;
+
 import com.gark.garksport.repository.AcademieRepository;
+import com.gark.garksport.repository.AdherentRepository;
 import com.gark.garksport.repository.PostsRepository;
-import com.gark.garksport.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +27,9 @@ public class PostsService {
 
     @Autowired
     private AcademieRepository academieRepository;
+
+    @Autowired
+    private AdherentRepository adherentRepository;
     private final UserService userService;
 
 
@@ -60,7 +61,7 @@ public class PostsService {
         return postsRepository.save(post);
     }
 
-    // Read operation
+    // web
     public List<Posts> getAcademiePosts(Principal connectedUser
 
     ) {
@@ -68,6 +69,16 @@ public class PostsService {
         Integer managerAcademieId = academieRepository.findByManagerId(userService.getUserId(connectedUser.getName())).getId();
 
         return postsRepository.findAllByAcademieIdOrderByCreatedAtDescIdDesc(managerAcademieId);
+    }
+    //mobile
+
+    public List<Posts> getadherentPosts(Principal connectedUser
+
+    ) {
+
+        Integer AcademieId = academieRepository.findByAdherentsId(userService.getUserId(connectedUser.getName())).getId();
+
+        return postsRepository.findAllByAcademieIdOrderByCreatedAtDescIdDesc(AcademieId);
     }
     public List<Posts> getPublicPosts() {
 

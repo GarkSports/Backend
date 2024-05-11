@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalTime;
 import java.util.*;
 
 @RestController
@@ -63,17 +64,14 @@ public class EvenementController {
         }
     }
 
-//    @PostMapping("/addMatchAmical")
-//    public Evenement addMatchAmical(@RequestBody MatchAmicalRequest request, Principal connectedUser) {
-//        Evenement evenement = request.getEvenement();
-//        List<EquipeHoraireDTO> equipesHoraire = request.getEquipesHoraire();
-//
-//        if (equipesHoraire != null && !equipesHoraire.isEmpty()) {
-//            return evenementService.addMatchAmical(evenement, equipesHoraire, userService.getUserId(connectedUser.getName()));
-//        } else {
-//            throw new IllegalArgumentException("EquipesHoraire must be provided.");
-//        }
-//    }
+    @PostMapping("/addMatchAmical")
+    public Evenement addMatchAmical(@RequestBody MatchAmicalRequest request, Principal connectedUser) {
+        Evenement evenement = request.getEvenement();
+        Integer equipeId = request.getEquipeId();
+        LocalTime horaire = request.getHoraire();
+
+        return evenementService.addMatchAmical(evenement, equipeId, horaire, userService.getUserId(connectedUser.getName()));
+    }
 
     @GetMapping("/getAllEvenements")
     public List<Evenement> getAllEvenements() {

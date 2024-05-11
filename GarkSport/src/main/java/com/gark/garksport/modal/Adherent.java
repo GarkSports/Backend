@@ -40,6 +40,8 @@ public class Adherent extends User {
     @OneToOne(mappedBy = "adherent")
     private Paiement paiement;
 
+    private Integer equipeId;
+
     private String nomEquipe="non affecté";
 
     @Column(length = 50)
