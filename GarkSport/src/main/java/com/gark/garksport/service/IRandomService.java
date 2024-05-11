@@ -16,6 +16,8 @@ public interface IRandomService {
 
     public Equipe addEquipe(Equipe equipe, Integer managerId, Integer disciplineId);
 
+    public Equipe updateEquipe(Equipe equipe, Integer equipeId);
+
     public Entraineur addEntraineur(Entraineur entraineur);
 
     public Set<Equipe> getEquipesByAcademie(Integer managerId);
@@ -41,4 +43,8 @@ public interface IRandomService {
     public Set<Adherent> getAllAdherentsByAcademie(Integer managerId);
 
     public Adherent addAdherent(Adherent adherent, String CodeEquipe);
+
+    public void removeAdherentFromEquipe(Integer adherentId);
+
+    public void removeEntraineurFromEquipe(Integer entraineurId);
 }
