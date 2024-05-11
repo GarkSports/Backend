@@ -14,4 +14,6 @@ public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
     Equipe findByCodeEquipe(String codeEquipe);
 
     List<Equipe> findByIdIn(List<Integer> idEquipes);
+
+    Equipe findByNom(String nomEquipe);
 }

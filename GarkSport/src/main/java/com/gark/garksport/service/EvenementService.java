@@ -123,24 +123,19 @@ public class EvenementService implements IEvenementService {
         throw new IllegalArgumentException("Either idEquipe or idMembres must be provided.");
     }
 
-//    @Override
-//    public Evenement addMatchAmical(Evenement evenement, List<EquipeHoraireDTO> equipeHoraires, Integer managerId) {
-//        evenement.setAcademie(managerRepository.findById(managerId).get().getAcademie());
-//        evenement.setType(EvenementType.MATCH_AMICAL);
-//
-//        Set<Equipe> equipes = new HashSet<>();
-//
-//        for (EquipeHoraireDTO equipeHoraire : equipeHoraires) {
-//            Optional<Equipe> equipeOptional = equipeRepository.findById(equipeHoraire.getEquipeId());
-//            equipeOptional.ifPresent(equipe -> {
-//                equipe.setDateMatchAmical(equipeHoraire.getHoraire());
-//                equipes.add(equipe);
-//            });
-//        }
-//        evenement.setConvocationEquipesMatchAmical(equipes);
-//        evenement = evenementRepository.save(evenement);
-//        return evenement;
-//    }
+    @Override
+    public Evenement addMatchAmical(Evenement evenement, Integer equipeId, LocalTime horraire, Integer managerId) {
+        evenement.setAcademie(managerRepository.findById(managerId).get().getAcademie());
+        evenement.setType(EvenementType.MATCH_AMICAL);
+
+        evenement.setConvocationEquipe(equipeRepository.findById(equipeId).get());
+        Equipe equipe = equipeRepository.findById(equipeId).get();
+        equipe.setDateMatchAmical(horraire);
+        equipeRepository.save(equipe);
+
+        evenement = evenementRepository.save(evenement);
+        return evenement;
+    }
 
     @Override
     public List<Evenement> getAllEvenements() {

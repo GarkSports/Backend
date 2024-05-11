@@ -25,9 +25,8 @@ public class Academie {
     @Enumerated(EnumType.STRING)
     private AcademieType type;
     private Float fraisAdhesion;
-    private String logo;
-    private String backgroundImage;
-    private String affiliation;
+    private String logo="https://firebasestorage.googleapis.com/v0/b/angularimage-43fec.appspot.com/o/academie%2Ffile.png?alt=media&token=80bf1bec-48e9-4980-ae53-5a532aff0fc3";
+    private String backgroundImage="https://firebasestorage.googleapis.com/v0/b/angularimage-43fec.appspot.com/o/academie%2F2eeb6d_5d7cdbcf50e24419ab6df9e1540c7eb.jpg?alt=media&token=475ea6a6-a246-472a-a487-65f6a7f495b8";
     @Enumerated(EnumType.STRING)
     private Etat etat;
     @JsonIgnoreProperties("academie")
@@ -46,7 +45,7 @@ public class Academie {
     private Set<Adherent> adherents;
 
     @JsonIgnoreProperties("academie")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Manager manager;
 
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -28,6 +28,7 @@ public class Equipe {
     private String groupeAge;
     private String couleur;
     private String codeEquipe;
+    private String logo="https://firebasestorage.googleapis.com/v0/b/angularimage-43fec.appspot.com/o/academie%2Fteam_img_default-removebg-preview.png?alt=media&token=c51799d5-c417-4e85-abcd-40847dcf0616";
 
     @ManyToOne
     private Discipline discipline;
