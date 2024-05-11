@@ -114,7 +114,7 @@ public class ManagerController {
     }
 
     @PostMapping("/add-adherent")
-        public Adherent addAdherent(
+    public Adherent addAdherent(
             @RequestBody Adherent adherent
     ) throws MessagingException {
         return managerService.addAdherent(adherent);

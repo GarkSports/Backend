@@ -1,11 +1,11 @@
 
 o
-java:S6204T"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8¸¨íí1
-X	java:S125^"<This block of commented-out lines of code should be removed.(©ïÙ8¾¨íí1
+java:S6204T"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8¼šé¼ö1
+X	java:S125^"<This block of commented-out lines of code should be removed.(©ïÙ8¿šé¼ö1
 I
-java:S1452„"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8Ç¨íí1
+java:S1452„"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8Ãšé¼ö1
 I
-java:S1452"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8Ë¨íí1
-^	java:S125©"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8Î¨íí1
+java:S1452"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8Æšé¼ö1
+^	java:S125©"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8Ëšé¼ö1
 a
-java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8Øş®‚í1
+java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8Ëšé¼ö1

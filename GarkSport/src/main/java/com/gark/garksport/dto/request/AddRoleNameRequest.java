@@ -1,6 +1,14 @@
 package com.gark.garksport.dto.request;
 
+import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
+
+@Data
 
 public class AddRoleNameRequest {
     private String roleName;
