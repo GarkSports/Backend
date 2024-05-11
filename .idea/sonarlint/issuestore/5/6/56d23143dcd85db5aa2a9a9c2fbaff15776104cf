@@ -1,4 +1,6 @@
 
+_
+java:S6813("BRemove this field injection and use constructor injection instead.(êæÄŞ8¸ğÒéõ1
 X	java:S125!"<This block of commented-out lines of code should be removed.(ÒÒÆÏ8÷îôÓñ1
 g
 java:S32528"EUse static access with "com.gark.garksport.modal.User" for "builder".(ÏÓşÔûÿÿÿÿ8üîôÓñ1

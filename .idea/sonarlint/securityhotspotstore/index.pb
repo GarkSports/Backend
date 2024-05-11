@@ -51,8 +51,6 @@ AGarkSport/src/main/java/com/gark/garksport/config/CorsConfig.java,5\1\5143775e
 NGarkSport/src/main/java/com/gark/garksport/config/JwtAuthenticationFilter.java,2\d\2dc152be61f1c63520c9018a5212b48096f89c17
 x
 HGarkSport/src/main/java/com/gark/garksport/config/ApplicationConfig.java,5\6\5655fc1a0f5f0d65a1eae938542a9ec302cc70e4
-|
-LGarkSport/src/main/java/com/gark/garksport/config/SecurityConfiguration.java,d\b\db9898d16b03405c784dae582f149312c2f6c571
 s
 CGarkSport/src/main/java/com/gark/garksport/service/UserService.java,6\c\6c9bf551517fe689474a668a44e75ee141687a09
 ƒ
@@ -183,3 +181,5 @@ GGarkSport/src/main/java/com/gark/garksport/dto/request/TestRequest.java,c\5\c5
 MGarkSport/src/main/java/com/gark/garksport/modal/enums/StatutEvenenement.java,3\2\3297bdb53f1a7ec7b23313e844df1ebe4ddc0410
 |
 LGarkSport/src/main/java/com/gark/garksport/dto/request/ExtendedEventDTO.java,8\c\8c714c2ac95f19529a2916fb8a3d4dc8cd3f6d55
+u
+EGarkSport/src/main/java/com/gark/garksport/config/SecurityConfig.java,1\2\12742779fbabc9a7f80cc48e607b65a10c2ee2b6

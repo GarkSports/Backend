@@ -90,6 +90,8 @@ public class AdminService {
             managerToUpdate.setLastname(manager.getLastname());
             managerToUpdate.setEmail(manager.getEmail());
             managerToUpdate.setAdresse(manager.getAdresse());
+            managerToUpdate.setTelephone(manager.getTelephone());
+
 
             // Save the updated manager
             return managerRepository.save(managerToUpdate);
