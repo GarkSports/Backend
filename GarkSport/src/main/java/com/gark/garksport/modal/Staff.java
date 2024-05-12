@@ -1,7 +1,9 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,4 +18,7 @@ import java.util.List;
 @Entity
 public class Staff extends User {
 
+    @JsonIgnoreProperties("staff")
+    @ManyToOne
+    private Academie academie;
 }

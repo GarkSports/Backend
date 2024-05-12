@@ -5,6 +5,7 @@ import com.gark.garksport.modal.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Repository
@@ -17,6 +18,6 @@ public interface AcademieRepository extends JpaRepository<Academie, Integer> {
 
     Set<Academie> findByIsArchivedTrue();
 
-
+    //Optional<RoleName> findByRoleNameAndAcademieId(String roleName, Integer academieId);
 
 }

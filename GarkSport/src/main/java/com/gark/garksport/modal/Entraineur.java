@@ -21,6 +21,8 @@ public class Entraineur extends User {
     @OneToMany(mappedBy = "entraineur", cascade = CascadeType.ALL)
     private Set<Adherent> adherents;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("entraineurs")
+    @ManyToOne
     private Academie academie;
+
 }

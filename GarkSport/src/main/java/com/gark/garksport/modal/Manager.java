@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -21,7 +22,9 @@ public class Manager extends User {
         return Objects.hash(super.hashCode(), telephone2);
     }
 
-    @JsonIgnoreProperties("manager")
+
+    @JsonIgnoreProperties("roleNames")
+    @JsonIgnore
     @OneToOne(mappedBy = "manager")
     private Academie academie;
 
