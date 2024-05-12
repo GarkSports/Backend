@@ -41,13 +41,26 @@ public class Academie {
     private String pays;
 
     @JsonIgnoreProperties("academie")
+    @OneToOne
+    private Manager manager;
+
+    @JsonIgnoreProperties("academie")
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
     private Set<Adherent> adherents;
 
     @JsonIgnoreProperties("academie")
-    @OneToOne
-    private Manager manager;
+    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
+    private Set<Entraineur> entraineur;
 
+    @JsonIgnoreProperties("academie")
+    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
+    private Set<Staff> staff;
+
+    @JsonIgnoreProperties("academie")
+    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
+    private Set<Parent> parents;
+
+    @JsonIgnoreProperties("academie")
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RoleName> roleNames = new HashSet<>();
 
