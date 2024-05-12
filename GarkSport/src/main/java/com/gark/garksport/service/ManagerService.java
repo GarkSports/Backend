@@ -167,15 +167,15 @@ public class ManagerService {
         // For example:
         // user.setRoleNames(this.roleNames);
     }
+    String generatedPWD = generateRandomPassword();
 
 
     public Staff addStaff(Staff request) throws MessagingException {
-        String generatedPWD = generateRandomPassword();
 
         Staff staff = new Staff();
         staff.setEmail(request.getEmail());
         staff.setRole(Role.STAFF);
-        staff.setPassword(passwordEncoder.encode(request.getPassword()));
+        staff.setPassword(passwordEncoder.encode(generatedPWD));
         staff.setRoleName(request.getRoleName());
 
         Set<Permission> permissions = request.getPermissions();
@@ -192,11 +192,10 @@ public class ManagerService {
         return repository.save(staff);
     }
     public Entraineur addCoach(Entraineur entraineur) throws MessagingException {
-        String generatedPWD = generateRandomPassword();
 
         entraineur.setEmail(entraineur.getEmail());
         entraineur.setRole(Role.ENTRAINEUR);
-        entraineur.setPassword(passwordEncoder.encode(entraineur.getPassword()));
+        entraineur.setPassword(passwordEncoder.encode(generatedPWD));
         entraineur.setRoleName(entraineur.getRoleName());// Set the permissions for the staff
 
 
@@ -212,11 +211,10 @@ public class ManagerService {
     }
 
     public Parent addParent(Parent parent) throws MessagingException {
-        String generatedPWD = generateRandomPassword();
 
         parent.setEmail(parent.getEmail());
         parent.setRole(Role.PARENT);
-        parent.setPassword(passwordEncoder.encode(parent.getPassword()));
+        parent.setPassword(passwordEncoder.encode(generatedPWD));
 
 
         MimeMessage message = mailSender.createMimeMessage();
@@ -231,11 +229,10 @@ public class ManagerService {
     }
 
     public Adherent addAdherent(Adherent adherent) throws MessagingException {
-        String generatedPWD = generateRandomPassword();
 
         adherent.setEmail(adherent.getEmail());
         adherent.setRole(Role.ADEHERANT);
-        adherent.setPassword(passwordEncoder.encode(adherent.getPassword()));
+        adherent.setPassword(passwordEncoder.encode(generatedPWD));
 
 
         MimeMessage message = mailSender.createMimeMessage();
