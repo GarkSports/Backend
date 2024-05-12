@@ -3,6 +3,16 @@ h
 java:S11927"KDefine a constant instead of duplicating this literal "/random/**" 4 times.(Å¨Ş8Öÿß«ò1
 j
 java:S1192<"MDefine a constant instead of duplicating this literal "/academie/**" 4 times.(àÊÃ–8„ïÇõ1
+j
+java:S5738'"HRemove this call to a deprecated method, it has been marked for removal.(ÊìÛ¯şÿÿÿÿ8«Û³¼ö1
+e
+java:S5738)"HRemove this call to a deprecated method, it has been marked for removal.(ÏğÅô8¬Û³¼ö1
+j
+java:S5738M"HRemove this call to a deprecated method, it has been marked for removal.(Åúßµûÿÿÿÿ8³Û³¼ö1
+e
+java:S5738N"HRemove this call to a deprecated method, it has been marked for removal.(èúŞ«8³Û³¼ö1
+j
+java:S5738O"HRemove this call to a deprecated method, it has been marked for removal.(Åúßµûÿÿÿÿ8´Û³¼ö1
 \
 java:S1128":Remove this unused import 'com.gark.garksport.modal.User'.(ë†¦·üÿÿÿÿ8‰ğÇõ1
 b

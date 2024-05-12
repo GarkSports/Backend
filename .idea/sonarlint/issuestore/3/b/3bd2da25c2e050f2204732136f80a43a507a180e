@@ -1,48 +1,38 @@
 
 l
-java:S1192_"ODefine a constant instead of duplicating this literal "User not found" 3 times.(¢ •Ä8ğŒˆèğ1
+java:S1192_"ODefine a constant instead of duplicating this literal "User not found" 3 times.(¢ •Ä8¬ãâ¼ö1
 k
-java:S1192Q"IDefine a constant instead of duplicating this literal "id is : " 3 times.(»”Ùºúÿÿÿÿ8ğŒˆèğ1
+java:S1192Q"IDefine a constant instead of duplicating this literal "id is : " 3 times.(»”Ùºúÿÿÿÿ8­ãâ¼ö1
 e
-java:S1192»"GDefine a constant instead of duplicating this literal " Login" 4 times.(¥äÎƒ8ğŒˆèğ1
+java:S1192»"GDefine a constant instead of duplicating this literal " Login" 4 times.(¥äÎƒ8­ãâ¼ö1
 q
-java:S1192¼"SDefine a constant instead of duplicating this literal "\">Login</a></div>" 4 times.(—î¼Û8ğŒˆèğ1
+java:S1192¼"SDefine a constant instead of duplicating this literal "\">Login</a></div>" 4 times.(—î¼Û8­ãâ¼ö1
 
-java:S1192¼"qDefine a constant instead of duplicating this literal "<div> Login using your email and this password: " 4 times.(—î¼Û8ñŒˆèğ1
+java:S1192¼"qDefine a constant instead of duplicating this literal "<div> Login using your email and this password: " 4 times.(—î¼Û8­ãâ¼ö1
 „
-java:S1192¼"fDefine a constant instead of duplicating this literal "<a href=\"http://localhost:8080/login" 4 times.(—î¼Û8ñŒˆèğ1
+java:S1192¼"fDefine a constant instead of duplicating this literal "<a href=\"http://localhost:8080/login" 4 times.(—î¼Û8­ãâ¼ö1
 v
-java:S1192¹"XDefine a constant instead of duplicating this literal "${spring.mail.username}" 4 times.(õË±÷8ñŒˆèğ1
+java:S1192¹"XDefine a constant instead of duplicating this literal "${spring.mail.username}" 4 times.(õË±÷8®ãâ¼ö1
 h
-java:S2259K"FA "NullPointerException" could be thrown; "academie" is nullable here.(ô®‹¨ıÿÿÿÿ8‘ˆèğ1
+java:S2259K"FA "NullPointerException" could be thrown; "academie" is nullable here.(ô®‹¨ıÿÿÿÿ8ğãâ¼ö1
 e
-java:S6201E"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8˜ˆèğ1
-L	java:S106Q"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8™ˆèğ1
-L	java:S106f"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8šˆèğ1
-L	java:S106y"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8›ˆèğ1
+java:S6201E"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8şãâ¼ö1
+L	java:S106Q"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8äâ¼ö1
+L	java:S106f"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8†äâ¼ö1
+L	java:S106y"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8‰äâ¼ö1
 f
-java:S6201†"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ˆèğ1
+java:S6201†"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8Œäâ¼ö1
 f
-java:S6201š"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8Ÿˆèğ1
+java:S6201š"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8“äâ¼ö1
 O
-java:S2175",A "Set<RoleName>" cannot contain a "String".(©‚ş…úÿÿÿÿ8 ˆèğ1
-^	java:S125¨"<This block of commented-out lines of code should be removed.(ï×û¯şÿÿÿÿ8 ˆèğ1
+java:S2175",A "Set<RoleName>" cannot contain a "String".(©‚ş…úÿÿÿÿ8•äâ¼ö1
+^	java:S125¨"<This block of commented-out lines of code should be removed.(ï×û¯şÿÿÿÿ8—äâ¼ö1
 c
-java:S3252º"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(Ğ¨±â8¤ˆèğ1
+java:S3252º"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(Ğ¨±â8Ÿäâ¼ö1
 b
-java:S3252Í"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(§—½A8¦ˆèğ1
+java:S3252Í"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(§—½A8¨äâ¼ö1
 c
-java:S3252à"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(‰Çï8©ˆèğ1
+java:S3252à"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(‰Çï8¯äâ¼ö1
 h
-java:S3252ó"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(µËúÿÿÿÿ8¬ˆèğ1
-X	java:S125ı"<This block of commented-out lines of code should be removed.(€ÑÕ~8­ˆèğ1
-a
-java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8ìò¦èğ1
-`
-java:S1128"CRemove this unused import 'jakarta.mail.internet.AddressException'.(ŞÁ¿É8íò¦èğ1
-l
-java:S1128"ORemove this unused import 'org.springframework.security.core.GrantedAuthority'.(½Á±ÿ8íò¦èğ1
-
-java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8íò¦èğ1
-r
-java:S1128"PRemove this unused import 'org.springframework.web.bind.annotation.RequestBody'.(â­½Àıÿÿÿÿ8íò¦èğ1
+java:S3252ó"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(µËúÿÿÿÿ8µäâ¼ö1
+X	java:S125ı"<This block of commented-out lines of code should be removed.(€ÑÕ~8¸äâ¼ö1
