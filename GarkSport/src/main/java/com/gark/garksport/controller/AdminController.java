@@ -1,10 +1,8 @@
 package com.gark.garksport.controller;
 
 import com.gark.garksport.dto.authentication.RegisterRequest;
-import com.gark.garksport.modal.Admin;
-import com.gark.garksport.modal.Manager;
-import com.gark.garksport.modal.Staff;
-import com.gark.garksport.modal.User;
+import com.gark.garksport.modal.*;
+import com.gark.garksport.repository.AcademieRepository;
 import com.gark.garksport.repository.ManagerRepository;
 import com.gark.garksport.repository.UserRepository;
 import com.gark.garksport.service.AdminService;
@@ -27,6 +25,7 @@ public class AdminController {
     private final AdminService adminService;
     private final UserRepository repository;
     private final ManagerRepository managerRepository;
+    private AcademieRepository academieRepository;
 
     @PreAuthorize("hasAuthority('READ')")
     @GetMapping("/hello")
@@ -66,13 +65,15 @@ public class AdminController {
         return ResponseEntity.ok(userList);
     }
 
-    @GetMapping("/get-all-users")
-    @ResponseBody
-    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
-        var user = getProfil(connectedUser);
-        List<User> userList = repository.findAllByIdNot(user.getId());
-        return ResponseEntity.ok(userList);
-    }
+//    @GetMapping("/get-all-users")
+//    @ResponseBody
+//    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
+//        var user = getProfil(connectedUser);
+//        Integer managerId = user.getId();
+//        Academie academie = user.getAcademie();
+//        List<User> userList = academieRepository.findAdherentsByAcademieAndManagerIdNot(academie, managerId);
+//        return ResponseEntity.ok(userList);
+//    }
 
     @PutMapping("/update-manager")
     public ResponseEntity<Manager> updateManager(@RequestParam Integer id, @RequestBody Manager manager) {

@@ -1,18 +1,19 @@
 
 m
-java:S12069"PThis class overrides "hashCode()" and should therefore also override "equals()".(ğÜşŠ8è°óÇö1
+java:S1206:"PThis class overrides "hashCode()" and should therefore also override "equals()".(ğÜşŠ8¼„÷1
+o
+java:S1128"RRemove this unused import 'com.fasterxml.jackson.annotation.JsonIgnoreProperties'.(ô’ˆî8Ñœ›’÷1
 @
-java:S1128
-"Remove this duplicated import.(»ÔÕüÿÿÿÿ8Î±óÇö1
+java:S1128"Remove this duplicated import.(»ÔÕüÿÿÿÿ8ÍÁ÷1
 R
-java:S1128"0Remove this unused import 'jakarta.persistence'.(Î«Ô§úÿÿÿÿ8Ï±óÇö1
+java:S1128"0Remove this unused import 'jakarta.persistence'.(Î«Ô§úÿÿÿÿ8ÍÁ÷1
 E
-java:S1128"#Remove this unused import 'lombok'.(â—‡‘şÿÿÿÿ8Ğ±óÇö1
+java:S1128"#Remove this unused import 'lombok'.(â—‡‘şÿÿÿÿ8ÍÁ÷1
 ;
-java:S1128"Remove this duplicated import.(½Á±ÿ8Ñ±óÇö1
+java:S1128"Remove this duplicated import.(½Á±ÿ8ÍÁ÷1
 ;
-java:S1128"Remove this duplicated import.(ÊÁ¥8Ò±óÇö1
+java:S1128"Remove this duplicated import.(ÊÁ¥8ÍÁ÷1
 S
-java:S1128"6Remove this unused import 'java.security.Permissions'.(ÜÕ»8Ò±óÇö1
+java:S1128"6Remove this unused import 'java.security.Permissions'.(ÜÕ»8™ßÿ÷1
 Z
-java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8Ó±óÇö1
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8™ßÿ÷1

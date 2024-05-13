@@ -1,12 +1,14 @@
 
 _
-java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄÞ8¼¨«íö1
+java:S6813&"BRemove this field injection and use constructor injection instead.(êæÄÞ8ò­À–÷1
 o
-java:S6204W"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8Î¨«íö1
+java:S6204Z"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ø­À–÷1
 e
-java:S6201`"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8Ð¨«íö1
+java:S6201c"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ù­À–÷1
 I
-java:S1452”"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8Ü¨«íö1
+java:S1452Ô"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8ü­À–÷1
+^	java:S125°"<This block of commented-out lines of code should be removed.(Õ§³™ùÿÿÿÿ8ü­À–÷1
+Y	java:S125À"<This block of commented-out lines of code should be removed.(Áíëí8ü­À–÷1
 I
-java:S1452ž"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8Ý¨«íö1
-^	java:S125æ"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8â¨«íö1
+java:S1452Þ"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8ý­À–÷1
+^	java:S125¦"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8®À–÷1

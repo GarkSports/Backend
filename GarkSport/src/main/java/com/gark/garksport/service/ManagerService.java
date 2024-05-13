@@ -173,6 +173,58 @@ public class ManagerService {
     String generatedPWD = generateRandomPassword();
 
 
+    public Set<Adherent> getAdherentsByAcademie(Integer managerId) {
+
+        // Get all adherents for the academie
+        Set<Adherent> allAdherents = adherentRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(()
+                -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
+
+        return allAdherents;
+    }
+
+    public Set<Staff> getStaffByAcademie(Integer managerId) {
+
+        // Get all adherents for the academie
+        Set<Staff> allStaff = staffRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(()
+                -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
+
+        return allStaff;
+    }
+
+    public Set<Entraineur> getEntraineurByAcademie(Integer managerId) {
+
+        // Get all adherents for the academie
+        Set<Entraineur> allEntraineurs = entraineurRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(()
+                -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
+
+        return allEntraineurs;
+    }
+
+    public Set<Parent> getParentByAcademie(Integer managerId) {
+
+        // Get all adherents for the academie
+        Set<Parent> allParent = parentRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(()
+                -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
+
+        return allParent;
+    }
+
+    public List<User> getUsersByAcademie(Integer managerId) {
+        Academie academie = managerRepository.findById(managerId)
+                .orElseThrow(() -> new IllegalArgumentException("Manager not found"))
+                .getAcademie();
+
+        List<User> allUsers = new ArrayList<>();
+        allUsers.addAll(staffRepository.findByAcademieId(academie.getId()));
+        allUsers.addAll(adherentRepository.findByAcademieId(academie.getId()));
+        allUsers.addAll(entraineurRepository.findByAcademieId(academie.getId()));
+       // allUsers.addAll(parentRepository.findByAcademieId(academie.getId()));
+
+        return allUsers;
+    }
+
+
+
     public Staff addStaff(Staff staff, Principal connectedUser) throws MessagingException {
 
         staff.setEmail(staff.getEmail());
@@ -180,13 +232,14 @@ public class ManagerService {
         staff.setPassword(passwordEncoder.encode(generatedPWD));
         staff.setRoleName(staff.getRoleName());
         User user = getProfil(connectedUser);
-        if (!(user instanceof Manager)) {
-            throw new RuntimeException("Only managers can add staff.");
-        }
 
         Manager manager = (Manager) user;
-        Academie academie = manager.getAcademie();
+        Academie academie = academieRepository.findByManagerId(manager.getId());
+        //Long academieId = Long.valueOf(academie.getId());
+
         staff.setAcademie(academie);
+       // staff.setAcademieId(academieId);
+
 
         if (academie == null) {
             throw new RuntimeException("Academie not found for the current manager.");
@@ -271,7 +324,7 @@ public class ManagerService {
     public Adherent addAdherent(Adherent adherent, Principal connectedUser) throws MessagingException {
 
         adherent.setEmail(adherent.getEmail());
-        adherent.setRole(Role.ADEHERANT);
+        adherent.setRole(Role.ADHERENT);
         adherent.setPassword(passwordEncoder.encode(generatedPWD));
 
 
@@ -280,6 +333,8 @@ public class ManagerService {
             Manager manager = (Manager) user;
             Academie academie = manager.getAcademie();
             adherent.setAcademie(academie);
+
+
 
 
 
