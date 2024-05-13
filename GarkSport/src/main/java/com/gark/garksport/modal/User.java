@@ -1,6 +1,7 @@
 package com.gark.garksport.modal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gark.garksport.modal.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;

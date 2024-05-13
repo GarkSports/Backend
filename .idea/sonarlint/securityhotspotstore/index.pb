@@ -213,3 +213,9 @@ w
 GGarkSport/src/main/java/com/gark/garksport/dto/chat/ChatContactDTO.java,f\c\fc191f2113a86f9a493600a45f5e041efda4fb50
 {
 KGarkSport/src/main/java/com/gark/garksport/dto/chat/SendMessageRequest.java,2\8\28034d49da2495fb2d63f19b27a61b1a99073c90
+}
+MGarkSport/src/main/java/com/gark/garksport/repository/RoleNameRepository.java,e\9\e9b2165406861833d13a73d4ca8703dcb5621acd
+{
+KGarkSport/src/main/java/com/gark/garksport/repository/ParentRepository.java,9\0\90d0869f2a8770ef938e6d41fbd28f1863021cf2
+z
+JGarkSport/src/main/java/com/gark/garksport/repository/StaffRepository.java,9\9\995858300e684ebb10c51b3cf0121abfba08e500

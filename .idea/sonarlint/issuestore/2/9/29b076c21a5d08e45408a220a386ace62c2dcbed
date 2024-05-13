@@ -1,6 +1,14 @@
 
 p
 java:S1192%"SDefine a constant instead of duplicating this literal "Adherent not found" 4 times.(ÈˆÅ8ç”¶çì1
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8Î¯û“÷1
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8Î¯û“÷1
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8Î¯û“÷1
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8Î¯û“÷1
 t
 java:S3776h"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(ç¿‚¡ûÿÿÿÿ8‚¿¶çì1
 I

@@ -1,9 +1,7 @@
 package com.gark.garksport.modal;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +12,10 @@ import java.util.Set;
 @Entity
 public class Parent extends User {
     private String informationParent;
+
+    @JsonIgnoreProperties("parents")
+    @ManyToOne
+    private Academie academie;
 
     @OneToMany(mappedBy = "parent")
     private Set<Reclamation> reclamations;
