@@ -5,9 +5,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.gark.garksport.dto.request.AddRoleNameRequest;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Permission;
+import com.gark.garksport.modal.enums.Role;
 import com.gark.garksport.repository.*;
 import com.gark.garksport.service.AdminService;
 import com.gark.garksport.service.ManagerService;
+import com.gark.garksport.service.UserService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ public class ManagerController {
     private final EntraineurRepository entraineurRepository;
     private final AdherentRepository adherentRepository;
     private final ParentRepository parentRepository;
+    private final UserService userService;
 
     @Autowired
     private AcademieRepository academieRepository;
@@ -137,13 +140,74 @@ public class ManagerController {
         return managerService.addAdherent(adherent, connectedUser);
     }
 
-    @GetMapping("/get-all-users")
+    @GetMapping("/get-adherents")
     @ResponseBody
-    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
-        var user = getProfil(connectedUser);
-        List<User> userList = repository.findAllByIdNot(user.getId());
-        return ResponseEntity.ok(userList);
+    public Set<Adherent> getAdherents(Principal connectedUser) {
+        return managerService.getAdherentsByAcademie(userService.getUserId(connectedUser.getName()));
     }
+    @GetMapping("/get-staff")
+    @ResponseBody
+    public Set<Staff> getStaff(Principal connectedUser) {
+        return managerService.getStaffByAcademie(userService.getUserId(connectedUser.getName()));
+    }
+
+    @GetMapping("/get-entraineur")
+    @ResponseBody
+    public Set<Entraineur> getEntraineur(Principal connectedUser) {
+        return managerService.getEntraineurByAcademie(userService.getUserId(connectedUser.getName()));
+    }
+
+    @GetMapping("/get-parent")
+    @ResponseBody
+    public Set<Parent> getParent(Principal connectedUser) {
+        return managerService.getParentByAcademie(userService.getUserId(connectedUser.getName()));
+    }
+
+    @GetMapping("/get-users")
+    @ResponseBody
+    public List<User> getUsersByAcademie(Principal connectedUser) {
+        return managerService.getUsersByAcademie(userService.getUserId(connectedUser.getName()));
+    }
+
+
+
+//    @GetMapping("/get-all-users")
+//    @ResponseBody
+//    public ResponseEntity<Set<User>> getUsersByRolesAndAcademie(Principal connectedUser) {
+//        Integer managerId = userService.getUserId(connectedUser.getName());
+//        Academie academie = managerRepository.findById(managerId)
+//                .orElseThrow(() -> new IllegalArgumentException("Manager not found"))
+//                .getAcademie();
+//
+//        List<Role> roles = Arrays.asList(Role.STAFF, Role.ENTRAINEUR, Role.ADEHERANT, Role.PARENT);
+//        Set<User> allUsers = new HashSet<>(repository.findByRolesAndAcademieIdIn(roles, academie.getId()));
+//
+//        return ResponseEntity.ok(allUsers);
+//    }
+
+
+
+//    @GetMapping("/get-all-users")
+//    @ResponseBody
+//    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
+//        User user = getProfil(connectedUser);
+//
+//        if (user instanceof Manager manager) {
+//            Academie academie = manager.getAcademie();
+//            if (academie != null) {
+//                System.out.println("academie ID: " + academie.getId());
+//                List<User> userList = repository.findAllByIdNot(user.getId());
+//                List<Entraineur> entraineurList = entraineurRepository.findAllByAcademieId(academie.getId());
+//                List<User> userListAcademie = repository.findAllByAcademieId(academie.getId());
+//
+//                return ResponseEntity.ok(userListAcademie);
+//            }
+//        }
+//
+//        // Handle the case when the user is not a Manager or doesn't have an associated Academie
+//        return ResponseEntity.ok(Collections.emptyList());
+//    }
+
     @GetMapping("/get-academie/{manager_id}")
     public ResponseEntity<?> getAcademie(@PathVariable("manager_id") Integer managerId) {
         Academie academie = academieRepository.findByManagerId(managerId);

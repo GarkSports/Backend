@@ -12,7 +12,7 @@ import static com.gark.garksport.modal.enums.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {
-    ADEHERANT,
+    ADHERENT,
 
     ADMIN,
 

@@ -50,11 +50,11 @@ public class Academie {
 
     @JsonIgnoreProperties("academie")
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
-    private Set<Entraineur> entraineur;
+    private Set<Entraineur> entraineurs;
 
     @JsonIgnoreProperties("academie")
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
-    private Set<Staff> staff;
+    private Set<Staff> staffs;
 
     @JsonIgnoreProperties("academie")
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
