@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ChatRepository extends JpaRepository<Chat, Long> {
 
-    List<Chat> findBySenderOrReceiverOrderByTimestamp(User sender, User receiver);
+    List<Chat> findBySenderOrReceiverOrderByTimestampDesc(User sender, User receiver);
 
     List<Chat> findBySenderAndReceiverOrReceiverAndSenderOrderByTimestamp(User sender1, User receiver1, User sender2, User receiver2);
 

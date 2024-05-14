@@ -3,6 +3,7 @@ package com.gark.garksport.service;
 import com.gark.garksport.dto.chat.ChatContactDTO;
 import com.gark.garksport.dto.chat.ChatDTO;
 import com.gark.garksport.modal.Chat;
+import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.ChatRepository;
 import com.gark.garksport.repository.UserRepository;
@@ -25,6 +26,8 @@ public class ChatService {
     private UserRepository userRepository;
 
     private final UserService userService;
+
+    private final NotificationService notificationService;
 
     public List<ChatDTO> getChatHistory(Principal connectedUser, Integer userId2) {
         Integer userId1 = userService.getUserId(connectedUser.getName());
@@ -56,6 +59,14 @@ public class ChatService {
         chat.setTimestamp(LocalDateTime.now());
         chatRepository.save(chat);
 
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("new message");
+        notificationMessage.setBody("vous avez recu un nouveau message a garksport");
+        notificationService.sendNotificationToUser(
+                receiver.getId(),
+                notificationMessage
+                );
+
         // Create and return the ChatMessageDTO
         ChatDTO chatMessageDTO = new ChatDTO();
         chatMessageDTO.setSenderId(senderId);
@@ -70,7 +81,7 @@ public class ChatService {
         User currentUser = userRepository.findById(currentUserId).orElse(null);
 
         List<ChatContactDTO> usersWithMessages = new ArrayList<>();
-        List<Chat> chats = chatRepository.findBySenderOrReceiverOrderByTimestamp(currentUser, currentUser);
+        List<Chat> chats = chatRepository.findBySenderOrReceiverOrderByTimestampDesc(currentUser, currentUser);
         for (Chat chat : chats) {
             if (!chat.getSender().equals(currentUser)) {
                 usersWithMessages.add(convertToDTO(chat.getSender()));
