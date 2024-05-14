@@ -219,3 +219,7 @@ MGarkSport/src/main/java/com/gark/garksport/repository/RoleNameRepository.java,
 KGarkSport/src/main/java/com/gark/garksport/repository/ParentRepository.java,9\0\90d0869f2a8770ef938e6d41fbd28f1863021cf2
 z
 JGarkSport/src/main/java/com/gark/garksport/repository/StaffRepository.java,9\9\995858300e684ebb10c51b3cf0121abfba08e500
+
+OGarkSport/src/main/java/com/gark/garksport/dto/request/PersonnaliseRequest.java,8\2\820c61ff8ed863bc2487338fabdf730c7b51bf84
+w
+GGarkSport/src/main/java/com/gark/garksport/dto/request/TestRequest.java,c\5\c56e709eafd8098cb035c4742d7e19a11a3dd9c6
