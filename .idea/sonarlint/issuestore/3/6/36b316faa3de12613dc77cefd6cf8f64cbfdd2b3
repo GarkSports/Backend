@@ -2,14 +2,14 @@
 }
 java:S1192/"[Define a constant instead of duplicating this literal "Equipe not found with id: " 3 times.(Çú‰ìıÿÿÿÿ8ÌŸÊõ1
 m
-java:S3655O"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8¢² Êõ1
+java:S3655y"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8©ÌŸÊõ1
 r
 java:S3655|"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¡ÙÄüÿÿÿÿ8¡² Êõ1
-m
-java:S3655y"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8©ÌŸÊõ1
 m
 java:S3655}"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(Áª¢î8¡² Êõ1
 m
 java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8©ÌŸÊõ1
 m
 java:S3655%"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8©ÌŸÊõ1
+m
+java:S3655O"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8¢² Êõ1
