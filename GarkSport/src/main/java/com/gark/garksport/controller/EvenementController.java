@@ -54,10 +54,10 @@ public class EvenementController {
 
         if (idEquipe != null) {
             // If idEquipe is provided, call the service method with idEquipe
-            return evenementService.addPersonnalisé(evenement, idEquipe, Collections.emptyList(), userService.getUserId(connectedUser.getName()));
+            return evenementService.addTest(evenement, idEquipe, Collections.emptyList(), userService.getUserId(connectedUser.getName()));
         } else if (idMembres != null && !idMembres.isEmpty()) {
             // If idMembres are provided, call the service method with idMembres
-            return evenementService.addPersonnalisé(evenement, null, idMembres, userService.getUserId(connectedUser.getName()));
+            return evenementService.addTest(evenement, null, idMembres, userService.getUserId(connectedUser.getName()));
         } else {
             // Handle the situation where neither idEquipe nor idMembres are provided
             throw new IllegalArgumentException("Either idEquipe or idMembres must be provided.");
