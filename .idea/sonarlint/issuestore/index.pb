@@ -169,8 +169,6 @@ t
 DGarkSport/src/main/java/com/gark/garksport/service/StaffService.java,2\9\2905ce3cee9ee67e3158d9d1f214f88fbb7fd9ac
 v
 FGarkSport/src/main/java/com/gark/garksport/service/ManagerService.java,3\b\3bd2da25c2e050f2204732136f80a43a507a180e
-|
-LGarkSport/src/main/java/com/gark/garksport/dto/request/EquipeHoraireDTO.java,4\3\4306a81ae8dd9018620c51436a3ed27e56b43571
 ~
 NGarkSport/src/main/java/com/gark/garksport/dto/request/MatchAmicalRequest.java,6\9\698ce969185f63d444aa9c20b465d3703292df0b
 k
@@ -219,3 +217,7 @@ MGarkSport/src/main/java/com/gark/garksport/repository/RoleNameRepository.java,
 KGarkSport/src/main/java/com/gark/garksport/repository/ParentRepository.java,9\0\90d0869f2a8770ef938e6d41fbd28f1863021cf2
 z
 JGarkSport/src/main/java/com/gark/garksport/repository/StaffRepository.java,9\9\995858300e684ebb10c51b3cf0121abfba08e500
+
+OGarkSport/src/main/java/com/gark/garksport/dto/request/PersonnaliseRequest.java,8\2\820c61ff8ed863bc2487338fabdf730c7b51bf84
+w
+GGarkSport/src/main/java/com/gark/garksport/dto/request/TestRequest.java,c\5\c56e709eafd8098cb035c4742d7e19a11a3dd9c6
