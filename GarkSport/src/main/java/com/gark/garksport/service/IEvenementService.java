@@ -1,11 +1,8 @@
 package com.gark.garksport.service;
-import com.gark.garksport.dto.request.EquipeHoraireDTO;
-import com.gark.garksport.dto.request.ExtendedEventDTO;
 import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.Evenement;
 import com.gark.garksport.modal.enums.StatutEvenenement;
 
-import java.lang.reflect.Member;
 import java.time.LocalTime;
 import java.util.List;
 
