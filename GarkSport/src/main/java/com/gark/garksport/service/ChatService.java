@@ -33,7 +33,7 @@ public class ChatService {
         Integer userId1 = userService.getUserId(connectedUser.getName());
         User user1 = userRepository.findById(userId1).orElse(null);
         User user2 = userRepository.findById(userId2).orElse(null);
-        List<Chat> chatList = chatRepository.findBySenderAndReceiverOrReceiverAndSenderOrderByTimestamp(user1, user2,user1,user2);
+        List<Chat> chatList = chatRepository.findBySenderAndReceiverOrReceiverAndSenderOrderByTimestampDesc(user1, user2,user1,user2);
         List<ChatDTO> chatDTOList = new ArrayList<>();
         for (Chat chat : chatList) {
             ChatDTO chatDTO = new ChatDTO();
@@ -61,7 +61,8 @@ public class ChatService {
 
         NotificationMessage notificationMessage = new NotificationMessage();
         notificationMessage.setTitle("new message");
-        notificationMessage.setBody("vous avez recu un nouveau message a garksport");
+        notificationMessage.setBody("vous avez recu un nouveau message ");
+        notificationMessage.setImage("https://cdn.iconscout.com/icon/free/png-256/free-message-2367724-1976874.png?f=webp&w=256");
         notificationService.sendNotificationToUser(
                 receiver.getId(),
                 notificationMessage

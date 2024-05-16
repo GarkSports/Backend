@@ -13,7 +13,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 
     List<Chat> findBySenderOrReceiverOrderByTimestampDesc(User sender, User receiver);
 
-    List<Chat> findBySenderAndReceiverOrReceiverAndSenderOrderByTimestamp(User sender1, User receiver1, User sender2, User receiver2);
+    List<Chat> findBySenderAndReceiverOrReceiverAndSenderOrderByTimestampDesc(User sender1, User receiver1, User sender2, User receiver2);
 
 
 }
