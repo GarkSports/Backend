@@ -221,3 +221,5 @@ JGarkSport/src/main/java/com/gark/garksport/repository/StaffRepository.java,9\9
 OGarkSport/src/main/java/com/gark/garksport/dto/request/PersonnaliseRequest.java,8\2\820c61ff8ed863bc2487338fabdf730c7b51bf84
 w
 GGarkSport/src/main/java/com/gark/garksport/dto/request/TestRequest.java,c\5\c56e709eafd8098cb035c4742d7e19a11a3dd9c6
+}
+MGarkSport/src/main/java/com/gark/garksport/modal/enums/StatutEvenenement.java,3\2\3297bdb53f1a7ec7b23313e844df1ebe4ddc0410
