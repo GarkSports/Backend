@@ -65,7 +65,7 @@ public class AdminService {
                     manager.setLastname(manager.getLastname());
                     manager.setEmail(manager.getEmail());
                     manager.setTelephone(manager.getTelephone());
-                    //manager.setTelephone2(manager.getTelephone2());
+                    manager.setTelephone2(manager.getTelephone2());
                     manager.setRole(Role.MANAGER);
                     manager.setPassword(passwordEncoder.encode(generatedPWD));
 
@@ -92,7 +92,7 @@ public class AdminService {
             managerToUpdate.setEmail(manager.getEmail());
             managerToUpdate.setAdresse(manager.getAdresse());
             managerToUpdate.setTelephone(manager.getTelephone());
-            //managerToUpdate.setTelephone2(manager.getTelephone2());
+            managerToUpdate.setTelephone2(manager.getTelephone2());
 
 
             // Save the updated manager

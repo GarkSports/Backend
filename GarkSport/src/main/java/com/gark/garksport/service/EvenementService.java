@@ -120,6 +120,7 @@ public class EvenementService implements IEvenementService {
     public Evenement addMatchAmical(Evenement evenement, Integer equipeId, LocalTime horraire, Integer managerId) {
         evenement.setAcademie(managerRepository.findById(managerId).get().getAcademie());
         evenement.setType(EvenementType.MATCH_AMICAL);
+        evenement.setHeure(horraire);
 
         evenement.setConvocationEquipe(equipeRepository.findById(equipeId).get());
         Equipe equipe = equipeRepository.findById(equipeId).get();
