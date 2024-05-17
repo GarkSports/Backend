@@ -1,29 +1,15 @@
 
 }
-java:S11926"[Define a constant instead of duplicating this literal "Equipe not found with id: " 3 times.(Çú‰ìıÿÿÿÿ8ÌŸÊõ1
-n
-java:S3655€"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8©ÌŸÊõ1
+java:S1192/"[Define a constant instead of duplicating this literal "Equipe not found with id: " 3 times.(Çú‰ìıÿÿÿÿ8õÖÏø1
 m
-java:S3655#"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8©ÌŸÊõ1
+java:S3655%"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8¯×Ïø1
 m
-java:S3655,"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8©ÌŸÊõ1
+java:S3655O"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8°×Ïø1
 m
-java:S3655V"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8¢² Êõ1
-s
-java:S3655ƒ"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¡ÙÄüÿÿÿÿ8¡² Êõ1
-n
-java:S3655„"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(Áª¢î8¡² Êõ1
-i
-java:S1128"LRemove this unused import 'com.gark.garksport.dto.request.EquipeHoraireDTO'.(ä›ˆ8˜¿üèõ1
-i
-java:S1128"LRemove this unused import 'com.gark.garksport.dto.request.ExtendedEventDTO'.(¬ô´æ8™¿üèõ1
-[
-java:S1128">Remove this unused import 'com.gark.garksport.modal.Academie'.(œòÄ8™¿üèõ1
-N
-java:S1128"1Remove this unused import 'java.text.DateFormat'.(÷Œá¼8™¿üèõ1
-R
-java:S1128"5Remove this unused import 'java.text.ParseException'.(ñ®ï•8™¿üèõ1
-T
-java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ8™¿üèõ1
-Z
-java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8™¿üèõ1
+java:S3655y"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8°×Ïø1
+m
+java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8°×Ïø1
+m
+java:S3655~"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(Áª¢î8°×Ïø1
+r
+java:S3655}"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¡ÙÄüÿÿÿÿ8°×Ïø1

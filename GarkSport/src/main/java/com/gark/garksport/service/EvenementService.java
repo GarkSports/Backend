@@ -1,8 +1,5 @@
 package com.gark.garksport.service;
 
-import com.gark.garksport.dto.request.EquipeHoraireDTO;
-import com.gark.garksport.dto.request.ExtendedEventDTO;
-import com.gark.garksport.modal.Academie;
 import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.Equipe;
 import com.gark.garksport.modal.Evenement;
@@ -12,12 +9,8 @@ import com.gark.garksport.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class EvenementService implements IEvenementService {
@@ -127,6 +120,7 @@ public class EvenementService implements IEvenementService {
     public Evenement addMatchAmical(Evenement evenement, Integer equipeId, LocalTime horraire, Integer managerId) {
         evenement.setAcademie(managerRepository.findById(managerId).get().getAcademie());
         evenement.setType(EvenementType.MATCH_AMICAL);
+        evenement.setHeure(horraire);
 
         evenement.setConvocationEquipe(equipeRepository.findById(equipeId).get());
         Equipe equipe = equipeRepository.findById(equipeId).get();
