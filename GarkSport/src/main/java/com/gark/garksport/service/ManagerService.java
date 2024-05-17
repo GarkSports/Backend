@@ -231,6 +231,9 @@ public class ManagerService {
         staff.setRole(Role.STAFF);
         staff.setPassword(passwordEncoder.encode(generatedPWD));
         staff.setRoleName(staff.getRoleName());
+        staff.setTelephone(staff.getTelephone());
+        staff.setPhoto(staff.getPhoto());
+
         User user = getProfil(connectedUser);
 
         Manager manager = (Manager) user;
@@ -275,6 +278,8 @@ public class ManagerService {
         entraineur.setRole(Role.ENTRAINEUR);
         entraineur.setPassword(passwordEncoder.encode(generatedPWD));
         entraineur.setRoleName(entraineur.getRoleName());// Set the permissions for the staff
+        entraineur.setTelephone(entraineur.getTelephone());
+        entraineur.setPhoto(entraineur.getPhoto());
 
 //        Set<Permission> permissions = entraineur.getPermissions();
 //        entraineur.setPermissions(permissions);
@@ -301,7 +306,8 @@ public class ManagerService {
         parent.setEmail(parent.getEmail());
         parent.setRole(Role.PARENT);
         parent.setPassword(passwordEncoder.encode(generatedPWD));
-
+        parent.setTelephone(parent.getTelephone());
+        parent.setPhoto(parent.getPhoto());
 
         User user = getProfil(connectedUser);
 
@@ -326,7 +332,8 @@ public class ManagerService {
         adherent.setEmail(adherent.getEmail());
         adherent.setRole(Role.ADHERENT);
         adherent.setPassword(passwordEncoder.encode(generatedPWD));
-
+        adherent.setTelephone(adherent.getTelephone());
+        adherent.setPhoto(adherent.getPhoto());
 
         User user = getProfil(connectedUser);
 
@@ -395,6 +402,8 @@ public class ManagerService {
             staffToUpdate.setFirstname(request.getFirstname());
             staffToUpdate.setLastname(request.getLastname());
             staffToUpdate.setAdresse(request.getAdresse());
+            staffToUpdate.setTelephone(request.getTelephone());
+            staffToUpdate.setPhoto(request.getPhoto());
 
 //            Set<Permission> permissions = request.getPermissions();
 //            staffToUpdate.setPermissions(permissions);
@@ -420,6 +429,8 @@ public class ManagerService {
             entraineurToUpdate.setFirstname(request.getFirstname());
             entraineurToUpdate.setLastname(request.getLastname());
             entraineurToUpdate.setAdresse(request.getAdresse());
+            entraineurToUpdate.setTelephone(request.getTelephone());
+            entraineurToUpdate.setPhoto(request.getPhoto());
 
 //            Set<Permission> permissions = request.getPermissions();
 //            staffToUpdate.setPermissions(permissions);
@@ -445,6 +456,8 @@ public class ManagerService {
             adherentToUpdate.setFirstname(request.getFirstname());
             adherentToUpdate.setLastname(request.getLastname());
             adherentToUpdate.setAdresse(request.getAdresse());
+            adherentToUpdate.setTelephone(request.getTelephone());
+            adherentToUpdate.setPhoto(request.getPhoto());
 
 //            Set<Permission> permissions = request.getPermissions();
 //            staffToUpdate.setPermissions(permissions);
