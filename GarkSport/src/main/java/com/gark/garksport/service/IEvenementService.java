@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public interface IEvenementService {
-    public Evenement addCompetition(Evenement evenement, Integer managerId);
+    public Evenement addCompetition(Evenement evenement, Integer idEquipe, List<Integer> idMembres,  Integer managerId);
     public Evenement addPersonnalisé(Evenement evenement, Integer idEquipe, List<Integer> idMembres, Integer managerId);
     public Evenement addTest(Evenement evenement, Integer idEquipe, List<Integer> idMembres,  Integer managerId);
     public Evenement addMatchAmical(Evenement evenement, Integer equipeId, LocalTime horraire, Integer managerId);
