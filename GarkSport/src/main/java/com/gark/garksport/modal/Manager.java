@@ -23,8 +23,7 @@ public class Manager extends User {
     }
 
 
-    @JsonIgnoreProperties("roleNames")
-    @JsonIgnore
+    @JsonIgnoreProperties({"roleNames", "manager"})
     @OneToOne(mappedBy = "manager")
     private Academie academie;
 
