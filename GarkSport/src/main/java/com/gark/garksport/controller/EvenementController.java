@@ -24,8 +24,21 @@ public class EvenementController {
 
 
     @PostMapping("/addCompetition")
-    public Evenement addCompetition(@RequestBody Evenement evenement, Principal connectedUser) {
-        return evenementService.addCompetition(evenement, userService.getUserId(connectedUser.getName()));
+    public Evenement addCompetition(@RequestBody CompetitionRequest request, Principal connectedUser) {
+        Evenement evenement = request.getEvenement();
+        Integer idEquipe = request.getIdEquipe();
+        List<Integer> idMembres = request.getIdMembres();
+
+        if (idEquipe != null) {
+            // If idEquipe is provided, call the service method with idEquipe
+            return evenementService.addCompetition(evenement, idEquipe, Collections.emptyList(), userService.getUserId(connectedUser.getName()));
+        } else if (idMembres != null && !idMembres.isEmpty()) {
+            // If idMembres are provided, call the service method with idMembres
+            return evenementService.addCompetition(evenement, null, idMembres, userService.getUserId(connectedUser.getName()));
+        } else {
+            // Handle the situation where neither idEquipe nor idMembres are provided
+            throw new IllegalArgumentException("Either idEquipe or idMembres must be provided.");
+        }
     }
 
     @PostMapping("/addPersonnalise")
