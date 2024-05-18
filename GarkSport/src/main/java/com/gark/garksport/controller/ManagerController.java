@@ -3,6 +3,7 @@ package com.gark.garksport.controller;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gark.garksport.dto.request.AddRoleNameRequest;
+import com.gark.garksport.dto.request.ResetPasswordRequest;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Permission;
 import com.gark.garksport.modal.enums.Role;
@@ -52,6 +53,15 @@ public class ManagerController {
             Principal connectedUser
     ) {
         return managerService.getProfil(connectedUser);
+    }
+
+    @GetMapping("/get-manager-profil")
+    @JsonIgnoreProperties
+    @ResponseBody
+    public Manager getManagerProfil(
+            Principal connectedUser
+    ) {
+        return managerService.getManagerProfil(connectedUser);
     }
 
     @GetMapping("/get-only-role-names")
@@ -105,6 +115,16 @@ public class ManagerController {
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PutMapping("/update-manager")
+    public ResponseEntity<Manager> updateManager(Principal principal, @RequestBody Manager request) {
+        try {
+            Manager updatedManager = managerService.updateManager(principal, request);
+            return ResponseEntity.ok(updatedManager);
+        } catch (RuntimeException | MessagingException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
@@ -169,6 +189,15 @@ public class ManagerController {
         return managerService.getUsersByAcademie(userService.getUserId(connectedUser.getName()));
     }
 
+    @PutMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(Principal connectedUser, @RequestBody ResetPasswordRequest request) {
+        try {
+            String result = managerService.resetPassword(connectedUser, request);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 
 
 //    @GetMapping("/get-all-users")
