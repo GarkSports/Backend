@@ -9,7 +9,15 @@ public enum Permission {
     READ("read"),
     UPDATE("update"),
     CREATE("create"),
-    DELETE("delete")
+    DELETE("delete"),
+
+    Voir_utilisateurs("read_users"),
+
+    MiseAJour_utilisateurs("update_users"),
+
+    Creer_utilisateurs("creer_users"),
+
+    Supprimer_utilisateurs("supprimer_users")
 
 
     ;
