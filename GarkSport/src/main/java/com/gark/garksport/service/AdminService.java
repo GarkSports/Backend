@@ -65,9 +65,13 @@ public class AdminService {
                     manager.setLastname(manager.getLastname());
                     manager.setEmail(manager.getEmail());
                     manager.setTelephone(manager.getTelephone());
-                    //manager.setTelephone2(manager.getTelephone2());
+                    manager.setTelephone2(manager.getTelephone2());
                     manager.setRole(Role.MANAGER);
-                    manager.setPassword(passwordEncoder.encode(generatedPWD));
+                    if (manager.getPassword() != null && !manager.getPassword().isEmpty()) {
+                        manager.setPassword(passwordEncoder.encode(manager.getPassword()));
+                    } else {
+                        manager.setPassword(passwordEncoder.encode(generatedPWD));
+                    }
 
             MimeMessage message = mailSender.createMimeMessage();
             message.setFrom(new InternetAddress("${spring.mail.username}"));
@@ -92,8 +96,8 @@ public class AdminService {
             managerToUpdate.setEmail(manager.getEmail());
             managerToUpdate.setAdresse(manager.getAdresse());
             managerToUpdate.setTelephone(manager.getTelephone());
-            //managerToUpdate.setTelephone2(manager.getTelephone2());
-
+            managerToUpdate.setTelephone2(manager.getTelephone2());
+            managerToUpdate.setPassword(managerToUpdate.getPassword());
 
             // Save the updated manager
             return managerRepository.save(managerToUpdate);

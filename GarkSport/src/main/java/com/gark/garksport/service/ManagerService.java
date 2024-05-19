@@ -3,6 +3,7 @@ package com.gark.garksport.service;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gark.garksport.dto.request.AddRoleNameRequest;
+import com.gark.garksport.dto.request.ResetPasswordRequest;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Permission;
 import com.gark.garksport.modal.enums.Role;
@@ -66,6 +67,12 @@ public class ManagerService {
         return userOptional.orElse(null);
     }
 
+    public Manager getManagerProfil(Principal connectedUser) {
+        var manager = (Manager) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+        Optional<Manager> managerOptional = managerRepository.findById(manager.getId());
+
+        return managerOptional.orElse(null);
+    }
 
     public String getRoleNames(Principal connectedUser) {
         var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
@@ -231,6 +238,9 @@ public class ManagerService {
         staff.setRole(Role.STAFF);
         staff.setPassword(passwordEncoder.encode(generatedPWD));
         staff.setRoleName(staff.getRoleName());
+        staff.setTelephone(staff.getTelephone());
+        staff.setPhoto(staff.getPhoto());
+
         User user = getProfil(connectedUser);
 
         Manager manager = (Manager) user;
@@ -275,6 +285,8 @@ public class ManagerService {
         entraineur.setRole(Role.ENTRAINEUR);
         entraineur.setPassword(passwordEncoder.encode(generatedPWD));
         entraineur.setRoleName(entraineur.getRoleName());// Set the permissions for the staff
+        entraineur.setTelephone(entraineur.getTelephone());
+        entraineur.setPhoto(entraineur.getPhoto());
 
 //        Set<Permission> permissions = entraineur.getPermissions();
 //        entraineur.setPermissions(permissions);
@@ -301,7 +313,8 @@ public class ManagerService {
         parent.setEmail(parent.getEmail());
         parent.setRole(Role.PARENT);
         parent.setPassword(passwordEncoder.encode(generatedPWD));
-
+        parent.setTelephone(parent.getTelephone());
+        parent.setPhoto(parent.getPhoto());
 
         User user = getProfil(connectedUser);
 
@@ -326,7 +339,8 @@ public class ManagerService {
         adherent.setEmail(adherent.getEmail());
         adherent.setRole(Role.ADHERENT);
         adherent.setPassword(passwordEncoder.encode(generatedPWD));
-
+        adherent.setTelephone(adherent.getTelephone());
+        adherent.setPhoto(adherent.getPhoto());
 
         User user = getProfil(connectedUser);
 
@@ -395,6 +409,8 @@ public class ManagerService {
             staffToUpdate.setFirstname(request.getFirstname());
             staffToUpdate.setLastname(request.getLastname());
             staffToUpdate.setAdresse(request.getAdresse());
+            staffToUpdate.setTelephone(request.getTelephone());
+            staffToUpdate.setPhoto(request.getPhoto());
 
 //            Set<Permission> permissions = request.getPermissions();
 //            staffToUpdate.setPermissions(permissions);
@@ -420,6 +436,8 @@ public class ManagerService {
             entraineurToUpdate.setFirstname(request.getFirstname());
             entraineurToUpdate.setLastname(request.getLastname());
             entraineurToUpdate.setAdresse(request.getAdresse());
+            entraineurToUpdate.setTelephone(request.getTelephone());
+            entraineurToUpdate.setPhoto(request.getPhoto());
 
 //            Set<Permission> permissions = request.getPermissions();
 //            staffToUpdate.setPermissions(permissions);
@@ -435,16 +453,18 @@ public class ManagerService {
     }
 
     public Adherent updateAdherent(Integer id, Adherent request) throws MessagingException {
-        Optional<Adherent> existingEntraineur = adherentRepository.findById(id);
+        Optional<Adherent> existingAdherent = adherentRepository.findById(id);
 
-        if (existingEntraineur.isPresent()) {
-            Adherent adherentToUpdate = existingEntraineur.get();
+        if (existingAdherent.isPresent()) {
+            Adherent adherentToUpdate = existingAdherent.get();
 
             adherentToUpdate.setEmail(request.getEmail());
             //staffToUpdate.setRoleName(request.getRoleName());
             adherentToUpdate.setFirstname(request.getFirstname());
             adherentToUpdate.setLastname(request.getLastname());
             adherentToUpdate.setAdresse(request.getAdresse());
+            adherentToUpdate.setTelephone(request.getTelephone());
+            adherentToUpdate.setPhoto(request.getPhoto());
 
 //            Set<Permission> permissions = request.getPermissions();
 //            staffToUpdate.setPermissions(permissions);
@@ -459,6 +479,53 @@ public class ManagerService {
         }
     }
 
+    public Manager updateManager(Principal connectedUser, Manager request) throws MessagingException {
+        User user = getProfil(connectedUser);
+
+        // Cast the user to Manager
+        if (user instanceof Manager) {
+            Manager manager = (Manager) user;
+
+            // Update the manager's details
+            manager.setEmail(request.getEmail());
+            manager.setFirstname(request.getFirstname());
+            manager.setLastname(request.getLastname());
+            manager.setAdresse(request.getAdresse());
+            manager.setTelephone(request.getTelephone());
+            manager.setTelephone2(request.getTelephone2());
+            // manager.setPhoto(request.getPhoto());
+            manager.setNationalite(request.getNationalite());
+            manager.setDateNaissance(request.getDateNaissance());
+
+            // Save the updated manager
+            return managerRepository.save(manager);
+        } else {
+            // Manager not found, handle the case accordingly
+            throw new RuntimeException("Manager not found for the connected user");
+        }
+    }
+
+
+    public String resetPassword(Principal connectedUser, ResetPasswordRequest request) throws MessagingException {
+
+            User user = getProfil(connectedUser);
+
+            // Check if the current password matches
+            if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+                throw new IllegalStateException("Current password is incorrect");
+            }
+
+            // Check if the new password matches the confirmation password
+            if (!request.getNewPassword().equals(request.getConfirmPassword())) {
+                throw new IllegalStateException("New password does not match the confirmation password");
+            }
+
+            // Update password
+            user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+            repository.save(user);
+            return "Password updated successfully";
+
+    }
 
 //    public Parent updateParent(Integer id, Adherent request) throws MessagingException {
 //        Optional<Parent> existingParent = parentRepository.findById(id);

@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-
 public class AddRoleNameRequest {
     private String roleName;
     private List<String> permissions;
