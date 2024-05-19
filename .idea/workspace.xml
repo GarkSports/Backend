@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/d/2d576a531796885720d631ee24561483449d6850" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/d/2d576a531796885720d631ee24561483449d6850" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/d/5d5643b1a26206261dabc9cd7483fcfdbfbbf8b4" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/d/5d5643b1a26206261dabc9cd7483fcfdbfbbf8b4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/8/68310adb00a58f4094a38640af67c47cead36c31" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/8/68310adb00a58f4094a38640af67c47cead36c31" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/c/6c9bf551517fe689474a668a44e75ee141687a09" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/c/6c9bf551517fe689474a668a44e75ee141687a09" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/5/95f4476ee432d6c9e401ec116afeeb57ba7bc6e7" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/5/95f4476ee432d6c9e401ec116afeeb57ba7bc6e7" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e4c4218144ae0675adb878d2fa70a1f4a0aa2468" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e4c4218144ae0675adb878d2fa70a1f4a0aa2468" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e5ee0dc24b0deb4212863c73479273ea4e207bae" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e5ee0dc24b0deb4212863c73479273ea4e207bae" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/NotificationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/NotificationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/PostsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/PostsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Chat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/AdherentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/AdherentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/ChatRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/ChatRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/ChatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/ChatService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/NotificationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,6 +238,23 @@
       <workItem from="1715761649947" duration="10665000" />
       <workItem from="1715804935557" duration="155000" />
       <workItem from="1715846946951" duration="4402000" />
+      <workItem from="1715855163929" duration="1135000" />
+      <workItem from="1715863559614" duration="608000" />
+      <workItem from="1715868625194" duration="2954000" />
+      <workItem from="1715875019749" duration="79000" />
+      <workItem from="1715875877509" duration="1350000" />
+      <workItem from="1715898535086" duration="653000" />
+      <workItem from="1715941932897" duration="862000" />
+      <workItem from="1715952233998" duration="2821000" />
+      <workItem from="1715955636075" duration="1541000" />
+      <workItem from="1715975909673" duration="2830000" />
+      <workItem from="1715983184980" duration="256000" />
+      <workItem from="1716023381198" duration="7130000" />
+      <workItem from="1716122011046" duration="270000" />
+      <workItem from="1716127028731" duration="3294000" />
+      <workItem from="1716140292387" duration="2049000" />
+      <workItem from="1716149234812" duration="334000" />
+      <workItem from="1716149716997" duration="79000" />
     </task>
     <servers />
   </component>

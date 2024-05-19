@@ -1,9 +1,11 @@
 
-G	java:S106H"+Replace this use of System.err by a logger.(úèƒú8ÀÅ…ø1
-G	java:S106M"+Replace this use of System.err by a logger.(‹ÙÁİ8ÁÅ…ø1
+G	java:S106E"+Replace this use of System.err by a logger.(úèƒú8ö±¦Äø1
+G	java:S106J"+Replace this use of System.err by a logger.(‹ÙÁİ8÷±¦Äø1
+L	java:S106c"+Replace this use of System.err by a logger.(ä½ÔÌşÿÿÿÿ8ÒÌ’Øø1
+G	java:S106e"+Replace this use of System.err by a logger.(ë¤ê‚8ÓÌ’Øø1
 Z
-java:S1128">Remove this unused import 'com.gark.garksport.modal.Adherent'.(ÈË‡U8ÆÅ…ø1
+java:S1128">Remove this unused import 'com.gark.garksport.modal.Adherent'.(ÈË‡U8µĞüØø1
 o
-java:S1128"MRemove this unused import 'com.gark.garksport.repository.AdherentRepository'.(ï‰¾Œÿÿÿÿÿ8ÆÅ…ø1
+java:S1128"MRemove this unused import 'com.gark.garksport.repository.AdherentRepository'.(ï‰¾Œÿÿÿÿÿ8µĞüØø1
 Q
-java:S1128"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8ÆÅ…ø1
+java:S1128"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8µĞüØø1

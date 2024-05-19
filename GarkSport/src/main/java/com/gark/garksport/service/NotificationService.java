@@ -5,10 +5,7 @@ import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.NotificationToken;
 import com.gark.garksport.repository.AdherentRepository;
 import com.gark.garksport.repository.NotificationTokenRepository;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingException;
-import com.google.firebase.messaging.Message;
-import com.google.firebase.messaging.Notification;
+import com.google.firebase.messaging.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,9 +94,12 @@ public class NotificationService {
             try{
                 firebaseMessaging.send(message);
                 return "Success sending notification";
-            }catch(FirebaseMessagingException e){
-                e.printStackTrace();
-                return "Error Sendin Notification";
+            }catch(FirebaseMessagingException ex){
+                if (ex.getMessagingErrorCode() == MessagingErrorCode.UNREGISTERED) {
+                    System.err.println("Device token has been unregistered");
+                } else {
+                    System.err.println("Failed to send the notification");
+                }
             }
         }
         return "end of sending notifications";

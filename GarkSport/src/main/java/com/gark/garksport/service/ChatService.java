@@ -60,7 +60,7 @@ public class ChatService {
         chatRepository.save(chat);
 
         NotificationMessage notificationMessage = new NotificationMessage();
-        notificationMessage.setTitle("new message");
+        notificationMessage.setTitle("GarkSport");
         notificationMessage.setBody("vous avez recu un nouveau message ");
         notificationMessage.setImage("https://cdn.iconscout.com/icon/free/png-256/free-message-2367724-1976874.png?f=webp&w=256");
         notificationService.sendNotificationToUser(
