@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface NotificationTokenRepository extends JpaRepository<NotificationToken, Integer> {
 
+    NotificationToken findByUserId(Integer userId);
+
     @Query("SELECT nt.token FROM NotificationToken nt WHERE nt.academieId = :academieId")
 
     List<String> findTokensByAcademieId(Integer academieId);

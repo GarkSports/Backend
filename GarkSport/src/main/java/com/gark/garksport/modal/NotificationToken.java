@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class NotificationToken {
     @Id
-    private String userId;
+    private Integer userId;
     private String token;
     private String codeEquipe;
     private Integer academieId;

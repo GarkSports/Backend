@@ -1,18 +1,22 @@
 package com.gark.garksport.service;
 
+import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.NotificationToken;
+import com.gark.garksport.repository.AdherentRepository;
 import com.gark.garksport.repository.NotificationTokenRepository;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingException;
-import com.google.firebase.messaging.Message;
-import com.google.firebase.messaging.Notification;
+import com.google.firebase.messaging.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class NotificationService {
 
     @Autowired
@@ -22,8 +26,23 @@ public class NotificationService {
     private NotificationTokenRepository notificationTokenRepository;
 
 
-    public void addnotificationtoken(NotificationToken notificationToken){
-        notificationTokenRepository.save(notificationToken);
+
+    private final UserService userService;
+
+
+    public NotificationToken addnotificationtoken(Principal currentUser, String token){
+        Integer currentuserid = userService.getUserId(currentUser.getName());
+        NotificationToken notificationdata = new NotificationToken();
+        notificationdata.setUserId(currentuserid);
+        notificationdata.setToken(token);
+        notificationdata.setAcademieId(userService.getadherentacademieid(currentuserid));
+        notificationdata.setCodeEquipe(userService.getadherentequipe(currentuserid));
+        return notificationTokenRepository.save(notificationdata);
+    }
+
+    public void deletetoken(Principal currentUser){
+        Integer currentuserid = userService.getUserId(currentUser.getName());
+        notificationTokenRepository.deleteById(currentuserid);
     }
 
     public void sendNotificationToAcademy(Integer academieId, NotificationMessage notificationMessage) {
@@ -35,6 +54,28 @@ public class NotificationService {
         List<String> tokens = notificationTokenRepository.findTokensByCodeEquipe(codeEquipe);
         sendNotificationToTokens(tokens, notificationMessage);
     }
+
+    public void sendNotificationToUser(Integer userId, NotificationMessage notificationMessage) {
+        NotificationToken notificationToken = notificationTokenRepository.findByUserId(userId);
+        if (notificationToken != null) {
+            String token = notificationToken.getToken();
+            if (token != null) {
+                List<String> tokens = new ArrayList<>();
+                tokens.add(token);
+                sendNotificationToTokens(tokens, notificationMessage);
+            } else {
+                // Handle the case where the token is null
+                // For example, log an error or throw an exception
+                System.err.println("Token is null for user: " + userId);
+            }
+        } else {
+            // Handle the case where the NotificationToken is not found for the user
+            // For example, log an error or throw an exception
+            System.err.println("NotificationToken not found for user: " + userId);
+        }
+    }
+
+
 
     private String sendNotificationToTokens(List<String> tokens, NotificationMessage notificationMessage) {
         Notification notification =Notification
@@ -53,9 +94,12 @@ public class NotificationService {
             try{
                 firebaseMessaging.send(message);
                 return "Success sending notification";
-            }catch(FirebaseMessagingException e){
-                e.printStackTrace();
-                return "Error Sendin Notification";
+            }catch(FirebaseMessagingException ex){
+                if (ex.getMessagingErrorCode() == MessagingErrorCode.UNREGISTERED) {
+                    System.err.println("Device token has been unregistered");
+                } else {
+                    System.err.println("Failed to send the notification");
+                }
             }
         }
         return "end of sending notifications";
