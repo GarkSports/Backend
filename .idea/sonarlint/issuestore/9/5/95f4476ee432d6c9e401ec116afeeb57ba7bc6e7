@@ -1,6 +1,4 @@
 
-_
-java:S6813&"BRemove this field injection and use constructor injection instead.(êæÄÞ8ò­À–÷1
 o
 java:S6204Z"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ø­À–÷1
 e
@@ -12,3 +10,9 @@ Y	java:S125À"<This block of commented-out lines of code should be removed.(Áí
 I
 java:S1452Þ"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8ý­À–÷1
 ^	java:S125¦"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8®À–÷1
+a
+java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8üªƒ–ø1
+p
+java:S1128"NRemove this unused import 'com.gark.garksport.dto.request.AddRoleNameRequest'.(í…Êºûÿÿÿÿ8üªƒ–ø1
+b
+java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(Ž»ÔÕüÿÿÿÿ8ýªƒ–ø1

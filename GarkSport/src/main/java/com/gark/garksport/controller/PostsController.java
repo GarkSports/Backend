@@ -22,14 +22,6 @@ public class PostsController {
     @Autowired
     private PostsService postsService;
 
-    @GetMapping("/get-profil")
-    @ResponseBody
-    public User getProfil(
-            Principal connectedUser
-    ) {
-        return adminService.getProfil(connectedUser);
-    }
-
 
     @GetMapping("/getacademiePosts")
     public List<Posts> getacademiePosts(
