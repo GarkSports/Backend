@@ -3,6 +3,7 @@ package com.gark.garksport.service;
 import com.gark.garksport.dto.chat.ChatContactDTO;
 import com.gark.garksport.dto.chat.ChatDTO;
 import com.gark.garksport.modal.Chat;
+import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.ChatRepository;
 import com.gark.garksport.repository.UserRepository;
@@ -26,11 +27,13 @@ public class ChatService {
 
     private final UserService userService;
 
+    private final NotificationService notificationService;
+
     public List<ChatDTO> getChatHistory(Principal connectedUser, Integer userId2) {
         Integer userId1 = userService.getUserId(connectedUser.getName());
         User user1 = userRepository.findById(userId1).orElse(null);
         User user2 = userRepository.findById(userId2).orElse(null);
-        List<Chat> chatList = chatRepository.findBySenderAndReceiverOrReceiverAndSenderOrderByTimestamp(user1, user2,user1,user2);
+        List<Chat> chatList = chatRepository.findBySenderAndReceiverOrReceiverAndSenderOrderByTimestampDesc(user1, user2,user1,user2);
         List<ChatDTO> chatDTOList = new ArrayList<>();
         for (Chat chat : chatList) {
             ChatDTO chatDTO = new ChatDTO();
@@ -56,6 +59,15 @@ public class ChatService {
         chat.setTimestamp(LocalDateTime.now());
         chatRepository.save(chat);
 
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("GarkSport");
+        notificationMessage.setBody("vous avez recu un nouveau message ");
+        notificationMessage.setImage("https://cdn.iconscout.com/icon/free/png-256/free-message-2367724-1976874.png?f=webp&w=256");
+        notificationService.sendNotificationToUser(
+                receiver.getId(),
+                notificationMessage
+                );
+
         // Create and return the ChatMessageDTO
         ChatDTO chatMessageDTO = new ChatDTO();
         chatMessageDTO.setSenderId(senderId);
@@ -70,7 +82,7 @@ public class ChatService {
         User currentUser = userRepository.findById(currentUserId).orElse(null);
 
         List<ChatContactDTO> usersWithMessages = new ArrayList<>();
-        List<Chat> chats = chatRepository.findBySenderOrReceiverOrderByTimestamp(currentUser, currentUser);
+        List<Chat> chats = chatRepository.findBySenderOrReceiverOrderByTimestampDesc(currentUser, currentUser);
         for (Chat chat : chats) {
             if (!chat.getSender().equals(currentUser)) {
                 usersWithMessages.add(convertToDTO(chat.getSender()));

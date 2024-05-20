@@ -1,5 +1,6 @@
 package com.gark.garksport.service;
 
+import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.AdherentRepository;
 import com.gark.garksport.repository.UserRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository repository;
+    private  final AdherentRepository adherentRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     @Autowired
@@ -34,6 +36,15 @@ public class UserService {
         return user.getFirstname() + " " + user.getLastname();
     }
 
+    public String getadherentequipe(Integer userid){
+        Adherent adherent = adherentRepository.findById(userid).orElseThrow(() ->new RuntimeException("adherent equipe not found"));
+        return adherent.getNomEquipe();
+    }
+
+    public Integer getadherentacademieid(Integer userid){
+        Adherent adherent = adherentRepository.findById(userid).orElseThrow(() ->new RuntimeException("adherent academieid not found"));
+        return adherent.getAcademie().getId();
+    }
 
 
 
