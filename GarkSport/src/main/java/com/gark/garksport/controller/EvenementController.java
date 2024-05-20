@@ -105,4 +105,9 @@ public class EvenementController {
     public List<Adherent> getMembersByEquipe(@PathVariable Integer idEquipe) {
         return evenementService.getMembersByEquipe(idEquipe);
     }
+
+    @GetMapping("/getMembersByEvenement/{idEvenement}")
+    public List<Adherent> getMembersByEvenement(@PathVariable Integer idEvenement) {
+        return evenementService.getMembersByEvenement(idEvenement);
+    }
 }
