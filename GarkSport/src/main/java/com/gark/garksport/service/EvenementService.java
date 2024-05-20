@@ -187,8 +187,8 @@ public class EvenementService implements IEvenementService {
     }
 
     @Override
-    public List<Evenement> getAllEvenements() {
-        return evenementRepository.findAll();
+    public Set<Evenement> getAllEvenements(Integer managerId) {
+        return evenementRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
     }
 
     @Override
