@@ -211,5 +211,13 @@ public class EvenementService implements IEvenementService {
         return new ArrayList<>(equipe.getAdherents());
     }
 
+    @Override
+    public List<Adherent> getMembersByEvenement(Integer idEvenement) {
+        Evenement evenement = evenementRepository.findById(idEvenement)
+                .orElseThrow(() -> new NoSuchElementException("Evenement not found with id: " + idEvenement));
+        Set<Adherent> members =  evenement.getConvocationEquipe().getAdherents();
+        return new ArrayList<>(members);
+    }
+
 
 }
