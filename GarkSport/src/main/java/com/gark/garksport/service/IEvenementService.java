@@ -5,6 +5,7 @@ import com.gark.garksport.modal.enums.StatutEvenenement;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 
 public interface IEvenementService {
@@ -12,7 +13,7 @@ public interface IEvenementService {
     public Evenement addPersonnalisé(Evenement evenement, Integer idEquipe, List<Integer> idMembres, Integer managerId);
     public Evenement addTest(Evenement evenement, Integer idEquipe, List<Integer> idMembres,  Integer managerId);
     public Evenement addMatchAmical(Evenement evenement, Integer equipeId, LocalTime horraire, Integer managerId);
-    public List<Evenement> getAllEvenements();
+    public Set<Evenement> getAllEvenements(Integer managerId);
     public void deleteEvenement(Integer id);
     public Evenement changeStatutEvenement(Integer id, StatutEvenenement statutEvenenement);
     public List<Adherent> getMembersByEquipe(Integer idEquipe);
