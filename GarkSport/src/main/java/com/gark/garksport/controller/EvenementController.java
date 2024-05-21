@@ -87,8 +87,8 @@ public class EvenementController {
     }
 
     @GetMapping("/getAllEvenements")
-    public List<Evenement> getAllEvenements() {
-        return evenementService.getAllEvenements();
+    public Set<Evenement> getAllEvenements(Principal connectedUser) {
+        return evenementService.getAllEvenements(userService.getUserId(connectedUser.getName()));
     }
 
     @DeleteMapping("/deleteEvenement/{id}")
