@@ -13,9 +13,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -221,6 +221,7 @@
       <workItem from="1715956463817" duration="5513000" />
       <workItem from="1716047579706" duration="2274000" />
       <workItem from="1716243757639" duration="799000" />
+      <workItem from="1716290894616" duration="9030000" />
     </task>
     <servers />
   </component>
