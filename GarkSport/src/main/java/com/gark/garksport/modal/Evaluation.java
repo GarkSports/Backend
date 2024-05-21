@@ -38,6 +38,10 @@ public class Evaluation {
     private float imc;
     private float vitesse;
     private float endurance;
-    private String note;
+    private String notePoids;
+    private String noteTaille;
+    private String noteImc;
+    private String noteVitesse;
+    private String noteEndurance;
 
 }
