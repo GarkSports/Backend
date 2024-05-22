@@ -223,3 +223,5 @@ w
 GGarkSport/src/main/java/com/gark/garksport/dto/request/TestRequest.java,c\5\c56e709eafd8098cb035c4742d7e19a11a3dd9c6
 }
 MGarkSport/src/main/java/com/gark/garksport/modal/enums/StatutEvenenement.java,3\2\3297bdb53f1a7ec7b23313e844df1ebe4ddc0410
+~
+NGarkSport/src/main/java/com/gark/garksport/dto/request/CompetitionRequest.java,c\7\c794dfe2b78b7d9da99dd2e3325225260d144050

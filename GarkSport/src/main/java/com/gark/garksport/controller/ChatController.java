@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -33,14 +34,27 @@ public class ChatController {
 
     @PostMapping("/send")
     public ResponseEntity<ChatDTO> sendMessage(Principal currentUser, @RequestBody SendMessageRequest request) {
-        Integer receiverId = request.getReceiverId();
+        List<Integer> receiversId = request.getReceiversId();
         String message = request.getMessage();
-        User receiver = userRepository.findById(receiverId).orElse(null);
-        if (currentUser == null || receiver == null || message == null) {
+        Integer idEquipe = request.getIdEquipe();
+
+        if (currentUser == null || message == null || (receiversId == null && idEquipe == null) || (receiversId != null && receiversId.isEmpty())) {
             return ResponseEntity.badRequest().build();
-        }
-        ChatDTO chatMessageDTO = chatService.sendMessage(currentUser, receiver, message);
-        return ResponseEntity.ok(chatMessageDTO);
+        } else
+        if (idEquipe != null) {
+            System.out.println("with id_equipe");
+            System.out.println(idEquipe);
+            ChatDTO chatMessageDTO = chatService.sendMessage(currentUser, null,idEquipe, message);
+            return ResponseEntity.ok(chatMessageDTO);
+
+        } else  if (receiversId != null && !receiversId.isEmpty()) {
+            System.out.println("with receivers");
+            System.out.println(receiversId);
+            ChatDTO chatMessageDTO = chatService.sendMessage(currentUser, receiversId, null ,message);
+            return ResponseEntity.ok(chatMessageDTO);
+
+        } throw new IllegalArgumentException("Either idEquipe or receiversId must be provided.");
+
     }
 
     @GetMapping("/usersWithMessages")
