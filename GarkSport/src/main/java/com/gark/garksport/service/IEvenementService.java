@@ -17,7 +17,8 @@ public interface IEvenementService {
     public void deleteEvenement(Integer id);
     public Evenement changeStatutEvenement(Integer id, StatutEvenenement statutEvenenement);
     public List<Adherent> getMembersByEquipe(Integer idEquipe);
-
     public List<Adherent> getMembersByEvenement(Integer idEvenement);
+    public Evenement updateEvenement(Evenement evenement, List<Integer> idMembres, Integer evenementId);
+
 
 }
