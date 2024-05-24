@@ -286,5 +286,21 @@ public class EvenementService implements IEvenementService {
         return new ArrayList<>(members);
     }
 
+    @Override
+    public Evenement updateEvenement(Evenement evenement, List<Integer> idMembres, Integer evenementId) {
+        Evenement existingEvenement = evenementRepository.findById(evenementId)
+                .orElseThrow(() -> new NoSuchElementException("Evenement not found with id: " + evenementId));
+
+        existingEvenement.setNomEvent(evenement.getNomEvent());
+        existingEvenement.setLieu(evenement.getLieu());
+        existingEvenement.setDate(evenement.getDate());
+        existingEvenement.setHeure(evenement.getHeure());
+        existingEvenement.setConvocationMembres(new HashSet<>(adherentRepository.findByIdIn(idMembres)));
+
+        return evenementRepository.save(existingEvenement);
+    }
+
+
+
 
 }
