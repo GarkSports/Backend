@@ -71,7 +71,7 @@ public class ChatService {
                     .map(adherent -> (User) adherent)
                     .collect(Collectors.toSet());
             chat.setReceivers(receivers);
-            System.out.println("hhhhhhhhhhhhh");
+            System.out.println("equipe id  ");
             System.out.println(receivers.size());
 
 
@@ -88,7 +88,6 @@ public class ChatService {
 
         System.out.println("test receivers");
         System.out.println(receiverdId);
-        //Set<User> receivers= userRepository.findByIdIn(receiverdId);
         System.out.println("test receivers");
         System.out.println(receivers.size());
 
