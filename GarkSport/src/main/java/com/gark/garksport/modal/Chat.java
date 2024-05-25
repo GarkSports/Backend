@@ -23,7 +23,7 @@ public class Chat {
 
     @Column(columnDefinition = "TEXT")
     private String message;
-
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime timestamp;
 
     // Getters and setters
