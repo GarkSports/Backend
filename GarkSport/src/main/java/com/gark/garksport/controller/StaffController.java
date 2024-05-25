@@ -8,6 +8,7 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.flogger.Flogger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -42,13 +43,44 @@ public class StaffController {
     }
 
 
-    @PostMapping("/save-evaluation")
-    public ResponseEntity<Evaluation> saveEvaluation(@RequestParam Integer adherentId, @RequestBody Evaluation evaluation,
-                                                     @RequestParam boolean clearOldFields) {
-        Evaluation savedEvaluation = entraineurService.saveEvaluation(adherentId, evaluation, clearOldFields);
-        return ResponseEntity.ok(savedEvaluation);
+    @PutMapping("/add-fields-evaluation")
+    @ResponseStatus
+    public ResponseEntity<Evaluation> addFieldsToEvaluation(@RequestParam Long evaluationId,
+                                                            @RequestBody DynamicField dynamicFields){
+        Evaluation newEvaluation = entraineurService.addFieldsToEvaluation(evaluationId, dynamicFields).getBody();
+        return ResponseEntity.ok(newEvaluation);
     }
 
+    @DeleteMapping("/{evaluationId}/dynamicFields/{dynamicFieldId}")
+    public ResponseEntity<Evaluation> removeDynamicFieldFromEvaluation(
+            @PathVariable Long evaluationId,
+            @PathVariable Integer dynamicFieldId) {
+        return entraineurService.removeDynamicFieldFromEvaluation(evaluationId, dynamicFieldId);
+    }
+
+    @PutMapping("/{evaluationId}/dynamicFields/{dynamicFieldId}")
+    public ResponseEntity<Evaluation> updateDynamicFieldInEvaluation(
+            @PathVariable Long evaluationId,
+            @PathVariable Integer dynamicFieldId,
+            @RequestBody DynamicField request) {
+        return entraineurService.updateDynamicFieldInEvaluation(evaluationId, dynamicFieldId, request);
+    }
+//    @PostMapping("/save-evaluation")
+//    public ResponseEntity<Evaluation> createEvaluation(@RequestParam Integer equipeId) {
+//        Evaluation createdEvaluation = entraineurService.createEvaluation(equipeId);
+//        return ResponseEntity.ok(createdEvaluation);
+//    }
+
+    @GetMapping("/hello1")
+    public String getHello1(){
+        return "hello";
+    }
+
+    @PostMapping("/evaluations/{evaluationId}/dynamic-fields")
+    public ResponseEntity<DynamicField> addDynamicField(@PathVariable Long evaluationId, @RequestBody DynamicField dynamicField) {
+        DynamicField createdDynamicField = entraineurService.addDynamicFieldToEvaluation(evaluationId, dynamicField);
+        return ResponseEntity.ok(createdDynamicField);
+    }
 
     @GetMapping("/get-evaluations")
     public ResponseEntity<List<Evaluation>> getEvaluations(@RequestParam Integer adherentId) {

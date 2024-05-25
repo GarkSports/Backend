@@ -9,7 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -26,13 +28,16 @@ public class Evaluation {
     @JsonIgnore
     private Adherent adherent;
 
+    @ManyToOne
+    @JoinColumn(name = "equipe_id")
+    @JsonIgnore
+    private Equipe equipe;
+
     @OneToMany(mappedBy = "evaluation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("evaluation")
     private List<DynamicField> dynamicFields = new ArrayList<>();
 
-    public List<DynamicField> getDynamicFields() {
-        return dynamicFields;
-    }
-
+    private String evaluationName;
     private float poids;
     private float taille;
     private float imc;

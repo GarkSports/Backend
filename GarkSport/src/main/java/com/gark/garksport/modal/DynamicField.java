@@ -1,31 +1,30 @@
 package com.gark.garksport.modal;
 
-import com.gark.garksport.modal.Evaluation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Getter
+@Setter
 public class DynamicField {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    private String name;
-    private String value;
-    private String unit;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "evaluation_id")
     private Evaluation evaluation;
 
-    // Getters and setters
-    public void setEvaluation(Evaluation evaluation) {
-        this.evaluation = evaluation;
-    }
+    private String fieldName;
+    private String unit;
+    private String value; // or Object
 
-    // Other getters and setters...
+
 }
