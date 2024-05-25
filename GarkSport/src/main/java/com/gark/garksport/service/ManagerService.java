@@ -140,7 +140,7 @@ public class ManagerService {
     }
 
 
-    public ResponseEntity<RoleName> addRoleName(RoleName request, Principal connectedUser) {
+        public ResponseEntity<RoleName> addRoleName(RoleName request, Principal connectedUser) {
         User user = getProfil(connectedUser);
         if (user instanceof Manager) {
             Manager manager = (Manager) user;
@@ -564,6 +564,8 @@ public class ManagerService {
             }
         }
     }
+
+
 
 //    public Staff addStaff(Staff staff, Set<Permission> inputPermissions) throws MessagingException {
 //
