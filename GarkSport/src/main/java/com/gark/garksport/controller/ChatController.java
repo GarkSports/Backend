@@ -3,9 +3,9 @@ package com.gark.garksport.controller;
 import com.gark.garksport.dto.chat.ChatContactDTO;
 import com.gark.garksport.dto.chat.ChatDTO;
 import com.gark.garksport.dto.chat.SendMessageRequest;
-import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.UserRepository;
-import com.gark.garksport.service.ChatService;
+import com.gark.garksport.service.IChatService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +16,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/chat")
+@RequiredArgsConstructor
 public class ChatController {
+
     @Autowired
-    private ChatService chatService;
-    @Autowired
-    private UserRepository userRepository;
+    private IChatService chatService;
 
 
     @GetMapping("/history")
@@ -65,5 +65,11 @@ public class ChatController {
         }
         List<ChatContactDTO> usersWithMessages = chatService.getUsersWithMessages(currentUser);
         return ResponseEntity.ok(usersWithMessages);
+    }
+
+    @DeleteMapping("/user/{otherUserId}")
+    public ResponseEntity<Void> removeUserFromDiscussions(Principal principal, @PathVariable Integer otherUserId) {
+        chatService.removeUserFromDiscussions(principal, otherUserId);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -26,4 +26,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
     List<Chat> findByGroupOrderByTimestampDesc(Equipe group);
 
 
+    List<Chat> findBySenderAndReceiversContaining(User currentUser, User otherUser);
+
+    List<Chat> findByReceiversContainingAndSender(User currentUser, User otherUser);
 }

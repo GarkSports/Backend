@@ -1,17 +1,17 @@
 
 e
-java:S2259}"CA "NullPointerException" could be thrown; "group" is nullable here.(ÈÍµœüÿÿÿÿ8®ˆı“ú1
+java:S2259}"CA "NullPointerException" could be thrown; "group" is nullable here.(ÈÍµœüÿÿÿÿ8ª†Î¶û1
 t
-java:S6204-"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ÙŸ³ıÿÿÿÿ8³ˆı“ú1
+java:S6204-"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ÙŸ³ıÿÿÿÿ8Ï†Î¶û1
 _
-java:S1612G"=Replace this lambda with method reference 'User.class::cast'.(˜Õà…şÿÿÿÿ8¸ˆı“ú1
-L	java:S106J"+Replace this use of System.out by a logger.(´Ì«¤ÿÿÿÿÿ8ºˆı“ú1
-G	java:S106K"+Replace this use of System.out by a logger.(Íˆº”8ºˆı“ú1
-L	java:S106Y"+Replace this use of System.out by a logger.(½Õü·ûÿÿÿÿ8Öøı“ú1
-G	java:S106Z"+Replace this use of System.out by a logger.(ãšÏÕ8×øı“ú1
-L	java:S106["+Replace this use of System.out by a logger.(½Õü·ûÿÿÿÿ8ÏŞ„”ú1
-G	java:S106\"+Replace this use of System.out by a logger.(Íˆº”8ÏŞ„”ú1
+java:S1612G"=Replace this lambda with method reference 'User.class::cast'.(˜Õà…şÿÿÿÿ8é†Î¶û1
+L	java:S106J"+Replace this use of System.out by a logger.(´Ì«¤ÿÿÿÿÿ8ë†Î¶û1
+G	java:S106K"+Replace this use of System.out by a logger.(Íˆº”8í†Î¶û1
+L	java:S106Y"+Replace this use of System.out by a logger.(½Õü·ûÿÿÿÿ8ñ†Î¶û1
+G	java:S106Z"+Replace this use of System.out by a logger.(ãšÏÕ8ò†Î¶û1
+L	java:S106["+Replace this use of System.out by a logger.(½Õü·ûÿÿÿÿ8ó†Î¶û1
+G	java:S106\"+Replace this use of System.out by a logger.(Íˆº”8ô†Î¶û1
 u
-java:S6204’"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(¥³¹Ôÿÿÿÿÿ8¿ˆı“ú1
+java:S6204’"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(¥³¹Ôÿÿÿÿÿ8–‡Î¶û1
 u
-java:S6204©"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ñ¿Ø€ıÿÿÿÿ8Âˆı“ú1
+java:S6204©"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ñ¿Ø€ıÿÿÿÿ8¨‡Î¶û1
