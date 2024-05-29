@@ -1,6 +1,5 @@
 
-e
-java:S2259}"CA "NullPointerException" could be thrown; "group" is nullable here.(ÈÍµœüÿÿÿÿ8ª†Î¶û1
+h	java:S112›"FDefine and throw a dedicated exception instead of using a generic one.(©š´µûÿÿÿÿ8Œ¸ªúû1
 t
 java:S6204-"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ÙŸ³ıÿÿÿÿ8Ï†Î¶û1
 _
@@ -12,6 +11,4 @@ G	java:S106Z"+Replace this use of System.out by a logger.(ãšÏÕ8ò†Î¶û1
 L	java:S106["+Replace this use of System.out by a logger.(½Õü·ûÿÿÿÿ8ó†Î¶û1
 G	java:S106\"+Replace this use of System.out by a logger.(Íˆº”8ô†Î¶û1
 u
-java:S6204’"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(¥³¹Ôÿÿÿÿÿ8–‡Î¶û1
-u
-java:S6204©"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ñ¿Ø€ıÿÿÿÿ8¨‡Î¶û1
+java:S6204‹"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ñ¿Ø€ıÿÿÿÿ8¨‡Î¶û1

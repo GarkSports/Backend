@@ -225,3 +225,9 @@ GGarkSport/src/main/java/com/gark/garksport/dto/request/TestRequest.java,c\5\c5
 MGarkSport/src/main/java/com/gark/garksport/modal/enums/StatutEvenenement.java,3\2\3297bdb53f1a7ec7b23313e844df1ebe4ddc0410
 ~
 NGarkSport/src/main/java/com/gark/garksport/dto/request/CompetitionRequest.java,c\7\c794dfe2b78b7d9da99dd2e3325225260d144050
+t
+DGarkSport/src/main/java/com/gark/garksport/service/IChatService.java,1\7\17997e709a956f89fa13c0398b37ced6bc4a8519
+€
+PGarkSport/src/main/java/com/gark/garksport/websocket/WebSocketConfiguration.java,0\3\03396be319dde81704215ebc2a112f1b88799ae6
+ƒ
+SGarkSport/src/main/java/com/gark/garksport/websocket/WebNotificationController.java,2\e\2ee46f096227a1f0f236875e16037dc2818c109e
