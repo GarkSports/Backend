@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -38,6 +39,10 @@ public class Equipe {
 
     @OneToMany
     private Set<Entraineur> entraineurs;
+
+    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("equipe")
+    private List<Evaluation> evaluations = new ArrayList<>();
 
     @ManyToOne
     private Academie academie;

@@ -3,15 +3,18 @@ package com.gark.garksport.modal;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gark.garksport.modal.enums.StatutAdherent;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true, exclude = {"paiement"})
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Adherent extends User {
     private String informationParent;
@@ -33,14 +36,23 @@ public class Adherent extends User {
     @ManyToOne
     private Academie academie;
 
+    @JsonIgnoreProperties("adherent")
+    @OneToMany(mappedBy = "adherent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Evaluation> evaluations = new ArrayList<>();
+
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Parent> parents;
+
 
     @JsonIgnoreProperties("adherent")
     @OneToOne(mappedBy = "adherent")
     private Paiement paiement;
 
     private Integer equipeId;
+
+    public List<Evaluation> getEvaluations() {
+        return evaluations;
+    }
 
     private String nomEquipe="non affecté";
 
@@ -55,13 +67,13 @@ public class Adherent extends User {
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
+    public void addEvaluation(Evaluation evaluation) {
+        evaluations.add(evaluation);
+        evaluation.setAdherent(this);
+    }
 
-
-
-
-
-
-
-
-
+    public void removeEvaluation(Evaluation evaluation) {
+        evaluations.remove(evaluation);
+        evaluation.setAdherent(null);
+    }
 }

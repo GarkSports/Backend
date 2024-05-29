@@ -24,6 +24,8 @@ public class RandomService implements IRandomService {
     private EntraineurRepository entraineurRepository;
     @Autowired
     private DisciplineRepository disciplineRepository;
+    @Autowired
+    private EvaluationRepository evaluationRepository;
     @Override
     public Manager addManager(Manager manager) {
         return managerRepository.save(manager);
@@ -62,10 +64,18 @@ public class RandomService implements IRandomService {
         Discipline discipline = disciplineRepository.findById(disciplineId).get();
         equipe.setAcademie(academie);
         equipe.setDiscipline(discipline);
-        // Generate random code for the equipe
         String randomCode = generateRandomCode();
         equipe.setCodeEquipe(randomCode);
-        return equipeRepository.save(equipe);
+
+        Equipe savedEquipe = equipeRepository.save(equipe);
+
+        Evaluation evaluation = new Evaluation();
+        evaluation.setEquipe(savedEquipe);
+        Evaluation savedEvaluation = evaluationRepository.save(evaluation);
+
+        savedEquipe.getEvaluations().add(savedEvaluation);
+
+        return savedEquipe;
     }
 
     @Override
