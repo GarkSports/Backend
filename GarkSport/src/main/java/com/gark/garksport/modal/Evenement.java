@@ -34,7 +34,7 @@ public class Evenement {
     private StatutEvenenement statut = StatutEvenenement.Activé;
 
     private Boolean repetition;
-    private TypeRepetition typeRepetition;
+    private TypeRepetition typeRepetition=TypeRepetition.SEMAINE;
     private Integer nbRepetition;
 
 

@@ -1,11 +1,13 @@
 package com.gark.garksport.repository;
 
 import com.gark.garksport.modal.Academie;
+import com.gark.garksport.modal.ConvocationEntrainement;
 import com.gark.garksport.modal.Equipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Repository
@@ -16,4 +18,6 @@ public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
     List<Equipe> findByIdIn(List<Integer> idEquipes);
 
     Equipe findByNom(String nomEquipe);
+
+    Optional<Equipe> findByConvocationsContains(ConvocationEntrainement convocation);
 }

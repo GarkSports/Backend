@@ -110,4 +110,11 @@ public class EvenementController {
     public List<Adherent> getMembersByEvenement(@PathVariable Integer idEvenement) {
         return evenementService.getMembersByEvenement(idEvenement);
     }
+
+    @PutMapping("/updateEvenement/{evenementId}")
+    public Evenement updateEvenement(@RequestBody UpdateEvenementRequest request, @PathVariable Integer evenementId) {
+        Evenement evenement = request.getEvenement();
+        List<Integer> idMembres = request.getIdMembres();
+        return evenementService.updateEvenement(evenement, idMembres, evenementId);
+    }
 }
