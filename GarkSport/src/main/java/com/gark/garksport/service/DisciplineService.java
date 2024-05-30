@@ -91,4 +91,9 @@ public class DisciplineService implements IDisciplineService {
             throw new RuntimeException("Failed to get Disciplines", e);
         }
     }
+
+    @Override
+    public Discipline getDisciplineById(Integer id) {
+        return disciplineRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Discipline not found"));
+    }
 }
