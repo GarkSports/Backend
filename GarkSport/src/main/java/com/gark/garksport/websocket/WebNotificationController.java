@@ -11,17 +11,13 @@ public class WebNotificationController {
     @Autowired
     private SimpMessagingTemplate template;
     // Initialize Notifications
-    private NotificationMessage notifications = new NotificationMessage();
-    @GetMapping("/notify")
-    public String getNotification() {
-        // Increment Notification by one
-        //notifications.increment();
-        System.out.println("tstsetst");
-        notifications.setTitle("ssss");
-        notifications.setBody("qsqsqsqs");
-        String user = "haythemdaoud99@gmail.com";
-        // Push notifications to front-end
-        template.convertAndSend("/queue/reply/haythemdaoud99@gmail.com", notifications);
+
+    public String sendNotification(String user,NotificationMessage NotificationMessage) {
+
+
+        System.out.println("sending notif to web"+NotificationMessage.toString());
+
+        template.convertAndSend("/queue/reply/"+user, NotificationMessage);
         return "Notifications successfully sent to Angular !";
     }
 

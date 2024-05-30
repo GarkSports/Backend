@@ -5,6 +5,7 @@ import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.NotificationToken;
 import com.gark.garksport.repository.AdherentRepository;
 import com.gark.garksport.repository.NotificationTokenRepository;
+import com.gark.garksport.repository.UserRepository;
 import com.gark.garksport.websocket.WebNotificationController;
 import com.google.firebase.messaging.*;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,9 @@ public class NotificationService {
 
     @Autowired
     private WebNotificationController webNotificationController;
+
+    @Autowired
+    private final UserRepository userRepository;
 
 
 
@@ -61,6 +65,8 @@ public class NotificationService {
 
     public void sendNotificationToUser(Integer userId, NotificationMessage notificationMessage) {
         NotificationToken notificationToken = notificationTokenRepository.findByUserId(userId);
+        String receiverEmail = userRepository.findById(userId).get().getUsername();
+        System.out.println("here i try to get user email"+receiverEmail);
 
         if (notificationToken != null) {
             String token = notificationToken.getToken();
@@ -77,8 +83,9 @@ public class NotificationService {
             // Handle the case where the NotificationToken is not found for the user
             // For example, log an error or throw an exception
             System.err.println("NotificationToken not found for user: " + userId);
+            webNotificationController.sendNotification(receiverEmail,notificationMessage);
         }
-        webNotificationController.getNotification();
+
     }
 
 
