@@ -210,5 +210,10 @@ public class PaiementService implements IPaiementService {
         return adherentRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
     }
 
+    @Override
+    public Paiement getPaiementById(Integer idPaiement) {
+        return paiementRepository.findById(idPaiement).orElseThrow(() -> new IllegalArgumentException("Paiement not found"));
+    }
+
 
 }

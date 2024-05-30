@@ -11,4 +11,5 @@ public interface IDisciplineService {
     public void deleteDiscipline(Integer id);
     public Discipline addDisciplineManager(Discipline discipline, Integer managerId);
     public Set<Discipline> getAllDisciplines(Integer managerId);
+    public Discipline getDisciplineById(Integer id);
 }
