@@ -69,11 +69,13 @@ public class SecurityConfiguration {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://www.spr01.com");
+        config.addAllowedOrigin("https://spr01.com");
+        config.addAllowedOrigin("http://localhost:4200");
+        config.addAllowedOrigin("http://5.196.15.147:4250");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
+        config.addExposedHeader(HttpHeaders.SET_COOKIE);
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-
 }
