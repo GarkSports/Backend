@@ -2,21 +2,16 @@ package com.gark.garksport.service;
 
 import com.gark.garksport.modal.*;
 import com.gark.garksport.repository.AdherentRepository;
-import com.gark.garksport.repository.DynamicFieldRepository;
+import com.gark.garksport.repository.KpiRepository;
 import com.gark.garksport.repository.EquipeRepository;
 import com.gark.garksport.repository.EvaluationRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.security.Principal;
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,37 +26,35 @@ public class EntraineurService {
     private EquipeRepository equipeRepository;
 
     @Autowired
-    private DynamicFieldRepository dynamicFieldRepository;
+    private KpiRepository kpiRepository;
 
     //////////////////// EVALUATION PART ///////////////////////////////////
 
 
-    public ResponseEntity<Evaluation> addFieldsToEvaluation(Long evaluationId, DynamicField request) {
+    public ResponseEntity<Evaluation> addFieldsToEvaluation(Long evaluationId, Kpi request) {
         Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
         if (evaluationOptional.isPresent()) {
             Evaluation evaluation = evaluationOptional.get();
-            DynamicField dynamicField = new DynamicField();
-            dynamicField.setFieldName(request.getFieldName());
-            dynamicField.setUnit(request.getUnit());
-            evaluation.getDynamicFields().add(dynamicField);
+            Kpi kpi = new Kpi(request.getKpiType());
+            kpi.setKpiType(request.getKpiType());
+            kpi.setEvaluation(evaluation); // Set the evaluation reference in the Kpi instance
+            evaluation.getKpis().add(kpi);
 
             Evaluation savedEvaluation = evaluationRepository.save(evaluation);
-            dynamicField.setEvaluation(savedEvaluation);
-            dynamicFieldRepository.save(dynamicField);
             return ResponseEntity.ok(savedEvaluation);
         }
         return ResponseEntity.badRequest().build();
     }
 
-    public ResponseEntity<Evaluation> removeDynamicFieldFromEvaluation(Long evaluationId, Integer dynamicFieldId) {
+    public ResponseEntity<Evaluation> removeDynamicFieldFromEvaluation(Long evaluationId, Integer kpiId) {
         Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
         if (evaluationOptional.isPresent()) {
             Evaluation evaluation = evaluationOptional.get();
-            Optional<DynamicField> dynamicFieldOptional = dynamicFieldRepository.findById(dynamicFieldId);
-            if (dynamicFieldOptional.isPresent()) {
-                DynamicField dynamicField = dynamicFieldOptional.get();
-                if (evaluation.getDynamicFields().remove(dynamicField)) {
-                    dynamicFieldRepository.delete(dynamicField);
+            Optional<Kpi> kpiOptional = kpiRepository.findById(kpiId);
+            if (kpiOptional.isPresent()) {
+                Kpi dynamicField = kpiOptional.get();
+                if (evaluation.getKpis().remove(dynamicField)) {
+                    kpiRepository.delete(dynamicField);
                     Evaluation updatedEvaluation = evaluationRepository.save(evaluation);
                     return ResponseEntity.ok(updatedEvaluation);
                 } else {
@@ -75,19 +68,17 @@ public class EntraineurService {
     }
 
     public ResponseEntity<Evaluation> updateDynamicFieldInEvaluation(Long evaluationId, Integer dynamicFieldId,
-                                                                     DynamicField request) {
+                                                                     Kpi request) {
         Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
         if (evaluationOptional.isPresent()) {
             Evaluation evaluation = evaluationOptional.get();
-            Optional<DynamicField> dynamicFieldOptional = dynamicFieldRepository.findById(dynamicFieldId);
+            Optional<Kpi> dynamicFieldOptional = kpiRepository.findById(dynamicFieldId);
             if (dynamicFieldOptional.isPresent()) {
-                DynamicField dynamicField = dynamicFieldOptional.get();
-                dynamicField.setFieldName(request.getFieldName());
-                dynamicField.setUnit(request.getUnit());
-                dynamicField.setValue(request.getValue());
+                Kpi dynamicField = dynamicFieldOptional.get();
+                dynamicField.setKpiType(request.getKpiType());
 
                 Evaluation updatedEvaluation = evaluationRepository.save(evaluation);
-                dynamicFieldRepository.save(dynamicField);
+                kpiRepository.save(dynamicField);
                 return ResponseEntity.ok(updatedEvaluation);
             } else {
                 return ResponseEntity.notFound().build();
@@ -96,16 +87,53 @@ public class EntraineurService {
         return ResponseEntity.notFound().build();
     }
 
+    public ResponseEntity<?> fillEvaluationFormAndSetForAdherent(Long evaluationId, Integer adherentId, Evaluation formData) {
+        Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
+        Optional<Adherent> adherentOptional = adherentRepository.findById(adherentId);
+
+        if (evaluationOptional.isPresent() && adherentOptional.isPresent()) {
+            Evaluation evaluationTemplate = evaluationOptional.get();
+            Adherent adherent = adherentOptional.get();
+
+            // Create a new Evaluation object to store the filled data
+            Evaluation filledEvaluation = new Evaluation();
+            filledEvaluation.setAdherent(adherent);
+            filledEvaluation.setEvaluationName(evaluationTemplate.getEvaluationName());
+            filledEvaluation.setKpis(new ArrayList<>());
+
+            // Fill the dynamic fields with the data from the form
+//            for (Kpi fieldData : formData.getDynamicFields()) {
+//                Kpi dynamicField = new Kpi();
+//                dynamicField.setFieldName(fieldData.getFieldName());
+//                dynamicField.setUnit(fieldData.getUnit());
+//                dynamicField.setValue(fieldData.getValue());
+//                filledEvaluation.getDynamicFields().add(dynamicField);
+//            }
+
+            // Save the filled evaluation
+            Evaluation savedEvaluation = evaluationRepository.save(filledEvaluation);
+
+            // Add the filled evaluation to the adherent's list of evaluations
+            adherent.getEvaluations().add(savedEvaluation);
+            adherentRepository.save(adherent);
+
+            return ResponseEntity.ok(savedEvaluation);
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
+
 //    public ResponseEntity<Evaluation> updateEvaluation(Integer evaluationId, Evaluation evaluation){
 //
 //    }
 
-    public DynamicField addDynamicFieldToEvaluation(Long evaluationId, DynamicField dynamicField) {
+    public Kpi addDynamicFieldToEvaluation(Long evaluationId, Kpi dynamicField) {
         Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
         if (evaluationOptional.isPresent()) {
             Evaluation evaluation = evaluationOptional.get();
             dynamicField.setEvaluation(evaluation);
-            return dynamicFieldRepository.save(dynamicField);
+            return kpiRepository.save(dynamicField);
         } else {
             throw new RuntimeException("Evaluation not found");
         }

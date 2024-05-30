@@ -24,8 +24,7 @@ public class RandomService implements IRandomService {
     private EntraineurRepository entraineurRepository;
     @Autowired
     private DisciplineRepository disciplineRepository;
-    @Autowired
-    private EvaluationRepository evaluationRepository;
+
     @Override
     public Manager addManager(Manager manager) {
         return managerRepository.save(manager);
@@ -68,13 +67,6 @@ public class RandomService implements IRandomService {
         equipe.setCodeEquipe(randomCode);
 
         Equipe savedEquipe = equipeRepository.save(equipe);
-
-        Evaluation evaluation = new Evaluation();
-        evaluation.setEquipe(savedEquipe);
-        Evaluation savedEvaluation = evaluationRepository.save(evaluation);
-
-        savedEquipe.getEvaluations().add(savedEvaluation);
-
         return savedEquipe;
     }
 

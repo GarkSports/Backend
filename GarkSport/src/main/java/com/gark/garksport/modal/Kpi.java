@@ -1,10 +1,7 @@
 package com.gark.garksport.modal;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.io.Serializable;
 
 @Data
 @Builder
@@ -13,18 +10,16 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-public class DynamicField {
+public class Kpi {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    private String kpiType;
     @ManyToOne
     @JoinColumn(name = "evaluation_id")
     private Evaluation evaluation;
 
-    private String fieldName;
-    private String unit;
-    private String value; // or Object
-
-
+    public Kpi(String kpiType) {
+        this.kpiType = kpiType;
+    }
 }

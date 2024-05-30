@@ -1,15 +1,16 @@
 package com.gark.garksport.service;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Etat;
-import com.gark.garksport.repository.AcademieHistoryRepository;
-import com.gark.garksport.repository.AcademieRepository;
-import com.gark.garksport.repository.ManagerRepository;
-import com.gark.garksport.repository.UserRepository;
+import com.gark.garksport.modal.enums.EvaluationType;
+import com.gark.garksport.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -24,13 +25,72 @@ public class AcademieService implements IAcademieService {
     private JavaMailSender javaMailSender;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EvaluationRepository evaluationRepository;
 
     @Override
     public Academie addAcademie(Academie academie, Integer managerId) {
         try {
             Manager manager = managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found"));
             academie.setManager(manager);
+            Kpi kpi = new Kpi();
+
+            // Create Mentality evaluation
+            Evaluation mentalityEvaluation = new Evaluation("Mentalite");
+            mentalityEvaluation.getKpis().add(new Kpi("Attitude"));
+            mentalityEvaluation.getKpis().add(new Kpi("Leadership"));
+            mentalityEvaluation.getKpis().add(new Kpi("Intensité"));
+            mentalityEvaluation.getKpis().add(new Kpi("Assiduité"));
+
+            kpi.setEvaluation(mentalityEvaluation);
+            mentalityEvaluation.getKpis().add(kpi);
+
+
+            // Create Physique evaluation
+            Evaluation physiqueEvaluation = new Evaluation("Physique");
+            physiqueEvaluation.getKpis().add(new Kpi("Coordination"));
+            physiqueEvaluation.getKpis().add(new Kpi("Vitesse"));
+            physiqueEvaluation.getKpis().add(new Kpi("Endurance"));
+            physiqueEvaluation.getKpis().add(new Kpi("Force"));
+
+            kpi.setEvaluation(physiqueEvaluation);
+            physiqueEvaluation.getKpis().add(kpi);
+
+            // Create Technique evaluation
+            Evaluation techniqueEvaluation = new Evaluation("Technique");
+            techniqueEvaluation.getKpis().add(new Kpi("Dribble"));
+            techniqueEvaluation.getKpis().add(new Kpi("Conduite"));
+            techniqueEvaluation.getKpis().add(new Kpi("Passe courte"));
+            techniqueEvaluation.getKpis().add(new Kpi("Passe longue"));
+            techniqueEvaluation.getKpis().add(new Kpi("1er touche"));
+            techniqueEvaluation.getKpis().add(new Kpi("Tir"));
+            techniqueEvaluation.getKpis().add(new Kpi("Tête"));
+            techniqueEvaluation.getKpis().add(new Kpi("Pied faible"));
+
+            kpi.setEvaluation(techniqueEvaluation);
+            techniqueEvaluation.getKpis().add(kpi);
+
+            // Create Tactic evaluation
+            Evaluation tacticEvaluation = new Evaluation("Tactique");
+            tacticEvaluation.getKpis().add(new Kpi("Jeu Defensif"));
+            tacticEvaluation.getKpis().add(new Kpi("Jeu Offensif"));
+            tacticEvaluation.getKpis().add(new Kpi("Vision"));
+            tacticEvaluation.getKpis().add(new Kpi("Prise de décision"));
+
+            kpi.setEvaluation(tacticEvaluation);
+            tacticEvaluation.getKpis().add(kpi);
+
+            // Add the Mentality evaluation to the academie
+            if (academie.getEvaluations() == null) {
+                academie.setEvaluations(new ArrayList<>());
+            }
+            academie.getEvaluations().add(mentalityEvaluation);
+            academie.getEvaluations().add(physiqueEvaluation);
+            academie.getEvaluations().add(techniqueEvaluation);
+            academie.getEvaluations().add(tacticEvaluation);
+
             return academieRepository.save(academie);
+            // return academieRepository.save(academie);
         } catch (Exception e) {
             throw new RuntimeException("Failed to add Academie", e);
         }
