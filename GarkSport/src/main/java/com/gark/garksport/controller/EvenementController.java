@@ -87,8 +87,8 @@ public class EvenementController {
     }
 
     @GetMapping("/getAllEvenements")
-    public List<Evenement> getAllEvenements() {
-        return evenementService.getAllEvenements();
+    public Set<Evenement> getAllEvenements(Principal connectedUser) {
+        return evenementService.getAllEvenements(userService.getUserId(connectedUser.getName()));
     }
 
     @DeleteMapping("/deleteEvenement/{id}")
@@ -104,5 +104,17 @@ public class EvenementController {
     @GetMapping("/getMembersByEquipe/{idEquipe}")
     public List<Adherent> getMembersByEquipe(@PathVariable Integer idEquipe) {
         return evenementService.getMembersByEquipe(idEquipe);
+    }
+
+    @GetMapping("/getMembersByEvenement/{idEvenement}")
+    public List<Adherent> getMembersByEvenement(@PathVariable Integer idEvenement) {
+        return evenementService.getMembersByEvenement(idEvenement);
+    }
+
+    @PutMapping("/updateEvenement/{evenementId}")
+    public Evenement updateEvenement(@RequestBody UpdateEvenementRequest request, @PathVariable Integer evenementId) {
+        Evenement evenement = request.getEvenement();
+        List<Integer> idMembres = request.getIdMembres();
+        return evenementService.updateEvenement(evenement, idMembres, evenementId);
     }
 }

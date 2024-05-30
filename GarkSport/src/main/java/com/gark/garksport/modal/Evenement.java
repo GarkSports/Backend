@@ -3,6 +3,7 @@ package com.gark.garksport.modal;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gark.garksport.modal.enums.EvenementType;
 import com.gark.garksport.modal.enums.StatutEvenenement;
+import com.gark.garksport.modal.enums.TypeRepetition;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,10 @@ public class Evenement {
     private LocalTime heure;
     private String description;
     private StatutEvenenement statut = StatutEvenenement.Activé;
+
+    private Boolean repetition;
+    private TypeRepetition typeRepetition=TypeRepetition.SEMAINE;
+    private Integer nbRepetition;
 
 
     @JsonIgnoreProperties("evenements")
