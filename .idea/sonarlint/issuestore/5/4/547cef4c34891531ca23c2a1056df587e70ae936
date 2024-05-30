@@ -1,20 +1,18 @@
 
-X	java:S125"<This block of commented-out lines of code should be removed.(ûþÎÈ8ßÛ¸€÷1
-X	java:S125"<This block of commented-out lines of code should be removed.(¶äòÇ8ÅâÊŒ÷1
-]	java:S125"<This block of commented-out lines of code should be removed.(äÍ½¾üÿÿÿÿ8¥†Í÷1
-]	java:S125"<This block of commented-out lines of code should be removed.(Åñ¢ºùÿÿÿÿ8Á‚”–÷1
+X	java:S125"<This block of commented-out lines of code should be removed.(ûþÎÈ8»‘Ä…ú1
+X	java:S125"<This block of commented-out lines of code should be removed.(¶äòÇ8¼‘Ä…ú1
+]	java:S125"<This block of commented-out lines of code should be removed.(äÍ½¾üÿÿÿÿ8¼‘Ä…ú1
+]	java:S125"<This block of commented-out lines of code should be removed.(Åñ¢ºùÿÿÿÿ8¼‘Ä…ú1
 [
-java:S1128">Remove this unused import 'com.gark.garksport.modal.Academie'.(œòÄ8î˜÷“÷1
+java:S1128">Remove this unused import 'com.gark.garksport.modal.Academie'.(œòÄ8½‘Ä…ú1
 Z
-java:S1128">Remove this unused import 'com.gark.garksport.modal.Adherent'.(ÈË‡U8­éÃ“÷1
+java:S1128">Remove this unused import 'com.gark.garksport.modal.Adherent'.(ÈË‡U8½‘Ä…ú1
 `
-java:S1128">Remove this unused import 'com.gark.garksport.modal.RoleName'.(ÑàÚ´úÿÿÿÿ8…Ý…÷1
+java:S1128">Remove this unused import 'com.gark.garksport.modal.RoleName'.(ÑàÚ´úÿÿÿÿ8½‘Ä…ú1
 b
-java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(Ž»ÔÕüÿÿÿÿ8¶ó›•÷1
+java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(Ž»ÔÕüÿÿÿÿ8½‘Ä…ú1
 l
-java:S1128	"JRemove this unused import 'org.springframework.data.jpa.repository.Query'.(Äºöïþÿÿÿÿ8ç½¦‘÷1
+java:S1128	"JRemove this unused import 'org.springframework.data.jpa.repository.Query'.(Äºöïþÿÿÿÿ8¾‘Ä…ú1
 i
 java:S1128
-"LRemove this unused import 'org.springframework.data.repository.query.Param'.(©”šô8ç½¦‘÷1
-L
-java:S1128"*Remove this unused import 'java.util.Set'.(ö²„¤þÿÿÿÿ8Á‚”–÷1
+"LRemove this unused import 'org.springframework.data.repository.query.Param'.(©”šô8¾‘Ä…ú1

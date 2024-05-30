@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="" />
+    <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/NotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/websocket/WebNotificationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/websocket/WebNotificationController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,10 +32,14 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2cv1wmenL2cZr7UQfqkF3aM1l8B" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
   </component>
+  <component name="ProjectId" id="2cv1wmenL2cZr7UQfqkF3aM1l8B" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -45,9 +53,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Amen&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/PFE_ESPRIT/backend/GarkAcademy2024-Back/GarkSport/src/main/resources&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;342fbad231df4f91ba2cf533d728058e&quot;
   }
@@ -215,22 +221,58 @@
       <workItem from="1715378744506" duration="1713000" />
       <workItem from="1715416532973" duration="8770000" />
       <workItem from="1715448125797" duration="341000" />
-      <workItem from="1715540361529" duration="513000" />
-      <workItem from="1715686657585" duration="6701000" />
-      <workItem from="1715773273600" duration="2106000" />
-      <workItem from="1715956463817" duration="5513000" />
-      <workItem from="1716047579706" duration="2274000" />
-      <workItem from="1716243757639" duration="799000" />
-      <workItem from="1716290894616" duration="9030000" />
-      <workItem from="1716465363633" duration="4489000" />
-      <workItem from="1716547416636" duration="432000" />
-      <workItem from="1716652917610" duration="653000" />
-      <workItem from="1716670374816" duration="4270000" />
-      <workItem from="1716719766602" duration="5112000" />
-      <workItem from="1716734951082" duration="4089000" />
-      <workItem from="1716810255960" duration="6938000" />
-      <workItem from="1716898080793" duration="645000" />
-      <workItem from="1716984346192" duration="1636000" />
+      <workItem from="1715470073890" duration="2080000" />
+      <workItem from="1715505807010" duration="755000" />
+      <workItem from="1715533303827" duration="4079000" />
+      <workItem from="1715550747911" duration="583000" />
+      <workItem from="1715561402507" duration="322000" />
+      <workItem from="1715589816713" duration="6118000" />
+      <workItem from="1715638717522" duration="3476000" />
+      <workItem from="1715674834087" duration="6719000" />
+      <workItem from="1715685999903" duration="6415000" />
+      <workItem from="1715709335748" duration="1578000" />
+      <workItem from="1715730468191" duration="610000" />
+      <workItem from="1715761649947" duration="10665000" />
+      <workItem from="1715804935557" duration="155000" />
+      <workItem from="1715846946951" duration="4402000" />
+      <workItem from="1715855163929" duration="1135000" />
+      <workItem from="1715863559614" duration="608000" />
+      <workItem from="1715868625194" duration="2954000" />
+      <workItem from="1715875019749" duration="79000" />
+      <workItem from="1715875877509" duration="1350000" />
+      <workItem from="1715898535086" duration="653000" />
+      <workItem from="1715941932897" duration="862000" />
+      <workItem from="1715952233998" duration="2821000" />
+      <workItem from="1715955636075" duration="1541000" />
+      <workItem from="1715975909673" duration="2830000" />
+      <workItem from="1715983184980" duration="256000" />
+      <workItem from="1716023381198" duration="7130000" />
+      <workItem from="1716122011046" duration="270000" />
+      <workItem from="1716127028731" duration="3294000" />
+      <workItem from="1716140292387" duration="2049000" />
+      <workItem from="1716149234812" duration="334000" />
+      <workItem from="1716149716997" duration="79000" />
+      <workItem from="1716150816753" duration="732000" />
+      <workItem from="1716193190589" duration="2762000" />
+      <workItem from="1716206040183" duration="8254000" />
+      <workItem from="1716245623845" duration="527000" />
+      <workItem from="1716247093745" duration="328000" />
+      <workItem from="1716248789928" duration="622000" />
+      <workItem from="1716306239537" duration="6911000" />
+      <workItem from="1716381634492" duration="8210000" />
+      <workItem from="1716402254991" duration="16689000" />
+      <workItem from="1716458329874" duration="4236000" />
+      <workItem from="1716467385006" duration="616000" />
+      <workItem from="1716492782864" duration="4639000" />
+      <workItem from="1716538652339" duration="1547000" />
+      <workItem from="1716558593238" duration="2843000" />
+      <workItem from="1716600191117" duration="3594000" />
+      <workItem from="1716659638966" duration="673000" />
+      <workItem from="1716724162922" duration="3167000" />
+      <workItem from="1716759223433" duration="1342000" />
+      <workItem from="1716802316434" duration="4086000" />
+      <workItem from="1716895589611" duration="32110000" />
+      <workItem from="1717064036729" duration="4483000" />
     </task>
     <servers />
   </component>
