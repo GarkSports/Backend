@@ -40,10 +40,6 @@ public class Equipe {
     @OneToMany
     private Set<Entraineur> entraineurs;
 
-    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("equipe")
-    private List<Evaluation> evaluations = new ArrayList<>();
-
     @ManyToOne
     private Academie academie;
 

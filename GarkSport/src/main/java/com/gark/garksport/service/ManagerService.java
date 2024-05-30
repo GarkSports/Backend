@@ -139,7 +139,9 @@ public class ManagerService {
         }
     }
 
-
+    public Optional<User> getManagerById(Integer id) {
+        return repository.findById(id);
+    }
         public ResponseEntity<RoleName> addRoleName(RoleName request, Principal connectedUser) {
         User user = getProfil(connectedUser);
         if (user instanceof Manager) {

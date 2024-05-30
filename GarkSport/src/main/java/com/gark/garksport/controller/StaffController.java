@@ -3,20 +3,14 @@ package com.gark.garksport.controller;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.repository.AdherentRepository;
 import com.gark.garksport.service.EntraineurService;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.flogger.Flogger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/staff")
@@ -46,8 +40,8 @@ public class StaffController {
     @PutMapping("/add-fields-evaluation")
     @ResponseStatus
     public ResponseEntity<Evaluation> addFieldsToEvaluation(@RequestParam Long evaluationId,
-                                                            @RequestBody DynamicField dynamicFields){
-        Evaluation newEvaluation = entraineurService.addFieldsToEvaluation(evaluationId, dynamicFields).getBody();
+                                                            @RequestBody Kpi kpis){
+        Evaluation newEvaluation = entraineurService.addFieldsToEvaluation(evaluationId, kpis).getBody();
         return ResponseEntity.ok(newEvaluation);
     }
 
@@ -62,9 +56,17 @@ public class StaffController {
     public ResponseEntity<Evaluation> updateDynamicFieldInEvaluation(
             @PathVariable Long evaluationId,
             @PathVariable Integer dynamicFieldId,
-            @RequestBody DynamicField request) {
+            @RequestBody Kpi request) {
         return entraineurService.updateDynamicFieldInEvaluation(evaluationId, dynamicFieldId, request);
     }
+
+    @PutMapping("/evaluation/{evaluationId}/adherent/{adherentId}")
+    public ResponseEntity<?> fillEvaluationFormAndSetForAdherent(@PathVariable Long evaluationId,
+                                                                 @PathVariable Integer adherentId,
+                                                                 @RequestBody Evaluation formData) {
+        return entraineurService.fillEvaluationFormAndSetForAdherent(evaluationId, adherentId, formData);
+    }
+
 //    @PostMapping("/save-evaluation")
 //    public ResponseEntity<Evaluation> createEvaluation(@RequestParam Integer equipeId) {
 //        Evaluation createdEvaluation = entraineurService.createEvaluation(equipeId);
@@ -77,8 +79,8 @@ public class StaffController {
     }
 
     @PostMapping("/evaluations/{evaluationId}/dynamic-fields")
-    public ResponseEntity<DynamicField> addDynamicField(@PathVariable Long evaluationId, @RequestBody DynamicField dynamicField) {
-        DynamicField createdDynamicField = entraineurService.addDynamicFieldToEvaluation(evaluationId, dynamicField);
+    public ResponseEntity<Kpi> addDynamicField(@PathVariable Long evaluationId, @RequestBody Kpi dynamicField) {
+        Kpi createdDynamicField = entraineurService.addDynamicFieldToEvaluation(evaluationId, dynamicField);
         return ResponseEntity.ok(createdDynamicField);
     }
 

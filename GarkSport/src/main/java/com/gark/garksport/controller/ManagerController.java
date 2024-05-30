@@ -101,7 +101,12 @@ public class ManagerController {
         return ResponseEntity.ok(permissionNames);
     }
 
-
+    @GetMapping("/getFormManagerById/{id}")
+    public ResponseEntity<User> getManagerById(@PathVariable Integer id) {
+        Optional<User> user = managerService.getManagerById(id);
+        return user.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
     @PutMapping("/update-role-name")
     public ResponseEntity<RoleName> updateRoleName(@RequestParam Integer id, @RequestBody RoleName request, Principal connectedUser) {
         try {

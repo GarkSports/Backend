@@ -64,6 +64,9 @@ public class Academie {
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RoleName> roleNames = new HashSet<>();
 
+    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("academie")
+    private List<Evaluation> evaluations = new ArrayList<>();
 
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
     private Set<Posts> PostsList = new HashSet<>();
