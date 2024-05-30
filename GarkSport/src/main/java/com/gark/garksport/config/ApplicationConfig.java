@@ -51,9 +51,9 @@ public class ApplicationConfig {
     public User addAdmin() {
         if (repository.findByEmail("garktn.assistance@gmail.com").isEmpty()) {
             Admin admin = new Admin();
-            admin.setEmail("garktn.assistance@gmail.com");
-            admin.setPassword(passwordEncoder().encode("Vaider123456@"));
-            admin.setFirstname("Gark");
+            admin.setEmail("spr01compte@gmail.com");
+            admin.setPassword(passwordEncoder().encode("spr0123456@"));
+            admin.setFirstname("SPR01");
             admin.setLastname("Assistance");
             admin.setRole(Role.ADMIN);
             adminRepository.save(admin);
