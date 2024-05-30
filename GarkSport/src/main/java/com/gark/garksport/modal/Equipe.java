@@ -49,4 +49,7 @@ public class Equipe {
     @OneToMany(mappedBy = "convocationEquipe")
     private List<Evenement> evenements;
 
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    private Set<ConvocationEntrainement> convocations;
+
 }

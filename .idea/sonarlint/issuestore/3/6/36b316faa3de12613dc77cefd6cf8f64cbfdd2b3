@@ -7,17 +7,17 @@ java:S1192"^Define a constant instead of duplicating this literal "Evenement 
 java:S1192'"[Define a constant instead of duplicating this literal "Equipe not found with id: " 5 times.(Çú‰ìıÿÿÿÿ8¨Ó«ú1
 œ
 java:S1192!"Define a constant instead of duplicating this literal "Both idEquipe and idMembres cannot be provided simultaneously." 3 times.(ı»Éã8¨Ó«ú1
+n
+java:S3655­"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8ëÓ«ú1
+m
+java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8ëÓ«ú1
 s
 java:S3655˜"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¬¤–úÿÿÿÿ8ìÓ«ú1
 s
 java:S3655Ó"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¬¤–úÿÿÿÿ8ìÓ«ú1
-m
-java:S3655q"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8ìÓ«ú1
-n
-java:S3655­"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8ëÓ«ú1
-n
-java:S3655è"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8ìÓ«ú1
 r
 java:S36550"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(¬¤–úÿÿÿÿ8ìÓ«ú1
+n
+java:S3655è"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8ìÓ«ú1
 m
-java:S3655"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8ëÓ«ú1
+java:S3655q"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(‚“ÌÃ8ìÓ«ú1
