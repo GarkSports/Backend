@@ -3,9 +3,11 @@ package com.gark.garksport.service;
 import com.gark.garksport.dto.chat.ChatContactDTO;
 import com.gark.garksport.dto.chat.ChatDTO;
 import com.gark.garksport.modal.Chat;
+import com.gark.garksport.modal.Equipe;
 import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.User;
 import com.gark.garksport.repository.ChatRepository;
+import com.gark.garksport.repository.EquipeRepository;
 import com.gark.garksport.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +15,19 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ChatService {
+public class ChatService implements IChatService{
     @Autowired
     private ChatRepository chatRepository;
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EquipeRepository equipeRepository;
 
     private final UserService userService;
 
@@ -33,12 +37,12 @@ public class ChatService {
         Integer userId1 = userService.getUserId(connectedUser.getName());
         User user1 = userRepository.findById(userId1).orElse(null);
         User user2 = userRepository.findById(userId2).orElse(null);
-        List<Chat> chatList = chatRepository.findBySenderAndReceiverOrReceiverAndSenderOrderByTimestampDesc(user1, user2,user1,user2);
+        List<Chat> chatList = chatRepository.findBySenderAndReceiversContainingOrReceiversContainingAndSenderOrderByTimestampDesc(user1, user2,user1, user2);
         List<ChatDTO> chatDTOList = new ArrayList<>();
         for (Chat chat : chatList) {
             ChatDTO chatDTO = new ChatDTO();
             chatDTO.setSenderId(chat.getSender().getId());
-            chatDTO.setReceiverId(chat.getReceiver().getId());
+            chatDTO.setReceiversId(chat.getReceivers().stream().map(User::getId).collect(Collectors.toList()));
             chatDTO.setMessage(chat.getMessage());
             chatDTO.setTimestamp(chat.getTimestamp());
             chatDTOList.add(chatDTO);
@@ -48,61 +52,130 @@ public class ChatService {
 
 
 
-    public ChatDTO sendMessage(Principal connectedUser, User receiver, String message) {
+    public ChatDTO sendMessage(Principal connectedUser, List<Integer> receiverdId,Integer idequipe, String message) {
+        Chat chat = new Chat();
+        Set<User> receivers = new HashSet<>();
+
         Integer senderId = userService.getUserId(connectedUser.getName());
         User sender = userRepository.findById(senderId).orElse(null);
+        if ((idequipe != null && idequipe != 0) && (receiverdId != null && !receiverdId.isEmpty())) {
+            throw new IllegalArgumentException("Both idEquipe and idMembres cannot be provided simultaneously.");
+        }
 
-        Chat chat = new Chat();
+        if (idequipe != null && idequipe != 0) {
+            // Retrieve the Equipe from the repository using idEquipe
+            Equipe equipe = equipeRepository.findById(idequipe)
+                    .orElseThrow(() -> new NoSuchElementException("Equipe not found with id: " + idequipe));
+            chat.setGroup(equipe);
+            receivers = equipe.getAdherents().stream()
+                    .map(adherent -> (User) adherent)
+                    .collect(Collectors.toSet());
+            chat.setReceivers(receivers);
+            System.out.println("equipe id  ");
+            System.out.println(receivers.size());
+
+
+
+
+
+
+        } else if (receiverdId != null && !receiverdId.isEmpty()) {
+            chat.setGroup(null);
+            receivers = userRepository.findByIdIn(receiverdId);
+            chat.setReceivers(receivers);
+
+        }
+
+        System.out.println("test receivers");
+        System.out.println(receiverdId);
+        System.out.println("test receivers");
+        System.out.println(receivers.size());
+
+
         chat.setSender(sender);
-        chat.setReceiver(receiver);
         chat.setMessage(message);
         chat.setTimestamp(LocalDateTime.now());
         chatRepository.save(chat);
+
+
+
 
         NotificationMessage notificationMessage = new NotificationMessage();
         notificationMessage.setTitle("GarkSport");
         notificationMessage.setBody("vous avez recu un nouveau message ");
         notificationMessage.setImage("https://cdn.iconscout.com/icon/free/png-256/free-message-2367724-1976874.png?f=webp&w=256");
-        notificationService.sendNotificationToUser(
-                receiver.getId(),
-                notificationMessage
-                );
+        for (User receiver : receivers) {
+            notificationService.sendNotificationToUser(receiver.getId(), notificationMessage);
+        }
 
         // Create and return the ChatMessageDTO
         ChatDTO chatMessageDTO = new ChatDTO();
         chatMessageDTO.setSenderId(senderId);
-        chatMessageDTO.setReceiverId(receiver.getId());
+        chatMessageDTO.setReceiversId(receiverdId);
         chatMessageDTO.setMessage(message);
         chatMessageDTO.setTimestamp(LocalDateTime.now());
         return chatMessageDTO;
     }
+
+
 
     public List<ChatContactDTO> getUsersWithMessages(Principal connectedUser) {
         Integer currentUserId = userService.getUserId(connectedUser.getName());
         User currentUser = userRepository.findById(currentUserId).orElse(null);
 
         List<ChatContactDTO> usersWithMessages = new ArrayList<>();
-        List<Chat> chats = chatRepository.findBySenderOrReceiverOrderByTimestampDesc(currentUser, currentUser);
+        List<Chat> chats = chatRepository.findBySenderOrReceiversContainingOrderByTimestampDesc(currentUser);
         for (Chat chat : chats) {
             if (!chat.getSender().equals(currentUser)) {
                 usersWithMessages.add(convertToDTO(chat.getSender()));
             }
-            if (!chat.getReceiver().equals(currentUser)) {
-                usersWithMessages.add(convertToDTO(chat.getReceiver()));
+            for (User receiver : chat.getReceivers()) {
+                if (!receiver.equals(currentUser)) {
+                    usersWithMessages.add(convertToDTO(receiver));
+                }
             }
         }
 
-        // Use distinct to remove duplicate users
         return usersWithMessages.stream().distinct().collect(Collectors.toList());
     }
 
-    // Method to convert User entity to ChatContactDTO
     private ChatContactDTO convertToDTO(User user) {
         ChatContactDTO chatUserDTO = new ChatContactDTO();
         chatUserDTO.setUserId(user.getId());
         chatUserDTO.setUsername(user.getFirstname() + " " + user.getLastname());
-        // Add other fields as needed
         return chatUserDTO;
+    }
+
+    public void removeUserFromDiscussions(Principal connectedUser, Integer otherUserId) {
+        Integer currentUserId = userService.getUserId(connectedUser.getName());
+        User currentUser = userRepository.findById(currentUserId).orElse(null);
+        User otherUser = userRepository.findById(otherUserId).orElse(null);
+
+        if (currentUser == null || otherUser == null) {
+            throw new RuntimeException("User not found");
+        }
+
+        // Find all chats where the current user is the sender and otherUser is in receivers
+        List<Chat> sentChats = chatRepository.findBySenderAndReceiversContaining(currentUser, otherUser);
+        for (Chat chat : sentChats) {
+            chat.getReceivers().remove(otherUser);
+            if (chat.getReceivers().isEmpty()) {
+                chatRepository.delete(chat); // If no receivers left, delete the chat
+            } else {
+                chatRepository.save(chat); // Otherwise, update the chat
+            }
+        }
+
+        // Find all chats where the other user is the sender and current user is in receivers
+        List<Chat> receivedChats = chatRepository.findByReceiversContainingAndSender(currentUser, otherUser);
+        for (Chat chat : receivedChats) {
+            chat.getReceivers().remove(currentUser);
+            if (chat.getReceivers().isEmpty()) {
+                chatRepository.delete(chat); // If no receivers left, delete the chat
+            } else {
+                chatRepository.save(chat); // Otherwise, update the chat
+            }
+        }
     }
 
 }
