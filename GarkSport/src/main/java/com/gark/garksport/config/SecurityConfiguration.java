@@ -70,6 +70,7 @@ public class SecurityConfiguration {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin("https://spr01.com");
+        config.addAllowedOrigin("https://www.spr01.com");
         config.addAllowedOrigin("http://localhost:4200");
         config.addAllowedOrigin("http://5.196.15.147:4250");
         config.addAllowedHeader("*");
