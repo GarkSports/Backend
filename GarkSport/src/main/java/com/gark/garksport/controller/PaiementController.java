@@ -69,4 +69,9 @@ public class PaiementController {
     public Paiement getPaiementById(@PathVariable Integer idPaiement){
         return paiementService.getPaiementById(idPaiement);
     }
+
+    @DeleteMapping("deletePaiementHistory/{idPaiementHistory}")
+    public void deletePaiementHistory(@PathVariable Integer idPaiementHistory){
+        paiementService.deletePaiementHistory(idPaiementHistory);
+    }
 }

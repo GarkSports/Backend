@@ -27,4 +27,6 @@ public interface IPaiementService {
 
     public Paiement getPaiementById(Integer idPaiement);
 
+    public void deletePaiementHistory(Integer idPaiementHistory);
+
 }

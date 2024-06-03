@@ -7,6 +7,8 @@ import com.gark.garksport.dto.request.ResetPasswordRequest;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Permission;
 import com.gark.garksport.modal.enums.Role;
+import com.gark.garksport.modal.enums.StatutAdherent;
+import com.gark.garksport.modal.enums.TypeAbonnement;
 import com.gark.garksport.repository.*;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.AddressException;
@@ -41,6 +43,9 @@ public class ManagerService {
     private final EntraineurRepository entraineurRepository;
     private final AdherentRepository adherentRepository;
     private final ParentRepository parentRepository;
+
+    private final PaiementRepository paiementRepository;
+    private final PaiementHistoryRepository paiementHistoryRepository;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -337,23 +342,55 @@ public class ManagerService {
     }
 
     public Adherent addAdherent(Adherent adherent, Principal connectedUser) throws MessagingException {
-
         adherent.setEmail(adherent.getEmail());
         adherent.setRole(Role.ADHERENT);
         adherent.setPassword(passwordEncoder.encode(generatedPWD));
         adherent.setTelephone(adherent.getTelephone());
         adherent.setPhoto(adherent.getPhoto());
+        adherent.setStatutAdherent(StatutAdherent.Non_Payé);
 
         User user = getProfil(connectedUser);
+        Manager manager = (Manager) user;
+        Academie academie = manager.getAcademie();
+        adherent.setAcademie(academie);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DAY_OF_MONTH, 30);
+        Date dateFin = cal.getTime();
+        adherent.setPaiementDate(dateFin);
 
-            Manager manager = (Manager) user;
-            Academie academie = manager.getAcademie();
-            adherent.setAcademie(academie);
+        // Save the adherent first
+        Adherent savedAdherent = repository.save(adherent);
 
+        Paiement paiement = new Paiement();
+        paiement.setAdherent(savedAdherent);
+        paiement.setTypeAbonnement(TypeAbonnement.Mensuel);
+        paiement.setDateDebut(new Date());
 
+        // Set dateFin to 30 days from today;
 
+        paiement.setDateFin(dateFin);
+        paiement.setDatePaiement(new Date());
+        paiement.setMontant(0f);
+        paiement.setReste(savedAdherent.getAcademie().getFraisAdhesion());
 
+        // Save the paiement
+        paiementRepository.save(paiement);
 
+        PaiementHistory paiementHistory = PaiementHistory.builder()
+                .dateDebut(paiement.getDateDebut())
+                .dateFin(paiement.getDateFin())
+                .datePaiement(new Date())
+                .montant(paiement.getMontant())
+                .reste(paiement.getReste())
+                .retardPaiement(30)
+                .adherent(adherent)
+                .build();
+
+        // Save the paiement history
+        paiementHistoryRepository.save(paiementHistory);
+
+        // Send the email
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
         message.setRecipients(MimeMessage.RecipientType.TO, adherent.getEmail());
@@ -362,7 +399,7 @@ public class ManagerService {
 
         mailSender.send(message);
 
-        return repository.save(adherent);
+        return savedAdherent;
     }
 
     public RoleName updateRoleName(Integer id, RoleName request, Manager manager) {
