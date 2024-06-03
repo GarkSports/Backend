@@ -1,0 +1,7 @@
+
+Z
+java:S1854"8Remove this useless assignment to local variable "user".(ґ©Д§щ€€€€8иак≥ь1
+L	java:S106"+Replace this use of System.out by a logger.(вЌЕђь€€€€8как≥ь1
+]	java:S125"<This block of commented-out lines of code should be removed.(ІµЖЊш€€€€8как≥ь1
+K
+java:S1481")Remove this unused "user" local variable.(ґ©Д§щ€€€€8лак≥ь1

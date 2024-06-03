@@ -1,3 +1,14 @@
 
+h	java:S112›"FDefine and throw a dedicated exception instead of using a generic one.(©š´µûÿÿÿÿ8Œ¸ªúû1
 t
-java:S6204`"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ñ¿Ø€ıÿÿÿÿ8©¥É„ø1
+java:S6204-"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ÙŸ³ıÿÿÿÿ8Ï†Î¶û1
+_
+java:S1612G"=Replace this lambda with method reference 'User.class::cast'.(˜Õà…şÿÿÿÿ8é†Î¶û1
+L	java:S106J"+Replace this use of System.out by a logger.(´Ì«¤ÿÿÿÿÿ8ë†Î¶û1
+G	java:S106K"+Replace this use of System.out by a logger.(Íˆº”8í†Î¶û1
+L	java:S106Y"+Replace this use of System.out by a logger.(½Õü·ûÿÿÿÿ8ñ†Î¶û1
+G	java:S106Z"+Replace this use of System.out by a logger.(ãšÏÕ8ò†Î¶û1
+L	java:S106["+Replace this use of System.out by a logger.(½Õü·ûÿÿÿÿ8ó†Î¶û1
+G	java:S106\"+Replace this use of System.out by a logger.(Íˆº”8ô†Î¶û1
+u
+java:S6204‹"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ñ¿Ø€ıÿÿÿÿ8¨‡Î¶û1
