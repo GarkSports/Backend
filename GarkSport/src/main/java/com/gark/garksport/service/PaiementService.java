@@ -4,11 +4,13 @@ import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.Paiement;
 import com.gark.garksport.modal.PaiementHistory;
 import com.gark.garksport.modal.enums.StatutAdherent;
+import com.gark.garksport.modal.enums.TypeAbonnement;
 import com.gark.garksport.repository.AdherentRepository;
 import com.gark.garksport.repository.ManagerRepository;
 import com.gark.garksport.repository.PaiementHistoryRepository;
 import com.gark.garksport.repository.PaiementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -63,10 +65,12 @@ public class PaiementService implements IPaiementService {
                 paiement.setReste(0f);
             }
 
-            if (paiement.getReste() != 0) {
+            if (paiement.getReste() != 0 && paiement.getMontant() != 0) {
                 adherent.setStatutAdherent(StatutAdherent.Payé_Partiellement);
-            } else {
+            } else if (paiement.getReste() == 0 && paiement.getMontant() != 0) {
                 adherent.setStatutAdherent(StatutAdherent.Payé);
+            } else if (paiement.getMontant() == 0 ) {
+                adherent.setStatutAdherent(StatutAdherent.Non_Payé);
             }
 
             // Set the adherent for the newPaiement
@@ -128,16 +132,22 @@ public class PaiementService implements IPaiementService {
             if (updatedPaiement.getMontant() != null) {
                 existingPaiement.setMontant(updatedPaiement.getMontant());
             }
-            if (updatedPaiement.getReste() == null || updatedPaiement.getReste() == 0f) {
+            if (updatedPaiement.getReste() == null && updatedPaiement.getMontant() != 0f || updatedPaiement.getReste() == 0f && updatedPaiement.getMontant() !=0f) {
                 updatedPaiement.setReste(0f);
                 // Update the adherent status based on the updated reste
                 Adherent adherent = existingPaiement.getAdherent();
                 adherent.setStatutAdherent(StatutAdherent.Payé);
-            } else {
+            } else if (updatedPaiement.getReste() != 0f && updatedPaiement.getMontant() != 0f) {
                 // Update the adherent status based on the updated reste
                 Adherent adherent = existingPaiement.getAdherent();
                 adherent.setStatutAdherent(StatutAdherent.Payé_Partiellement);
             }
+            else if (updatedPaiement.getMontant() == 0f) {
+                // Update the adherent status based on the updated reste
+                Adherent adherent = existingPaiement.getAdherent();
+                adherent.setStatutAdherent(StatutAdherent.Non_Payé);
+            }
+
             if (updatedPaiement.getReste() != null) {
                 existingPaiement.setReste(updatedPaiement.getReste());
             }
@@ -214,6 +224,48 @@ public class PaiementService implements IPaiementService {
     public Paiement getPaiementById(Integer idPaiement) {
         return paiementRepository.findById(idPaiement).orElseThrow(() -> new IllegalArgumentException("Paiement not found"));
     }
+
+    @Override
+    public void deletePaiementHistory(Integer idPaiementHistory) {
+        paiementHistoryRepository.deleteById(idPaiementHistory);
+    }
+
+    @Scheduled(cron = "*/15 * * * * *")
+    public void checkPaiementDate() {
+        List<Paiement> paiements = paiementRepository.findAll();
+        Date today = new Date();
+        for (Paiement paiement : paiements) {
+            if (paiement.getDateFin().before(today)) {
+                paiement.setDateDebut(today);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(today);
+                if (paiement.getTypeAbonnement().equals(TypeAbonnement.Mensuel)) {
+                    calendar.add(Calendar.MONTH, 1);
+                } else if (paiement.getTypeAbonnement().equals(TypeAbonnement.Trimestriel)) {
+                    calendar.add(Calendar.MONTH, 3);
+                } else if (paiement.getTypeAbonnement().equals(TypeAbonnement.Annuel)) {
+                    calendar.add(Calendar.YEAR, 1);
+                }
+                paiement.setDateFin(calendar.getTime());
+                paiement.setMontant(0f);
+                paiement.setDatePaiement(today);
+                paiement.getAdherent().setStatutAdherent(StatutAdherent.Non_Payé); // Updating the status to Non Payé
+                adherentRepository.save(paiement.getAdherent());
+                if (paiement.getTypeAbonnement().equals(TypeAbonnement.Mensuel)) {
+                    paiement.setReste(paiement.getAdherent().getAcademie().getFraisAdhesion());
+                } else if (paiement.getTypeAbonnement().equals(TypeAbonnement.Trimestriel)) {
+                    paiement.setReste(paiement.getAdherent().getAcademie().getFraisAdhesion() * 3);
+                } else if (paiement.getTypeAbonnement().equals(TypeAbonnement.Annuel)) {
+                    paiement.setReste(paiement.getAdherent().getAcademie().getFraisAdhesion() * 12);
+                }
+                paiementRepository.save(paiement);
+            }
+        }
+    }
+
+
+
+
 
 
 }

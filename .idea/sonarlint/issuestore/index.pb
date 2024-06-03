@@ -241,3 +241,5 @@ MGarkSport/src/main/java/com/gark/garksport/modal/ConvocationEntrainement.java,
 NGarkSport/src/main/java/com/gark/garksport/dto/request/CompetitionRequest.java,c\7\c794dfe2b78b7d9da99dd2e3325225260d144050
 
 OGarkSport/src/main/java/com/gark/garksport/dto/request/EntrainementRequest.java,6\e\6e31d99a895af6156c3e3d4f5c6a30163423890a
+v
+FGarkSport/src/main/java/com/gark/garksport/config/SchedulerConfig.java,1\4\1422bb6209e66442e56e7a7650c8fbc9d534c753
