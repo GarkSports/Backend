@@ -16,8 +16,8 @@ public interface NotificationTokenRepository extends JpaRepository<NotificationT
 
     List<String> findTokensByAcademieId(Integer academieId);
 
-    @Query("SELECT nt.token FROM NotificationToken nt WHERE nt.codeEquipe = :codeEquipe")
+    @Query("SELECT nt.token FROM NotificationToken nt WHERE nt.EquipeId = :codeEquipe")
 
 
-    List<String> findTokensByCodeEquipe(String codeEquipe);
+    List<String> findTokensByCodeEquipe(Integer codeEquipe);
 }
