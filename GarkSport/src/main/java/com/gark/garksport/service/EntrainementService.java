@@ -4,6 +4,7 @@ import com.gark.garksport.dto.request.EntrainementRequest;
 import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.ConvocationEntrainement;
 import com.gark.garksport.modal.Equipe;
+import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.repository.AdherentRepository;
 import com.gark.garksport.repository.ConvocationEntrainementRepository;
 import com.gark.garksport.repository.EquipeRepository;
@@ -25,10 +26,18 @@ public class EntrainementService implements IEntrainementService{
 
     @Autowired
     private ConvocationEntrainementRepository convocationEntrainementRepository;
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     public Equipe addEntrainement(EntrainementRequest entrainementRequest, Integer idEquipe) {
         Optional<Equipe> optionalEquipe = equipeRepository.findById(idEquipe);
+
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("GarkSport");
+        notificationMessage.setBody("vous avez un nouveau Entrainement");
+        notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
+
         if (optionalEquipe.isPresent()) {
             Equipe equipe = optionalEquipe.get();
 
@@ -50,6 +59,10 @@ public class EntrainementService implements IEntrainementService{
 
             // Save the equipe
             equipeRepository.save(equipe);
+
+            //send notification
+            notificationService.sendNotificationToTeam(idEquipe,notificationMessage);
+
             return equipe;
         }
         return null;
@@ -78,6 +91,13 @@ public class EntrainementService implements IEntrainementService{
 
         // Delete the convocation
         convocationEntrainementRepository.deleteById(idConvocation);
+
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("GarkSport");
+        notificationMessage.setBody("vous avez un entraînement annulé");
+        notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
+
+        notificationService.sendNotificationToTeam(equipe.getId(),notificationMessage);
     }
 
     @Override
@@ -99,8 +119,18 @@ public class EntrainementService implements IEntrainementService{
         convocation.setHeure(convocationEntrainement.getHeure());
         convocation.setAdherents(adherents);
         convocationEntrainementRepository.save(convocation);
+
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("GarkSport");
+        notificationMessage.setBody("vous avez un entraînement modifié");
+        notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
+
+        notificationService.sendNotificationToMembers(entrainementRequest.getIdAdherents(),notificationMessage);
+
         return equipeRepository.findByConvocationsContains(convocation)
                 .orElseThrow(() -> new EntityNotFoundException("Equipe not found for this convocation"));
+
+
     }
 
 

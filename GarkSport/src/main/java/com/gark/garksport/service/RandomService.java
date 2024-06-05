@@ -248,8 +248,12 @@ public class RandomService implements IRandomService {
         Academie academie = equipe.getAcademie();
         academie.getAdherents().add(adherent);
         adherent.setAcademie(academie);
+        adherent.setEquipeId(equipe.getId());
+        equipe.getAdherents().add(adherent);
+
         adherentRepository.save(adherent);
         academieRepository.save(academie);
+        equipeRepository.save(equipe);
         return adherent;
     }
 

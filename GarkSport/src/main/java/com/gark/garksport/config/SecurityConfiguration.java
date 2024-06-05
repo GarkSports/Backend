@@ -13,6 +13,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -61,4 +64,19 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("https://spr01.com");
+        config.addAllowedOrigin("https://www.spr01.com");
+        config.addAllowedOrigin("http://localhost:4200");
+        config.addAllowedOrigin("http://5.196.15.147:4250");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.addExposedHeader(HttpHeaders.SET_COOKIE);
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
 }

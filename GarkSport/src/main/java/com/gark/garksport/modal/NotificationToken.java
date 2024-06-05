@@ -17,7 +17,7 @@ public class NotificationToken {
     @Id
     private Integer userId;
     private String token;
-    private String codeEquipe;
+    private Integer EquipeId;
     private Integer academieId;
 
     // Getters and setters
