@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.*;
@@ -311,23 +310,19 @@ public class ManagerController {
 
     @PutMapping("/update-adherent")
     public ResponseEntity<Adherent> updateAdherent(@RequestParam Integer id, @RequestBody Adherent request) throws MessagingException {
-
-
+        try {
+            Optional<Adherent> existingAdherent = adherentRepository.findById(id);
+            if (existingAdherent.isPresent()) {
                 Adherent updateAdherent = managerService.updateAdherent(id, request);
                 return ResponseEntity.ok(updateAdherent);
-
-
-    }
-
-    @GetMapping("/get-by-id")
-    public Adherent getById(@RequestParam Integer id) {
-        Optional<Adherent> existingAdherent = adherentRepository.findById(id);
-        if (existingAdherent.isPresent()) {
-            return existingAdherent.get();
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Adherent not found");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 
 //    @GetMapping("/get-role-names")
 //    public ResponseEntity<List<String>> getRoleNames(Principal connectedUser) {

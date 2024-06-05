@@ -28,9 +28,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.security.Principal;
 import java.security.SecureRandom;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -366,6 +363,7 @@ public class ManagerService {
         Adherent savedAdherent = repository.save(adherent);
 
 
+<<<<<<< HEAD
         Paiement paiement = new Paiement();
         paiement.setAdherent(savedAdherent);
         paiement.setTypeAbonnement(TypeAbonnement.Mensuel);
@@ -395,6 +393,11 @@ public class ManagerService {
         paiementHistoryRepository.save(paiementHistory);
 
         // Send the email
+=======
+
+
+
+>>>>>>> parent of 93f22fa (eval)
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
         message.setRecipients(MimeMessage.RecipientType.TO, adherent.getEmail());
@@ -494,10 +497,7 @@ public class ManagerService {
             throw new RuntimeException("Manager not found with ID: " + id);
         }
     }
-    public int calculateAge(Date birthDate) {
-        LocalDate birthLocalDate = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        return Period.between(birthLocalDate, LocalDate.now()).getYears();
-    }
+
     public Adherent updateAdherent(Integer id, Adherent request) throws MessagingException {
         Optional<Adherent> existingAdherent = adherentRepository.findById(id);
 
@@ -505,39 +505,25 @@ public class ManagerService {
             Adherent adherentToUpdate = existingAdherent.get();
 
             adherentToUpdate.setEmail(request.getEmail());
+            //staffToUpdate.setRoleName(request.getRoleName());
             adherentToUpdate.setFirstname(request.getFirstname());
             adherentToUpdate.setLastname(request.getLastname());
             adherentToUpdate.setAdresse(request.getAdresse());
             adherentToUpdate.setTelephone(request.getTelephone());
             adherentToUpdate.setPhoto(request.getPhoto());
-            adherentToUpdate.setDateNaissance(request.getDateNaissance());
-            adherentToUpdate.setNationalite(request.getNationalite());
-            adherentToUpdate.setNiveauScolaire(request.getNiveauScolaire());
-            adherentToUpdate.setNomEquipe(request.getNomEquipe());
 
-            if (request.getInformationsParent() != null) {
-                InformationsParent parentInfoToUpdate = adherentToUpdate.getInformationsParent();
-                if (parentInfoToUpdate == null) {
-                    parentInfoToUpdate = new InformationsParent();
-                    parentInfoToUpdate.setAdherent(adherentToUpdate);
-                    adherentToUpdate.setInformationsParent(parentInfoToUpdate);
-                }
-                parentInfoToUpdate.setNomParent(request.getInformationsParent().getNomParent());
-                parentInfoToUpdate.setPrenomParent(request.getInformationsParent().getPrenomParent());
-                parentInfoToUpdate.setTelephoneParent(request.getInformationsParent().getTelephoneParent());
-                parentInfoToUpdate.setAdresseParent(request.getInformationsParent().getAdresseParent());
-                parentInfoToUpdate.setEmailParent(request.getInformationsParent().getEmailParent());
-                parentInfoToUpdate.setNationaliteParent(request.getInformationsParent().getNationaliteParent());
-            } else {
-                throw new RuntimeException("Parent information is missing for the adherent.");
-            }
+//            Set<Permission> permissions = request.getPermissions();
+//            staffToUpdate.setPermissions(permissions);
+
+
 
             return adherentRepository.save(adherentToUpdate);
-        } else {
-            throw new RuntimeException("Adherent not found with ID: " + id);
+        }
+        else {
+            // Manager not found, handle the case accordingly
+            throw new RuntimeException("Manager not found with ID: " + id);
         }
     }
-
 
     public Manager updateManager(Principal connectedUser, Manager request) throws MessagingException {
         User user = getProfil(connectedUser);

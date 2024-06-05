@@ -14,9 +14,10 @@ public class ValKpis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String valKpi;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "kpi_id")
     private Kpi kpi;
 
+    private String valKpi;
 }
