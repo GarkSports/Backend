@@ -63,17 +63,17 @@ public class StaffController {
         return entraineurService.addTest(connectedUser);
     }
 
-//    @PostMapping("/adherents/{adherentId}/tests/{testId}/assign")
-//    public ResponseEntity<?> assignKpiValue(@PathVariable Integer adherentId, @PathVariable Integer testId) {
-//        try {Integer testId, Integer categoryId, Integer kpiId, Integer adherentId, String kpiValue
-//            entraineurService.assignKpiValue(adherentId, testId);
-//            return ResponseEntity.ok().build();
-//        } catch (EntityNotFoundException e) {
-//            return ResponseEntity.notFound().build();
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
+    @PostMapping("/adherents/{adherentId}/tests/{testId}/assign")
+    public ResponseEntity<?> assignKpiValue(@PathVariable Integer adherentId, @PathVariable Integer testId) {
+        try {Integer testId, Integer categoryId, Integer kpiId, Integer adherentId, String kpiValue
+            entraineurService.assignKpiValue(adherentId, testId);
+            return ResponseEntity.ok().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
 
 //    @DeleteMapping("/{evaluationId}/dynamicFields/{dynamicFieldId}")
