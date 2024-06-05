@@ -2,7 +2,6 @@ package com.gark.garksport.modal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.gark.garksport.modal.enums.EvaluationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,41 +10,34 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Evaluation {
+public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String testName;
 
-    private String evaluationType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "academie_id")
+    @JsonIgnore
+    private Academie academie;
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "evaluation_id")
+//    @JsonIgnore
+//    private Evaluation evaluation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "adherent_id")
     @JsonIgnore
     private Adherent adherent;
 
+    @OneToMany(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("test")
+    private List<Categorie> categories = new ArrayList<>();
 
-
-
-//    @JsonIgnoreProperties("evaluation")
-//    @OneToOne
-//    private Academie academie;
-
-
-
-//    @Enumerated(EnumType.STRING)
-//    @Column(nullable = false)
-//    private EvaluationType type;
-
-    private String evaluationName;
-
-    public Evaluation(String evaluationType) {
-        this.evaluationType = evaluationType;
-    }
 }

@@ -19,6 +19,11 @@ import java.util.Set;
 public class Adherent extends User {
     private String informationParent;
 
+    private String niveauScolaire;
+
+    @OneToOne
+    private InformationsParent informationsParent;
+
     @ManyToOne(cascade = CascadeType.ALL)
     private Discipline discipline;
 
@@ -43,6 +48,9 @@ public class Adherent extends User {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Parent> parents;
 
+    @JsonIgnoreProperties("adherent")
+    @OneToMany(mappedBy = "adherent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Test> tests = new ArrayList<>();
 
     @JsonIgnoreProperties("adherent")
     @OneToOne(mappedBy = "adherent")
