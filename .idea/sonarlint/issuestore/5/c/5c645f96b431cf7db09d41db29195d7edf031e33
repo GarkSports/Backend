@@ -1,0 +1,13 @@
+
+m	java:S1179"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ÿ‡•Æ8ÒşßËş1
+g
+java:S2259/"EA "NullPointerException" could be thrown; "orElse()" can return null.(õß¾£ÿÿÿÿÿ8ûşßËş1
+b
+java:S2259<"EA "NullPointerException" could be thrown; "orElse()" can return null.(äÅ½Õ8ûşßËş1
+b
+java:S2259-"EA "NullPointerException" could be thrown; "orElse()" can return null.(¥•À”8üşßËş1
+b
+java:S2259>"EA "NullPointerException" could be thrown; "orElse()" can return null.(ÓÁ÷¨8ûşßËş1
+G	java:S106*"+Replace this use of System.out by a logger.(ªĞ8ÿşßËş1
+V
+java:S1172D"4Remove this unused method parameter "connectedUser".(ºã§ìûÿÿÿÿ8ƒÿßËş1

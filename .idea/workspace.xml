@@ -5,18 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/BeneficesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/DepencesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Benefices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Depenses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/enums/Comptabiliteetat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/BeneficesRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/DepensesRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/BeneficesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/DepensesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/9/199dc86a5af0cc8d6f630c16af5c0529f9c8dbb7" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/9/199dc86a5af0cc8d6f630c16af5c0529f9c8dbb7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/0/2033d384424e77df18c47decc29a9ddfdeda77b8" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/0/2033d384424e77df18c47decc29a9ddfdeda77b8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/6/26c8da0f0385fa8b31d56a15dc52acbc36a74590" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/6/26c8da0f0385fa8b31d56a15dc52acbc36a74590" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/e/2ee46f096227a1f0f236875e16037dc2818c109e" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/e/2ee46f096227a1f0f236875e16037dc2818c109e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/6/36b316faa3de12613dc77cefd6cf8f64cbfdd2b3" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/6/36b316faa3de12613dc77cefd6cf8f64cbfdd2b3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/b/3bd2da25c2e050f2204732136f80a43a507a180e" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/b/3bd2da25c2e050f2204732136f80a43a507a180e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/6/5655fc1a0f5f0d65a1eae938542a9ec302cc70e4" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/6/5655fc1a0f5f0d65a1eae938542a9ec302cc70e4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/5/95f4476ee432d6c9e401ec116afeeb57ba7bc6e7" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/5/95f4476ee432d6c9e401ec116afeeb57ba7bc6e7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/b/ab2273b13e879695d3bd949771a6c5af2e94b488" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/b/ab2273b13e879695d3bd949771a6c5af2e94b488" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/8/b8d959bf545aeb8c04c1ec6939d38ee985b8d302" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/8/b8d959bf545aeb8c04c1ec6939d38ee985b8d302" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e4c4218144ae0675adb878d2fa70a1f4a0aa2468" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/4/e4c4218144ae0675adb878d2fa70a1f4a0aa2468" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e5f358604fed8f8c0822f9307ab2724f234553ed" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/5/e5f358604fed8f8c0822f9307ab2724f234553ed" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/NotificationToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/NotificationToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/NotificationTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/NotificationTokenRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/EntrainementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/EntrainementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/EvenementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/EvenementService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/NotificationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/websocket/WebNotificationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/websocket/WebNotificationController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -240,6 +262,8 @@
       <workItem from="1716898080793" duration="645000" />
       <workItem from="1716984346192" duration="1636000" />
       <workItem from="1717415438814" duration="8916000" />
+      <workItem from="1717582258678" duration="24799000" />
+      <workItem from="1717660779378" duration="5833000" />
     </task>
     <servers />
   </component>
