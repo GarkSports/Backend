@@ -32,4 +32,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findByBlocked(boolean blocked);
     List<User> findByRoleName(String existingRoleName);
+
+    Set<User> findByIdIn(List<Integer> receiversId);
 }

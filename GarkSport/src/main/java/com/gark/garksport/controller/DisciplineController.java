@@ -47,4 +47,9 @@ public class DisciplineController {
     public Set<Discipline> getAllDisciplines(Principal connectedUser) {
         return disciplineService.getAllDisciplines(userService.getUserId(connectedUser.getName()));
     }
+
+    @GetMapping("/getDisciplineById/{id}")
+    public Discipline getDisciplineById(@PathVariable Integer id) {
+        return disciplineService.getDisciplineById(id);
+    }
 }

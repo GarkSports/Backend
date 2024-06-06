@@ -4,7 +4,10 @@ import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.NotificationToken;
 import com.gark.garksport.repository.AdherentRepository;
+import com.gark.garksport.repository.EquipeRepository;
 import com.gark.garksport.repository.NotificationTokenRepository;
+import com.gark.garksport.repository.UserRepository;
+import com.gark.garksport.websocket.WebNotificationController;
 import com.google.firebase.messaging.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,15 @@ public class NotificationService {
     @Autowired
     private NotificationTokenRepository notificationTokenRepository;
 
+    @Autowired
+    private WebNotificationController webNotificationController;
+
+    @Autowired
+    private final UserRepository userRepository;
+
+    @Autowired
+    private EquipeRepository equipeRepository;
+
 
 
     private final UserService userService;
@@ -36,7 +48,7 @@ public class NotificationService {
         notificationdata.setUserId(currentuserid);
         notificationdata.setToken(token);
         notificationdata.setAcademieId(userService.getadherentacademieid(currentuserid));
-        notificationdata.setCodeEquipe(userService.getadherentequipe(currentuserid));
+        notificationdata.setEquipeId(userService.getadherentequipe(currentuserid));
         return notificationTokenRepository.save(notificationdata);
     }
 
@@ -47,22 +59,25 @@ public class NotificationService {
 
     public void sendNotificationToAcademy(Integer academieId, NotificationMessage notificationMessage) {
         List<String> tokens = notificationTokenRepository.findTokensByAcademieId(academieId);
-        sendNotificationToTokens(tokens, notificationMessage);
+        //sendNotificationToTokens(tokens, notificationMessage);
     }
 
-    public void sendNotificationToTeam(String codeEquipe, NotificationMessage notificationMessage) {
-        List<String> tokens = notificationTokenRepository.findTokensByCodeEquipe(codeEquipe);
+    public void sendNotificationToTeam(Integer idEquipe, NotificationMessage notificationMessage) {
+
+        List<String> tokens = notificationTokenRepository.findTokensByCodeEquipe(idEquipe);
+        System.out.println("List<String> tokens ;"+tokens);
         sendNotificationToTokens(tokens, notificationMessage);
     }
 
     public void sendNotificationToUser(Integer userId, NotificationMessage notificationMessage) {
         NotificationToken notificationToken = notificationTokenRepository.findByUserId(userId);
+        String receiverEmail = userRepository.findById(userId).get().getUsername();
+
+
         if (notificationToken != null) {
             String token = notificationToken.getToken();
             if (token != null) {
-                List<String> tokens = new ArrayList<>();
-                tokens.add(token);
-                sendNotificationToTokens(tokens, notificationMessage);
+                sendNotificationToToken(token, notificationMessage);
             } else {
                 // Handle the case where the token is null
                 // For example, log an error or throw an exception
@@ -72,19 +87,27 @@ public class NotificationService {
             // Handle the case where the NotificationToken is not found for the user
             // For example, log an error or throw an exception
             System.err.println("NotificationToken not found for user: " + userId);
+            webNotificationController.sendNotification(receiverEmail,notificationMessage);
+        }
+
+    }
+
+    public void sendNotificationToMembers(List<Integer> idMembres,NotificationMessage notificationMessage){
+        for(Integer idmember :idMembres){
+            sendNotificationToUser(idmember,notificationMessage);
         }
     }
 
 
 
-    private String sendNotificationToTokens(List<String> tokens, NotificationMessage notificationMessage) {
+    public String sendNotificationToToken(String token, NotificationMessage notificationMessage) {
         Notification notification =Notification
                 .builder()
                 .setTitle(notificationMessage.getTitle())
                 .setBody(notificationMessage.getBody())
                 .setImage(notificationMessage.getImage())
                 .build();
-        for (String token : tokens) {
+
             Message message = Message
                     .builder()
                     .setToken(token)
@@ -100,8 +123,34 @@ public class NotificationService {
                 } else {
                     System.err.println("Failed to send the notification");
                 }
+            } return "end of sending notifications";
+    }
+
+    private String sendNotificationToTokens(List<String> tokens, NotificationMessage notificationMessage) {
+        Notification notification =Notification
+                .builder()
+                .setTitle(notificationMessage.getTitle())
+                .setBody(notificationMessage.getBody())
+                .setImage(notificationMessage.getImage())
+                .build();
+
+        for (String token : tokens){
+            Message message = Message
+                .builder()
+                .setToken(token)
+                .setNotification(notification)
+                .build();
+        try{
+            firebaseMessaging.send(message);
+            return "Success sending notification";
+        }catch(FirebaseMessagingException ex){
+            if (ex.getMessagingErrorCode() == MessagingErrorCode.UNREGISTERED) {
+                System.err.println("Device token has been unregistered");
+            } else {
+                System.err.println("Failed to send the notification");
             }
         }
-        return "end of sending notifications";
+        } return "end of sending notifications";
+
     }
 }

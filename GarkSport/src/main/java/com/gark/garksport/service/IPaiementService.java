@@ -25,4 +25,8 @@ public interface IPaiementService {
 
     public Set<Adherent> getAdherentsByAcademie(Integer managerId);
 
+    public Paiement getPaiementById(Integer idPaiement);
+
+    public void deletePaiementHistory(Integer idPaiementHistory);
+
 }

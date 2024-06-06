@@ -3,6 +3,7 @@ package com.gark.garksport.service;
 import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.Equipe;
 import com.gark.garksport.modal.Evenement;
+import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.enums.EvenementType;
 import com.gark.garksport.modal.enums.StatutEvenenement;
 import com.gark.garksport.modal.enums.TypeRepetition;
@@ -24,9 +25,17 @@ public class EvenementService implements IEvenementService {
     @Autowired
     private ManagerRepository managerRepository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @Override
     public Evenement addCompetition(Evenement evenement, Integer idEquipe, List<Integer> idMembres, Integer managerId) {
         evenement.setAcademie(managerRepository.findById(managerId).get().getAcademie());
+
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("GarkSport");
+        notificationMessage.setBody("vous avez une nouvelle competition");
+        notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
 
         // Check if both idEquipe and idMembres are provided
         if ((idEquipe != null && idEquipe != 0) && (idMembres != null && !idMembres.isEmpty())) {
@@ -41,6 +50,8 @@ public class EvenementService implements IEvenementService {
             evenement.setConvocationEquipe(equipe);
             evenement.setConvocationMembres(new HashSet<>(equipe.getAdherents()));
             evenement.setType(EvenementType.COMPETITION);
+            notificationService.sendNotificationToTeam(idEquipe,notificationMessage);
+
         } else if (idMembres != null && !idMembres.isEmpty()) {
             Set<Adherent> membres = adherentRepository.findByIdIn(idMembres);
             evenement.setConvocationMembres(new HashSet<>(membres));
@@ -48,12 +59,21 @@ public class EvenementService implements IEvenementService {
             Equipe equipe = equipeRepository.findById(firstMember.getEquipeId()).get();
             evenement.setConvocationEquipe(equipe);
             evenement.setType(EvenementType.COMPETITION);
+            //send notification members
+
+            notificationService.sendNotificationToMembers(idMembres,notificationMessage);
+
         } else {
             throw new IllegalArgumentException("Either idEquipe or idMembres must be provided.");
         }
 
         // Save the initial evenement
         Evenement savedEvenement = evenementRepository.save(evenement);
+
+
+
+
+
 
         // Handle repetition logic
         if (Boolean.TRUE.equals(evenement.getRepetition())) {
@@ -111,6 +131,11 @@ public class EvenementService implements IEvenementService {
     @Override
     public Evenement addPersonnalisé(Evenement evenement, Integer idEquipe, List<Integer> idMembres, Integer managerId) {
         evenement.setAcademie(managerRepository.findById(managerId).get().getAcademie());
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("GarkSport");
+        notificationMessage.setBody("vous avez un nouveau événement");
+        notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
+
 
         // Check if both idEquipe and idMembres are provided
         if ((idEquipe != null && idEquipe != 0) && (idMembres != null && !idMembres.isEmpty())) {
@@ -138,6 +163,8 @@ public class EvenementService implements IEvenementService {
             // Handle repetition logic
             handleRepetition(evenement);
 
+            notificationService.sendNotificationToTeam(idEquipe,notificationMessage);
+
             return evenement;
         }
 
@@ -160,6 +187,7 @@ public class EvenementService implements IEvenementService {
 
             // Handle repetition logic
             handleRepetition(evenement);
+            notificationService.sendNotificationToMembers(idMembres,notificationMessage);
 
             return evenement;
         }
@@ -172,7 +200,10 @@ public class EvenementService implements IEvenementService {
     public Evenement addTest(Evenement evenement, Integer idEquipe, List<Integer> idMembres, Integer managerId) {
         evenement.setAcademie(managerRepository.findById(managerId).get().getAcademie());
 
-
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("GarkSport");
+        notificationMessage.setBody("vous avez un nouveau Test");
+        notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
         // Check if both idEquipe and idMembres are provided
         if ((idEquipe != null && idEquipe != 0) && (idMembres != null && !idMembres.isEmpty())) {
             throw new IllegalArgumentException("Both idEquipe and idMembres cannot be provided simultaneously.");
@@ -199,6 +230,7 @@ public class EvenementService implements IEvenementService {
 
             // Handle repetition logic
             handleRepetition(evenement);
+            notificationService.sendNotificationToTeam(idEquipe,notificationMessage);
 
             return evenement;
         }
@@ -222,6 +254,7 @@ public class EvenementService implements IEvenementService {
 
             // Handle repetition logic
             handleRepetition(evenement);
+            notificationService.sendNotificationToMembers(idMembres,notificationMessage);
 
             return evenement;
         }
@@ -252,6 +285,11 @@ public class EvenementService implements IEvenementService {
         if (Boolean.TRUE.equals(evenement.getRepetition())) {
             handleRepetition(evenement);
         }
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("GarkSport");
+        notificationMessage.setBody("Vous avez un nouveau match amical");
+        notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
+        notificationService.sendNotificationToTeam(equipeId,notificationMessage);
 
         return evenement;
     }
@@ -299,6 +337,14 @@ public class EvenementService implements IEvenementService {
         existingEvenement.setDate(evenement.getDate());
         existingEvenement.setHeure(evenement.getHeure());
         existingEvenement.setConvocationMembres(new HashSet<>(adherentRepository.findByIdIn(idMembres)));
+
+
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("GarkSport");
+        notificationMessage.setBody("vous avez un evenement modifié");
+        notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
+
+        notificationService.sendNotificationToMembers(idMembres,notificationMessage);
 
         return evenementRepository.save(existingEvenement);
     }

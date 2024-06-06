@@ -46,6 +46,9 @@ public class PostsService {
                 case "tennis":
                     post.setImageUrl("https://www.mouratoglou.com/wp-content/uploads/2019/04/lacademie_courtscouverts-1-700x350.png");
                     break;
+                default:
+                    post.setImageUrl("https://m.media-amazon.com/images/I/71kgOmfloSL.jpg");
+                    break;
 
             }
         }

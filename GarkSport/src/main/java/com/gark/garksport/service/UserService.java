@@ -36,9 +36,9 @@ public class UserService {
         return user.getFirstname() + " " + user.getLastname();
     }
 
-    public String getadherentequipe(Integer userid){
+    public Integer getadherentequipe(Integer userid){
         Adherent adherent = adherentRepository.findById(userid).orElseThrow(() ->new RuntimeException("adherent equipe not found"));
-        return adherent.getNomEquipe();
+        return adherent.getEquipeId();
     }
 
     public Integer getadherentacademieid(Integer userid){
