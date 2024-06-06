@@ -362,8 +362,6 @@ public class ManagerService {
         // Save the adherent first
         Adherent savedAdherent = repository.save(adherent);
 
-
-<<<<<<< HEAD
         Paiement paiement = new Paiement();
         paiement.setAdherent(savedAdherent);
         paiement.setTypeAbonnement(TypeAbonnement.Mensuel);
@@ -393,11 +391,7 @@ public class ManagerService {
         paiementHistoryRepository.save(paiementHistory);
 
         // Send the email
-=======
 
-
-
->>>>>>> parent of 93f22fa (eval)
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
         message.setRecipients(MimeMessage.RecipientType.TO, adherent.getEmail());
