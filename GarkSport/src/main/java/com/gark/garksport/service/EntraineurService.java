@@ -4,6 +4,7 @@ import com.gark.garksport.modal.*;
 import com.gark.garksport.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -66,50 +68,30 @@ public class EntraineurService {
         return test;
     }
 
-    public void assignKpiValue(Integer testId, Integer categoryId, Integer kpiId, Integer adherentId, String kpiValue) {
-        Test test = testRepository.findById(testId).orElseThrow(() -> new IllegalArgumentException("Test not found"));
+    public void assignKpiValues(Long adherentId, Long testId, Long categoryId, Map<Long, String> kpiValues) throws ConfigDataResourceNotFoundException {
+        Adherent adherent = adherentRepository.findById(adherentId)
+                .orElseThrow(() -> new ConfigDataResourceNotFoundException("Adherent not found with id: " + adherentId));
 
-        // Find the category in the test
-        Optional<Categorie> optionalCategory = test.getCategories().stream()
-                .filter(category -> category.getId().equals(categoryId))
-                .findFirst();
+        Test test = testRepository.findById(testId)
+                .orElseThrow(() -> new ConfigDataResourceNotFoundException("Test not found with id: " + testId));
 
-        if (optionalCategory.isPresent()) {
-            Categorie category = optionalCategory.get();
+        Categorie category = categorieRepository.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + categoryId));
 
-            // Find the KPI in the category
-            Optional<Kpi> optionalKpi = category.getKpis().stream()
-                    .filter(kpi -> kpi.getId().equals(kpiId))
-                    .findFirst();
+        for (Map.Entry<Long, String> entry : kpiValues.entrySet()) {
+            Long kpiId = entry.getKey();
+            String value = entry.getValue();
 
-            if (optionalKpi.isPresent()) {
-                Kpi kpi = optionalKpi.get();
+            Kpi kpi = category.getKpis().stream()
+                    .filter(k -> k.getId().equals(kpiId))
+                    .findFirst()
+                    .orElseThrow(() -> new ResourceNotFoundException("KPI not found in category with id: " + kpiId));
 
-                // Create a ValKpi and set its value
-                ValKpis valKpis = new ValKpis();
-                valKpis.setValKpi(kpiValue);
-                valKpis.setKpi(kpi);
-
-                // Find the adherent
-                Adherent adherent = adherentRepository.findById(adherentId)
-                        .orElseThrow(() -> new IllegalArgumentException("Adherent not found"));
-
-                adherent.getTests().add(test);
-                adherentRepository.save(adherent);
-
-                // Add the ValKpi to the KPI and save the test
-                kpi.setValkpi(valKpis);
-                testRepository.save(test);
-            } else {
-                throw new IllegalArgumentException("KPI not found in category");
-            }
-        } else {
-            throw new IllegalArgumentException("Category not found in test");
+            // Update the KPI value as necessary
+            kpi.setValue(value);
+            kpiRepository.save(kpi);
         }
     }
-
-
-
 //    public ResponseEntity<Evaluation> removeDynamicFieldFromEvaluation(Long evaluationId, Integer kpiId) {
 //        Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
 //        if (evaluationOptional.isPresent()) {

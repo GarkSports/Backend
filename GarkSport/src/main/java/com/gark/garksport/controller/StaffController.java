@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.print.attribute.standard.PrinterInfo;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -63,17 +65,22 @@ public class StaffController {
         return entraineurService.addTest(connectedUser);
     }
 
-    @PostMapping("/adherents/{adherentId}/tests/{testId}/assign")
-    public ResponseEntity<?> assignKpiValue(@PathVariable Integer adherentId, @PathVariable Integer testId) {
-        try {Integer testId, Integer categoryId, Integer kpiId, Integer adherentId, String kpiValue
-            entraineurService.assignKpiValue(adherentId, testId);
-            return ResponseEntity.ok().build();
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
+    @PutMapping("/{adherentId}/tests/{testId}/categories/{categoryId}/assignKpiValues")
+    public ResponseEntity<String> assignKpiValues(
+            @PathVariable Long adherentId,
+            @PathVariable Long testId,
+            @PathVariable Long categoryId,
+            @RequestBody Map<Long, String> kpiValues) {
+        try {
+            entraineurService.assignKpiValues(adherentId, testId, categoryId, kpiValues);
+            return ResponseEntity.ok("KPI values assigned successfully.");
+        } catch (ConfigDataResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
         }
     }
+
 
 
 //    @DeleteMapping("/{evaluationId}/dynamicFields/{dynamicFieldId}")
