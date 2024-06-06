@@ -89,8 +89,9 @@
 		<dependency> 
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
-		</dependency> 
-			<groupId>ch.qos.logback</groupId>
+		</dependency>
+		<dependency>
+		<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
 		<dependency>
