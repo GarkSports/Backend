@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -69,5 +71,16 @@ public class BeneficesController {
         }
         beneficesService.deleteBenefices(connectedUser,id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/monthly-sums")
+    public Map<String, BigDecimal> getMonthlySums(Principal connectedUser) {
+
+        return beneficesService.getMonthlySumsForAcademie(connectedUser);
+    }
+
+    @GetMapping("/monthly-comparisons")
+    public Map<String, BigDecimal> getMonthlyComparisons(Principal connectedUser) {
+        return beneficesService.getMonthlyComparisonsForAcademie(connectedUser);
     }
 }

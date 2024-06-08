@@ -1,4 +1,28 @@
 
-m	java:S1179"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ÿ‡•Æ8ıóĞÏş1
+m	java:S117?"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ÿ‡•Æ8¿¼‡¸ÿ1
+b
+java:S2259D"EA "NullPointerException" could be thrown; "orElse()" can return null.(ÓÁ÷¨8¬¤ü¾ÿ1
+g
+java:S22592"EA "NullPointerException" could be thrown; "orElse()" can return null.(ø¨¥Ûúÿÿÿÿ8´½‡¸ÿ1
+g
+java:S22594"EA "NullPointerException" could be thrown; "orElse()" can return null.(öØ†øÿÿÿÿ8şÊç¸ÿ1
+g
+java:S2259w"EA "NullPointerException" could be thrown; "orElse()" can return null.(Ğ öáùÿÿÿÿ8‚ûã¾ÿ1
+b
+java:S2259u"EA "NullPointerException" could be thrown; "orElse()" can return null.(Ö“Õ8¬¤ü¾ÿ1
+b
+java:S2259B"EA "NullPointerException" could be thrown; "orElse()" can return null.(äÅ½Õ8‚ûã¾ÿ1
 Q
-java:S1172D"4Remove this unused method parameter "connectedUser".(ËŒ¾8‘ôĞÏş1
+java:S1172J"4Remove this unused method parameter "connectedUser".(ËŒ¾8á½‡¸ÿ1
+L
+java:S1874œ".Remove this use of "divide"; it is deprecated.(Öõïí8©üŒ¿ÿ1
+S
+java:S1874œ"5Remove this use of "ROUND_HALF_UP"; it is deprecated.(Öõïí8ªüŒ¿ÿ1
+L
+java:S1874".Remove this use of "divide"; it is deprecated.(Ö¾è€8ÕÆ¿ÿ1
+S
+java:S1874"5Remove this use of "ROUND_HALF_UP"; it is deprecated.(Ö¾è€8ÕÆ¿ÿ1
+Q
+java:S1874 ".Remove this use of "divide"; it is deprecated.(â–Í÷ûÿÿÿÿ8ÕÆ¿ÿ1
+X
+java:S1874 "5Remove this use of "ROUND_HALF_UP"; it is deprecated.(â–Í÷ûÿÿÿÿ8ÖÆ¿ÿ1

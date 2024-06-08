@@ -62,7 +62,7 @@ public class DepensesService {
             IdAcademie = staffRepository.findById(userId).orElse(null).getAcademie().getId();
         }
 
-        return depensesRepository.findByAcademieId(IdAcademie);
+        return depensesRepository.findByAcademieIdOrderByDateDesc(IdAcademie);
     }
 
     public Optional<Depenses> getDepensesById(Principal connectedUser,Integer id) {
@@ -80,7 +80,7 @@ public class DepensesService {
             existingDepenses.setEtat(newDepenses.getEtat());
             existingDepenses.setType(newDepenses.getType());
             existingDepenses.setQuantite(newDepenses.getQuantite());
-            existingDepenses.setPrixUnite(newDepenses.getPrixUnite());
+            existingDepenses.setPrixunite(newDepenses.getPrixunite());
 
             // Adjust other properties as needed
             return depensesRepository.save(existingDepenses);

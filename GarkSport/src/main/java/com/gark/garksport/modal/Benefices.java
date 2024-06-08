@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Benefices {
 
@@ -24,10 +26,10 @@ public class Benefices {
 
     private Comptabiliteetat etat;
 
-    private int quantite;
+    private double quantite;
 
     @Column(name = "prix_unite")
-    private BigDecimal prixUnite;
+    private BigDecimal prixunite;
 
     private BigDecimal total;
 
@@ -42,16 +44,10 @@ public class Benefices {
     private Academie academie;
 
 
-    public Benefices() {
-        // Initialisez la date avec la date actuelle par défaut
-        this.date = LocalDate.now();
-    }
-
-
     @PrePersist
     @PreUpdate
     public void calculateTotal() {
-        this.total = BigDecimal.valueOf(this.quantite).multiply(this.prixUnite);
+        this.total = BigDecimal.valueOf(this.quantite).multiply(this.prixunite);
     }
 
     // Autres méthodes si nécessaire
