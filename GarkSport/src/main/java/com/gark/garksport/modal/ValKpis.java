@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +18,8 @@ public class ValKpis {
     private String valKpi;
 
     @OneToOne
+    @JoinColumn(name = "kpi_id")
+    @JsonIgnore
     private Kpi kpi;
 
 }

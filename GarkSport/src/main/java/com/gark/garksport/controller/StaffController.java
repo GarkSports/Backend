@@ -2,20 +2,15 @@ package com.gark.garksport.controller;
 
 import com.gark.garksport.modal.*;
 import com.gark.garksport.repository.AdherentRepository;
-import com.gark.garksport.repository.TestRepository;
 import com.gark.garksport.service.EntraineurService;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.PrinterInfo;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -47,12 +42,11 @@ public class StaffController {
 
     @PutMapping("/add-fields-evaluation")
     @ResponseStatus
-    public ResponseEntity<Categorie> addFieldsToCategory(@RequestParam Integer evaluationId,
-                                                      @RequestBody Kpi kpis){
-        Categorie newCategorie = entraineurService.addFieldsToCategory(evaluationId, kpis).getBody();
+    public ResponseEntity<Categorie> addFieldsToCategory(@RequestParam Integer categorieId,
+                                                         @RequestBody Kpi kpis){
+        Categorie newCategorie = entraineurService.addFieldsToCategory(categorieId, kpis).getBody();
         return ResponseEntity.ok(newCategorie);
     }
-
     @GetMapping("/getTest")
     public Test getTest(@RequestParam Integer testId){
 
@@ -65,23 +59,75 @@ public class StaffController {
         return entraineurService.addTest(connectedUser);
     }
 
-    @PutMapping("/{adherentId}/tests/{testId}/categories/{categoryId}/assignKpiValues")
-    public ResponseEntity<String> assignKpiValues(
-            @PathVariable Long adherentId,
-            @PathVariable Long testId,
-            @PathVariable Long categoryId,
-            @RequestBody Map<Long, String> kpiValues) {
-        try {
-            entraineurService.assignKpiValues(adherentId, testId, categoryId, kpiValues);
-            return ResponseEntity.ok("KPI values assigned successfully.");
-        } catch (ConfigDataResourceNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
-        }
+    @PostMapping("/add-categorie")
+    public ResponseEntity<Categorie> addCategorie(Principal connectedUser,
+                                                  @RequestParam Integer testId,
+                                                  @RequestBody Categorie requestCategorie
+                                                  ){
+        return entraineurService.addCategorie(connectedUser,testId,requestCategorie);
     }
 
+    @PostMapping("/adherents/{adherentId}/tests/{testId}/categories/{categoryId}/assignKpiValues")
+    public ResponseEntity<Void> assignKpiValues(
+            @PathVariable Integer adherentId,
+            @PathVariable Integer testId,
+            @PathVariable Integer categoryId,
+            @RequestBody Map<String, String> kpiValuesMap) {
 
+        List<Integer> kpiIds = new ArrayList<>();
+        List<String> kpiValues = new ArrayList<>();
+
+        kpiValuesMap.forEach((key, value) -> {
+            kpiIds.add(Integer.parseInt(key));
+            kpiValues.add(value);
+        });
+
+        entraineurService.assignKpiValues(adherentId, testId, categoryId, kpiIds, kpiValues);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/academies/{academieId}/tests")
+    public ResponseEntity<List<Test>> getTestsByAcademieId(@PathVariable Integer academieId) {
+        List<Test> tests = entraineurService.getTestsByAcademieId(academieId);
+        return ResponseEntity.ok(tests);
+    }
+
+    @GetMapping("/test/{testId}")
+    public ResponseEntity<Optional<Test>> getTestById(@PathVariable Integer testId) {
+        Optional<Test> test = entraineurService.getTestById(testId);
+        return ResponseEntity.ok(test);
+    }
+
+    @GetMapping("/{testId}/categories")
+    public ResponseEntity<List<Categorie>> getCategoriesByTestId(@PathVariable Integer testId) {
+        List<Categorie> categories = entraineurService.getCategoriesByTestId(testId);
+        return ResponseEntity.ok(categories);
+    }
+
+    @DeleteMapping("/valKpi/{valKpiId}")
+    public ResponseEntity<Void> deleteKpiValue(@PathVariable Integer valKpiId) {
+        entraineurService.deleteKpiValue(valKpiId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/kpi/{kpiId}")
+    public ResponseEntity<Void> deleteKpi(@PathVariable Integer kpiId) {
+        entraineurService.deleteKpi(kpiId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/kpi/{kpiId}")
+    public ResponseEntity<Kpi> updateKpi(@PathVariable Integer kpiId, @RequestBody Map<String, String> updates) {
+        String newValue = updates.get("kpiType");
+        Kpi updatedKpi = entraineurService.updateKpi(kpiId, newValue);
+        return ResponseEntity.ok(updatedKpi);
+    }
+    @PutMapping("/valKpi/{valKpiId}")
+    public ResponseEntity<ValKpis> updateValKpi(@PathVariable Integer valKpiId, @RequestBody Map<String, String> updates) {
+        String newValue = updates.get("valKpi");
+        ValKpis updatedValKpi = entraineurService.updateValKpi(valKpiId, newValue);
+        return ResponseEntity.ok(updatedValKpi);
+    }
 
 //    @DeleteMapping("/{evaluationId}/dynamicFields/{dynamicFieldId}")
 //    public ResponseEntity<Evaluation> removeDynamicFieldFromEvaluation(

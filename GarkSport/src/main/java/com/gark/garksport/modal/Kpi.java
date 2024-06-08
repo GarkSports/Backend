@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,11 +22,13 @@ public class Kpi {
     private Integer id;
     private String kpiType;
 
-    @OneToOne
+    @OneToOne(mappedBy = "kpi", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("kpi")
     private ValKpis valkpi;
 
     @ManyToOne
     @JoinColumn(name = "categorie_id")
+    @JsonIgnore
     private Categorie categorie;
 
     public Kpi(String kpiType) {

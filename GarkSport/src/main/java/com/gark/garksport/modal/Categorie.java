@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class Categorie {
 
     @ManyToOne
     @JoinColumn(name = "test_id")
+    @JsonIgnore
     private Test test;
 
     @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL, orphanRemoval = true)

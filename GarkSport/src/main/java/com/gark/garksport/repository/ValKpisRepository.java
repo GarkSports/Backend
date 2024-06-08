@@ -1,11 +1,11 @@
 package com.gark.garksport.repository;
 
-import com.gark.garksport.modal.Categorie;
-import com.gark.garksport.modal.Evaluation;
+import com.gark.garksport.modal.Kpi;
+import com.gark.garksport.modal.ValKpis;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface CategorieRepository extends JpaRepository<Categorie, Integer> {
+public interface ValKpisRepository extends JpaRepository<ValKpis, Integer> {
 }
