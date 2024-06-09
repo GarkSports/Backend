@@ -3,7 +3,6 @@ package com.gark.garksport.websocket;
 import com.gark.garksport.modal.NotificationMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,7 +14,7 @@ public class WebNotificationController {
     public String sendNotification(String user,NotificationMessage NotificationMessage) {
 
 
-        System.out.println("sending notif to web"+NotificationMessage.toString());
+
 
         template.convertAndSend("/queue/reply/"+user, NotificationMessage);
         return "Notifications successfully sent to Angular !";

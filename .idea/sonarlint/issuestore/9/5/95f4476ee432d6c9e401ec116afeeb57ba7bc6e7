@@ -1,18 +1,18 @@
 
 o
-java:S6204Z"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ø­À–÷1
+java:S6204d"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ø­À–÷1
 e
-java:S6201c"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ù­À–÷1
+java:S6201r"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ù­À–÷1
 I
-java:S1452Ô"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8ü­À–÷1
-^	java:S125°"<This block of commented-out lines of code should be removed.(Õ§³™ùÿÿÿÿ8ü­À–÷1
-Y	java:S125À"<This block of commented-out lines of code should be removed.(Áíëí8ü­À–÷1
+java:S1452ö"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8ü­À–÷1
+^	java:S125Ò"<This block of commented-out lines of code should be removed.(Õ§³™ùÿÿÿÿ8ü­À–÷1
+Y	java:S125â"<This block of commented-out lines of code should be removed.(Áíëí8ü­À–÷1
 I
-java:S1452Þ"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8ý­À–÷1
-^	java:S125¦"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8®À–÷1
+java:S1452€"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8ý­À–÷1
+^	java:S125È"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8®À–÷1
 a
 java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8üªƒ–ø1
 p
 java:S1128"NRemove this unused import 'com.gark.garksport.dto.request.AddRoleNameRequest'.(í…Êºûÿÿÿÿ8üªƒ–ø1
 b
-java:S1128"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(Ž»ÔÕüÿÿÿÿ8ýªƒ–ø1
+java:S1128	"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(Ž»ÔÕüÿÿÿÿ8ýªƒ–ø1
