@@ -1,0 +1,9 @@
+
+]	java:S125
+"<This block of commented-out lines of code should be removed.(‰‘ìöıÿÿÿÿ8ÿîËğş1
+e
+java:S1128"HRemove this unused import 'org.springframework.context.annotation.Bean'.(‚î‰Ş8€ïËğş1
+c
+java:S1128"ARemove this unused import 'org.springframework.http.HttpHeaders'.(ãŸñ×úÿÿÿÿ8€ïËğş1
+}
+java:S1128"[Remove this unused import 'org.springframework.web.servlet.config.annotation.CorsRegistry'.(âÁ’©şÿÿÿÿ8€ïËğş1

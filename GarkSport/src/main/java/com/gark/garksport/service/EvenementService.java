@@ -199,10 +199,12 @@ public class EvenementService implements IEvenementService {
     @Override
     public Evenement addTest(Evenement evenement, Integer idEquipe, List<Integer> idMembres, Integer managerId) {
         evenement.setAcademie(managerRepository.findById(managerId).get().getAcademie());
+
         NotificationMessage notificationMessage = new NotificationMessage();
         notificationMessage.setTitle("GarkSport");
         notificationMessage.setBody("vous avez un nouveau Test");
         notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
+
         // Check if both idEquipe and idMembres are provided
         if ((idEquipe != null && idEquipe != 0) && (idMembres != null && !idMembres.isEmpty())) {
             throw new IllegalArgumentException("Both idEquipe and idMembres cannot be provided simultaneously.");

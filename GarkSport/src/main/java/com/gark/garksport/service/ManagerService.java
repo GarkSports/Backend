@@ -391,6 +391,7 @@ public class ManagerService {
         paiementHistoryRepository.save(paiementHistory);
 
         // Send the email
+
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
         message.setRecipients(MimeMessage.RecipientType.TO, adherent.getEmail());

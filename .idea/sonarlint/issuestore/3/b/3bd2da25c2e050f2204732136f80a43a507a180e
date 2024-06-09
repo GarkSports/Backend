@@ -64,7 +64,7 @@ h
 java:S3252Œ"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(µËúÿÿÿÿ8š¨Øğı1
 H	java:S106 "+Replace this use of System.out by a logger.(œÄá8¨Øğı1
 M	java:S106¡"+Replace this use of System.out by a logger.(»¸¤Åÿÿÿÿÿ8¨Øğı1
-H	java:S106¢"+Replace this use of System.out by a logger.(ùŸÊù8ÕèÚÆş1
+H	java:S106¢"+Replace this use of System.out by a logger.(ùŸÊù8´Ê’êş1
 H	java:S106ª"+Replace this use of System.out by a logger.(´­ùö8¨Øğı1
 Y	java:S125­"<This block of commented-out lines of code should be removed.(²ŠŞ’8Ÿ¨Øğı1
 ›
