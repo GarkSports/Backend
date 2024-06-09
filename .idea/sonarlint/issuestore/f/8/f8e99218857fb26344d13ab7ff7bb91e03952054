@@ -1,0 +1,10 @@
+
+a	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ρ΄μ³ϊÿÿÿÿ
+J
+java:S1172Z"/Remove this unused method parameter "formData".(ι€““ψÿÿÿÿ
+A
+java:S1452Z"&Remove usage of generic wildcard type.(ι€““ψÿÿÿÿ
+V	java:S125i"<This block of commented-out lines of code should be removed.(Β°υÒώÿÿÿÿ
+V	java:S125"<This block of commented-out lines of code should be removed.(•—¨¨ψÿÿÿÿ
+W	java:S125"<This block of commented-out lines of code should be removed.(ποσψÿÿÿÿ
+W	java:S125"<This block of commented-out lines of code should be removed.(“Έ†ψÿÿÿÿ
