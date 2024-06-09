@@ -34,10 +34,10 @@ public class Equipe {
     @ManyToOne
     private Discipline discipline;
 
-    @OneToMany
+    @ManyToMany
     private Set<Adherent> adherents;
 
-    @OneToMany
+    @ManyToMany
     private Set<Entraineur> entraineurs;
 
     @ManyToOne

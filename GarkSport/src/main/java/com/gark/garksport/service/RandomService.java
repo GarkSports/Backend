@@ -112,35 +112,54 @@ public class RandomService implements IRandomService {
     }
 
     @Override
-    public Set<Adherent> getAdherentsByAcademie(Integer managerId) {
-        // Get all adherents for the academie
-        Set<Adherent> allAdherents = adherentRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
+    public Set<Adherent> getAdherentsByAcademie(Integer managerId, Integer equipeId) {
+        // Retrieve the manager's academy ID
+        Integer academieId = managerRepository.findById(managerId)
+                .orElseThrow(() -> new IllegalArgumentException("Manager not found"))
+                .getAcademie()
+                .getId();
 
-        // Get the IDs of adherents assigned to any equipe for the academie
-        Set<Integer> assignedAdherentIds = equipeRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId()).stream()
-                .flatMap(equipe -> equipe.getAdherents().stream().map(Adherent::getId))
+        // Get all adherents for the academie
+        Set<Adherent> allAdherents = adherentRepository.findByAcademieId(academieId);
+
+        // Get the equipe to filter adherents
+        Equipe equipe = equipeRepository.findById(equipeId)
+                .orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
+
+        // Get the IDs of adherents assigned to this equipe
+        Set<Integer> adherentIdsInEquipe = equipe.getAdherents().stream()
+                .map(Adherent::getId)
                 .collect(Collectors.toSet());
 
-        // Filter out adherents who are not assigned to any equipe
+        // Filter out adherents who are assigned to this equipe
         return allAdherents.stream()
-                .filter(adherent -> !assignedAdherentIds.contains(adherent.getId()))
+                .filter(adherent -> !adherentIdsInEquipe.contains(adherent.getId()))
                 .collect(Collectors.toSet());
     }
 
     @Override
-    public Set<Entraineur> getEntraineursByAcademie(Integer managerId) {
-        // Get all entraineurs for the academie
-        Set<Entraineur> allEntraineurs = entraineurRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
+    public Set<Entraineur> getEntraineursByAcademie(Integer managerId, Integer equipeId) {
+        // Retrieve the manager's academy ID
+        Integer academieId = managerRepository.findById(managerId)
+                .orElseThrow(() -> new IllegalArgumentException("Manager not found"))
+                .getAcademie()
+                .getId();
 
-        // Get the IDs of entraineurs assigned to any equipe for the academie
-        Set<Integer> assignedEntraineurIds = equipeRepository.findByAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId()).stream()
-                .flatMap(equipe -> equipe.getEntraineurs().stream()) // FlatMap to handle multiple entraineurs per equipe
+        // Get all entraineurs for the academie
+        Set<Entraineur> allEntraineurs = entraineurRepository.findByAcademieId(academieId);
+
+        // Get the equipe to filter entraineurs
+        Equipe equipe = equipeRepository.findById(equipeId)
+                .orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
+
+        // Get the IDs of entraineurs assigned to this equipe
+        Set<Integer> entraineurIdsInEquipe = equipe.getEntraineurs().stream()
                 .map(Entraineur::getId)
                 .collect(Collectors.toSet());
 
-        // Filter out entraineurs who are not assigned to any equipe
+        // Filter out entraineurs who are assigned to this equipe
         return allEntraineurs.stream()
-                .filter(entraineur -> !assignedEntraineurIds.contains(entraineur.getId()))
+                .filter(entraineur -> !entraineurIdsInEquipe.contains(entraineur.getId()))
                 .collect(Collectors.toSet());
     }
 
@@ -258,9 +277,9 @@ public class RandomService implements IRandomService {
     }
 
     @Override
-    public void removeAdherentFromEquipe(Integer adherentId) {
+    public void removeAdherentFromEquipe(Integer adherentId, Integer equipeId) {
         Adherent adherent = adherentRepository.findById(adherentId).orElseThrow(() -> new IllegalArgumentException("Adherent not found"));
-        Equipe equipe = equipeRepository.findById(adherent.getEquipeId()).orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
+        Equipe equipe = equipeRepository.findById(equipeId).orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
         equipe.getAdherents().remove(adherent);
         adherent.setNomEquipe("non affecté");
         adherent.setEquipeId(null);
@@ -269,9 +288,9 @@ public class RandomService implements IRandomService {
     }
 
     @Override
-    public void removeEntraineurFromEquipe(Integer entraineurId) {
+    public void removeEntraineurFromEquipe(Integer entraineurId, Integer equipeId) {
         Entraineur entraineur = entraineurRepository.findById(entraineurId).orElseThrow(() -> new IllegalArgumentException("Entraineur not found"));
-        Equipe equipe = equipeRepository.findById(entraineur.getEquipeId()).orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
+        Equipe equipe = equipeRepository.findById(equipeId).orElseThrow(() -> new IllegalArgumentException("Equipe not found"));
         equipe.getEntraineurs().remove(entraineur);
         entraineur.setNomEquipe("non affecté");
         entraineur.setEquipeId(null);
