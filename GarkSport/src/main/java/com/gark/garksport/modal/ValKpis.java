@@ -15,11 +15,11 @@ public class ValKpis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String valKpi;
 
     @OneToOne
     @JoinColumn(name = "kpi_id")
     @JsonIgnore
     private Kpi kpi;
 
+    private String valKpi;
 }

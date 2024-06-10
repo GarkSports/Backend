@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -16,7 +13,6 @@ import java.util.List;
 @Getter
 @Setter
 public class Kpi {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,6 +26,9 @@ public class Kpi {
     @JoinColumn(name = "categorie_id")
     @JsonIgnore
     private Categorie categorie;
+    @ManyToOne
+    @JoinColumn(name = "evaluation_id")
+    private Evaluation evaluation;
 
     public Kpi(String kpiType) {
         this.kpiType = kpiType;

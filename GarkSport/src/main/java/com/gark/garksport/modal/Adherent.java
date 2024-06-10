@@ -46,9 +46,6 @@ public class Adherent extends User {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Parent> parents;
 
-    @JsonIgnoreProperties("adherent")
-    @OneToMany(mappedBy = "adherent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Test> tests = new ArrayList<>();
 
     @JsonIgnoreProperties("adherent")
     @OneToOne(mappedBy = "adherent", cascade = CascadeType.ALL, orphanRemoval = true)

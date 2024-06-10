@@ -1,7 +1,4 @@
-
-Z
-java:S1854"8Remove this useless assignment to local variable "user".(¶©„¤ùÿÿÿÿ8èàê³ü1
-L	java:S106"+Replace this use of System.out by a logger.(âÍ…¬üÿÿÿÿ8êàê³ü1
-]	java:S125"<This block of commented-out lines of code should be removed.(§µ†¾øÿÿÿÿ8êàê³ü1
-K
-java:S1481")Remove this unused "user" local variable.(¶©„¤ùÿÿÿÿ8ëàê³ü1
+ 
+m	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ã²Ã Å¾Ë†8Ã¬Â¦â€œÃªÃ¾1
+L	java:S106"+Replace this use of System.out by a logger.(Ã‡ÃºÃ‹ÂºÃ¼Ã¿Ã¿Ã¿Ã¿8Ã¸Â¦â€œÃªÃ¾1
+ 

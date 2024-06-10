@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Builder
@@ -30,14 +29,14 @@ public class Evaluation {
     @JsonIgnore
     private Adherent adherent;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "academie_id")
+    @JsonIgnore
+    private Academie academie;
 
-
-
-//    @JsonIgnoreProperties("evaluation")
-//    @OneToOne
-//    private Academie academie;
-
-
+    @OneToMany(mappedBy = "evaluation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("evaluation")
+    private List<Kpi> kpis = new ArrayList<>();
 
 //    @Enumerated(EnumType.STRING)
 //    @Column(nullable = false)

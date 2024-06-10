@@ -10,7 +10,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -31,13 +34,10 @@ public class Equipe {
     @ManyToOne
     private Discipline discipline;
 
-    @OneToMany
+    @ManyToMany
     private Set<Adherent> adherents;
 
-//    @ManyToMany(mappedBy = "equipes")
-//    private Set<Adherent> adherents = new HashSet<>();
-
-    @OneToMany
+    @ManyToMany
     private Set<Entraineur> entraineurs;
 
     @ManyToOne

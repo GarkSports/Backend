@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/NotificationToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/NotificationToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/NotificationTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/repository/NotificationTokenRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/EntrainementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/EntrainementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/EvenementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/EvenementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/NotificationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/UserService.java" afterDir="false" />
-    </list>
+    <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -240,6 +232,12 @@
       <workItem from="1716898080793" duration="645000" />
       <workItem from="1716984346192" duration="1636000" />
       <workItem from="1717415438814" duration="8916000" />
+      <workItem from="1717672628547" duration="839000" />
+      <workItem from="1717769417756" duration="7000" />
+      <workItem from="1717769605903" duration="8000" />
+      <workItem from="1717841092471" duration="7364000" />
+      <workItem from="1717853022414" duration="646000" />
+      <workItem from="1717924445039" duration="634000" />
     </task>
     <servers />
   </component>

@@ -29,7 +29,6 @@ public class Academie {
     private String backgroundImage="https://firebasestorage.googleapis.com/v0/b/angularimage-43fec.appspot.com/o/academie%2F2eeb6d_5d7cdbcf50e24419ab6df9e1540c7eb.jpg?alt=media&token=475ea6a6-a246-472a-a487-65f6a7f495b8";
     @Enumerated(EnumType.STRING)
     private Etat etat;
-
     @JsonIgnoreProperties("academie")
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
     private Set<AcademieHistory> academieHistory;
@@ -65,12 +64,9 @@ public class Academie {
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RoleName> roleNames = new HashSet<>();
 
+    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("academie")
-    @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
-    private List<Test> tests;
-
-//    @OneToOne
-//    private Evaluation evaluation ;
+    private List<Evaluation> evaluations = new ArrayList<>();
 
     @OneToMany(mappedBy = "academie", cascade = CascadeType.ALL)
     private Set<Posts> PostsList = new HashSet<>();
