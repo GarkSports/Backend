@@ -6,18 +6,21 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-@EqualsAndHashCode(callSuper = true, exclude = {"paiement"})
+@EqualsAndHashCode(callSuper = true, exclude = {"paiement", "informationsParent"})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@ToString(callSuper = true, exclude = "informationsParent")
 public class Adherent extends User {
-    private String informationParent;
+
+    private String niveauScolaire;
+
+    @JsonIgnoreProperties("adherent")
+    @OneToOne(mappedBy = "adherent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private InformationsParent informationsParent;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Discipline discipline;
@@ -45,8 +48,18 @@ public class Adherent extends User {
 
 
     @JsonIgnoreProperties("adherent")
-    @OneToOne(mappedBy = "adherent")
+    @OneToOne(mappedBy = "adherent", cascade = CascadeType.ALL, orphanRemoval = true)
     private Paiement paiement;
+
+//    @ManyToMany
+//    @JoinTable(
+//            name = "adherent_equipe",
+//            joinColumns = @JoinColumn(name = "adherent_id"),
+//            inverseJoinColumns = @JoinColumn(name = "equipe_id")
+//    )
+//    private Set<Equipe> equipes = new HashSet<>();
+//
+//    private String nomEquipe="non affecté";
 
     private Integer equipeId;
 
@@ -66,6 +79,10 @@ public class Adherent extends User {
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
     private Date creationDate;
+
+    @JsonIgnoreProperties("adherent") // Exclude adherent from serialization to prevent infinite recursion
+    @OneToMany(mappedBy = "adherent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PaiementHistory> paiementHistory = new ArrayList<>();
 
     public void addEvaluation(Evaluation evaluation) {
         evaluations.add(evaluation);
