@@ -55,15 +55,63 @@ public class EntraineurService {
         return ResponseEntity.badRequest().build();
     }
 
-    public ResponseEntity<Test> addTest(Principal connectedUser) {
+    public ResponseEntity<Test> addTest(Integer academieId, Test testRequest){
+        Optional<Academie> academieOpt = academieRepository.findById(academieId);
+
+        if (!academieOpt.isPresent()) {
+            return ResponseEntity.badRequest().body(null); // Or handle this case appropriately
+        }
+
+        Academie academie = academieOpt.get();
+        Test newTest = new Test();
+        newTest.setTestName(testRequest.getTestName());
+        newTest.setAcademie(academie); // Associate the test with the academie
+
+
+        for (Categorie categorieRequest : testRequest.getCategories()) {
+            Categorie newCategorie = new Categorie(categorieRequest.getCategorieName());
+            newCategorie.setTest(newTest); // Associate the category with the test
+            newTest.getCategories().add(newCategorie);
+        }
+
+        Test savedTest = testRepository.save(newTest); // Save the category along with its KPIs
+
+        return ResponseEntity.ok(savedTest);
+    }
+
+    public ResponseEntity<Test> addTestWithCategories(Test testRequest, Principal connectedUser) {
         User user = getProfil(connectedUser);
 
         Manager manager = (Manager) user;
         Academie academie = academieRepository.findByManagerId(manager.getId());
 
-        academieService.addTest(academie);
-        return ResponseEntity.ok(academie.getTests().get(academie.getTests().size() - 1));
+        if (academie == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        Test newTest = new Test();
+        newTest.setTestName(testRequest.getTestName());
+        newTest.setAcademie(academie); // Associate the test with the academie
+
+        // Add categories
+        for (Categorie categorieRequest : testRequest.getCategories()) {
+            Categorie newCategorie = new Categorie(categorieRequest.getCategorieName());
+            newCategorie.setTest(newTest); // Associate the category with the test
+            newTest.getCategories().add(newCategorie);
+
+            for (Kpi kpiRequest : categorieRequest.getKpis()) {
+                Kpi kpi = new Kpi(kpiRequest.getKpiType());
+                kpi.setCategorie(newCategorie); // Set the category reference in the KPI instance
+                newCategorie.getKpis().add(kpi); // Add the KPI to the category
+            }
+        }
+
+        Test savedTest = testRepository.save(newTest); // Save the test along with its categories and KPIs
+
+        return ResponseEntity.ok(savedTest);
     }
+
+    //TODO duplicate test
 
     public Test getTest(Integer testId){
         Test test = testRepository.findById(testId).orElseThrow(() -> new IllegalArgumentException("Test not found"));
@@ -199,123 +247,13 @@ public class EntraineurService {
 
         valKpisRepository.delete(valKpi);
     }
-//    public ResponseEntity<Evaluation> removeDynamicFieldFromEvaluation(Long evaluationId, Integer kpiId) {
-//        Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
-//        if (evaluationOptional.isPresent()) {
-//            Evaluation evaluation = evaluationOptional.get();
-//            Optional<Kpi> kpiOptional = kpiRepository.findById(kpiId);
-//            if (kpiOptional.isPresent()) {
-//                Kpi dynamicField = kpiOptional.get();
-//                if (evaluation.getKpis().remove(dynamicField)) {
-//                    kpiRepository.delete(dynamicField);
-//                    Evaluation updatedEvaluation = evaluationRepository.save(evaluation);
-//                    return ResponseEntity.ok(updatedEvaluation);
-//                } else {
-//                    return ResponseEntity.badRequest().body(null);
-//                }
-//            } else {
-//                return ResponseEntity.notFound().build();
-//            }
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
-//
-//    public ResponseEntity<Evaluation> updateDynamicFieldInEvaluation(Long evaluationId, Integer dynamicFieldId,
-//                                                                     Kpi request) {
-//        Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
-//        if (evaluationOptional.isPresent()) {
-//            Evaluation evaluation = evaluationOptional.get();
-//            Optional<Kpi> dynamicFieldOptional = kpiRepository.findById(dynamicFieldId);
-//            if (dynamicFieldOptional.isPresent()) {
-//                Kpi dynamicField = dynamicFieldOptional.get();
-//                dynamicField.setKpiType(request.getKpiType());
-//
-//                Evaluation updatedEvaluation = evaluationRepository.save(evaluation);
-//                kpiRepository.save(dynamicField);
-//                return ResponseEntity.ok(updatedEvaluation);
-//            } else {
-//                return ResponseEntity.notFound().build();
-//            }
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
-//
-//    public ResponseEntity<?> fillEvaluationFormAndSetForAdherent(Long evaluationId, Integer adherentId, Evaluation formData) {
-//        Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
-//        Optional<Adherent> adherentOptional = adherentRepository.findById(adherentId);
-//
-//        if (evaluationOptional.isPresent() && adherentOptional.isPresent()) {
-//            Evaluation evaluationTemplate = evaluationOptional.get();
-//            Adherent adherent = adherentOptional.get();
-//
-//            // Create a new Evaluation object to store the filled data
-//            Evaluation filledEvaluation = new Evaluation();
-//            filledEvaluation.setAdherent(adherent);
-//            filledEvaluation.setEvaluationName(evaluationTemplate.getEvaluationName());
-//            filledEvaluation.setKpis(new ArrayList<>());
+    @Transactional
+    public void deleteTest(Integer testId) {
+        testRepository.deleteById(testId);
+    }
 
-            // Fill the dynamic fields with the data from the form
-//            for (Kpi fieldData : formData.getDynamicFields()) {
-//                Kpi dynamicField = new Kpi();
-//                dynamicField.setFieldName(fieldData.getFieldName());
-//                dynamicField.setUnit(fieldData.getUnit());
-//                dynamicField.setValue(fieldData.getValue());
-//                filledEvaluation.getDynamicFields().add(dynamicField);
-//            }
-
-            // Save the filled evaluation
-//            Evaluation savedEvaluation = evaluationRepository.save(filledEvaluation);
-//
-//            // Add the filled evaluation to the adherent's list of evaluations
-//            adherent.getEvaluations().add(savedEvaluation);
-//            adherentRepository.save(adherent);
-//
-//            return ResponseEntity.ok(savedEvaluation);
-//        }
-//
-//        return ResponseEntity.badRequest().build();
-//    }
-
-
-//    public Kpi addDynamicFieldToEvaluation(Long evaluationId, Kpi dynamicField) {
-//        Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
-//        if (evaluationOptional.isPresent()) {
-//            Evaluation evaluation = evaluationOptional.get();
-//            dynamicField.setEvaluation(evaluation);
-//            return kpiRepository.save(dynamicField);
-//        } else {
-//            throw new RuntimeException("Evaluation not found");
-//        }
-//    }
-//    public ResponseEntity<RoleName> addRoleName(RoleName request, Principal connectedUser) {
-//        User user = getProfil(connectedUser);
-//        if (user instanceof Manager) {
-//            Manager manager = (Manager) user;
-//            Academie academie = academieRepository.findByManagerId(manager.getId());
-//            if (academie != null) {
-//                RoleName roleName = new RoleName();
-//                roleName.setName(request.getName());
-//                roleName.setPermissions(request.getPermissions());
-//                roleName.setAcademie(academie);
-//                academie.getRoleNames().add(roleName);
-//                academieRepository.save(academie);
-//                return ResponseEntity.ok(roleName);
-//            }
-//        }
-//        return ResponseEntity.badRequest().build();
-//    }
-
-    //    public Evaluation createEvaluation(Integer equipeId) {
-//        Optional<Equipe> equipeOptional = equipeRepository.findById(equipeId);
-//        if (equipeOptional.isPresent()) {
-//            Evaluation evaluation = new Evaluation();
-//            Equipe equipe = equipeOptional.get();
-//            evaluation.setEquipe(equipe); // Associate the evaluation with the equipe
-//            return evaluationRepository.save(evaluation);
-//        } else {
-//            throw new RuntimeException("Equipe not found with id " + equipeId);
-//        }
-//    }
-
-
+    @Transactional
+    public void deleteCategorie(Integer categoryId) {
+        categorieRepository.deleteById(categoryId);
+    }
 }

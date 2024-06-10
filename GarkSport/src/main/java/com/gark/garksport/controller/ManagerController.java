@@ -149,6 +149,7 @@ public class ManagerController {
         return managerService.addCoach(entraineur, connectedUser);
     }
 
+
     @PostMapping("/add-parent")
     public Parent addParent(
             @RequestBody Parent parent,
@@ -205,43 +206,10 @@ public class ManagerController {
         }
     }
 
-
-//    @GetMapping("/get-all-users")
-//    @ResponseBody
-//    public ResponseEntity<Set<User>> getUsersByRolesAndAcademie(Principal connectedUser) {
-//        Integer managerId = userService.getUserId(connectedUser.getName());
-//        Academie academie = managerRepository.findById(managerId)
-//                .orElseThrow(() -> new IllegalArgumentException("Manager not found"))
-//                .getAcademie();
-//
-//        List<Role> roles = Arrays.asList(Role.STAFF, Role.ENTRAINEUR, Role.ADEHERANT, Role.PARENT);
-//        Set<User> allUsers = new HashSet<>(repository.findByRolesAndAcademieIdIn(roles, academie.getId()));
-//
-//        return ResponseEntity.ok(allUsers);
-//    }
-
-
-
-//    @GetMapping("/get-all-users")
-//    @ResponseBody
-//    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
-//        User user = getProfil(connectedUser);
-//
-//        if (user instanceof Manager manager) {
-//            Academie academie = manager.getAcademie();
-//            if (academie != null) {
-//                System.out.println("academie ID: " + academie.getId());
-//                List<User> userList = repository.findAllByIdNot(user.getId());
-//                List<Entraineur> entraineurList = entraineurRepository.findAllByAcademieId(academie.getId());
-//                List<User> userListAcademie = repository.findAllByAcademieId(academie.getId());
-//
-//                return ResponseEntity.ok(userListAcademie);
-//            }
-//        }
-//
-//        // Handle the case when the user is not a Manager or doesn't have an associated Academie
-//        return ResponseEntity.ok(Collections.emptyList());
-//    }
+    @DeleteMapping("/delete-user")
+    public String deleteUser(@RequestParam Integer id){
+        return managerService.deleteUser(id);
+    }
 
     @GetMapping("/get-academie/{manager_id}")
     public ResponseEntity<?> getAcademie(@PathVariable("manager_id") Integer managerId) {

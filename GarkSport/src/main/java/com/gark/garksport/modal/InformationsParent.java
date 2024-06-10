@@ -1,16 +1,15 @@
 package com.gark.garksport.modal;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode(exclude = "adherent")
+@ToString(exclude = "adherent")
 public class InformationsParent {
 
     @Id
@@ -23,6 +22,7 @@ public class InformationsParent {
     private String emailParent;
     private String nationaliteParent;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "adherent_id")
     private Adherent adherent;
 }

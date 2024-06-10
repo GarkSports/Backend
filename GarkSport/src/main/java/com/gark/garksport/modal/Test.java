@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Data
 @Builder
@@ -26,11 +27,6 @@ public class Test {
     @JsonIgnore
     private Academie academie;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "evaluation_id")
-//    @JsonIgnore
-//    private Evaluation evaluation;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "adherent_id")
     @JsonIgnore
@@ -39,5 +35,13 @@ public class Test {
     @OneToMany(mappedBy = "test", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("test")
     private List<Categorie> categories = new ArrayList<>();
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        creationDate = new Date();
+    }
 
 }

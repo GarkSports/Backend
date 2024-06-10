@@ -32,5 +32,6 @@ public class PaiementHistory {
     private Integer retardPaiement;
 
     @ManyToOne
+    @JoinColumn(name = "adherent_id")
     private Adherent adherent;
 }

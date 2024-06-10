@@ -46,7 +46,7 @@ public class ManagerService {
     private final EntraineurRepository entraineurRepository;
     private final AdherentRepository adherentRepository;
     private final ParentRepository parentRepository;
-
+    private final InformationsParentRepository informationsParentRepository;
     private final PaiementRepository paiementRepository;
     private final PaiementHistoryRepository paiementHistoryRepository;
 
@@ -351,6 +351,7 @@ public class ManagerService {
         adherent.setTelephone(adherent.getTelephone());
         adherent.setPhoto(adherent.getPhoto());
         adherent.setStatutAdherent(StatutAdherent.Non_Payé);
+        //adherent.setEquipes(adherent.getEquipes());
 
         User user = getProfil(connectedUser);
         Manager manager = (Manager) user;
@@ -528,6 +529,9 @@ public class ManagerService {
                 parentInfoToUpdate.setAdresseParent(request.getInformationsParent().getAdresseParent());
                 parentInfoToUpdate.setEmailParent(request.getInformationsParent().getEmailParent());
                 parentInfoToUpdate.setNationaliteParent(request.getInformationsParent().getNationaliteParent());
+
+                // Save the InformationsParent entity before saving the Adherent entity
+                informationsParentRepository.save(parentInfoToUpdate);
             } else {
                 throw new RuntimeException("Parent information is missing for the adherent.");
             }
@@ -625,6 +629,17 @@ public class ManagerService {
         }
     }
 
+    public String deleteUser(Integer id) {
+        var user = repository.findById(id);
+        System.out.println("id is : "+id);
+        if (user.isPresent()) {
+
+            repository.delete(user.get()); //turn it to archive we don't want to delete any data !!!!
+            return "User deleted successfully";
+        } else {
+            return "User not found";
+        }
+    }
 
 
 //    public Staff addStaff(Staff staff, Set<Permission> inputPermissions) throws MessagingException {

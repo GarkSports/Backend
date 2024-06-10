@@ -53,10 +53,18 @@ public class StaffController {
         return entraineurService.getTest(testId);
     }
 
+    @PostMapping("/add-test-with-categories")
+    @ResponseStatus
+    public ResponseEntity<Test> addTestWithCategories(@RequestBody Test testRequest, Principal connectedUser) {
+
+        return entraineurService.addTestWithCategories(testRequest, connectedUser);
+    }
+
     @PostMapping("/add-test")
     @ResponseStatus
-    public ResponseEntity<Test> addTest(Principal connectedUser){
-        return entraineurService.addTest(connectedUser);
+    public ResponseEntity<Test> addTest(@RequestParam Integer academieId, @RequestBody Test testRequest) {
+
+        return entraineurService.addTest(academieId, testRequest);
     }
 
     @PostMapping("/add-categorie")
@@ -129,53 +137,20 @@ public class StaffController {
         return ResponseEntity.ok(updatedValKpi);
     }
 
-//    @DeleteMapping("/{evaluationId}/dynamicFields/{dynamicFieldId}")
-//    public ResponseEntity<Evaluation> removeDynamicFieldFromEvaluation(
-//            @PathVariable Long evaluationId,
-//            @PathVariable Integer dynamicFieldId) {
-//        return entraineurService.removeDynamicFieldFromEvaluation(evaluationId, dynamicFieldId);
-//    }
-//
-//    @PutMapping("/{evaluationId}/dynamicFields/{dynamicFieldId}")
-//    public ResponseEntity<Evaluation> updateDynamicFieldInEvaluation(
-//            @PathVariable Long evaluationId,
-//            @PathVariable Integer dynamicFieldId,
-//            @RequestBody Kpi request) {
-//        return entraineurService.updateDynamicFieldInEvaluation(evaluationId, dynamicFieldId, request);
-//    }
-//
-//    @PutMapping("/evaluation/{evaluationId}/adherent/{adherentId}")
-//    public ResponseEntity<?> fillEvaluationFormAndSetForAdherent(@PathVariable Long evaluationId,
-//                                                                 @PathVariable Integer adherentId,
-//                                                                 @RequestBody Evaluation formData) {
-//        return entraineurService.fillEvaluationFormAndSetForAdherent(evaluationId, adherentId, formData);
-//    }
-
-//    @PostMapping("/save-evaluation")
-//    public ResponseEntity<Evaluation> createEvaluation(@RequestParam Integer equipeId) {
-//        Evaluation createdEvaluation = entraineurService.createEvaluation(equipeId);
-//        return ResponseEntity.ok(createdEvaluation);
-//    }
-
     @GetMapping("/hello1")
     public String getHello1(){
         return "hello";
     }
 
-//    @PostMapping("/evaluations/{evaluationId}/dynamic-fields")
-//    public ResponseEntity<Kpi> addDynamicField(@PathVariable Long evaluationId, @RequestBody Kpi dynamicField) {
-//        Kpi createdDynamicField = entraineurService.addDynamicFieldToEvaluation(evaluationId, dynamicField);
-//        return ResponseEntity.ok(createdDynamicField);
-//    }
+    @DeleteMapping("/tests/{testId}")
+    public ResponseEntity<Void> deleteTest(@PathVariable Integer testId) {
+        entraineurService.deleteTest(testId);
+        return ResponseEntity.noContent().build(); // Return no content (204) on successful deletion
+    }
 
-//    @GetMapping("/get-evaluations")
-//    public ResponseEntity<List<Evaluation>> getEvaluations(@RequestParam Integer adherentId) {
-//        Optional<Adherent> adherentOptional = adherentRepository.findById(adherentId);
-//        if (adherentOptional.isPresent()) {
-//            Adherent adherent = adherentOptional.get();
-//            return ResponseEntity.ok(adherent.getEvaluations());
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @DeleteMapping("/categories/{categoryId}")
+    public ResponseEntity<Void> deleteCategorie(@PathVariable Integer categoryId) {
+        entraineurService.deleteCategorie(categoryId);
+        return ResponseEntity.noContent().build(); // Return no content (204) on successful deletion
+    }
 }
