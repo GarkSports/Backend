@@ -49,7 +49,7 @@ public class ApplicationConfig {
 
     @Bean
     public User addAdmin() {
-        if (repository.findByEmail("garktn.assistance@gmail.com").isEmpty()) {
+        if (repository.findByEmail("spr01compte@gmail.com").isEmpty()) {
             Admin admin = new Admin();
             admin.setEmail("spr01compte@gmail.com");
             admin.setPassword(passwordEncoder().encode("spr0123456@"));
