@@ -23,8 +23,12 @@ public class Manager extends User {
     }
 
 
-    @JsonIgnoreProperties({"roleNames", "manager"})
+    @JsonIgnoreProperties({"academie"})
     @OneToOne(mappedBy = "manager")
     private Academie academie;
 
+    @Override
+    public String toString() {
+        return "Manager{telephone2='" + telephone2 + "', " + super.toString() + "}";
+    }
 }

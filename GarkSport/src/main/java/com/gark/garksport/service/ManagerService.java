@@ -14,6 +14,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.webjars.NotFoundException;
 
 import java.security.Principal;
 import java.security.SecureRandom;
@@ -241,7 +243,7 @@ public class ManagerService {
     }
 
 
-
+    @Transactional
     public Staff addStaff(Staff staff, Principal connectedUser) throws MessagingException {
 
         staff.setEmail(staff.getEmail());
@@ -260,23 +262,20 @@ public class ManagerService {
         staff.setAcademie(academie);
        // staff.setAcademieId(academieId);
 
-
         if (academie == null) {
             throw new RuntimeException("Academie not found for the current manager.");
         }
 
+        RoleName roleNameToAdd = roleNameRepository.findByNameAndAcademie(staff.getRoleName(), academie);
+        if (roleNameToAdd == null) {
+            throw new RuntimeException("RoleName not found for roleName: " + staff.getRoleName());
+        }
 
+        Set<Permission> permissions = roleNameToAdd.getPermissions().stream()
+                .map(permissionName -> Permission.valueOf(String.valueOf(permissionName)))
+                .collect(Collectors.toSet());
 
-//        RoleName roleNameToAdd = roleNameRepository.findByNameAndAcademie(staff.getRoleName(), academie);
-//        if (roleNameToAdd == null) {
-//            throw new RuntimeException("RoleName not found for roleName: " + staff.getRoleName());
-//        }
-//
-//        Set<Permission> permissions = roleNameToAdd.getPermissions().stream()
-//                .map(permissionName -> Permission.valueOf(String.valueOf(permissionName)))
-//                .collect(Collectors.toSet());
-//
-//        staff.setPermissions(permissions);
+        staff.setPermissions(permissions);
 
 
         MimeMessage message = mailSender.createMimeMessage();
@@ -615,19 +614,27 @@ public class ManagerService {
 //            throw new RuntimeException("Manager not found with ID: " + id);
 //        }
 //    }
-    public void deleteRoleName(Integer id, Manager manager) {
-        Academie academie = academieRepository.findByManagerId(manager.getId());
-        if (academie != null) {
-            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
-            if (existingRoleNameOptional.isPresent()) {
-                RoleName existingRoleName = existingRoleNameOptional.get();
-                String oldRoleName = existingRoleName.getName();
-                // Remove the RoleName from the Academie
-                academie.getRoleNames().remove(existingRoleName);
+public void deleteRoleName(Integer id, Manager manager) {
+    Academie academie = academieRepository.findByManagerId(manager.getId());
 
-            }
-        }
+    if (academie == null) {
+        throw new RuntimeException("Academie not found for the current manager.");
     }
+
+    Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
+    if (existingRoleNameOptional.isPresent()) {
+        RoleName existingRoleName = existingRoleNameOptional.get();
+        if (existingRoleName.getAcademie().equals(academie)) {
+            academie.getRoleNames().remove(existingRoleName);
+            roleNameRepository.delete(existingRoleName);
+            academieRepository.save(academie);
+        } else {
+            throw new RuntimeException("Role name does not belong to the current manager's academie");
+        }
+    } else {
+        throw new NotFoundException("Role name not found");
+    }
+}
 
     public String deleteUser(Integer id) {
         var user = repository.findById(id);
