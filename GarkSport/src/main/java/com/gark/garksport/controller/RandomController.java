@@ -63,14 +63,14 @@ public class RandomController {
         return randomService.getEquipesByAcademie(userService.getUserId(connectedUser.getName()));
     }
 
-    @GetMapping("/getAdherents")
-    public Set<Adherent> getAdherents(Principal connectedUser) {
-        return randomService.getAdherentsByAcademie(userService.getUserId(connectedUser.getName()));
+    @GetMapping("/getAdherents/{equipeId}")
+    public Set<Adherent> getAdherents(Principal connectedUser, @PathVariable Integer equipeId) {
+        return randomService.getAdherentsByAcademie(userService.getUserId(connectedUser.getName()), equipeId);
     }
 
-    @GetMapping("/getEntraineurs")
-    public Set<Entraineur> getEntraineurs(Principal connectedUser) {
-        return randomService.getEntraineursByAcademie(userService.getUserId(connectedUser.getName()));
+    @GetMapping("/getEntraineurs/{equipeId}")
+    public Set<Entraineur> getEntraineurs(Principal connectedUser, @PathVariable Integer equipeId) {
+        return randomService.getEntraineursByAcademie(userService.getUserId(connectedUser.getName()), equipeId);
     }
 
     @DeleteMapping("/deleteEquipe/{equipeId}")
@@ -119,13 +119,13 @@ public class RandomController {
         return randomService.addAdherent(adherent, codeequipe);
     }
 
-    @DeleteMapping("/removeAdherentFromEquipe/{adherentId}")
-    public void removeAdherentFromEquipe(@PathVariable Integer adherentId) {
-        randomService.removeAdherentFromEquipe(adherentId);
+    @DeleteMapping("/removeAdherentFromEquipe/{adherentId}/{equipeId}")
+    public void removeAdherentFromEquipe(@PathVariable Integer adherentId, @PathVariable Integer equipeId) {
+        randomService.removeAdherentFromEquipe(adherentId, equipeId);
     }
 
-    @DeleteMapping("/removeEntraineurFromEquipe/{entraineurId}")
-    public void removeEntraineurFromEquipe(@PathVariable Integer entraineurId) {
-        randomService.removeEntraineurFromEquipe(entraineurId);
+    @DeleteMapping("/removeEntraineurFromEquipe/{entraineurId}/{equipeId}")
+    public void removeEntraineurFromEquipe(@PathVariable Integer entraineurId, @PathVariable Integer equipeId) {
+        randomService.removeEntraineurFromEquipe(entraineurId, equipeId);
     }
 }
