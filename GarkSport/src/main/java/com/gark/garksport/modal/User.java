@@ -37,7 +37,9 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    private String roleName; //added y manager
+    @JsonIgnoreProperties("user")
+    @ManyToOne // Many users can have the same role name
+    private RoleName roleName;
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
     private String adresse;
@@ -52,7 +54,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_permissions", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "permission")
-    private Set<Permission> permissions;
+    private Set<Permission> permissions = new HashSet<>();
+
 
     @Override
     public int hashCode() {
@@ -63,12 +66,29 @@ public class User implements UserDetails {
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> auths = new ArrayList<>();
+
+        // Add the user's role as an authority
         auths.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
-        for (Permission permission : permissions) {
-            auths.add(new SimpleGrantedAuthority(permission.name()));
+
+
+        // Retrieve the role name associated with the user
+        RoleName roleName = this.getRoleName();
+
+        // Check if the role name is not null and get its permissions
+        if (roleName != null) {
+            Set<Permission> rolePermissions = roleName.getPermissions();
+
+            // Add each permission as an authority
+            for (Permission permission : rolePermissions) {
+                auths.add(new SimpleGrantedAuthority(permission.name()));
+            }
         }
+
         return auths;
     }
+
+
+
 
     @Override
     public String getUsername() {

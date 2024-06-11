@@ -14,6 +14,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -241,7 +242,7 @@ public class ManagerService {
     }
 
 
-
+    @Transactional
     public Staff addStaff(Staff staff, Principal connectedUser) throws MessagingException {
 
         staff.setEmail(staff.getEmail());
@@ -260,24 +261,19 @@ public class ManagerService {
         staff.setAcademie(academie);
        // staff.setAcademieId(academieId);
 
-
         if (academie == null) {
             throw new RuntimeException("Academie not found for the current manager.");
         }
 
+        RoleName roleNameToAdd = roleNameRepository.findByNameAndAcademie(staff.getRoleName(), academie);
+        if (roleNameToAdd == null) {
+            throw new RuntimeException("RoleName not found for roleName: " + staff.getRoleName());
+        }
 
+        Set<Permission> permissions = new HashSet<>(roleNameToAdd.getPermissions());
+        staff.setPermissions(permissions);
 
-//        RoleName roleNameToAdd = roleNameRepository.findByNameAndAcademie(staff.getRoleName(), academie);
-//        if (roleNameToAdd == null) {
-//            throw new RuntimeException("RoleName not found for roleName: " + staff.getRoleName());
-//        }
-//
-//        Set<Permission> permissions = roleNameToAdd.getPermissions().stream()
-//                .map(permissionName -> Permission.valueOf(String.valueOf(permissionName)))
-//                .collect(Collectors.toSet());
-//
-//        staff.setPermissions(permissions);
-
+        System.out.println("Assigned permissions: " + permissions);
 
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
@@ -407,40 +403,40 @@ public class ManagerService {
         return savedAdherent;
     }
 
-    public RoleName updateRoleName(Integer id, RoleName request, Manager manager) {
-        Academie academie = academieRepository.findByManagerId(manager.getId());
-        if (academie != null) {
-
-            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
-            if (existingRoleNameOptional.isPresent()) {
-                RoleName existingRoleName = existingRoleNameOptional.get();
-                String oldRoleName = existingRoleName.getName();
-                existingRoleName.setName(request.getName());
-                existingRoleName.setPermissions(request.getPermissions());
-                existingRoleName.setAcademie(academie);
-                System.out.println("this is rolename: " + existingRoleName);
-                System.out.println("this is rolename: " + existingRoleName.getAcademie().getRoleNames());
-                System.out.println("this is rolename: " + existingRoleNameOptional.get());
-
-                List<User> usersToUpdate = repository.findByRoleName(oldRoleName);
-                for (User user : usersToUpdate) {
-                    user.setRoleName(request.getName());
-                    user.setPermissions(request.getPermissions());
-                    repository.saveAll(usersToUpdate);
-                }
-                System.out.println("this is rolename: " + usersToUpdate);
-
-
-                //updateUserRoleNames(oldRoleName, request.getRoleName());
-
-                return roleNameRepository.save(existingRoleName);
-            } else {
-                throw new RuntimeException("RoleName not found with ID: " + id);
-            }
-        } else {
-            throw new RuntimeException("Academie not found for manager with ID: " + manager.getId());
-        }
-    }
+//    public RoleName updateRoleName(Integer id, RoleName request, Manager manager) {
+//        Academie academie = academieRepository.findByManagerId(manager.getId());
+//        if (academie != null) {
+//
+//            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
+//            if (existingRoleNameOptional.isPresent()) {
+//                RoleName existingRoleName = existingRoleNameOptional.get();
+//                String oldRoleName = existingRoleName.getName();
+//                existingRoleName.setName(request.getName());
+//                existingRoleName.setPermissions(request.getPermissions());
+//                existingRoleName.setAcademie(academie);
+//                System.out.println("this is rolename: " + existingRoleName);
+//                System.out.println("this is rolename: " + existingRoleName.getAcademie().getRoleNames());
+//                System.out.println("this is rolename: " + existingRoleNameOptional.get());
+//
+//                List<User> usersToUpdate = repository.findByRoleName(oldRoleName);
+//                for (User user : usersToUpdate) {
+//                    user.setRoleName(request.getName());
+//                    user.setPermissions(request.getPermissions());
+//                    repository.saveAll(usersToUpdate);
+//                }
+//                System.out.println("this is rolename: " + usersToUpdate);
+//
+//
+//                //updateUserRoleNames(oldRoleName, request.getRoleName());
+//
+//                return roleNameRepository.save(existingRoleName);
+//            } else {
+//                throw new RuntimeException("RoleName not found with ID: " + id);
+//            }
+//        } else {
+//            throw new RuntimeException("Academie not found for manager with ID: " + manager.getId());
+//        }
+//    }
 
     public Staff updateStaff(Integer id, Staff request) throws MessagingException {
         Optional<Staff> existingStaff = staffRepository.findById(id);

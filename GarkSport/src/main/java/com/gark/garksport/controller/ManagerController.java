@@ -107,21 +107,21 @@ public class ManagerController {
         return user.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-    @PutMapping("/update-role-name")
-    public ResponseEntity<RoleName> updateRoleName(@RequestParam Integer id, @RequestBody RoleName request, Principal connectedUser) {
-        try {
-            User user = getProfil(connectedUser);
-            if (user instanceof Manager) {
-                Manager manager = (Manager) user;
-                RoleName updatedRoleName = managerService.updateRoleName(id, request, manager);
-                return ResponseEntity.ok(updatedRoleName);
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+//    @PutMapping("/update-role-name")
+//    public ResponseEntity<RoleName> updateRoleName(@RequestParam Integer id, @RequestBody RoleName request, Principal connectedUser) {
+//        try {
+//            User user = getProfil(connectedUser);
+//            if (user instanceof Manager) {
+//                Manager manager = (Manager) user;
+//                RoleName updatedRoleName = managerService.updateRoleName(id, request, manager);
+//                return ResponseEntity.ok(updatedRoleName);
+//            } else {
+//                return ResponseEntity.badRequest().build();
+//            }
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
 
     @PutMapping("/update-manager")
     public ResponseEntity<Manager> updateManager(Principal principal, @RequestBody Manager request) {
