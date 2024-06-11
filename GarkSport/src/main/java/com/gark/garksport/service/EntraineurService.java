@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -15,6 +16,15 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class EntraineurService {
+    private final UserRepository repository;
+    @Autowired
+    private CategorieRepository categorieRepository;
+    @Autowired
+    private AcademieRepository academieRepository;
+    @Autowired
+    private AcademieService academieService;
+    @Autowired
+    private TestRepository testRepository;
     @Autowired
     private AdherentRepository adherentRepository;
     @Autowired
@@ -22,29 +32,25 @@ public class EntraineurService {
     @Autowired
     private KpiRepository kpiRepository;
 
-    @Autowired
-    private EvaluationRepository evaluationRepository;
-
-    @Autowired
-    private EquipeRepository equipeRepository;
-
-    @Autowired
-    private KpiRepository kpiRepository;
-
     //////////////////// EVALUATION PART ///////////////////////////////////
 
+    public User getProfil(Principal connectedUser) {
+        var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+        Optional<User> userOptional = repository.findById(user.getId());
 
-    public ResponseEntity<Evaluation> addFieldsToEvaluation(Long evaluationId, Kpi request) {
-        Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
-        if (evaluationOptional.isPresent()) {
-            Evaluation evaluation = evaluationOptional.get();
+        return userOptional.orElse(null);
+    }
+
+    public ResponseEntity<Categorie> addFieldsToCategory(Integer categorieId, Kpi request) {
+        Optional<Categorie> categorieOptional = categorieRepository.findById(categorieId);
+        if (categorieOptional.isPresent()) {
+            Categorie categorie = categorieOptional.get();
             Kpi kpi = new Kpi(request.getKpiType());
-            kpi.setKpiType(request.getKpiType());
-            kpi.setEvaluation(evaluation); // Set the evaluation reference in the Kpi instance
-            evaluation.getKpis().add(kpi);
+            kpi.setCategorie(categorie); // Set the category reference in the Kpi instance
+            categorie.getKpis().add(kpi); // Add the Kpi to the category
 
-            Evaluation savedEvaluation = evaluationRepository.save(evaluation);
-            return ResponseEntity.ok(savedEvaluation);
+            Categorie savedCategorie = categorieRepository.save(categorie); // Save the category
+            return ResponseEntity.ok(savedCategorie);
         }
         return ResponseEntity.badRequest().build();
     }
@@ -180,18 +186,8 @@ public class EntraineurService {
         public ResourceNotFoundException(String message) {
             super(message);
         }
-        return ResponseEntity.notFound().build();
     }
 
-    public ResponseEntity<Evaluation> updateDynamicFieldInEvaluation(Long evaluationId, Integer dynamicFieldId,
-                                                                     Kpi request) {
-        Optional<Evaluation> evaluationOptional = evaluationRepository.findById(evaluationId);
-        if (evaluationOptional.isPresent()) {
-            Evaluation evaluation = evaluationOptional.get();
-            Optional<Kpi> dynamicFieldOptional = kpiRepository.findById(dynamicFieldId);
-            if (dynamicFieldOptional.isPresent()) {
-                Kpi dynamicField = dynamicFieldOptional.get();
-                dynamicField.setKpiType(request.getKpiType());
 
     @Transactional
     public void assignKpiValues(Integer adherentId, Integer testId, Integer categoryId, List<Integer> kpiIds, List<String> kpiValues) {
