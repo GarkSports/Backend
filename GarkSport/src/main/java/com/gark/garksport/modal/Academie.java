@@ -72,6 +72,11 @@ public class Academie {
     private Set<Posts> PostsList = new HashSet<>();
 
     @Override
+    public String toString() {
+        return "Academie{id=" + id + ", nom='" + nom + "', type=" + type + ", fraisAdhesion=" + fraisAdhesion + "}";
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(id);  // Use a unique field to calculate hashCode
     }

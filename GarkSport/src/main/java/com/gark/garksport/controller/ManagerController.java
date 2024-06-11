@@ -14,6 +14,7 @@ import com.gark.garksport.service.UserService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class ManagerController {
     private final AdherentRepository adherentRepository;
     private final ParentRepository parentRepository;
     private final UserService userService;
+    private final RoleNameRepository roleNameRepository;
 
     @Autowired
     private AcademieRepository academieRepository;
@@ -122,6 +124,51 @@ public class ManagerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @DeleteMapping("/delete-role-name")
+    public ResponseEntity<Map<String, String>> deleteRoleName(@RequestParam Integer id, Principal connectedUser) {
+        User user = getProfil(connectedUser);
+
+        if (user instanceof Manager) {
+            Manager manager = (Manager) user;
+            Academie academie = academieRepository.findByManagerId(manager.getId());
+
+            if (academie == null) {
+                Map<String, String> response = new HashMap<>();
+                response.put("error", "Academie not found for the current manager.");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
+            if (existingRoleNameOptional.isPresent()) {
+                RoleName existingRoleName = existingRoleNameOptional.get();
+                if (existingRoleName.getAcademie().equals(academie)) {
+                    String oldRoleName = existingRoleName.getName();
+                    academie.getRoleNames().remove(existingRoleName);
+                    roleNameRepository.delete(existingRoleName);
+                    academieRepository.save(academie);
+
+                    Map<String, String> response = new HashMap<>();
+                    response.put("message", "Role name '" + oldRoleName + "' deleted successfully");
+                    return ResponseEntity.ok(response);
+                } else {
+                    Map<String, String> response = new HashMap<>();
+                    response.put("error", "Role name does not belong to the current manager's academie");
+                    return ResponseEntity.badRequest().body(response);
+                }
+            } else {
+                Map<String, String> response = new HashMap<>();
+                response.put("error", "Role name not found");
+                return ResponseEntity.badRequest().body(response);
+            }
+        } else {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "User is not a Manager");
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+
 
     @PutMapping("/update-manager")
     public ResponseEntity<Manager> updateManager(Principal principal, @RequestBody Manager request) {

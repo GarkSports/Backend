@@ -33,11 +33,18 @@ public class StaffController {
         return "first hello from staff controller";
     }
 
-    @PreAuthorize("hasAuthority('STAFF_SECOND_READ')")
+    @PreAuthorize("hasAuthority('READ')")
     @GetMapping("/hello2")
-    public String getHello2(){
+    public String getHello2() {
         return "second hello from staff controller";
     }
+
+    @PreAuthorize("hasAuthority('UPDATE')")
+    @GetMapping("/hello3")
+    public String updateHello() {
+        return "update hello from staff controller";
+    }
+
 
 
     @PutMapping("/add-fields-evaluation")

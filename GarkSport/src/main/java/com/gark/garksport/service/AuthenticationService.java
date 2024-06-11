@@ -21,6 +21,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -71,22 +72,48 @@ public class AuthenticationService {
         return repository.save(user);
 
     }
+    public class InvalidCredentialsException extends RuntimeException {
+        public InvalidCredentialsException(String message) {
+            super(message);
+        }
+    }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request, HttpServletResponse response){
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
+    public class InvalidEmailException extends RuntimeException {
+        public InvalidEmailException(String message) {
+            super(message);
+        }
+    }
+
+    public class UserBlockedException extends RuntimeException {
+        public UserBlockedException(String message) {
+            super(message);
+        }
+    }
+    public AuthenticationResponse authenticate(AuthenticationRequest request, HttpServletResponse response) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+        } catch (BadCredentialsException e) {
+            var user = repository.findByEmail(request.getEmail())
+                    .orElseThrow(() -> new InvalidEmailException("Email not found"));
+
+            throw new InvalidCredentialsException("Invalid password");
+        }
+
         var user = repository.findByEmail(request.getEmail())
-                .orElseThrow();
+                .orElseThrow(() -> new InvalidEmailException("Email not found"));
+
         System.out.println("User authorities: " + user.getAuthorities());
         System.out.println("User role: " + user.getRole());
 
         if (user.isBlocked()) {
-            throw new LockedException("User is blocked");
+            throw new UserBlockedException("User is blocked");
         }
+
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         ResponseCookie cookie = ResponseCookie.from("accessToken", jwtToken)
