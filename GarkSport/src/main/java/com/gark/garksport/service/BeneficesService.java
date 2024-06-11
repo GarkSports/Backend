@@ -128,6 +128,12 @@ public class BeneficesService {
         BigDecimal lastMonthBenefices = beneficesRepository.sumByMonthAndAcademie(lastMonth.atDay(1), lastMonth.atEndOfMonth(), academieId);
         BigDecimal lastMonthDepenses = depensesRepository.sumByMonthAndAcademie(lastMonth.atDay(1), lastMonth.atEndOfMonth(), academieId);
 
+        // Handle null values by setting them to zero
+        if (currentMonthBenefices == null) currentMonthBenefices = BigDecimal.ZERO;
+        if (currentMonthDepenses == null) currentMonthDepenses = BigDecimal.ZERO;
+        if (lastMonthBenefices == null) lastMonthBenefices = BigDecimal.ZERO;
+        if (lastMonthDepenses == null) lastMonthDepenses = BigDecimal.ZERO;
+
         BigDecimal currentMonthNet = currentMonthBenefices.subtract(currentMonthDepenses);
         BigDecimal lastMonthNet = lastMonthBenefices.subtract(lastMonthDepenses);
 
@@ -142,6 +148,7 @@ public class BeneficesService {
         return sums;
     }
 
+
     public Map<String, BigDecimal> getMonthlyComparisonsForAcademie(Principal connectedUser) {
         Map<String, BigDecimal> sums = getMonthlySumsForAcademie(connectedUser);
 
@@ -152,12 +159,14 @@ public class BeneficesService {
         BigDecimal currentMonthNet = sums.get("currentMonthNet");
         BigDecimal lastMonthNet = sums.get("lastMonthNet");
 
-        BigDecimal beneficesComparison = lastMonthBenefices.compareTo(BigDecimal.ZERO) == 0 ?
-                BigDecimal.ZERO : currentMonthBenefices.subtract(lastMonthBenefices).divide(lastMonthBenefices,BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
-        BigDecimal depensesComparison = lastMonthDepenses.compareTo(BigDecimal.ZERO) == 0 ?
-                BigDecimal.ZERO : currentMonthDepenses.subtract(lastMonthDepenses).divide(lastMonthDepenses,BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
-        BigDecimal netComparison = lastMonthNet.compareTo(BigDecimal.ZERO) == 0 ?
-                BigDecimal.ZERO : currentMonthNet.subtract(lastMonthNet).divide(lastMonthNet,BigDecimal.ROUND_UP).multiply(BigDecimal.valueOf(100));
+        BigDecimal beneficesComparison = (lastMonthBenefices.compareTo(BigDecimal.ZERO) == 0) ?
+                BigDecimal.ZERO : currentMonthBenefices.subtract(lastMonthBenefices).divide(lastMonthBenefices, BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
+
+        BigDecimal depensesComparison = (lastMonthDepenses.compareTo(BigDecimal.ZERO) == 0) ?
+                BigDecimal.ZERO : currentMonthDepenses.subtract(lastMonthDepenses).divide(lastMonthDepenses, BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
+
+        BigDecimal netComparison = (lastMonthNet.compareTo(BigDecimal.ZERO) == 0) ?
+                BigDecimal.ZERO : currentMonthNet.subtract(lastMonthNet).divide(lastMonthNet, BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
 
         Map<String, BigDecimal> comparisons = new HashMap<>();
         comparisons.put("beneficesComparison", beneficesComparison);
@@ -166,4 +175,5 @@ public class BeneficesService {
 
         return comparisons;
     }
+
 }
