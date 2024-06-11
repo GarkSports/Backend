@@ -25,6 +25,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.webjars.NotFoundException;
 
 import java.security.Principal;
 import java.security.SecureRandom;
@@ -270,10 +271,12 @@ public class ManagerService {
             throw new RuntimeException("RoleName not found for roleName: " + staff.getRoleName());
         }
 
-        Set<Permission> permissions = new HashSet<>(roleNameToAdd.getPermissions());
+        Set<Permission> permissions = roleNameToAdd.getPermissions().stream()
+                .map(permissionName -> Permission.valueOf(String.valueOf(permissionName)))
+                .collect(Collectors.toSet());
+
         staff.setPermissions(permissions);
 
-        System.out.println("Assigned permissions: " + permissions);
 
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
@@ -403,40 +406,40 @@ public class ManagerService {
         return savedAdherent;
     }
 
-//    public RoleName updateRoleName(Integer id, RoleName request, Manager manager) {
-//        Academie academie = academieRepository.findByManagerId(manager.getId());
-//        if (academie != null) {
-//
-//            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
-//            if (existingRoleNameOptional.isPresent()) {
-//                RoleName existingRoleName = existingRoleNameOptional.get();
-//                String oldRoleName = existingRoleName.getName();
-//                existingRoleName.setName(request.getName());
-//                existingRoleName.setPermissions(request.getPermissions());
-//                existingRoleName.setAcademie(academie);
-//                System.out.println("this is rolename: " + existingRoleName);
-//                System.out.println("this is rolename: " + existingRoleName.getAcademie().getRoleNames());
-//                System.out.println("this is rolename: " + existingRoleNameOptional.get());
-//
-//                List<User> usersToUpdate = repository.findByRoleName(oldRoleName);
-//                for (User user : usersToUpdate) {
-//                    user.setRoleName(request.getName());
-//                    user.setPermissions(request.getPermissions());
-//                    repository.saveAll(usersToUpdate);
-//                }
-//                System.out.println("this is rolename: " + usersToUpdate);
-//
-//
-//                //updateUserRoleNames(oldRoleName, request.getRoleName());
-//
-//                return roleNameRepository.save(existingRoleName);
-//            } else {
-//                throw new RuntimeException("RoleName not found with ID: " + id);
-//            }
-//        } else {
-//            throw new RuntimeException("Academie not found for manager with ID: " + manager.getId());
-//        }
-//    }
+    public RoleName updateRoleName(Integer id, RoleName request, Manager manager) {
+        Academie academie = academieRepository.findByManagerId(manager.getId());
+        if (academie != null) {
+
+            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
+            if (existingRoleNameOptional.isPresent()) {
+                RoleName existingRoleName = existingRoleNameOptional.get();
+                String oldRoleName = existingRoleName.getName();
+                existingRoleName.setName(request.getName());
+                existingRoleName.setPermissions(request.getPermissions());
+                existingRoleName.setAcademie(academie);
+                System.out.println("this is rolename: " + existingRoleName);
+                System.out.println("this is rolename: " + existingRoleName.getAcademie().getRoleNames());
+                System.out.println("this is rolename: " + existingRoleNameOptional.get());
+
+                List<User> usersToUpdate = repository.findByRoleName(oldRoleName);
+                for (User user : usersToUpdate) {
+                    user.setRoleName(request.getName());
+                    user.setPermissions(request.getPermissions());
+                    repository.saveAll(usersToUpdate);
+                }
+                System.out.println("this is rolename: " + usersToUpdate);
+
+
+                //updateUserRoleNames(oldRoleName, request.getRoleName());
+
+                return roleNameRepository.save(existingRoleName);
+            } else {
+                throw new RuntimeException("RoleName not found with ID: " + id);
+            }
+        } else {
+            throw new RuntimeException("Academie not found for manager with ID: " + manager.getId());
+        }
+    }
 
     public Staff updateStaff(Integer id, Staff request) throws MessagingException {
         Optional<Staff> existingStaff = staffRepository.findById(id);
@@ -611,19 +614,27 @@ public class ManagerService {
 //            throw new RuntimeException("Manager not found with ID: " + id);
 //        }
 //    }
-    public void deleteRoleName(Integer id, Manager manager) {
-        Academie academie = academieRepository.findByManagerId(manager.getId());
-        if (academie != null) {
-            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
-            if (existingRoleNameOptional.isPresent()) {
-                RoleName existingRoleName = existingRoleNameOptional.get();
-                String oldRoleName = existingRoleName.getName();
-                // Remove the RoleName from the Academie
-                academie.getRoleNames().remove(existingRoleName);
+public void deleteRoleName(Integer id, Manager manager) {
+    Academie academie = academieRepository.findByManagerId(manager.getId());
 
-            }
-        }
+    if (academie == null) {
+        throw new RuntimeException("Academie not found for the current manager.");
     }
+
+    Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
+    if (existingRoleNameOptional.isPresent()) {
+        RoleName existingRoleName = existingRoleNameOptional.get();
+        if (existingRoleName.getAcademie().equals(academie)) {
+            academie.getRoleNames().remove(existingRoleName);
+            roleNameRepository.delete(existingRoleName);
+            academieRepository.save(academie);
+        } else {
+            throw new RuntimeException("Role name does not belong to the current manager's academie");
+        }
+    } else {
+        throw new NotFoundException("Role name not found");
+    }
+}
 
     public String deleteUser(Integer id) {
         var user = repository.findById(id);

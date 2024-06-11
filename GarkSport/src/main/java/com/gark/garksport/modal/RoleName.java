@@ -19,18 +19,20 @@ public class RoleName {
     private Integer id;
     private String name;
 
-    @JsonIgnoreProperties("roleName")
-    @OneToMany(mappedBy = "roleName")
-    private Set<User> users;
-
+    @JsonIgnoreProperties("roleNames")
     @ElementCollection(targetClass = Permission.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "role_permissions", joinColumns = @JoinColumn(name = "role_name_id"))
+    @CollectionTable(name = "role_permissions", joinColumns = @JoinColumn(name = "role_id"))
     @Column(name = "permission")
     private Set<Permission> permissions;
 
-
     @ManyToOne
     @JoinColumn(name = "academie_id")
+    @JsonIgnoreProperties("roleNames")
     private Academie academie;
+
+    @Override
+    public String toString() {
+        return "RoleName{id=" + id + ", name='" + name + "', permissions=" + permissions + "}";
+    }
 }
