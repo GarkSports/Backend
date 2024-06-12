@@ -44,6 +44,10 @@ public class Evenement {
     @ManyToMany
     private Set<Adherent> convocationMembres;
 
+    @JsonIgnoreProperties("evenements")
+    @ManyToMany
+    private Set<Equipe> convocationEquipesMatchAmical;
+
 
     @ManyToOne
     private Academie academie;

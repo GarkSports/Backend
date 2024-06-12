@@ -59,11 +59,19 @@ public class RandomService implements IRandomService {
 
     @Override
     public Equipe addEquipe(Equipe equipe, Integer managerId, Integer disciplineId) {
-        Academie academie = academieRepository.findById(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId()).get();
+        Academie academie = academieRepository.findById(managerRepository.findById(managerId)
+            .orElseThrow(() -> new IllegalArgumentException("Manager not found"))
+            .getAcademie().getId()).get();
         Discipline discipline = disciplineRepository.findById(disciplineId).get();
         equipe.setAcademie(academie);
         equipe.setDiscipline(discipline);
-        String randomCode = generateRandomCode();
+
+        // Generate a unique random code
+        String randomCode;
+        do {
+            randomCode = generateRandomCode();
+        } while (equipeRepository.existsByCodeEquipe(randomCode)); // Check if the code already exists
+
         equipe.setCodeEquipe(randomCode);
 
         Equipe savedEquipe = equipeRepository.save(equipe);

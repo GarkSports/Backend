@@ -374,7 +374,7 @@ public class ManagerService {
         // Set dateFin to 30 days from today;
 
         paiement.setDateFin(dateFin);
-        paiement.setDatePaiement(new Date());
+        paiement.setDatePaiement(null);
         paiement.setMontant(0f);
         paiement.setReste(savedAdherent.getAcademie().getFraisAdhesion());
 
@@ -388,6 +388,7 @@ public class ManagerService {
                 .montant(paiement.getMontant())
                 .reste(paiement.getReste())
                 .retardPaiement(30)
+                .statutAdherent(StatutAdherent.Non_Payé)
                 .adherent(adherent)
                 .build();
 

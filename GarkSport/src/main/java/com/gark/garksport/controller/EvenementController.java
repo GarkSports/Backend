@@ -79,12 +79,10 @@ public class EvenementController {
 
     @PostMapping("/addMatchAmical")
     public Evenement addMatchAmical(@RequestBody MatchAmicalRequest request, Principal connectedUser) {
-        Evenement evenement = request.getEvenement();
-        Integer equipeId = request.getEquipeId();
-        LocalTime horaire = request.getHoraire();
-
-        return evenementService.addMatchAmical(evenement, equipeId, horaire, userService.getUserId(connectedUser.getName()));
+        Integer managerId = userService.getUserId(connectedUser.getName());
+        return evenementService.addMatchAmical(request, managerId);
     }
+
 
     @GetMapping("/getAllEvenements")
     public Set<Evenement> getAllEvenements(Principal connectedUser) {
@@ -116,5 +114,15 @@ public class EvenementController {
         Evenement evenement = request.getEvenement();
         List<Integer> idMembres = request.getIdMembres();
         return evenementService.updateEvenement(evenement, idMembres, evenementId);
+    }
+
+    @PutMapping("/updateEvenementMatchAmical/{evenementId}")
+    public Evenement updateEvenementMatchAmical(@RequestBody Evenement evenement, @PathVariable Integer evenementId) {
+        return evenementService.updateEvenementMatchAmical(evenement, evenementId);
+    }
+
+    @GetMapping("/getEquipesByEvenementMatchAmical/{idEvenement}")
+    public List<Equipe> getEquipesByEvenementMatchAmical(@PathVariable Integer idEvenement) {
+        return evenementService.getEquipesByEvenementMatchAmical(idEvenement);
     }
 }
