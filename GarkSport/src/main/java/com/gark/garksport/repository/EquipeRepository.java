@@ -20,4 +20,6 @@ public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
     Equipe findByNom(String nomEquipe);
 
     Optional<Equipe> findByConvocationsContains(ConvocationEntrainement convocation);
+
+    boolean existsByCodeEquipe(String randomCode);
 }
