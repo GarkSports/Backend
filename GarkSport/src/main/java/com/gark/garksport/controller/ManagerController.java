@@ -14,6 +14,7 @@ import com.gark.garksport.service.UserService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class ManagerController {
     private final AdherentRepository adherentRepository;
     private final ParentRepository parentRepository;
     private final UserService userService;
+    private final RoleNameRepository roleNameRepository;
 
     @Autowired
     private AcademieRepository academieRepository;
@@ -123,6 +125,51 @@ public class ManagerController {
         }
     }
 
+    @DeleteMapping("/delete-role-name")
+    public ResponseEntity<Map<String, String>> deleteRoleName(@RequestParam Integer id, Principal connectedUser) {
+        User user = getProfil(connectedUser);
+
+        if (user instanceof Manager) {
+            Manager manager = (Manager) user;
+            Academie academie = academieRepository.findByManagerId(manager.getId());
+
+            if (academie == null) {
+                Map<String, String> response = new HashMap<>();
+                response.put("error", "Academie not found for the current manager.");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
+            if (existingRoleNameOptional.isPresent()) {
+                RoleName existingRoleName = existingRoleNameOptional.get();
+                if (existingRoleName.getAcademie().equals(academie)) {
+                    String oldRoleName = existingRoleName.getName();
+                    academie.getRoleNames().remove(existingRoleName);
+                    roleNameRepository.delete(existingRoleName);
+                    academieRepository.save(academie);
+
+                    Map<String, String> response = new HashMap<>();
+                    response.put("message", "Role name '" + oldRoleName + "' deleted successfully");
+                    return ResponseEntity.ok(response);
+                } else {
+                    Map<String, String> response = new HashMap<>();
+                    response.put("error", "Role name does not belong to the current manager's academie");
+                    return ResponseEntity.badRequest().body(response);
+                }
+            } else {
+                Map<String, String> response = new HashMap<>();
+                response.put("error", "Role name not found");
+                return ResponseEntity.badRequest().body(response);
+            }
+        } else {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "User is not a Manager");
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+
+
     @PutMapping("/update-manager")
     public ResponseEntity<Manager> updateManager(Principal principal, @RequestBody Manager request) {
         try {
@@ -147,6 +194,7 @@ public class ManagerController {
     ) throws MessagingException {
         return managerService.addCoach(entraineur, connectedUser);
     }
+
 
     @PostMapping("/add-parent")
     public Parent addParent(
@@ -204,43 +252,10 @@ public class ManagerController {
         }
     }
 
-
-//    @GetMapping("/get-all-users")
-//    @ResponseBody
-//    public ResponseEntity<Set<User>> getUsersByRolesAndAcademie(Principal connectedUser) {
-//        Integer managerId = userService.getUserId(connectedUser.getName());
-//        Academie academie = managerRepository.findById(managerId)
-//                .orElseThrow(() -> new IllegalArgumentException("Manager not found"))
-//                .getAcademie();
-//
-//        List<Role> roles = Arrays.asList(Role.STAFF, Role.ENTRAINEUR, Role.ADEHERANT, Role.PARENT);
-//        Set<User> allUsers = new HashSet<>(repository.findByRolesAndAcademieIdIn(roles, academie.getId()));
-//
-//        return ResponseEntity.ok(allUsers);
-//    }
-
-
-
-//    @GetMapping("/get-all-users")
-//    @ResponseBody
-//    public ResponseEntity<List<User>> getAllUsers(Principal connectedUser) {
-//        User user = getProfil(connectedUser);
-//
-//        if (user instanceof Manager manager) {
-//            Academie academie = manager.getAcademie();
-//            if (academie != null) {
-//                System.out.println("academie ID: " + academie.getId());
-//                List<User> userList = repository.findAllByIdNot(user.getId());
-//                List<Entraineur> entraineurList = entraineurRepository.findAllByAcademieId(academie.getId());
-//                List<User> userListAcademie = repository.findAllByAcademieId(academie.getId());
-//
-//                return ResponseEntity.ok(userListAcademie);
-//            }
-//        }
-//
-//        // Handle the case when the user is not a Manager or doesn't have an associated Academie
-//        return ResponseEntity.ok(Collections.emptyList());
-//    }
+    @DeleteMapping("/delete-user")
+    public String deleteUser(@RequestParam Integer id){
+        return managerService.deleteUser(id);
+    }
 
     @GetMapping("/get-academie/{manager_id}")
     public ResponseEntity<?> getAcademie(@PathVariable("manager_id") Integer managerId) {

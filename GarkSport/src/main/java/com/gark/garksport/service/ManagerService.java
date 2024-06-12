@@ -14,6 +14,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +25,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.webjars.NotFoundException;
 
 import java.security.Principal;
 import java.security.SecureRandom;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -43,7 +48,7 @@ public class ManagerService {
     private final EntraineurRepository entraineurRepository;
     private final AdherentRepository adherentRepository;
     private final ParentRepository parentRepository;
-
+    private final InformationsParentRepository informationsParentRepository;
     private final PaiementRepository paiementRepository;
     private final PaiementHistoryRepository paiementHistoryRepository;
 
@@ -238,7 +243,7 @@ public class ManagerService {
     }
 
 
-
+    @Transactional
     public Staff addStaff(Staff staff, Principal connectedUser) throws MessagingException {
 
         staff.setEmail(staff.getEmail());
@@ -257,23 +262,20 @@ public class ManagerService {
         staff.setAcademie(academie);
        // staff.setAcademieId(academieId);
 
-
         if (academie == null) {
             throw new RuntimeException("Academie not found for the current manager.");
         }
 
+        RoleName roleNameToAdd = roleNameRepository.findByNameAndAcademie(staff.getRoleName(), academie);
+        if (roleNameToAdd == null) {
+            throw new RuntimeException("RoleName not found for roleName: " + staff.getRoleName());
+        }
 
+        Set<Permission> permissions = roleNameToAdd.getPermissions().stream()
+                .map(permissionName -> Permission.valueOf(String.valueOf(permissionName)))
+                .collect(Collectors.toSet());
 
-//        RoleName roleNameToAdd = roleNameRepository.findByNameAndAcademie(staff.getRoleName(), academie);
-//        if (roleNameToAdd == null) {
-//            throw new RuntimeException("RoleName not found for roleName: " + staff.getRoleName());
-//        }
-//
-//        Set<Permission> permissions = roleNameToAdd.getPermissions().stream()
-//                .map(permissionName -> Permission.valueOf(String.valueOf(permissionName)))
-//                .collect(Collectors.toSet());
-//
-//        staff.setPermissions(permissions);
+        staff.setPermissions(permissions);
 
 
         MimeMessage message = mailSender.createMimeMessage();
@@ -348,6 +350,7 @@ public class ManagerService {
         adherent.setTelephone(adherent.getTelephone());
         adherent.setPhoto(adherent.getPhoto());
         adherent.setStatutAdherent(StatutAdherent.Non_Payé);
+        //adherent.setEquipes(adherent.getEquipes());
 
         User user = getProfil(connectedUser);
         Manager manager = (Manager) user;
@@ -361,6 +364,7 @@ public class ManagerService {
 
         // Save the adherent first
         Adherent savedAdherent = repository.save(adherent);
+
 
         Paiement paiement = new Paiement();
         paiement.setAdherent(savedAdherent);
@@ -392,7 +396,6 @@ public class ManagerService {
         paiementHistoryRepository.save(paiementHistory);
 
         // Send the email
-
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
         message.setRecipients(MimeMessage.RecipientType.TO, adherent.getEmail());
@@ -492,7 +495,10 @@ public class ManagerService {
             throw new RuntimeException("Manager not found with ID: " + id);
         }
     }
-
+    public int calculateAge(Date birthDate) {
+        LocalDate birthLocalDate = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return Period.between(birthLocalDate, LocalDate.now()).getYears();
+    }
     public Adherent updateAdherent(Integer id, Adherent request) throws MessagingException {
         Optional<Adherent> existingAdherent = adherentRepository.findById(id);
 
@@ -500,25 +506,42 @@ public class ManagerService {
             Adherent adherentToUpdate = existingAdherent.get();
 
             adherentToUpdate.setEmail(request.getEmail());
-            //staffToUpdate.setRoleName(request.getRoleName());
             adherentToUpdate.setFirstname(request.getFirstname());
             adherentToUpdate.setLastname(request.getLastname());
             adherentToUpdate.setAdresse(request.getAdresse());
             adherentToUpdate.setTelephone(request.getTelephone());
             adherentToUpdate.setPhoto(request.getPhoto());
+            adherentToUpdate.setDateNaissance(request.getDateNaissance());
+            adherentToUpdate.setNationalite(request.getNationalite());
+            adherentToUpdate.setNiveauScolaire(request.getNiveauScolaire());
+            adherentToUpdate.setNomEquipe(request.getNomEquipe());
 
-//            Set<Permission> permissions = request.getPermissions();
-//            staffToUpdate.setPermissions(permissions);
+            if (request.getInformationsParent() != null) {
+                InformationsParent parentInfoToUpdate = adherentToUpdate.getInformationsParent();
+                if (parentInfoToUpdate == null) {
+                    parentInfoToUpdate = new InformationsParent();
+                    parentInfoToUpdate.setAdherent(adherentToUpdate);
+                    adherentToUpdate.setInformationsParent(parentInfoToUpdate);
+                }
+                parentInfoToUpdate.setNomParent(request.getInformationsParent().getNomParent());
+                parentInfoToUpdate.setPrenomParent(request.getInformationsParent().getPrenomParent());
+                parentInfoToUpdate.setTelephoneParent(request.getInformationsParent().getTelephoneParent());
+                parentInfoToUpdate.setAdresseParent(request.getInformationsParent().getAdresseParent());
+                parentInfoToUpdate.setEmailParent(request.getInformationsParent().getEmailParent());
+                parentInfoToUpdate.setNationaliteParent(request.getInformationsParent().getNationaliteParent());
 
-
+                // Save the InformationsParent entity before saving the Adherent entity
+                informationsParentRepository.save(parentInfoToUpdate);
+            } else {
+                throw new RuntimeException("Parent information is missing for the adherent.");
+            }
 
             return adherentRepository.save(adherentToUpdate);
-        }
-        else {
-            // Manager not found, handle the case accordingly
-            throw new RuntimeException("Manager not found with ID: " + id);
+        } else {
+            throw new RuntimeException("Adherent not found with ID: " + id);
         }
     }
+
 
     public Manager updateManager(Principal connectedUser, Manager request) throws MessagingException {
         User user = getProfil(connectedUser);
@@ -592,20 +615,39 @@ public class ManagerService {
 //            throw new RuntimeException("Manager not found with ID: " + id);
 //        }
 //    }
-    public void deleteRoleName(Integer id, Manager manager) {
-        Academie academie = academieRepository.findByManagerId(manager.getId());
-        if (academie != null) {
-            Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
-            if (existingRoleNameOptional.isPresent()) {
-                RoleName existingRoleName = existingRoleNameOptional.get();
-                String oldRoleName = existingRoleName.getName();
-                // Remove the RoleName from the Academie
-                academie.getRoleNames().remove(existingRoleName);
+public void deleteRoleName(Integer id, Manager manager) {
+    Academie academie = academieRepository.findByManagerId(manager.getId());
 
-            }
-        }
+    if (academie == null) {
+        throw new RuntimeException("Academie not found for the current manager.");
     }
 
+    Optional<RoleName> existingRoleNameOptional = roleNameRepository.findById(id);
+    if (existingRoleNameOptional.isPresent()) {
+        RoleName existingRoleName = existingRoleNameOptional.get();
+        if (existingRoleName.getAcademie().equals(academie)) {
+            academie.getRoleNames().remove(existingRoleName);
+            roleNameRepository.delete(existingRoleName);
+            academieRepository.save(academie);
+        } else {
+            throw new RuntimeException("Role name does not belong to the current manager's academie");
+        }
+    } else {
+        throw new NotFoundException("Role name not found");
+    }
+}
+
+    public String deleteUser(Integer id) {
+        var user = repository.findById(id);
+        System.out.println("id is : "+id);
+        if (user.isPresent()) {
+
+            repository.delete(user.get()); //turn it to archive we don't want to delete any data !!!!
+            return "User deleted successfully";
+        } else {
+            return "User not found";
+        }
+    }
 
 
 //    public Staff addStaff(Staff staff, Set<Permission> inputPermissions) throws MessagingException {

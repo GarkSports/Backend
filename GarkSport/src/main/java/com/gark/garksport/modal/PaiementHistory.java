@@ -37,5 +37,6 @@ public class PaiementHistory {
     private StatutAdherent statutAdherent;
 
     @ManyToOne
+    @JoinColumn(name = "adherent_id")
     private Adherent adherent;
 }

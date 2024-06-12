@@ -11,16 +11,12 @@ public enum Permission {
     CREATE("create"),
     DELETE("delete"),
 
-    Voir_utilisateurs("read_users"),
-
-    MiseAJour_utilisateurs("update_users"),
-
-    Creer_utilisateurs("creer_users"),
-
-    Supprimer_utilisateurs("supprimer_users")
+    READ_USERS("read_users"),
+    UPDATE_USERS("update_users"),
+    CREATE_USERS("create_users"),
+    DELETE_USERS("delete_users");
 
 
-    ;
     @Getter
     private final String permission;
 }

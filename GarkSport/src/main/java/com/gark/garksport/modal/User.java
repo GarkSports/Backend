@@ -52,7 +52,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_permissions", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "permission")
-    private Set<Permission> permissions;
+    private Set<Permission> permissions = new HashSet<>();
+
 
     @Override
     public int hashCode() {
@@ -66,9 +67,13 @@ public class User implements UserDetails {
         auths.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
         for (Permission permission : permissions) {
             auths.add(new SimpleGrantedAuthority(permission.name()));
+            System.out.println("permission :"+permission.name());
         }
         return auths;
+
     }
+
+
 
     @Override
     public String getUsername() {
