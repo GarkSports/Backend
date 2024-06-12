@@ -16,6 +16,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@DiscriminatorColumn(name = "dtype")
+@DiscriminatorValue("B")
 public class Benefices {
 
     @Id

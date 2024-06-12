@@ -1,6 +1,7 @@
 package com.gark.garksport.service;
 
 import com.gark.garksport.modal.Adherent;
+import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.Paiement;
 import com.gark.garksport.modal.PaiementHistory;
 import com.gark.garksport.modal.enums.StatutAdherent;
@@ -26,6 +27,9 @@ public class PaiementService implements IPaiementService {
 
     @Autowired
     private ManagerRepository managerRepository;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Override
     public Set<Paiement> getAllPaiementsByAcademie(Integer managerId) {
@@ -100,6 +104,16 @@ public class PaiementService implements IPaiementService {
 
             // Save the paiement history
             paiementHistoryRepository.save(paiementHistory);
+
+            //send notification
+            NotificationMessage notificationMessage = new NotificationMessage();
+            notificationMessage.setTitle("GarkSport:"+adherent.getFirstname());
+            notificationMessage.setBody("Le règlement de votre abonnement a été effectué avec succès.");
+            notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/1019/1019607.png");
+            notificationService.sendNotificationToUser(
+                    idAdherent,
+                    notificationMessage
+            );
 
             return savedPaiement;
         }
@@ -180,6 +194,16 @@ public class PaiementService implements IPaiementService {
 
             // Save the paiement history for the updated paiement
             paiementHistoryRepository.save(paiementHistory);
+
+            //send notification
+            NotificationMessage notificationMessage = new NotificationMessage();
+            notificationMessage.setTitle("GarkSport:"+adherent.getFirstname());
+            notificationMessage.setBody("Le règlement de votre abonnement a été effectué avec succès.");
+            notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/1019/1019607.png");
+            notificationService.sendNotificationToUser(
+                    adherent.getId(),
+                    notificationMessage
+            );
 
             return updatedPaiementEntity;
         } else {
