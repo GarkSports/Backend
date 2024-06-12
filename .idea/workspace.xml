@@ -4,28 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/1/21880ce3d789df1ee0bba78aea9568a7d7e1d66a" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/1/21880ce3d789df1ee0bba78aea9568a7d7e1d66a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/d/2d576a531796885720d631ee24561483449d6850" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/d/2d576a531796885720d631ee24561483449d6850" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/6/36b316faa3de12613dc77cefd6cf8f64cbfdd2b3" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/6/36b316faa3de12613dc77cefd6cf8f64cbfdd2b3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/7/b7138cff336cfdc65d295a9d30182be720745c0f" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/7/b7138cff336cfdc65d295a9d30182be720745c0f" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/2/d27c2207ceb771f1861702dd58c38a96b8b87c60" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/2/d27c2207ceb771f1861702dd58c38a96b8b87c60" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/3/f3f4f991da6fe5bee1fd9a9677b358ab809f3a10" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/3/f3f4f991da6fe5bee1fd9a9677b358ab809f3a10" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/PostsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/controller/PostsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Posts.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/modal/Posts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/BeneficesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/BeneficesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/PostsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GarkSport/src/main/java/com/gark/garksport/service/PostsService.java" afterDir="false" />
-    </list>
+    <list default="true" id="44654c22-6358-4639-a7c3-b851e4548c4a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -44,9 +27,6 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2cv1wmenL2cZr7UQfqkF3aM1l8B" />
   <component name="ProjectLevelVcsManager">
@@ -69,7 +49,6 @@
     &quot;last_opened_file_path&quot;: &quot;D:/PFE_ESPRIT/backend/GarkAcademy2024-Back/GarkSport/src/main/resources&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;342fbad231df4f91ba2cf533d728058e&quot;
   }
 }</component>
@@ -256,17 +235,16 @@
       <workItem from="1717672628547" duration="839000" />
       <workItem from="1717769417756" duration="7000" />
       <workItem from="1717769605903" duration="8000" />
-      <workItem from="1717942274032" duration="491000" />
-      <workItem from="1717943539136" duration="735000" />
-      <workItem from="1717947237818" duration="1038000" />
-      <workItem from="1717957305211" duration="935000" />
-      <workItem from="1718006144611" duration="690000" />
-      <workItem from="1718015891889" duration="6629000" />
-      <workItem from="1718091343127" duration="5048000" />
-      <workItem from="1718116802620" duration="3288000" />
-      <workItem from="1718128098651" duration="2846000" />
-      <workItem from="1718215751781" duration="1580000" />
-      <workItem from="1718218088725" duration="14000" />
+      <workItem from="1717841092471" duration="7364000" />
+      <workItem from="1717853022414" duration="646000" />
+      <workItem from="1717924445039" duration="634000" />
+      <workItem from="1718032324223" duration="2070000" />
+      <workItem from="1718043689468" duration="1120000" />
+      <workItem from="1718058457070" duration="1240000" />
+      <workItem from="1718096640168" duration="1917000" />
+      <workItem from="1718113882008" duration="6674000" />
+      <workItem from="1718195248435" duration="3238000" />
+      <workItem from="1718210401941" duration="2433000" />
     </task>
     <servers />
   </component>

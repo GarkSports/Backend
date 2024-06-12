@@ -1,7 +1,7 @@
 
 p
-java:S1192+"SDefine a constant instead of duplicating this literal "Adherent not found" 4 times.(ÈˆÅ8¬’ØÆ€2
+java:S1192'"SDefine a constant instead of duplicating this literal "Adherent not found" 4 times.(ÈˆÅ8ô¹ç€2
 t
-java:S3776z"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(ç¿‚¡ûÿÿÿÿ8¢•ØÆ€2
+java:S3776n"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(ç¿‚¡ûÿÿÿÿ8¾Õ˜ç€2
 I
-java:S1168Ø"+Return an empty collection instead of null.(¥¹ï8¬•ØÆ€2
+java:S1168Æ"+Return an empty collection instead of null.(¥¹ï8¾ç€2
