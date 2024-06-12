@@ -11,7 +11,6 @@ import com.gark.garksport.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -189,7 +188,8 @@ public class BeneficesService {
     }
 
     //benefices by Paiement
-    @Scheduled(cron = "0 0 0 * * ?") // Exécution chaque jour à minuit
+    //@Scheduled(cron = "0 0 0 * * ?") // Exécution chaque jour à minuit
+
     public void updateallDailyBenefices() {
         List<Academie> AllAcademies = academieRepository.findAll();
         for( Academie academie: AllAcademies) {
@@ -230,7 +230,7 @@ public class BeneficesService {
                                 .build();
                     }
 
-                    benefices.setQuantite(benefices.getQuantite() + 1);
+                    benefices.setQuantite(paiements.size());
 
                     beneficesRepository.save(benefices);
                 }

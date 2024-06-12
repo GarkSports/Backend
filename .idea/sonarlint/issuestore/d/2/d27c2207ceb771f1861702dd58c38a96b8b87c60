@@ -1,28 +1,37 @@
 
-m	java:S117?"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ÿ‡•Æ8¿¼‡¸ÿ1
-b
-java:S2259u"EA "NullPointerException" could be thrown; "orElse()" can return null.(Ö“Õ8‹úØ²€2
+m	java:S117J"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ÿ‡•Æ8ùë§í€2
+s	java:S117Â"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(àÏìîıÿÿÿÿ8ùë§í€2
+s	java:S117Ï"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(úöƒíúÿÿÿÿ8ùë§í€2
 g
-java:S2259w"EA "NullPointerException" could be thrown; "orElse()" can return null.(Ğ öáùÿÿÿÿ8ëšØ²€2
+java:S2259="EA "NullPointerException" could be thrown; "orElse()" can return null.(ø¨¥Ûúÿÿÿÿ8¾í§í€2
 g
-java:S22594"EA "NullPointerException" could be thrown; "orElse()" can return null.(öØ†øÿÿÿÿ8ŠúØ²€2
-g
-java:S22592"EA "NullPointerException" could be thrown; "orElse()" can return null.(ø¨¥Ûúÿÿÿÿ8´½‡¸ÿ1
+java:S2259?"EA "NullPointerException" could be thrown; "orElse()" can return null.(öØ†øÿÿÿÿ8Àí§í€2
+c
+java:S2259€"EA "NullPointerException" could be thrown; "orElse()" can return null.(Ö“Õ8Áí§í€2
 b
-java:S2259B"EA "NullPointerException" could be thrown; "orElse()" can return null.(äÅ½Õ8Å°ç±€2
+java:S2259O"EA "NullPointerException" could be thrown; "orElse()" can return null.(ÓÁ÷¨8Âí§í€2
+h
+java:S2259‚"EA "NullPointerException" could be thrown; "orElse()" can return null.(Ğ öáùÿÿÿÿ8Äí§í€2
 b
-java:S2259D"EA "NullPointerException" could be thrown; "orElse()" can return null.(ÓÁ÷¨8ğ°Ğ²€2
+java:S2259M"EA "NullPointerException" could be thrown; "orElse()" can return null.(äÅ½Õ8Åí§í€2
+s
+java:S3655Ï"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(úöƒíúÿÿÿÿ8Æí§í€2
+n
+java:S3655ä"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(Éã‘8Èí§í€2
+s
+java:S3655å"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ëŞäºşÿÿÿÿ8Éí§í€2
 Q
-java:S1172J"4Remove this unused method parameter "connectedUser".(ËŒ¾8á½‡¸ÿ1
+java:S1172U"4Remove this unused method parameter "connectedUser".(ËŒ¾8İí§í€2
 L
-java:S1874£".Remove this use of "divide"; it is deprecated.(Öõïí8ˆÅÑ²€2
+java:S1874®".Remove this use of "divide"; it is deprecated.(Öõïí8øí§í€2
 S
-java:S1874£"5Remove this use of "ROUND_HALF_UP"; it is deprecated.(Öõïí8ˆÅÑ²€2
+java:S1874®"5Remove this use of "ROUND_HALF_UP"; it is deprecated.(Öõïí8úí§í€2
 L
-java:S1874¦".Remove this use of "divide"; it is deprecated.(Ö¾è€8ŠÅÑ²€2
+java:S1874±".Remove this use of "divide"; it is deprecated.(Ö¾è€8üí§í€2
 S
-java:S1874¦"5Remove this use of "ROUND_HALF_UP"; it is deprecated.(Ö¾è€8ŠÅÑ²€2
+java:S1874±"5Remove this use of "ROUND_HALF_UP"; it is deprecated.(Ö¾è€8ıí§í€2
 Q
-java:S1874©".Remove this use of "divide"; it is deprecated.(â–Í÷ûÿÿÿÿ8‹ÅÑ²€2
+java:S1874´".Remove this use of "divide"; it is deprecated.(â–Í÷ûÿÿÿÿ8ÿí§í€2
 X
-java:S1874©"5Remove this use of "ROUND_HALF_UP"; it is deprecated.(â–Í÷ûÿÿÿÿ8ŒÅÑ²€2
+java:S1874´"5Remove this use of "ROUND_HALF_UP"; it is deprecated.(â–Í÷ûÿÿÿÿ8î§í€2
+M	java:S106Å"+Replace this use of System.out by a logger.(¼²¼ úÿÿÿÿ8†î§í€2
