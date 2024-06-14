@@ -1,10 +1,11 @@
 
-a	java:S112Š"FDefine and throw a dedicated exception instead of using a generic one.(Ñ´ì³úÿÿÿÿ
-J
-java:S1172Z"/Remove this unused method parameter "formData".(é€““øÿÿÿÿ
-A
-java:S1452Z"&Remove usage of generic wildcard type.(é€““øÿÿÿÿ
-V	java:S125i"<This block of commented-out lines of code should be removed.(Â°õÒþÿÿÿÿ
-V	java:S125"<This block of commented-out lines of code should be removed.(•—¨¨øÿÿÿÿ
-W	java:S125"<This block of commented-out lines of code should be removed.(ðïóŽøÿÿÿÿ
-W	java:S125Ÿ"<This block of commented-out lines of code should be removed.(ž“¸†øÿÿÿÿ
+}
+java:S1192{"[Define a constant instead of duplicating this literal "ValKpi not found with id: " 3 times.(É’ÇÅþÿÿÿÿ8ÑÐÀ¾€2
+y
+java:S1488u"\Immediately return this expression instead of assigning it to the temporary variable "test".(ƒ¼ãŸ8ÝÐÀ¾€2
+N
+java:S1135r"2Complete the task associated to this TODO comment.(«š´E8ýÒÀ¾€2
+_
+java:S1854¡"<Remove this useless assignment to local variable "academie".(¼­Õðøÿÿÿÿ8ŠÓÀ¾€2
+P
+java:S1481¡"-Remove this unused "academie" local variable.(¼­Õðøÿÿÿÿ8ÓÀ¾€2

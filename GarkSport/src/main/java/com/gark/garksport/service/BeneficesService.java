@@ -1,9 +1,14 @@
 package com.gark.garksport.service;
 
+import com.gark.garksport.modal.Academie;
 import com.gark.garksport.modal.Benefices;
+import com.gark.garksport.modal.Paiement;
 import com.gark.garksport.modal.User;
+import com.gark.garksport.modal.enums.Comptabiliteetat;
 import com.gark.garksport.modal.enums.Role;
+import com.gark.garksport.modal.enums.TypeAbonnement;
 import com.gark.garksport.repository.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +41,12 @@ public class BeneficesService {
 
     @Autowired
     private StaffRepository staffRepository;
+
+    @Autowired
+    private PaiementRepository paiementRepository;
+
+    @Autowired
+    private AcademieRepository academieRepository;
 
 
 
@@ -128,6 +139,12 @@ public class BeneficesService {
         BigDecimal lastMonthBenefices = beneficesRepository.sumByMonthAndAcademie(lastMonth.atDay(1), lastMonth.atEndOfMonth(), academieId);
         BigDecimal lastMonthDepenses = depensesRepository.sumByMonthAndAcademie(lastMonth.atDay(1), lastMonth.atEndOfMonth(), academieId);
 
+        // Handle null values by setting them to zero
+        if (currentMonthBenefices == null) currentMonthBenefices = BigDecimal.ZERO;
+        if (currentMonthDepenses == null) currentMonthDepenses = BigDecimal.ZERO;
+        if (lastMonthBenefices == null) lastMonthBenefices = BigDecimal.ZERO;
+        if (lastMonthDepenses == null) lastMonthDepenses = BigDecimal.ZERO;
+
         BigDecimal currentMonthNet = currentMonthBenefices.subtract(currentMonthDepenses);
         BigDecimal lastMonthNet = lastMonthBenefices.subtract(lastMonthDepenses);
 
@@ -142,6 +159,7 @@ public class BeneficesService {
         return sums;
     }
 
+
     public Map<String, BigDecimal> getMonthlyComparisonsForAcademie(Principal connectedUser) {
         Map<String, BigDecimal> sums = getMonthlySumsForAcademie(connectedUser);
 
@@ -152,12 +170,14 @@ public class BeneficesService {
         BigDecimal currentMonthNet = sums.get("currentMonthNet");
         BigDecimal lastMonthNet = sums.get("lastMonthNet");
 
-        BigDecimal beneficesComparison = lastMonthBenefices.compareTo(BigDecimal.ZERO) == 0 ?
-                BigDecimal.ZERO : currentMonthBenefices.subtract(lastMonthBenefices).divide(lastMonthBenefices,BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
-        BigDecimal depensesComparison = lastMonthDepenses.compareTo(BigDecimal.ZERO) == 0 ?
-                BigDecimal.ZERO : currentMonthDepenses.subtract(lastMonthDepenses).divide(lastMonthDepenses,BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
-        BigDecimal netComparison = lastMonthNet.compareTo(BigDecimal.ZERO) == 0 ?
-                BigDecimal.ZERO : currentMonthNet.subtract(lastMonthNet).divide(lastMonthNet,BigDecimal.ROUND_UP).multiply(BigDecimal.valueOf(100));
+        BigDecimal beneficesComparison = (lastMonthBenefices.compareTo(BigDecimal.ZERO) == 0) ?
+                BigDecimal.ZERO : currentMonthBenefices.subtract(lastMonthBenefices).divide(lastMonthBenefices, BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
+
+        BigDecimal depensesComparison = (lastMonthDepenses.compareTo(BigDecimal.ZERO) == 0) ?
+                BigDecimal.ZERO : currentMonthDepenses.subtract(lastMonthDepenses).divide(lastMonthDepenses, BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
+
+        BigDecimal netComparison = (lastMonthNet.compareTo(BigDecimal.ZERO) == 0) ?
+                BigDecimal.ZERO : currentMonthNet.subtract(lastMonthNet).divide(lastMonthNet, BigDecimal.ROUND_HALF_UP).multiply(BigDecimal.valueOf(100));
 
         Map<String, BigDecimal> comparisons = new HashMap<>();
         comparisons.put("beneficesComparison", beneficesComparison);
@@ -166,4 +186,69 @@ public class BeneficesService {
 
         return comparisons;
     }
+
+    //benefices by Paiement
+    //@Scheduled(cron = "0 0 0 * * ?") // Exécution chaque jour à minuit
+
+    public void updateallDailyBenefices() {
+        List<Academie> AllAcademies = academieRepository.findAll();
+        for( Academie academie: AllAcademies) {
+            updateDailyBenefices(academie.getId());
+            System.out.println("Exécution de la tâche planifiée...");
+        }
+    }
+
+
+
+    @Transactional
+    public void updateDailyBenefices(Integer id) {
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+
+        final BigDecimal PRIX_UNITE = BigDecimal.valueOf(academieRepository.findById(id).get().getFraisAdhesion());
+
+        List<Paiement> paiements = paiementRepository.findByAdherentAcademieIdAndDatePaiement(id,yesterday);
+
+        if (!paiements.isEmpty()) {
+            for (Paiement paiement : paiements) {
+                int monthsToAdd = getMonthsToAdd(paiement.getTypeAbonnement());
+
+                for (int i = 0; i < monthsToAdd; i++) {
+                    LocalDate monthDate = yesterday.plusMonths(i).withDayOfMonth(1);
+                    String typeBenefice = "Benefices paiement " + monthDate.getMonth() + " " + monthDate.getYear();
+
+                    Benefices benefices = beneficesRepository.findFirstByTypeAndAcademieId(typeBenefice,id);
+                    if (benefices == null) {
+                        benefices = Benefices.builder()
+                                .type(typeBenefice)
+                                .etat(Comptabiliteetat.FIXE)
+                                .quantite(0)
+                                .prixunite(PRIX_UNITE)
+                                .total(BigDecimal.ZERO)
+                                .date(yesterday)
+                                .academie(academieRepository.findById(id).get())
+                                .user(academieRepository.findById(id).get().getManager())
+                                .build();
+                    }
+
+                    benefices.setQuantite(paiements.size());
+
+                    beneficesRepository.save(benefices);
+                }
+            }
+        }
+    }
+
+    private int getMonthsToAdd(TypeAbonnement typeAbonnement) {
+        switch (typeAbonnement) {
+            case Mensuel:
+                return 1;
+            case Trimestriel:
+                return 3;
+            case Annuel:
+                return 12;
+            default:
+                throw new IllegalArgumentException("Type d'abonnement inconnu : " + typeAbonnement);
+        }
+    }
+
 }

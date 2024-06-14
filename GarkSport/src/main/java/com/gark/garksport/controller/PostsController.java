@@ -1,7 +1,6 @@
 package com.gark.garksport.controller;
 
 import com.gark.garksport.modal.Posts;
-import com.gark.garksport.modal.User;
 import com.gark.garksport.service.AdminService;
 import com.gark.garksport.service.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -67,8 +66,8 @@ public class PostsController {
     }
 
     @GetMapping("/{id}")
-    public Posts getPostById(@PathVariable Integer id) {
-        return postsService.getPostById(id);
+    public Posts getPostById(Principal connectedUser,@PathVariable Integer id) {
+        return postsService.getPostById(connectedUser,id);
     }
 
     // Update operation
