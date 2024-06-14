@@ -32,6 +32,7 @@ public class Paiement {
     private Float reste;
     private String remarque;
     private Integer retardPaiement;
+    private Boolean gratuit=false;
 
     @JsonIgnoreProperties("paiement")
     @OneToOne

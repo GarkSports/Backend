@@ -12,6 +12,7 @@ import com.gark.garksport.repository.PaiementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -32,6 +33,7 @@ public class PaiementService implements IPaiementService {
         return paiementRepository.findByAdherentAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
     }
 
+
     @Override
     public Paiement addPaiement(Paiement paiement, Integer idAdherent) {
         if (adherentRepository.existsById(idAdherent)) {
@@ -49,16 +51,14 @@ public class PaiementService implements IPaiementService {
             // Extract relevant fields from newPaiement
             Date datePaiement = paiement.getDatePaiement();
             Date dateFin = paiement.getDateFin(); // Assuming dateFin is set
-            Date todayDate = new Date();
 
             // Calculate retardPaiement
             int retardPaiement = 0;
-            if (todayDate.after(dateFin)) {
-                long differenceMillis = todayDate.getTime() - dateFin.getTime();
+            if (datePaiement != null && datePaiement.after(dateFin)) {
+                long differenceMillis = datePaiement.getTime() - dateFin.getTime();
                 long daysDifference = differenceMillis / (1000 * 60 * 60 * 24); // Convert milliseconds to days
                 retardPaiement = (int) daysDifference;
             }
-
 
             // Set retardPaiement in the newPaiement
             paiement.setRetardPaiement(retardPaiement);
@@ -66,13 +66,14 @@ public class PaiementService implements IPaiementService {
             if (paiement.getReste() == null) {
                 paiement.setReste(0f);
             }
-
-            if (paiement.getReste() != 0 && paiement.getMontant() != 0) {
+            if (paiement.getReste() != 0 && paiement.getMontant() != 0 && paiement.getGratuit()==false) {
                 adherent.setStatutAdherent(StatutAdherent.Payé_Partiellement);
-            } else if (paiement.getReste() == 0 && paiement.getMontant() != 0) {
+            } else if (paiement.getReste() == 0 && paiement.getMontant() != 0 && paiement.getGratuit()==false) {
                 adherent.setStatutAdherent(StatutAdherent.Payé);
-            } else if (paiement.getMontant() == 0 ) {
+            } else if (paiement.getMontant() == 0 && paiement.getGratuit()==false) {
                 adherent.setStatutAdherent(StatutAdherent.Non_Payé);
+            } else if(paiement.getGratuit()){
+                adherent.setStatutAdherent(StatutAdherent.Gratuit);
             }
 
             // Set the adherent for the newPaiement
@@ -94,7 +95,6 @@ public class PaiementService implements IPaiementService {
                     .montant(paiement.getMontant())
                     .reste(paiement.getReste())
                     .retardPaiement(paiement.getRetardPaiement())
-                    .statutAdherent(adherent.getStatutAdherent())
                     .adherent(adherent)
                     .build();
 
@@ -270,7 +270,7 @@ public class PaiementService implements IPaiementService {
                     paiement.setReste(paiement.getAdherent().getAcademie().getFraisAdhesion() * 12);
                 }
                 paiementRepository.save(paiement);
-            }else {
+            }else if (!paiement.getAdherent().getStatutAdherent().equals(StatutAdherent.Non_Payé)){
                 paiement.setRetardPaiement(0);
                 paiementRepository.save(paiement);
             }

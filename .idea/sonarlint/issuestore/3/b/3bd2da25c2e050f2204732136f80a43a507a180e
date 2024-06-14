@@ -1,112 +1,107 @@
 
-h	java:S112†"FDefine and throw a dedicated exception instead of using a generic one.(¾ÆÀ‚ÿÿÿÿÿ8ï¨…“€2
-h	java:S112³"FDefine and throw a dedicated exception instead of using a generic one.(„Âáÿúÿÿÿÿ8ñ¨…“€2
-h	java:S112¶"FDefine and throw a dedicated exception instead of using a generic one.(÷ÇÕÌúÿÿÿÿ8ñ¨…“€2
-h	java:S112Ñ"FDefine and throw a dedicated exception instead of using a generic one.(‰öşÕşÿÿÿÿ8ò¨…“€2
-h	java:S112ì"FDefine and throw a dedicated exception instead of using a generic one.(‰öşÕşÿÿÿÿ8ò¨…“€2
-h	java:S112‡"FDefine and throw a dedicated exception instead of using a generic one.(‰öşÕşÿÿÿÿ8ò¨…“€2
-c	java:S112¡"FDefine and throw a dedicated exception instead of using a generic one.(Šì¼8ò¨…“€2
-l
-java:S1192o"ODefine a constant instead of duplicating this literal "User not found" 3 times.(¢ •Ä8÷¨…“€2
-
-java:S1192Ñ"\Define a constant instead of duplicating this literal "Manager not found with ID: " 3 times.(‰öşÕşÿÿÿÿ8÷¨…“€2
-p
-java:S1192Â"RDefine a constant instead of duplicating this literal "Manager not found" 5 times.(±éÖ8÷¨…“€2
+h	java:S112Š"FDefine and throw a dedicated exception instead of using a generic one.(¾ÆÀ‚ÿÿÿÿÿ8¹Ã¹2
+c	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(÷øçœ8¹Ã¹2
+h	java:S112¶"FDefine and throw a dedicated exception instead of using a generic one.(„Âáÿúÿÿÿÿ8ºÃ¹2
+h	java:S112¹"FDefine and throw a dedicated exception instead of using a generic one.(÷ÇÕÌúÿÿÿÿ8ºÃ¹2
+h	java:S112Ô"FDefine and throw a dedicated exception instead of using a generic one.(‰öşÕşÿÿÿÿ8»Ã¹2
+h	java:S112ï"FDefine and throw a dedicated exception instead of using a generic one.(‰öşÕşÿÿÿÿ8»Ã¹2
+c	java:S112˜"FDefine and throw a dedicated exception instead of using a generic one.(ËÏú8¼Ã¹2
+h	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(à€»úÿÿÿÿ8¼Ã¹2
+c	java:S112¸"FDefine and throw a dedicated exception instead of using a generic one.(Šì¼8¼Ã¹2
+h	java:S112î"FDefine and throw a dedicated exception instead of using a generic one.(¾ÆÀ‚ÿÿÿÿÿ8½Ã¹2
+h	java:S112ù"FDefine and throw a dedicated exception instead of using a generic one.(¨ìè¾şÿÿÿÿ8½Ã¹2
 
-java:S1192›"qDefine a constant instead of duplicating this literal "<div> Login using your email and this password: " 4 times.(—î¼Û8ø¨…“€2
+java:S1192"qDefine a constant instead of duplicating this literal "<div> Login using your email and this password: " 4 times.(—î¼Û8ÂÃ¹2
 v
-java:S1192˜"XDefine a constant instead of duplicating this literal "${spring.mail.username}" 4 times.(õË±÷8ø¨…“€2
+java:S1192š"XDefine a constant instead of duplicating this literal "${spring.mail.username}" 4 times.(õË±÷8ÂÃ¹2
 q
-java:S1192¢"SDefine a constant instead of duplicating this literal "this is rolename: " 4 times.(œÄá8ù¨…“€2
-k
-java:S1192a"IDefine a constant instead of duplicating this literal "id is : " 3 times.(»”Ùºúÿÿÿÿ8ù¨…“€2
+java:S1192¥"SDefine a constant instead of duplicating this literal "this is rolename: " 4 times.(œÄá8ÂÃ¹2
 e
-java:S1192š"GDefine a constant instead of duplicating this literal " Login" 4 times.(¥äÎƒ8ù¨…“€2
-q
-java:S1192›"SDefine a constant instead of duplicating this literal "\">Login</a></div>" 4 times.(—î¼Û8ú¨…“€2
-„
-java:S1192›"fDefine a constant instead of duplicating this literal "<a href=\"http://localhost:8080/login" 4 times.(—î¼Û8ú¨…“€2
-
-java:S1488Á"dImmediately return this expression instead of assigning it to the temporary variable "allAdherents".(ª ÖT8ş¨…“€2
-ƒ
-java:S1488Ê"`Immediately return this expression instead of assigning it to the temporary variable "allStaff".(ş…õõüÿÿÿÿ8ÿ¨…“€2
-„
-java:S1488Ó"fImmediately return this expression instead of assigning it to the temporary variable "allEntraineurs".(Ë¨ÇÄ8ÿ¨…“€2
-„
-java:S1488Ü"aImmediately return this expression instead of assigning it to the temporary variable "allParent".(¾–ñ–ûÿÿÿÿ8ÿ¨…“€2
-h
-java:S2259["FA "NullPointerException" could be thrown; "academie" is nullable here.(ô®‹¨ıÿÿÿÿ8¹Æ™€2
-e
-java:S6201U"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8««…“€2
-L	java:S106a"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8®«…“€2
-L	java:S106v"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8±«…“€2
-M	java:S106‰"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8´«…“€2
-f
-java:S6201˜"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8¸«…“€2
-f
-java:S6201«"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8½«…“€2
-O
-java:S2175¯",A "Set<RoleName>" cannot contain a "String".(©‚ş…úÿÿÿÿ8èÆ™€2
-^	java:S125¹"<This block of commented-out lines of code should be removed.(ï×û¯şÿÿÿÿ8¿«…“€2
-Y	java:S125ë"<This block of commented-out lines of code should be removed.(ù–ô¡8Ó«…“€2
-^	java:S125ÿ"<This block of commented-out lines of code should be removed.(Ş¾®·üÿÿÿÿ8×«…“€2
-^	java:S125‚"<This block of commented-out lines of code should be removed.(×¤èÿÿÿÿÿ8×«…“€2
-^	java:S125‹"<This block of commented-out lines of code should be removed.(Ï›¨¾øÿÿÿÿ8Ø«…“€2
-c
-java:S3252™"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(Ğ¨±â8Û«…“€2
-Y	java:S125ª"<This block of commented-out lines of code should be removed.(œÓı€8à«…“€2
-b
-java:S3252µ"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(§—½A8á«…“€2
-c
-java:S3252Ï"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(‰Çï8æ«…“€2
-^	java:S125ò"<This block of commented-out lines of code should be removed.(ğƒß™ûÿÿÿÿ8í«…“€2
-h
-java:S3252"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(µËúÿÿÿÿ8ğ«…“€2
-H	java:S106¢"+Replace this use of System.out by a logger.(œÄá8ô«…“€2
-M	java:S106£"+Replace this use of System.out by a logger.(»¸¤Åÿÿÿÿÿ8õ«…“€2
-H	java:S106¤"+Replace this use of System.out by a logger.(ùŸÊù8õ«…“€2
-H	java:S106¬"+Replace this use of System.out by a logger.(´­ùö8÷«…“€2
-Y	java:S125¯"<This block of commented-out lines of code should be removed.(²ŠŞ’8÷«…“€2
-›
-java:S1130º"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(Â—‚õıÿÿÿÿ8ù«…“€2
-Y	java:S125Á"<This block of commented-out lines of code should be removed.(¿Éò­8û«…“€2
-^	java:S125È"<This block of commented-out lines of code should be removed.(›¯ª™ûÿÿÿÿ8ü«…“€2
-›
-java:S1130Õ"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(³òğúûÿÿÿÿ8ı«…“€2
-Y	java:S125Ü"<This block of commented-out lines of code should be removed.(¿Éò­8ş«…“€2
-^	java:S125ã"<This block of commented-out lines of code should be removed.(›¯ª™ûÿÿÿÿ8ÿ«…“€2
-›
-java:S1130ğ"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(­Ù£Íıÿÿÿÿ8¹Æ™€2
-Y	java:S125÷"<This block of commented-out lines of code should be removed.(¿Éò­8¬…“€2
-^	java:S125ş"<This block of commented-out lines of code should be removed.(›¯ª™ûÿÿÿÿ8‚¬…“€2
-›
-java:S1130‹"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(…ÆÆ°ùÿÿÿÿ8ƒ¬…“€2
-f
-java:S6201"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8„¬…“€2
-^	java:S125™"<This block of commented-out lines of code should be removed.(Ù•çúşÿÿÿÿ8…¬…“€2
-›
-java:S1130¦"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(Ğ²ö¾şÿÿÿÿ8ÀÆ™€2
-]
-java:S1854Ù"?Remove this useless assignment to local variable "oldRoleName".(¿éöş8‹¬…“€2
-^	java:S125»"<This block of commented-out lines of code should be removed.(™ÄñÉøÿÿÿÿ8Œ¬…“€2
-N
-java:S1481Ù"0Remove this unused "oldRoleName" local variable.(¿éöş8¬…“€2
-X	java:S125ã"<This block of commented-out lines of code should be removed.(€ÑÕ~8¬…“€2
-o
-java:S1128"RRemove this unused import 'com.fasterxml.jackson.annotation.JsonIgnoreProperties'.(ô’ˆî8ÊÆ™€2
-a
-java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8ÊÆ™€2
-p
-java:S1128"NRemove this unused import 'com.gark.garksport.dto.request.AddRoleNameRequest'.(í…Êºûÿÿÿÿ8ËÆ™€2
-c
-java:S1128"FRemove this unused import 'com.gark.garksport.modal.enums.Permission'.(°¹À”8ËÆ™€2
-`
-java:S1128"CRemove this unused import 'jakarta.mail.internet.AddressException'.(ŞÁ¿É8ËÆ™€2
+java:S1192œ"GDefine a constant instead of duplicating this literal " Login" 4 times.(¥äÎƒ8ÂÃ¹2
 l
-java:S1128"ORemove this unused import 'org.springframework.security.core.GrantedAuthority'.(½Á±ÿ8ËÆ™€2
+java:S1192t"ODefine a constant instead of duplicating this literal "User not found" 4 times.(¢ •Ä8ÃÃ¹2
+p
+java:S1192Ç"RDefine a constant instead of duplicating this literal "Manager not found" 5 times.(±éÖ8ÃÃ¹2
+k
+java:S1192f"IDefine a constant instead of duplicating this literal "id is : " 4 times.(»”Ùºúÿÿÿÿ8ÃÃ¹2
+q
+java:S1192"SDefine a constant instead of duplicating this literal "\">Login</a></div>" 4 times.(—î¼Û8ÃÃ¹2
+„
+java:S1192"fDefine a constant instead of duplicating this literal "<a href=\"http://localhost:8080/login" 4 times.(—î¼Û8ÄÃ¹2
 
-java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8ËÆ™€2
+java:S1488Æ"dImmediately return this expression instead of assigning it to the temporary variable "allAdherents".(ª ÖT8ÉÃ¹2
+ƒ
+java:S1488Ï"`Immediately return this expression instead of assigning it to the temporary variable "allStaff".(ş…õõüÿÿÿÿ8ÊÃ¹2
+„
+java:S1488Ø"fImmediately return this expression instead of assigning it to the temporary variable "allEntraineurs".(Ë¨ÇÄ8ËÃ¹2
+„
+java:S1488á"aImmediately return this expression instead of assigning it to the temporary variable "allParent".(¾–ñ–ûÿÿÿÿ8ËÃ¹2
+h
+java:S2259`"FA "NullPointerException" could be thrown; "academie" is nullable here.(ô®‹¨ıÿÿÿÿ8ÎÄ¹2
+z
+java:S4144€"\Update this method so that its implementation is not identical to "archiveUser" on line 140.(õï­8ÕÄ¹2
+e
+java:S6201Z"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8çÄ¹2
+L	java:S106f"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8êÄ¹2
+L	java:S106{"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8ñÄ¹2
+M	java:S106"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8öÄ¹2
+f
+java:S6201"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ıÄ¹2
+f
+java:S6201°"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ˆÅ¹2
+O
+java:S2175´",A "Set<RoleName>" cannot contain a "String".(©‚ş…úÿÿÿÿ8ŠÅ¹2
+^	java:S125¾"<This block of commented-out lines of code should be removed.(ï×û¯şÿÿÿÿ8Å¹2
+Y	java:S125ğ"<This block of commented-out lines of code should be removed.(ù–ô¡8¢Å¹2
+^	java:S125„"<This block of commented-out lines of code should be removed.(Ş¾®·üÿÿÿÿ8­Å¹2
+^	java:S125‡"<This block of commented-out lines of code should be removed.(×¤èÿÿÿÿÿ8®Å¹2
+c
+java:S3252›"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(Ğ¨±â8·Å¹2
+Y	java:S125¬"<This block of commented-out lines of code should be removed.(œÓı€8ÍÅ¹2
+b
+java:S3252·"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(§—½A8ÏÅ¹2
+c
+java:S3252Ñ"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(‰Çï8×Å¹2
+Y	java:S125á"<This block of commented-out lines of code should be removed.(²øÓ8İÅ¹2
+^	java:S125ö"<This block of commented-out lines of code should be removed.(ğƒß™ûÿÿÿÿ8äÅ¹2
+h
+java:S3252‘"EUse static access with "jakarta.mail.Message$RecipientType" for "TO".(µËúÿÿÿÿ8ğÅ¹2
+H	java:S106¥"+Replace this use of System.out by a logger.(œÄá8ûÅ¹2
+M	java:S106¦"+Replace this use of System.out by a logger.(»¸¤Åÿÿÿÿÿ8üÅ¹2
+H	java:S106§"+Replace this use of System.out by a logger.(ùŸÊù8ıÅ¹2
+H	java:S106¯"+Replace this use of System.out by a logger.(´­ùö8€Æ¹2
+Y	java:S125²"<This block of commented-out lines of code should be removed.(²ŠŞ’8€Æ¹2
+›
+java:S1130½"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(Â—‚õıÿÿÿÿ8‚Æ¹2
+Y	java:S125Ä"<This block of commented-out lines of code should be removed.(¿Éò­8…Æ¹2
+^	java:S125Ë"<This block of commented-out lines of code should be removed.(›¯ª™ûÿÿÿÿ8‡Æ¹2
+›
+java:S1130Ø"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(³òğúûÿÿÿÿ8‰Æ¹2
+Y	java:S125ß"<This block of commented-out lines of code should be removed.(¿Éò­8Æ¹2
+^	java:S125æ"<This block of commented-out lines of code should be removed.(›¯ª™ûÿÿÿÿ8Æ¹2
+›
+java:S1130ö"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(­Ù£Íıÿÿÿÿ8”Æ¹2
+›
+java:S1130¢"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(…ÆÆ°ùÿÿÿÿ8¥Æ¹2
+f
+java:S6201¦"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8©Æ¹2
+^	java:S125°"<This block of commented-out lines of code should be removed.(Ù•çúşÿÿÿÿ8¬Æ¹2
+›
+java:S1130½"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(Ğ²ö¾şÿÿÿÿ8°Æ¹2
+^	java:S125Ò"<This block of commented-out lines of code should be removed.(™ÄñÉøÿÿÿÿ8·Æ¹2
+M	java:S106‚"+Replace this use of System.out by a logger.(»”Ùºúÿÿÿÿ8¼Æ¹2
+X	java:S125"<This block of commented-out lines of code should be removed.(€ÑÕ~8¬…“€2
+o
+java:S1128"RRemove this unused import 'com.fasterxml.jackson.annotation.JsonIgnoreProperties'.(ô’ˆî8—Ï»2
+a
+java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8—Ï»2
+p
+java:S1128"NRemove this unused import 'com.gark.garksport.dto.request.AddRoleNameRequest'.(í…Êºûÿÿÿÿ8—Ï»2
+`
+java:S1128"CRemove this unused import 'jakarta.mail.internet.AddressException'.(ŞÁ¿É8—Ï»2
+l
+java:S1128"ORemove this unused import 'org.springframework.security.core.GrantedAuthority'.(½Á±ÿ8—Ï»2
+
+java:S1128"_Remove this unused import 'org.springframework.security.core.authority.SimpleGrantedAuthority'.(– ‹Ìûÿÿÿÿ8˜Ï»2
 r
-java:S1128"PRemove this unused import 'org.springframework.web.bind.annotation.RequestBody'.(â­½Àıÿÿÿÿ8ËÆ™€2
-Z
-java:S1128 "8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8ÌÆ™€2
+java:S1128"PRemove this unused import 'org.springframework.web.bind.annotation.RequestBody'.(â­½Àıÿÿÿÿ8˜Ï»2

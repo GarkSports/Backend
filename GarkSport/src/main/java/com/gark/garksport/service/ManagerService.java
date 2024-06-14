@@ -384,10 +384,10 @@ public class ManagerService {
         PaiementHistory paiementHistory = PaiementHistory.builder()
                 .dateDebut(paiement.getDateDebut())
                 .dateFin(paiement.getDateFin())
-                .datePaiement(new Date())
+                .datePaiement(null)
                 .montant(paiement.getMontant())
                 .reste(paiement.getReste())
-                .retardPaiement(30)
+                .retardPaiement(0)
                 .statutAdherent(StatutAdherent.Non_Payé)
                 .adherent(adherent)
                 .build();
