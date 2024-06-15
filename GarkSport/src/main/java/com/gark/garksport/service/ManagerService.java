@@ -245,15 +245,20 @@ public class ManagerService {
     }
 
 
-    @Transactional
+
     public Staff addStaff(Staff staff, Principal connectedUser) throws MessagingException {
 
+        staff.setFirstname(staff.getFirstname());
+        staff.setLastname(staff.getLastname());
         staff.setEmail(staff.getEmail());
         staff.setRole(Role.STAFF);
         staff.setPassword(passwordEncoder.encode(generatedPWD));
         staff.setRoleName(staff.getRoleName());
         staff.setTelephone(staff.getTelephone());
         staff.setPhoto(staff.getPhoto());
+        staff.setAdresse(staff.getAdresse());
+        staff.setNationalite(staff.getNationalite());
+        staff.setDateNaissance(staff.getDateNaissance());
 
         User user = getProfil(connectedUser);
 
@@ -355,6 +360,7 @@ public class ManagerService {
     }
 
     public Adherent addAdherent(Adherent adherent, List<String> equipeNames, Principal connectedUser) throws MessagingException {
+
         adherent.setFirstname(adherent.getFirstname());
         adherent.setLastname(adherent.getLastname());
         adherent.setEmail(adherent.getEmail());
@@ -367,7 +373,6 @@ public class ManagerService {
         adherent.setNiveauScolaire(adherent.getNiveauScolaire());
         adherent.setDateNaissance(adherent.getDateNaissance());
         adherent.setNationalite(adherent.getNationalite());
-
 
 
         User user = getProfil(connectedUser);
@@ -492,6 +497,7 @@ public class ManagerService {
             staffToUpdate.setTelephone(request.getTelephone());
             staffToUpdate.setPhoto(request.getPhoto());
             staffToUpdate.setNationalite(request.getNationalite());
+            staffToUpdate.setDateNaissance(request.getDateNaissance());
 
 //            Set<Permission> permissions = request.getPermissions();
 //            staffToUpdate.setPermissions(permissions);
@@ -513,12 +519,13 @@ public class ManagerService {
             Entraineur entraineurToUpdate = existingEntraineur.get();
 
             entraineurToUpdate.setEmail(request.getEmail());
-            //staffToUpdate.setRoleName(request.getRoleName());
+            entraineurToUpdate.setRoleName(request.getRoleName());
             entraineurToUpdate.setFirstname(request.getFirstname());
             entraineurToUpdate.setLastname(request.getLastname());
             entraineurToUpdate.setAdresse(request.getAdresse());
             entraineurToUpdate.setTelephone(request.getTelephone());
             entraineurToUpdate.setPhoto(request.getPhoto());
+            entraineurToUpdate.setNationalite(request.getNationalite());
 
             Entraineur updatedEntraineur = entraineurRepository.save(entraineurToUpdate);
 
