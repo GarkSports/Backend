@@ -2,8 +2,11 @@ package com.gark.garksport.service;
 
 
 import com.gark.garksport.modal.*;
+import com.gark.garksport.modal.enums.StatutAdherent;
+import com.gark.garksport.modal.enums.TypeAbonnement;
 import com.gark.garksport.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -24,6 +27,13 @@ public class RandomService implements IRandomService {
     private EntraineurRepository entraineurRepository;
     @Autowired
     private DisciplineRepository disciplineRepository;
+    @Autowired
+    private PaiementRepository paiementRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private PaiementHistoryRepository paiementHistoryRepository;
 
     @Override
     public Manager addManager(Manager manager) {
@@ -269,8 +279,11 @@ public class RandomService implements IRandomService {
     @Override
     public Adherent addAdherent(Adherent adherent, String CodeEquipe) {
         Equipe equipe = equipeRepository.findByCodeEquipe(CodeEquipe);
+        adherent.setStatutAdherent(StatutAdherent.Non_Payé);
+        adherent.setPassword(passwordEncoder.encode(adherent.getPassword()));
 
         adherent.setNomEquipe(equipe.getNom());
+
 
         Academie academie = equipe.getAcademie();
         academie.getAdherents().add(adherent);
@@ -278,9 +291,45 @@ public class RandomService implements IRandomService {
         adherent.setEquipeId(equipe.getId());
         equipe.getAdherents().add(adherent);
 
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DAY_OF_MONTH, 30);
+        Date dateFin = cal.getTime();
+        adherent.setPaiementDate(dateFin);
+
         adherentRepository.save(adherent);
         academieRepository.save(academie);
         equipeRepository.save(equipe);
+
+        Paiement paiement = new Paiement();
+        paiement.setAdherent(adherent);
+        paiement.setTypeAbonnement(TypeAbonnement.Mensuel);
+        paiement.setDateDebut(new Date());
+
+        // Set dateFin to 30 days from today;
+
+        paiement.setDateFin(dateFin);
+        paiement.setDatePaiement(null);
+        paiement.setMontant(0f);
+        paiement.setReste(adherent.getAcademie().getFraisAdhesion());
+
+        // Save the paiement
+        paiementRepository.save(paiement);
+
+        PaiementHistory paiementHistory = PaiementHistory.builder()
+                .dateDebut(paiement.getDateDebut())
+                .dateFin(paiement.getDateFin())
+                .datePaiement(null)
+                .montant(paiement.getMontant())
+                .reste(paiement.getReste())
+                .retardPaiement(0)
+                .statutAdherent(StatutAdherent.Non_Payé)
+                .adherent(adherent)
+                .build();
+
+        // Save the paiement history
+        paiementHistoryRepository.save(paiementHistory);
+
         return adherent;
     }
 

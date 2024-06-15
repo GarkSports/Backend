@@ -83,4 +83,9 @@ public class BeneficesController {
     public Map<String, BigDecimal> getMonthlyComparisons(Principal connectedUser) {
         return beneficesService.getMonthlyComparisonsForAcademie(connectedUser);
     }
+
+    @GetMapping("/monthBenefice")
+    public Benefices monthBenefice(Principal connectedUser){
+        return beneficesService.monthBenefices(connectedUser);
+    }
 }
