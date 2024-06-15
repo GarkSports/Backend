@@ -1,5 +1,6 @@
 package com.gark.garksport.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gark.garksport.modal.enums.StatutAdherent;
 import jakarta.persistence.*;
@@ -17,6 +18,17 @@ import java.util.*;
 public class Adherent extends User {
 
     private String niveauScolaire;
+
+
+//    @JsonIgnore
+//    @ManyToMany(mappedBy = "adherents", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinTable(
+//            name = "equipe_adherent",
+//            joinColumns = @JoinColumn(name = "adherent_id"),
+//            inverseJoinColumns = @JoinColumn(name = "equipe_id")
+//    )
+//    private Set<Equipe> equipes = new HashSet<>();
+
 
     @JsonIgnoreProperties("adherent")
     @OneToOne(mappedBy = "adherent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
