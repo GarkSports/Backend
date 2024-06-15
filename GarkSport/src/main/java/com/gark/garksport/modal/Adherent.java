@@ -60,7 +60,7 @@ public class Adherent extends User {
 
 
     @JsonIgnoreProperties("adherent")
-    @OneToOne(mappedBy = "adherent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "adherent")
     private Paiement paiement;
 
 //    @ManyToMany

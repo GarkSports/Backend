@@ -11,18 +11,9 @@ import java.util.Set;
 @Data
 public class MatchAmicalRequest {
     private Evenement evenement;
-    private Integer equipeId;
-    private LocalTime horaire;
+    List<EquipeHorraireDTO> equipesHorraires;
 
     public Evenement getEvenement() {
         return evenement;
-    }
-
-    public Integer getEquipeId() {
-        return equipeId;
-    }
-
-    public LocalTime getHoraire() {
-        return horaire;
     }
 }

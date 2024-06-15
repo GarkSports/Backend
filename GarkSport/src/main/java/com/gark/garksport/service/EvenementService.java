@@ -1,5 +1,7 @@
 package com.gark.garksport.service;
 
+import com.gark.garksport.dto.request.EquipeHorraireDTO;
+import com.gark.garksport.dto.request.MatchAmicalRequest;
 import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.Equipe;
 import com.gark.garksport.modal.Evenement;
@@ -264,35 +266,62 @@ public class EvenementService implements IEvenementService {
     }
 
     @Override
-    public Evenement addMatchAmical(Evenement evenement, Integer equipeId, LocalTime horraire, Integer managerId) {
+    public Evenement addMatchAmical(MatchAmicalRequest request, Integer managerId) {
+        Evenement evenement = request.getEvenement();
+        List<EquipeHorraireDTO> equipeHorraireDTOs = request.getEquipesHorraires();
+
+        // Validate input
+        if (equipeHorraireDTOs == null || equipeHorraireDTOs.isEmpty()) {
+            throw new IllegalArgumentException("The list of equipeHorraireDTOs must not be null or empty");
+        }
+
+        // Set the academie and other properties for the event
         evenement.setAcademie(managerRepository.findById(managerId).get().getAcademie());
         evenement.setType(EvenementType.MATCH_AMICAL);
-        evenement.setHeure(horraire);
 
-        Equipe equipe = equipeRepository.findById(equipeId)
-                .orElseThrow(() -> new NoSuchElementException("Equipe not found with id: " + equipeId));
+        // Set convocationEquipesMatchAmical and convocationMembres
+        Set<Equipe> equipes = new HashSet<>();
+        Set<Adherent> allAdherents = new HashSet<>();
 
-        evenement.setConvocationEquipe(equipe);
-        Set<Adherent> membres = new HashSet<>(equipe.getAdherents());
-        evenement.setConvocationMembres(membres);
+        for (EquipeHorraireDTO dto : equipeHorraireDTOs) {
+            Integer equipeId = dto.getEquipeId();
+            LocalTime horraire = dto.getHorraire();
 
-        equipe.setDateMatchAmical(horraire);
-        equipeRepository.save(equipe);
+            Equipe equipe = equipeRepository.findById(equipeId)
+                    .orElseThrow(() -> new NoSuchElementException("Equipe not found with id: " + equipeId));
 
+            // Each equipe gets its own horraire
+            equipe.setDateMatchAmical(horraire);
+            equipeRepository.save(equipe);
+
+            equipes.add(equipe);
+            allAdherents.addAll(equipe.getAdherents());
+        }
+
+        evenement.setConvocationEquipesMatchAmical(equipes);
+        evenement.setConvocationMembres(allAdherents);
+
+        // Save the event
         evenement = evenementRepository.save(evenement);
 
         // Handle repetition logic
         if (Boolean.TRUE.equals(evenement.getRepetition())) {
             handleRepetition(evenement);
         }
+
+        // Send notifications
         NotificationMessage notificationMessage = new NotificationMessage();
         notificationMessage.setTitle("GarkSport");
         notificationMessage.setBody("Vous avez un nouveau match amical");
         notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
-        notificationService.sendNotificationToTeam(equipeId,notificationMessage);
+
+        for (EquipeHorraireDTO dto : equipeHorraireDTOs) {
+            notificationService.sendNotificationToTeam(dto.getEquipeId(), notificationMessage);
+        }
 
         return evenement;
     }
+
 
     @Override
     public Set<Evenement> getAllEvenements(Integer managerId) {
@@ -347,6 +376,30 @@ public class EvenementService implements IEvenementService {
         notificationService.sendNotificationToMembers(idMembres,notificationMessage);
 
         return evenementRepository.save(existingEvenement);
+    }
+
+    @Override
+    public Evenement updateEvenementMatchAmical(Evenement evenement, Integer evenementId) {
+        Evenement existingEvenement = evenementRepository.findById(evenementId)
+                .orElseThrow(() -> new NoSuchElementException("Evenement not found with id: " + evenementId));
+
+        existingEvenement.setNomEvent(evenement.getNomEvent());
+        existingEvenement.setLieu(evenement.getLieu());
+        existingEvenement.setDate(evenement.getDate());
+
+
+        NotificationMessage notificationMessage = new NotificationMessage();
+        notificationMessage.setTitle("GarkSport");
+        notificationMessage.setBody("vous avez un evenement modifié");
+        notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/3176/3176237.png");
+
+        return evenementRepository.save(existingEvenement);
+    }
+
+    @Override
+    public List<Equipe> getEquipesByEvenementMatchAmical(Integer idEvenement) {
+        Evenement evenement = evenementRepository.findById(idEvenement).orElseThrow(() -> new NoSuchElementException("Evenement not found with id: " + idEvenement));
+        return new ArrayList<>(evenement.getConvocationEquipesMatchAmical());
     }
 
 

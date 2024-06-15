@@ -13,10 +13,15 @@ import java.util.List;
 @Repository
 public interface BeneficesRepository extends JpaRepository<Benefices,Integer> {
 
-    List<Benefices> findByAcademieIdOrderByDateDesc(Integer academieID);
+    @Query("SELECT b FROM Benefices b WHERE b.academie.id = :academieId AND TYPE(b) = Benefices ORDER BY b.date DESC")
+    List<Benefices> findByAcademieIdOrderByDateDesc(@Param("academieId") Integer academieId);
 
-    @Query("SELECT SUM(b.total) FROM Benefices b WHERE b.date BETWEEN :startDate AND :endDate AND b.academie.id = :academieId")
+
+    @Query("SELECT SUM(b.total) FROM Benefices b WHERE b.date BETWEEN :startDate AND :endDate AND b.academie.id = :academieId AND TYPE(b) = Benefices ")
     BigDecimal sumByMonthAndAcademie(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, @Param("academieId") Integer academieId);
+
+    @Query("SELECT b FROM Benefices b WHERE b.type = :type AND b.academie.id = :academieId AND TYPE(b) = Benefices")
+    Benefices findFirstByTypeAndAcademieId(@Param("type") String type, @Param("academieId") Integer academieId);
 
 
 }

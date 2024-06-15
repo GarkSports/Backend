@@ -3,7 +3,6 @@ package com.gark.garksport.service;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gark.garksport.dto.request.AddRoleNameRequest;
-import com.gark.garksport.dto.request.AdherentRequest;
 import com.gark.garksport.dto.request.ResetPasswordRequest;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Permission;
@@ -52,7 +51,6 @@ public class ManagerService {
     private final InformationsParentRepository informationsParentRepository;
     private final PaiementRepository paiementRepository;
     private final PaiementHistoryRepository paiementHistoryRepository;
-    private final EquipeRepository equipeRepository;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -245,20 +243,15 @@ public class ManagerService {
     }
 
 
-
+    @Transactional
     public Staff addStaff(Staff staff, Principal connectedUser) throws MessagingException {
 
-        staff.setFirstname(staff.getFirstname());
-        staff.setLastname(staff.getLastname());
         staff.setEmail(staff.getEmail());
         staff.setRole(Role.STAFF);
         staff.setPassword(passwordEncoder.encode(generatedPWD));
         staff.setRoleName(staff.getRoleName());
         staff.setTelephone(staff.getTelephone());
         staff.setPhoto(staff.getPhoto());
-        staff.setAdresse(staff.getAdresse());
-        staff.setNationalite(staff.getNationalite());
-        staff.setDateNaissance(staff.getDateNaissance());
 
         User user = getProfil(connectedUser);
 
@@ -295,7 +288,7 @@ public class ManagerService {
 
         return repository.save(staff);
     }
-    public Entraineur addCoach(Entraineur entraineur, List<String> equipeNames,Principal connectedUser) throws MessagingException {
+    public Entraineur addCoach(Entraineur entraineur, Principal connectedUser) throws MessagingException {
 
         entraineur.setEmail(entraineur.getEmail());
         entraineur.setRole(Role.ENTRAINEUR);
@@ -303,24 +296,15 @@ public class ManagerService {
         entraineur.setRoleName(entraineur.getRoleName());// Set the permissions for the staff
         entraineur.setTelephone(entraineur.getTelephone());
         entraineur.setPhoto(entraineur.getPhoto());
+
+//        Set<Permission> permissions = entraineur.getPermissions();
+//        entraineur.setPermissions(permissions);
+
         User user = getProfil(connectedUser);
 
         Manager manager = (Manager) user;
         Academie academie = manager.getAcademie();
         entraineur.setAcademie(academie);
-
-        Entraineur savedEntraineur = repository.save(entraineur);
-        for (String equipeName : equipeNames) {
-            Equipe equipe = equipeRepository.findByNom(equipeName);
-            equipe.getEntraineurs().add(savedEntraineur);
-            equipeRepository.save(equipe);
-        }
-
-
-//        Set<Permission> permissions = entraineur.getPermissions();
-//        entraineur.setPermissions(permissions);
-
-
 
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
@@ -330,7 +314,7 @@ public class ManagerService {
 
         mailSender.send(message);
 
-        return savedEntraineur;
+        return repository.save(entraineur);
     }
 
     public Parent addParent(Parent parent, Principal connectedUser) throws MessagingException {
@@ -359,21 +343,14 @@ public class ManagerService {
         return repository.save(parent);
     }
 
-    public Adherent addAdherent(Adherent adherent, List<String> equipeNames, Principal connectedUser) throws MessagingException {
-
-        adherent.setFirstname(adherent.getFirstname());
-        adherent.setLastname(adherent.getLastname());
+    public Adherent addAdherent(Adherent adherent, Principal connectedUser) throws MessagingException {
         adherent.setEmail(adherent.getEmail());
         adherent.setRole(Role.ADHERENT);
         adherent.setPassword(passwordEncoder.encode(generatedPWD));
-        adherent.setAdresse(adherent.getAdresse());
         adherent.setTelephone(adherent.getTelephone());
         adherent.setPhoto(adherent.getPhoto());
         adherent.setStatutAdherent(StatutAdherent.Non_Payé);
-        adherent.setNiveauScolaire(adherent.getNiveauScolaire());
-        adherent.setDateNaissance(adherent.getDateNaissance());
-        adherent.setNationalite(adherent.getNationalite());
-
+        //adherent.setEquipes(adherent.getEquipes());
 
         User user = getProfil(connectedUser);
         Manager manager = (Manager) user;
@@ -387,60 +364,47 @@ public class ManagerService {
 
         // Save the adherent first
         Adherent savedAdherent = repository.save(adherent);
-        for (String equipeName : equipeNames) {
-            Equipe equipe = equipeRepository.findByNom(equipeName);
-            equipe.getAdherents().add(savedAdherent);
-            equipeRepository.save(equipe);
-        }
 
 
-            Paiement paiement = new Paiement();
-            paiement.setAdherent(savedAdherent);
-            paiement.setTypeAbonnement(TypeAbonnement.Mensuel);
-            paiement.setDateDebut(new Date());
+        Paiement paiement = new Paiement();
+        paiement.setAdherent(savedAdherent);
+        paiement.setTypeAbonnement(TypeAbonnement.Mensuel);
+        paiement.setDateDebut(new Date());
 
-            // Set dateFin to 30 days from today;
+        // Set dateFin to 30 days from today;
 
-            paiement.setDateFin(dateFin);
-            paiement.setDatePaiement(new Date());
-            paiement.setMontant(0f);
-            paiement.setReste(savedAdherent.getAcademie().getFraisAdhesion());
+        paiement.setDateFin(dateFin);
+        paiement.setDatePaiement(null);
+        paiement.setMontant(0f);
+        paiement.setReste(savedAdherent.getAcademie().getFraisAdhesion());
 
-            // Save the paiement
-            paiementRepository.save(paiement);
+        // Save the paiement
+        paiementRepository.save(paiement);
 
-            PaiementHistory paiementHistory = PaiementHistory.builder()
-                    .dateDebut(paiement.getDateDebut())
-                    .dateFin(paiement.getDateFin())
-                    .datePaiement(new Date())
-                    .montant(paiement.getMontant())
-                    .reste(paiement.getReste())
-                    .retardPaiement(30)
-                    .adherent(adherent)
-                    .build();
+        PaiementHistory paiementHistory = PaiementHistory.builder()
+                .dateDebut(paiement.getDateDebut())
+                .dateFin(paiement.getDateFin())
+                .datePaiement(null)
+                .montant(paiement.getMontant())
+                .reste(paiement.getReste())
+                .retardPaiement(0)
+                .statutAdherent(StatutAdherent.Non_Payé)
+                .adherent(adherent)
+                .build();
 
-            // Save the paiement history
-            paiementHistoryRepository.save(paiementHistory);
+        // Save the paiement history
+        paiementHistoryRepository.save(paiementHistory);
 
-            // Send the email
-            MimeMessage message = mailSender.createMimeMessage();
-            message.setFrom(new InternetAddress("${spring.mail.username}"));
-            message.setRecipients(MimeMessage.RecipientType.TO, adherent.getEmail());
-            message.setSubject(adherent.getRoleName() + " Login");
-            message.setText("<div> Login using your email and this password: " + adherent.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
+        // Send the email
+        MimeMessage message = mailSender.createMimeMessage();
+        message.setFrom(new InternetAddress("${spring.mail.username}"));
+        message.setRecipients(MimeMessage.RecipientType.TO, adherent.getEmail());
+        message.setSubject(adherent.getRoleName() + " Login");
+        message.setText("<div> Login using your email and this password: " + adherent.getEmail() + generatedPWD + "<a href=\"http://localhost:8080/login" + "\">Login</a></div>");
 
-            mailSender.send(message);
+        mailSender.send(message);
 
-            return savedAdherent;
-        }
-
-
-    public List<Equipe> findEquipesByAdherentId(Integer id) {
-        return equipeRepository.findEquipesByAdherentId(id);
-    }
-
-    public List<Equipe> findEquipesByEntraineurId(Integer id) {
-        return equipeRepository.findEquipesByEntraineurId(id);
+        return savedAdherent;
     }
 
     public RoleName updateRoleName(Integer id, RoleName request, Manager manager) {
@@ -462,17 +426,12 @@ public class ManagerService {
                 for (User user : usersToUpdate) {
                     user.setRoleName(request.getName());
                     user.setPermissions(request.getPermissions());
+                    repository.saveAll(usersToUpdate);
                 }
+                System.out.println("this is rolename: " + usersToUpdate);
 
-// Save all users at once after updating them
-                repository.saveAll(usersToUpdate);
 
-// Print out the updated users
-                for (User updatedUser : usersToUpdate) {
-                    System.out.println("This is the new user with permissions: " + updatedUser.getPermissions());
-                }
-
-//                updateUserRoleNames(oldRoleName, request.getRoleName());
+                //updateUserRoleNames(oldRoleName, request.getRoleName());
 
                 return roleNameRepository.save(existingRoleName);
             } else {
@@ -490,19 +449,17 @@ public class ManagerService {
             Staff staffToUpdate = existingStaff.get();
 
             staffToUpdate.setEmail(request.getEmail());
-            staffToUpdate.setRoleName(request.getRoleName());
+            //staffToUpdate.setRoleName(request.getRoleName());
             staffToUpdate.setFirstname(request.getFirstname());
             staffToUpdate.setLastname(request.getLastname());
             staffToUpdate.setAdresse(request.getAdresse());
             staffToUpdate.setTelephone(request.getTelephone());
             staffToUpdate.setPhoto(request.getPhoto());
-            staffToUpdate.setNationalite(request.getNationalite());
-            staffToUpdate.setDateNaissance(request.getDateNaissance());
 
 //            Set<Permission> permissions = request.getPermissions();
 //            staffToUpdate.setPermissions(permissions);
 
-            System.out.println("This is the new user with permissions staff ye amen: " + staffToUpdate.getPermissions());
+
 
             return staffRepository.save(staffToUpdate);
         }
@@ -512,54 +469,26 @@ public class ManagerService {
         }
     }
 
-    public Entraineur updateCoach(Integer id, Entraineur request, List<String> newEquipeNames) throws MessagingException {
+    public Entraineur updateCoach(Integer id, Entraineur request) throws MessagingException {
         Optional<Entraineur> existingEntraineur = entraineurRepository.findById(id);
 
         if (existingEntraineur.isPresent()) {
             Entraineur entraineurToUpdate = existingEntraineur.get();
 
             entraineurToUpdate.setEmail(request.getEmail());
-            entraineurToUpdate.setRoleName(request.getRoleName());
+            //staffToUpdate.setRoleName(request.getRoleName());
             entraineurToUpdate.setFirstname(request.getFirstname());
             entraineurToUpdate.setLastname(request.getLastname());
             entraineurToUpdate.setAdresse(request.getAdresse());
             entraineurToUpdate.setTelephone(request.getTelephone());
             entraineurToUpdate.setPhoto(request.getPhoto());
-            entraineurToUpdate.setNationalite(request.getNationalite());
-
-            Entraineur updatedEntraineur = entraineurRepository.save(entraineurToUpdate);
-
-// Step 1: Retrieve the existing equipes associated with the entraineur
-            List<Equipe> existingEquipes = equipeRepository.findEquipesByEntraineurId(id);
-
-// Step 2: Remove the entraineur from the existing equipes
-            for (Equipe equipe : existingEquipes) {
-                equipe.getEntraineurs().remove(updatedEntraineur);
-                equipeRepository.save(equipe);
-            }
-
-// Step 3: Add the entraineur to the new equipes
-            List<Equipe> newEquipes = new ArrayList<>();
-            for (String newEquipeName : newEquipeNames) {
-                Equipe newEquipe = equipeRepository.findByNom(newEquipeName);
-                if (newEquipe != null) {
-                    newEquipe.getEntraineurs().add(updatedEntraineur);
-                    newEquipes.add(newEquipe);
-                }
-            }
-
-            for (Equipe equipe : newEquipes) {
-                equipeRepository.save(equipe);
-            }
-
-
 
 //            Set<Permission> permissions = request.getPermissions();
 //            staffToUpdate.setPermissions(permissions);
 
 
 
-            return updatedEntraineur;
+            return entraineurRepository.save(entraineurToUpdate);
         }
         else {
             // Manager not found, handle the case accordingly
@@ -570,7 +499,7 @@ public class ManagerService {
         LocalDate birthLocalDate = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return Period.between(birthLocalDate, LocalDate.now()).getYears();
     }
-    public Adherent updateAdherent(Integer id, Adherent request, List<String> newEquipeNames) throws MessagingException {
+    public Adherent updateAdherent(Integer id, Adherent request) throws MessagingException {
         Optional<Adherent> existingAdherent = adherentRepository.findById(id);
 
         if (existingAdherent.isPresent()) {
@@ -585,30 +514,7 @@ public class ManagerService {
             adherentToUpdate.setDateNaissance(request.getDateNaissance());
             adherentToUpdate.setNationalite(request.getNationalite());
             adherentToUpdate.setNiveauScolaire(request.getNiveauScolaire());
-           // List<String> equipeNoms = Arrays.asList(nomEquipes.split(","));
-
-            Adherent updatedAdherent = adherentRepository.save(adherentToUpdate);
-
-            // Step 1: Retrieve the existing equipes associated with the adherent
-            List<Equipe> existingEquipes = equipeRepository.findEquipesByAdherentId(id);
-
-            // Step 2: Remove the adherent from the existing equipes
-            for (Equipe equipe : existingEquipes) {
-                equipe.getAdherents().remove(updatedAdherent);
-                equipeRepository.save(equipe);
-            }
-
-            // Step 3: Add the adherent to the new equipes
-            List<Equipe> newEquipes = new ArrayList<>();
-            for (String newEquipeName : newEquipeNames) {
-                Equipe newEquipe = equipeRepository.findByNom(newEquipeName);
-                if (newEquipe != null) {
-                    newEquipe.getAdherents().add(updatedAdherent);
-                    newEquipes.add(newEquipe);
-                }
-            }
-
-
+            adherentToUpdate.setNomEquipe(request.getNomEquipe());
 
             if (request.getInformationsParent() != null) {
                 InformationsParent parentInfoToUpdate = adherentToUpdate.getInformationsParent();
@@ -630,7 +536,7 @@ public class ManagerService {
                 throw new RuntimeException("Parent information is missing for the adherent.");
             }
 
-            return updatedAdherent;
+            return adherentRepository.save(adherentToUpdate);
         } else {
             throw new RuntimeException("Adherent not found with ID: " + id);
         }

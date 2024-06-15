@@ -32,4 +32,5 @@ public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
 
     @Query("SELECT e FROM Equipe e JOIN e.entraineurs a WHERE a.id = :id")
     List<Equipe> findEquipesByEntraineurId(@Param("id") Integer id);
+    boolean existsByCodeEquipe(String randomCode);
 }

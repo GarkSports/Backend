@@ -89,8 +89,13 @@ public class PostsService {
     }
 
 
-    public Posts getPostById(Integer id) {
-        return postsRepository.findById(id).orElse(null);
+    public Posts getPostById(Principal connectedUser,Integer id) {
+        Integer AcademieId = academieRepository.findByAdherentsId(userService.getUserId(connectedUser.getName())).getId();
+        Integer postacademieid = postsRepository.findById(id).get().getAcademie().getId();
+        if (AcademieId == postacademieid){
+
+            return postsRepository.findById(id).orElse(null);
+        } else return null;
     }
 
     // Update operation

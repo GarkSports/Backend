@@ -1,6 +1,7 @@
 package com.gark.garksport.service;
 
 import com.gark.garksport.modal.Adherent;
+import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.Paiement;
 import com.gark.garksport.modal.PaiementHistory;
 import com.gark.garksport.modal.enums.StatutAdherent;
@@ -12,6 +13,7 @@ import com.gark.garksport.repository.PaiementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -27,10 +29,14 @@ public class PaiementService implements IPaiementService {
     @Autowired
     private ManagerRepository managerRepository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @Override
     public Set<Paiement> getAllPaiementsByAcademie(Integer managerId) {
         return paiementRepository.findByAdherentAcademieId(managerRepository.findById(managerId).orElseThrow(() -> new IllegalArgumentException("Manager not found")).getAcademie().getId());
     }
+
 
     @Override
     public Paiement addPaiement(Paiement paiement, Integer idAdherent) {
@@ -52,7 +58,7 @@ public class PaiementService implements IPaiementService {
 
             // Calculate retardPaiement
             int retardPaiement = 0;
-            if (datePaiement.after(dateFin)) {
+            if (datePaiement != null && datePaiement.after(dateFin)) {
                 long differenceMillis = datePaiement.getTime() - dateFin.getTime();
                 long daysDifference = differenceMillis / (1000 * 60 * 60 * 24); // Convert milliseconds to days
                 retardPaiement = (int) daysDifference;
@@ -64,13 +70,14 @@ public class PaiementService implements IPaiementService {
             if (paiement.getReste() == null) {
                 paiement.setReste(0f);
             }
-
-            if (paiement.getReste() != 0 && paiement.getMontant() != 0) {
+            if (paiement.getReste() != 0 && paiement.getMontant() != 0 && paiement.getGratuit()==false) {
                 adherent.setStatutAdherent(StatutAdherent.Payé_Partiellement);
-            } else if (paiement.getReste() == 0 && paiement.getMontant() != 0) {
+            } else if (paiement.getReste() == 0 && paiement.getMontant() != 0 && paiement.getGratuit()==false) {
                 adherent.setStatutAdherent(StatutAdherent.Payé);
-            } else if (paiement.getMontant() == 0 ) {
+            } else if (paiement.getMontant() == 0 && paiement.getGratuit()==false) {
                 adherent.setStatutAdherent(StatutAdherent.Non_Payé);
+            } else if(paiement.getGratuit()){
+                adherent.setStatutAdherent(StatutAdherent.Gratuit);
             }
 
             // Set the adherent for the newPaiement
@@ -98,6 +105,16 @@ public class PaiementService implements IPaiementService {
             // Save the paiement history
             paiementHistoryRepository.save(paiementHistory);
 
+            //send notification
+            NotificationMessage notificationMessage = new NotificationMessage();
+            notificationMessage.setTitle("GarkSport:"+adherent.getFirstname());
+            notificationMessage.setBody("Le règlement de votre abonnement a été effectué avec succès.");
+            notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/1019/1019607.png");
+            notificationService.sendNotificationToUser(
+                    idAdherent,
+                    notificationMessage
+            );
+
             return savedPaiement;
         }
         return null;
@@ -122,17 +139,18 @@ public class PaiementService implements IPaiementService {
                 existingPaiement.setDateFin(updatedPaiement.getDateFin());
             }
             if (updatedPaiement.getDatePaiement() != null) {
-                // Calculate the new retardPaiement
-                long differenceMillis = updatedPaiement.getDatePaiement().getTime() - existingPaiement.getDateFin().getTime();
-                long daysDifference = differenceMillis / (1000 * 60 * 60 * 24); // Convert milliseconds to days
-                int retardPaiement = (int) daysDifference;
-                existingPaiement.setRetardPaiement(Math.max(0, retardPaiement)); // Set the new retardPaiement, ensuring it's non-negative
                 existingPaiement.setDatePaiement(updatedPaiement.getDatePaiement());
+            } else if (updatedPaiement.getMontant() != null && updatedPaiement.getMontant() != 0f) {
+                // Set datePaiement to today's date if montant is not null and different from 0
+                existingPaiement.setDatePaiement(new Date());
+            } else if (updatedPaiement.getMontant() != null && updatedPaiement.getMontant() == 0f) {
+                // Set datePaiement to null if montant is 0
+                existingPaiement.setDatePaiement(null);
             }
             if (updatedPaiement.getMontant() != null) {
                 existingPaiement.setMontant(updatedPaiement.getMontant());
             }
-            if (updatedPaiement.getReste() == null && updatedPaiement.getMontant() != 0f || updatedPaiement.getReste() == 0f && updatedPaiement.getMontant() !=0f) {
+            if (updatedPaiement.getReste() == null && updatedPaiement.getMontant() != 0f || updatedPaiement.getReste() == 0f && updatedPaiement.getMontant() != 0f) {
                 updatedPaiement.setReste(0f);
                 // Update the adherent status based on the updated reste
                 Adherent adherent = existingPaiement.getAdherent();
@@ -141,8 +159,7 @@ public class PaiementService implements IPaiementService {
                 // Update the adherent status based on the updated reste
                 Adherent adherent = existingPaiement.getAdherent();
                 adherent.setStatutAdherent(StatutAdherent.Payé_Partiellement);
-            }
-            else if (updatedPaiement.getMontant() == 0f) {
+            } else if (updatedPaiement.getMontant() == 0f) {
                 // Update the adherent status based on the updated reste
                 Adherent adherent = existingPaiement.getAdherent();
                 adherent.setStatutAdherent(StatutAdherent.Non_Payé);
@@ -171,17 +188,31 @@ public class PaiementService implements IPaiementService {
                     .montant(updatedPaiement.getMontant())
                     .reste(updatedPaiement.getReste())
                     .retardPaiement(updatedPaiement.getRetardPaiement())
+                    .statutAdherent(existingPaiement.getAdherent().getStatutAdherent()) // Assuming statutAdherent remains same after update
                     .adherent(existingPaiement.getAdherent()) // Assuming adherent remains same after update
                     .build();
 
             // Save the paiement history for the updated paiement
             paiementHistoryRepository.save(paiementHistory);
 
+            //send notification
+            NotificationMessage notificationMessage = new NotificationMessage();
+            notificationMessage.setTitle("GarkSport:"+adherent.getFirstname());
+            notificationMessage.setBody("Le règlement de votre abonnement a été effectué avec succès.");
+            notificationMessage.setImage("https://cdn-icons-png.flaticon.com/512/1019/1019607.png");
+            notificationService.sendNotificationToUser(
+                    adherent.getId(),
+                    notificationMessage
+            );
+
             return updatedPaiementEntity;
         } else {
             throw new IllegalArgumentException("Paiement not found with ID: " + idPaiement);
         }
     }
+
+
+
 
     @Override
     public Set<PaiementHistory> getPaiementHistoryByAdherent(Integer adherentId) {
@@ -236,6 +267,9 @@ public class PaiementService implements IPaiementService {
         Date today = new Date();
         for (Paiement paiement : paiements) {
             if (paiement.getDateFin().before(today)) {
+                long differenceMillis = today.getTime()-paiement.getDateFin().getTime();
+                long daysDifference = differenceMillis / (1000 * 60 * 60 * 24);
+                paiement.setRetardPaiement((int) daysDifference);
                 paiement.setDateDebut(today);
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(today);
@@ -248,8 +282,9 @@ public class PaiementService implements IPaiementService {
                 }
                 paiement.setDateFin(calendar.getTime());
                 paiement.setMontant(0f);
-                paiement.setDatePaiement(today);
-                paiement.getAdherent().setStatutAdherent(StatutAdherent.Non_Payé); // Updating the status to Non Payé
+                paiement.setDatePaiement(null);
+                paiement.getAdherent().setStatutAdherent(StatutAdherent.Non_Payé);
+
                 adherentRepository.save(paiement.getAdherent());
                 if (paiement.getTypeAbonnement().equals(TypeAbonnement.Mensuel)) {
                     paiement.setReste(paiement.getAdherent().getAcademie().getFraisAdhesion());
@@ -258,6 +293,9 @@ public class PaiementService implements IPaiementService {
                 } else if (paiement.getTypeAbonnement().equals(TypeAbonnement.Annuel)) {
                     paiement.setReste(paiement.getAdherent().getAcademie().getFraisAdhesion() * 12);
                 }
+                paiementRepository.save(paiement);
+            }else if (!paiement.getAdherent().getStatutAdherent().equals(StatutAdherent.Non_Payé)){
+                paiement.setRetardPaiement(0);
                 paiementRepository.save(paiement);
             }
         }
