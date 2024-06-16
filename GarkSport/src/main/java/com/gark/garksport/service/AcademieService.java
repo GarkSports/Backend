@@ -27,6 +27,8 @@ public class AcademieService implements IAcademieService {
     private UserRepository userRepository;
     @Autowired
     private EvaluationRepository evaluationRepository;
+    @Autowired
+    private TestRepository testRepository;
 
     @Override
     public Academie addAcademie(Academie academie, Integer managerId) {
@@ -35,59 +37,65 @@ public class AcademieService implements IAcademieService {
             academie.setManager(manager);
             Kpi kpi = new Kpi();
 
-            // Create Mentality evaluation
-            Evaluation mentalityEvaluation = new Evaluation("Mentalite");
-            mentalityEvaluation.getKpis().add(new Kpi("Attitude"));
-            mentalityEvaluation.getKpis().add(new Kpi("Leadership"));
-            mentalityEvaluation.getKpis().add(new Kpi("Intensité"));
-            mentalityEvaluation.getKpis().add(new Kpi("Assiduité"));
+            Test newTest = new Test();
+            newTest.setTestName("Test par défaut");
+            newTest.setAcademie(academie);
 
-            kpi.setEvaluation(mentalityEvaluation);
-            mentalityEvaluation.getKpis().add(kpi);
+            // Create Mentality evaluation
+            Categorie mentalityCategorie = new Categorie("Mentalite");
+            mentalityCategorie.getKpis().add(new Kpi("Attitude"));
+            mentalityCategorie.getKpis().add(new Kpi("Leadership"));
+            mentalityCategorie.getKpis().add(new Kpi("Intensité"));
+            mentalityCategorie.getKpis().add(new Kpi("Assiduité"));
+
+            kpi.setCategorie(mentalityCategorie);
+            mentalityCategorie.getKpis().add(kpi);
 
 
             // Create Physique evaluation
-            Evaluation physiqueEvaluation = new Evaluation("Physique");
-            physiqueEvaluation.getKpis().add(new Kpi("Coordination"));
-            physiqueEvaluation.getKpis().add(new Kpi("Vitesse"));
-            physiqueEvaluation.getKpis().add(new Kpi("Endurance"));
-            physiqueEvaluation.getKpis().add(new Kpi("Force"));
+            Categorie physiqueCategorie = new Categorie("Physique");
+            physiqueCategorie.getKpis().add(new Kpi("Coordination"));
+            physiqueCategorie.getKpis().add(new Kpi("Vitesse"));
+            physiqueCategorie.getKpis().add(new Kpi("Endurance"));
+            physiqueCategorie.getKpis().add(new Kpi("Force"));
 
-            kpi.setEvaluation(physiqueEvaluation);
-            physiqueEvaluation.getKpis().add(kpi);
+            kpi.setCategorie(physiqueCategorie);
+            physiqueCategorie.getKpis().add(kpi);
 
             // Create Technique evaluation
-            Evaluation techniqueEvaluation = new Evaluation("Technique");
-            techniqueEvaluation.getKpis().add(new Kpi("Dribble"));
-            techniqueEvaluation.getKpis().add(new Kpi("Conduite"));
-            techniqueEvaluation.getKpis().add(new Kpi("Passe courte"));
-            techniqueEvaluation.getKpis().add(new Kpi("Passe longue"));
-            techniqueEvaluation.getKpis().add(new Kpi("1er touche"));
-            techniqueEvaluation.getKpis().add(new Kpi("Tir"));
-            techniqueEvaluation.getKpis().add(new Kpi("Tête"));
-            techniqueEvaluation.getKpis().add(new Kpi("Pied faible"));
+            Categorie techniqueCategorie = new Categorie("Technique");
+            techniqueCategorie.getKpis().add(new Kpi("Dribble"));
+            techniqueCategorie.getKpis().add(new Kpi("Conduite"));
+            techniqueCategorie.getKpis().add(new Kpi("Passe courte"));
+            techniqueCategorie.getKpis().add(new Kpi("Passe longue"));
+            techniqueCategorie.getKpis().add(new Kpi("1er touche"));
+            techniqueCategorie.getKpis().add(new Kpi("Tir"));
+            techniqueCategorie.getKpis().add(new Kpi("Tête"));
+            techniqueCategorie.getKpis().add(new Kpi("Pied faible"));
 
-            kpi.setEvaluation(techniqueEvaluation);
-            techniqueEvaluation.getKpis().add(kpi);
+            kpi.setCategorie(techniqueCategorie);
+            techniqueCategorie.getKpis().add(kpi);
 
             // Create Tactic evaluation
-            Evaluation tacticEvaluation = new Evaluation("Tactique");
-            tacticEvaluation.getKpis().add(new Kpi("Jeu Defensif"));
-            tacticEvaluation.getKpis().add(new Kpi("Jeu Offensif"));
-            tacticEvaluation.getKpis().add(new Kpi("Vision"));
-            tacticEvaluation.getKpis().add(new Kpi("Prise de décision"));
+            Categorie tacticCategorie = new Categorie("Tactique");
+            tacticCategorie.getKpis().add(new Kpi("Jeu Defensif"));
+            tacticCategorie.getKpis().add(new Kpi("Jeu Offensif"));
+            tacticCategorie.getKpis().add(new Kpi("Vision"));
+            tacticCategorie.getKpis().add(new Kpi("Prise de décision"));
 
-            kpi.setEvaluation(tacticEvaluation);
-            tacticEvaluation.getKpis().add(kpi);
+            kpi.setCategorie(tacticCategorie);
+            tacticCategorie.getKpis().add(kpi);
 
             // Add the Mentality evaluation to the academie
             if (academie.getEvaluations() == null) {
                 academie.setEvaluations(new ArrayList<>());
             }
-            academie.getEvaluations().add(mentalityEvaluation);
-            academie.getEvaluations().add(physiqueEvaluation);
-            academie.getEvaluations().add(techniqueEvaluation);
-            academie.getEvaluations().add(tacticEvaluation);
+            newTest.getCategories().add(mentalityCategorie);
+            newTest.getCategories().add(physiqueCategorie);
+            newTest.getCategories().add(techniqueCategorie);
+            newTest.getCategories().add(tacticCategorie);
+
+            testRepository.save(newTest);
 
             return academieRepository.save(academie);
             // return academieRepository.save(academie);

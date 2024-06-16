@@ -51,6 +51,8 @@ public class ManagerService {
     private final InformationsParentRepository informationsParentRepository;
     private final PaiementRepository paiementRepository;
     private final PaiementHistoryRepository paiementHistoryRepository;
+    private final EquipeRepository equipeRepository;
+
 
     @Autowired
     private JavaMailSender mailSender;
@@ -243,15 +245,19 @@ public class ManagerService {
     }
 
 
-    @Transactional
     public Staff addStaff(Staff staff, Principal connectedUser) throws MessagingException {
 
+        staff.setFirstname(staff.getFirstname());
+        staff.setLastname(staff.getLastname());
         staff.setEmail(staff.getEmail());
         staff.setRole(Role.STAFF);
         staff.setPassword(passwordEncoder.encode(generatedPWD));
         staff.setRoleName(staff.getRoleName());
         staff.setTelephone(staff.getTelephone());
         staff.setPhoto(staff.getPhoto());
+        staff.setAdresse(staff.getAdresse());
+        staff.setNationalite(staff.getNationalite());
+        staff.setDateNaissance(staff.getDateNaissance());
 
         User user = getProfil(connectedUser);
 
@@ -288,14 +294,19 @@ public class ManagerService {
 
         return repository.save(staff);
     }
-    public Entraineur addCoach(Entraineur entraineur, Principal connectedUser) throws MessagingException {
+    public Entraineur addCoach(Entraineur entraineur,List<String> equipeNames, Principal connectedUser) throws MessagingException {
 
+        entraineur.setFirstname(entraineur.getFirstname());
+        entraineur.setLastname(entraineur.getLastname());
         entraineur.setEmail(entraineur.getEmail());
         entraineur.setRole(Role.ENTRAINEUR);
         entraineur.setPassword(passwordEncoder.encode(generatedPWD));
-        entraineur.setRoleName(entraineur.getRoleName());// Set the permissions for the staff
+        entraineur.setRoleName(entraineur.getRoleName());
         entraineur.setTelephone(entraineur.getTelephone());
         entraineur.setPhoto(entraineur.getPhoto());
+        entraineur.setAdresse(entraineur.getAdresse());
+        entraineur.setNationalite(entraineur.getNationalite());
+        entraineur.setDateNaissance(entraineur.getDateNaissance());
 
 //        Set<Permission> permissions = entraineur.getPermissions();
 //        entraineur.setPermissions(permissions);
@@ -306,6 +317,14 @@ public class ManagerService {
         Academie academie = manager.getAcademie();
         entraineur.setAcademie(academie);
 
+        Entraineur savedEntraineur = repository.save(entraineur);
+
+        for (String equipeName : equipeNames) {
+            Equipe equipe = equipeRepository.findByNom(equipeName);
+            equipe.getEntraineurs().add(savedEntraineur);
+            equipeRepository.save(equipe);
+        }
+
         MimeMessage message = mailSender.createMimeMessage();
         message.setFrom(new InternetAddress("${spring.mail.username}"));
         message.setRecipients(MimeMessage.RecipientType.TO, entraineur.getEmail());
@@ -314,7 +333,7 @@ public class ManagerService {
 
         mailSender.send(message);
 
-        return repository.save(entraineur);
+        return savedEntraineur;
     }
 
     public Parent addParent(Parent parent, Principal connectedUser) throws MessagingException {
@@ -343,19 +362,27 @@ public class ManagerService {
         return repository.save(parent);
     }
 
-    public Adherent addAdherent(Adherent adherent, Principal connectedUser) throws MessagingException {
+    public Adherent addAdherent(Adherent adherent, List<String> equipeNames, Principal connectedUser) throws MessagingException {
+
+        adherent.setFirstname(adherent.getFirstname());
+        adherent.setLastname(adherent.getLastname());
         adherent.setEmail(adherent.getEmail());
         adherent.setRole(Role.ADHERENT);
         adherent.setPassword(passwordEncoder.encode(generatedPWD));
+        adherent.setAdresse(adherent.getAdresse());
         adherent.setTelephone(adherent.getTelephone());
         adherent.setPhoto(adherent.getPhoto());
         adherent.setStatutAdherent(StatutAdherent.Non_Payé);
-        //adherent.setEquipes(adherent.getEquipes());
+        adherent.setNiveauScolaire(adherent.getNiveauScolaire());
+        adherent.setDateNaissance(adherent.getDateNaissance());
+        adherent.setNationalite(adherent.getNationalite());
 
         User user = getProfil(connectedUser);
+
         Manager manager = (Manager) user;
         Academie academie = manager.getAcademie();
         adherent.setAcademie(academie);
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.add(Calendar.DAY_OF_MONTH, 30);
@@ -364,7 +391,11 @@ public class ManagerService {
 
         // Save the adherent first
         Adherent savedAdherent = repository.save(adherent);
-
+        for (String equipeName : equipeNames) {
+            Equipe equipe = equipeRepository.findByNom(equipeName);
+            equipe.getAdherents().add(savedAdherent);
+            equipeRepository.save(equipe);
+        }
 
         Paiement paiement = new Paiement();
         paiement.setAdherent(savedAdherent);
@@ -406,6 +437,14 @@ public class ManagerService {
 
         return savedAdherent;
     }
+    public List<Equipe> findEquipesByAdherentId(Integer id) {
+        return equipeRepository.findEquipesByAdherentId(id);
+    }
+
+
+    public List<Equipe> findEquipesByEntraineurId(Integer id) {
+        return equipeRepository.findEquipesByEntraineurId(id);
+    }
 
     public RoleName updateRoleName(Integer id, RoleName request, Manager manager) {
         Academie academie = academieRepository.findByManagerId(manager.getId());
@@ -426,12 +465,13 @@ public class ManagerService {
                 for (User user : usersToUpdate) {
                     user.setRoleName(request.getName());
                     user.setPermissions(request.getPermissions());
-                    repository.saveAll(usersToUpdate);
                 }
-                System.out.println("this is rolename: " + usersToUpdate);
+                repository.saveAll(usersToUpdate);
 
-
-                //updateUserRoleNames(oldRoleName, request.getRoleName());
+// Print out the updated users
+                for (User updatedUser : usersToUpdate) {
+                    System.out.println("This is the new user with permissions: " + updatedUser.getPermissions());
+                }
 
                 return roleNameRepository.save(existingRoleName);
             } else {
@@ -449,12 +489,14 @@ public class ManagerService {
             Staff staffToUpdate = existingStaff.get();
 
             staffToUpdate.setEmail(request.getEmail());
-            //staffToUpdate.setRoleName(request.getRoleName());
+            staffToUpdate.setRoleName(request.getRoleName());
             staffToUpdate.setFirstname(request.getFirstname());
             staffToUpdate.setLastname(request.getLastname());
             staffToUpdate.setAdresse(request.getAdresse());
             staffToUpdate.setTelephone(request.getTelephone());
             staffToUpdate.setPhoto(request.getPhoto());
+            staffToUpdate.setNationalite(request.getNationalite());
+            staffToUpdate.setDateNaissance(request.getDateNaissance());
 
 //            Set<Permission> permissions = request.getPermissions();
 //            staffToUpdate.setPermissions(permissions);
@@ -469,26 +511,49 @@ public class ManagerService {
         }
     }
 
-    public Entraineur updateCoach(Integer id, Entraineur request) throws MessagingException {
+    public Entraineur updateCoach(Integer id, Entraineur request, List<String> newEquipeNames) throws MessagingException {
         Optional<Entraineur> existingEntraineur = entraineurRepository.findById(id);
 
         if (existingEntraineur.isPresent()) {
             Entraineur entraineurToUpdate = existingEntraineur.get();
 
             entraineurToUpdate.setEmail(request.getEmail());
-            //staffToUpdate.setRoleName(request.getRoleName());
+            entraineurToUpdate.setRoleName(request.getRoleName());
             entraineurToUpdate.setFirstname(request.getFirstname());
             entraineurToUpdate.setLastname(request.getLastname());
             entraineurToUpdate.setAdresse(request.getAdresse());
             entraineurToUpdate.setTelephone(request.getTelephone());
             entraineurToUpdate.setPhoto(request.getPhoto());
+            entraineurToUpdate.setNationalite(request.getNationalite());
 
-//            Set<Permission> permissions = request.getPermissions();
-//            staffToUpdate.setPermissions(permissions);
+            Entraineur updatedEntraineur = entraineurRepository.save(entraineurToUpdate);
+
+            // Step 1: Retrieve the existing equipes associated with the entraineur
+            List<Equipe> existingEquipes = equipeRepository.findEquipesByEntraineurId(id);
+
+            // Step 2: Remove the entraineur from the existing equipes
+            for (Equipe equipe : existingEquipes) {
+                equipe.getEntraineurs().remove(updatedEntraineur);
+                equipeRepository.save(equipe);
+            }
+
+// Step 3: Add the entraineur to the new equipes
+            List<Equipe> newEquipes = new ArrayList<>();
+            for (String newEquipeName : newEquipeNames) {
+                Equipe newEquipe = equipeRepository.findByNom(newEquipeName);
+                if (newEquipe != null) {
+                    newEquipe.getEntraineurs().add(updatedEntraineur);
+                    newEquipes.add(newEquipe);
+                }
+            }
+
+            for (Equipe equipe : newEquipes) {
+                equipeRepository.save(equipe);
+            }
 
 
 
-            return entraineurRepository.save(entraineurToUpdate);
+            return updatedEntraineur;
         }
         else {
             // Manager not found, handle the case accordingly
@@ -499,7 +564,7 @@ public class ManagerService {
         LocalDate birthLocalDate = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         return Period.between(birthLocalDate, LocalDate.now()).getYears();
     }
-    public Adherent updateAdherent(Integer id, Adherent request) throws MessagingException {
+    public Adherent updateAdherent(Integer id, Adherent request, List<String> newEquipeNames) throws MessagingException {
         Optional<Adherent> existingAdherent = adherentRepository.findById(id);
 
         if (existingAdherent.isPresent()) {
@@ -514,7 +579,27 @@ public class ManagerService {
             adherentToUpdate.setDateNaissance(request.getDateNaissance());
             adherentToUpdate.setNationalite(request.getNationalite());
             adherentToUpdate.setNiveauScolaire(request.getNiveauScolaire());
-            adherentToUpdate.setNomEquipe(request.getNomEquipe());
+
+            Adherent updatedAdherent = adherentRepository.save(adherentToUpdate);
+
+            // Step 1: Retrieve the existing equipes associated with the adherent
+            List<Equipe> existingEquipes = equipeRepository.findEquipesByAdherentId(id);
+
+            // Step 2: Remove the adherent from the existing equipes
+            for (Equipe equipe : existingEquipes) {
+                equipe.getAdherents().remove(updatedAdherent);
+                equipeRepository.save(equipe);
+            }
+
+            // Step 3: Add the adherent to the new equipes
+            List<Equipe> newEquipes = new ArrayList<>();
+            for (String newEquipeName : newEquipeNames) {
+                Equipe newEquipe = equipeRepository.findByNom(newEquipeName);
+                if (newEquipe != null) {
+                    newEquipe.getAdherents().add(updatedAdherent);
+                    newEquipes.add(newEquipe);
+                }
+            }
 
             if (request.getInformationsParent() != null) {
                 InformationsParent parentInfoToUpdate = adherentToUpdate.getInformationsParent();
@@ -536,7 +621,7 @@ public class ManagerService {
                 throw new RuntimeException("Parent information is missing for the adherent.");
             }
 
-            return adherentRepository.save(adherentToUpdate);
+            return updatedAdherent;
         } else {
             throw new RuntimeException("Adherent not found with ID: " + id);
         }
