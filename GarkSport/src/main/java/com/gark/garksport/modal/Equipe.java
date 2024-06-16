@@ -34,7 +34,7 @@ public class Equipe {
     @ManyToOne
     private Discipline discipline;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Adherent> adherents;
 
     @ManyToMany

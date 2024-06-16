@@ -3,6 +3,7 @@ package com.gark.garksport.controller;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gark.garksport.dto.request.AddRoleNameRequest;
+import com.gark.garksport.dto.request.AdherentRequest;
 import com.gark.garksport.dto.request.ResetPasswordRequest;
 import com.gark.garksport.modal.*;
 import com.gark.garksport.modal.enums.Permission;
@@ -189,10 +190,11 @@ public class ManagerController {
 
     @PostMapping("/add-coach")
     public Entraineur addCoach(
+            @RequestParam List<String> equipeNames,
             @RequestBody Entraineur entraineur,
             Principal connectedUser
     ) throws MessagingException {
-        return managerService.addCoach(entraineur, connectedUser);
+        return managerService.addCoach(entraineur,equipeNames, connectedUser);
     }
 
 
@@ -206,12 +208,24 @@ public class ManagerController {
 
     @PostMapping("/add-adherent")
     public Adherent addAdherent(
+            @RequestParam List<String> equipeNames,
             @RequestBody Adherent adherent,
             Principal connectedUser
     ) throws MessagingException {
 
-        return managerService.addAdherent(adherent, connectedUser);
+        return managerService.addAdherent(adherent,equipeNames, connectedUser);
     }
+
+    @GetMapping("/equipes/by-adherent-id")
+    public List<Equipe> findEquipesByAdherentId(@RequestParam Integer id) {
+        return managerService.findEquipesByAdherentId(id);
+    }
+
+    @GetMapping("/equipes/by-entraineur-id")
+    public List<Equipe> getEquipesByEntraineurId(@RequestParam Integer id) {
+        return managerService.findEquipesByEntraineurId(id);
+    }
+
 
     @GetMapping("/get-adherents")
     @ResponseBody
@@ -309,11 +323,13 @@ public class ManagerController {
     }
 
     @PutMapping("/update-coach")
-    public ResponseEntity<Entraineur> updateCoach(@RequestParam Integer id, @RequestBody Entraineur request) throws MessagingException {
+    public ResponseEntity<Entraineur> updateCoach(@RequestParam Integer id,
+                                                  @RequestParam List<String> equipeNames,
+                                                  @RequestBody Entraineur request) throws MessagingException {
         try {
             Optional<Entraineur> existingEntraineur = entraineurRepository.findById(id);
             if (existingEntraineur.isPresent()) {
-                Entraineur updateCoach = managerService.updateCoach(id, request);
+                Entraineur updateCoach = managerService.updateCoach(id, request, equipeNames);
                 return ResponseEntity.ok(updateCoach);
             } else {
                 return ResponseEntity.notFound().build();
@@ -324,18 +340,18 @@ public class ManagerController {
     }
 
     @PutMapping("/update-adherent")
-    public ResponseEntity<Adherent> updateAdherent(@RequestParam Integer id, @RequestBody Adherent request) throws MessagingException {
-        try {
+    public ResponseEntity<Adherent> updateAdherent(@RequestParam Integer id,
+                                                   @RequestParam List<String> equipeNames,
+                                                   @RequestBody Adherent request) throws MessagingException {
+
             Optional<Adherent> existingAdherent = adherentRepository.findById(id);
             if (existingAdherent.isPresent()) {
-                Adherent updateAdherent = managerService.updateAdherent(id, request);
+                Adherent updateAdherent = managerService.updateAdherent(id, request, equipeNames);
                 return ResponseEntity.ok(updateAdherent);
             } else {
                 return ResponseEntity.notFound().build();
             }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+
     }
 
 
