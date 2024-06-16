@@ -281,6 +281,7 @@ public class EvenementService implements IEvenementService {
 
         // Set convocationEquipesMatchAmical and convocationMembres
         Set<Equipe> equipes = new HashSet<>();
+        Set<Adherent> allAdherents = new HashSet<>();
 
         for (EquipeHorraireDTO dto : equipeHorraireDTOs) {
             Integer equipeId = dto.getEquipeId();
@@ -294,9 +295,11 @@ public class EvenementService implements IEvenementService {
             equipeRepository.save(equipe);
 
             equipes.add(equipe);
+            allAdherents.addAll(equipe.getAdherents());
         }
 
         evenement.setConvocationEquipesMatchAmical(equipes);
+        evenement.setConvocationMembres(allAdherents);
 
         // Save the event
         evenement = evenementRepository.save(evenement);
