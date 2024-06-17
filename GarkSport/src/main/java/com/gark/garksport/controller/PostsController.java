@@ -46,7 +46,7 @@ public class PostsController {
 
 
     // Create operation
-    //    @PreAuthorize("hasAuthority('ajouter_blog')")
+    //    @PreAuthorize("hasAuthority('Ajouter_blog')")
 
     @PostMapping("/addpost")
     public ResponseEntity<?> createPost(@RequestBody Posts post,Principal connectedUser) {
@@ -73,14 +73,14 @@ public class PostsController {
         return postsService.getPostById(connectedUser,id);
     }
 
-    //    @PreAuthorize("hasAuthority('modifier_blog')")
+    //    @PreAuthorize("hasAuthority('Modifier_blog')")
 
     @PutMapping("/updatepost/{id}")
     public Posts updatePost(@PathVariable Integer id, @RequestBody Posts post) {
         return postsService.updatePost(id, post);
     }
 
-    // @PreAuthorize("hasAuthority('supprimer_blog')")
+    // @PreAuthorize("hasAuthority('Supprimer_blog')")
     @DeleteMapping("/deletepost/{id}")
     public void deletePost(@PathVariable Integer id) {
         postsService.deletePost(id);

@@ -23,7 +23,7 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final AdherentRepository adherentRepository;
 
-    @PreAuthorize("hasAuthority('management:read')")
+   // @PreAuthorize("hasAuthority('management:read')")
     @GetMapping("/hello")
         public String sayHello(){
             return "Hello from secured endpoint";

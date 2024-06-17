@@ -27,19 +27,19 @@ public class StaffController {
 
 
     //@PreAuthorize("hasAuthority('ROLE_STAFF')")
-    @PreAuthorize("hasAnyAuthority('STAFF_READ','management:read')")
+//    @PreAuthorize("hasAnyAuthority('STAFF_READ','management:read')")
     @GetMapping("/hello")
     public String getHello(){
         return "first hello from staff controller";
     }
 
-    @PreAuthorize("hasAuthority('READ')")
+//    @PreAuthorize("hasAuthority('READ')")
     @GetMapping("/hello2")
     public String getHello2() {
         return "second hello from staff controller";
     }
 
-    @PreAuthorize("hasAuthority('UPDATE')")
+//    @PreAuthorize("hasAuthority('UPDATE')")
     @GetMapping("/hello3")
     public String updateHello() {
         return "update hello from staff controller";

@@ -27,7 +27,7 @@ public class AdminController {
     private final ManagerRepository managerRepository;
     private AcademieRepository academieRepository;
 
-    @PreAuthorize("hasAuthority('READ')")
+  //  @PreAuthorize("hasAuthority('READ')")
     @GetMapping("/hello")
     public String get() {
 
