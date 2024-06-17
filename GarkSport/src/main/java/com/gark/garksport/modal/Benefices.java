@@ -37,6 +37,9 @@ public class Benefices {
 
     private LocalDate date;
 
+    @Column(name = "Benefices_paiement")
+    private Boolean benefpaiement = false;
+
     @JsonIgnore
     @ManyToOne
     private User user;

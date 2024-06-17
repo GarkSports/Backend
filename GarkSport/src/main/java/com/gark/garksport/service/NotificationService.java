@@ -1,7 +1,9 @@
 package com.gark.garksport.service;
 
+import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.NotificationMessage;
 import com.gark.garksport.modal.NotificationToken;
+import com.gark.garksport.repository.AdherentRepository;
 import com.gark.garksport.repository.EquipeRepository;
 import com.gark.garksport.repository.NotificationTokenRepository;
 import com.gark.garksport.repository.UserRepository;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +35,8 @@ public class NotificationService {
 
     @Autowired
     private EquipeRepository equipeRepository;
+
+
 
 
 
@@ -60,8 +65,11 @@ public class NotificationService {
 
     public void sendNotificationToTeam(Integer idEquipe, NotificationMessage notificationMessage) {
 
-        List<String> tokens = notificationTokenRepository.findTokensByCodeEquipe(idEquipe);
-        sendNotificationToTokens(tokens, notificationMessage);
+        Set<Adherent> equipeAdhs = equipeRepository.findAdherentsByEquipeId(idEquipe);
+
+        for (Adherent adh : equipeAdhs){
+            this.sendNotificationToUser(adh.getId(),notificationMessage);
+        }
     }
 
     public void sendNotificationToUser(Integer userId, NotificationMessage notificationMessage) {

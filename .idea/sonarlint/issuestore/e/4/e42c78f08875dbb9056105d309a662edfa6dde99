@@ -1,17 +1,18 @@
 
-c	java:S112ø"FDefine and throw a dedicated exception instead of using a generic one.(€ß¸Å8¤ô‘€2
+c	java:S112‚"FDefine and throw a dedicated exception instead of using a generic one.(€ß¸Å8¤ô‘€2
 o
-java:S1192?"RDefine a constant instead of duplicating this literal "Manager not found" 6 times.(ë“¶Ž8Ðö‘“€2
+java:S1192I"RDefine a constant instead of duplicating this literal "Manager not found" 6 times.(ë“¶Ž8Ðö‘“€2
 s
-java:S1192S"QDefine a constant instead of duplicating this literal "Equipe not found" 8 times.(…âéôøÿÿÿÿ8“¤ô‘€2
-s	java:S117Ž"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ÍÈÝÿÿÿÿÿ8”¤ô‘€2
+java:S1192]"QDefine a constant instead of duplicating this literal "Equipe not found" 8 times.(…âéôøÿÿÿÿ8“¤ô‘€2
+s	java:S117˜"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ÍÈÝÿÿÿÿÿ8”¤ô‘€2
 …
-java:S1488M"cImmediately return this expression instead of assigning it to the temporary variable "savedEquipe".(É£Ù©ùÿÿÿÿ8Òö‘“€2
-m
-java:S3655A"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8»ƒÕ•€2
-r
-java:S3655>"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ýªàôýÿÿÿÿ8»ƒÕ•€2
+java:S1488W"cImmediately return this expression instead of assigning it to the temporary variable "savedEquipe".(É£Ù©ùÿÿÿÿ8Òö‘“€2
 m
 java:S3655-"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8—¦ô‘€2
 m
-java:S3655#"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8—¦ô‘€2
+java:S36557"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8—¦ô‘€2
+m
+java:S3655K"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8»ƒÕ•€2
+r
+java:S3655H"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ýªàôýÿÿÿÿ8»ƒÕ•€2
+^	java:S125µ"<This block of commented-out lines of code should be removed.(ðƒß™ûÿÿÿÿ8ªûú’‚2

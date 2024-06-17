@@ -17,16 +17,6 @@ public class NotificationController {
     @Autowired
     NotificationService notificationService;
 
-//    @PostMapping("/codeequipe/{codeequipe}")
-//    public void sendNotificaitonByToken(@RequestBody NotificationMessage notificationMessage, @PathVariable String codeequipe){
-//        notificationService.sendNotificationToTeam(codeequipe, notificationMessage);
-//    }
-//
-//    @PostMapping("/academieid/{academieid}")
-//    public void sendNotificaitonByacademieid(@RequestBody NotificationMessage notificationMessage, @PathVariable Integer academieid){
-//        notificationService.sendNotificationToAcademy(academieid, notificationMessage);
-//    }
-
 
     @PostMapping("/addtoken")
     public ResponseEntity addNotificaitonToken(Principal currentUser, @RequestParam String token){
