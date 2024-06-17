@@ -6,6 +6,7 @@ import com.gark.garksport.modal.enums.Role;
 import com.gark.garksport.repository.AdminRepository;
 import com.gark.garksport.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,11 +18,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
     private final UserRepository repository;
     private final AdminRepository adminRepository;
+
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -60,4 +64,5 @@ public class ApplicationConfig {
         }
         return null;
     }
+
 }

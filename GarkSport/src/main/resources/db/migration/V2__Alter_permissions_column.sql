@@ -1,1 +1,0 @@
-ALTER TABLE role_permissions MODIFY COLUMN permission VARCHAR(50);
