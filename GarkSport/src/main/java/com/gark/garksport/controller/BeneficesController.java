@@ -5,6 +5,7 @@ import com.gark.garksport.service.BeneficesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -20,7 +21,7 @@ public class BeneficesController {
     @Autowired
     private BeneficesService beneficesService;
 
-    // Endpoint pour enregistrer un bénéfice
+    //   @PreAuthorize("hasAuthority('ajouter_comptabilite')")
     @PostMapping("/add")
     public ResponseEntity<Benefices> saveBenefices(Principal connectedUser,@RequestBody Benefices benefices) {
         if (connectedUser == null ) {
@@ -30,7 +31,7 @@ public class BeneficesController {
         return new ResponseEntity<>(savedBenefices, HttpStatus.CREATED);
     }
 
-    // Endpoint pour récupérer tous les bénéfices
+    //      @PreAuthorize("hasAuthority('lire_comptabilite')")
     @GetMapping("/all")
     public ResponseEntity<List<Benefices>> getAllBenefices(Principal connectedUser) {
         if (connectedUser == null ) {
@@ -40,7 +41,8 @@ public class BeneficesController {
         return new ResponseEntity<>(beneficesList, HttpStatus.OK);
     }
 
-    // Endpoint pour récupérer un bénéfice par son ID
+    //    @PreAuthorize("hasAuthority('lire_comptabilite')")
+
     @GetMapping("/{id}")
     public ResponseEntity<Benefices> getBeneficesById(Principal connectedUser,@PathVariable Integer id) {
         if (connectedUser == null ) {
@@ -51,7 +53,8 @@ public class BeneficesController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // Endpoint pour mettre à jour un bénéfice par son ID
+    //    @PreAuthorize("hasAuthority('modifier_comptabilite')")
+
     @PutMapping("/update/{id}")
     public ResponseEntity<Benefices> updateBenefices(Principal connectedUser,@PathVariable Integer id, @RequestBody Benefices newBenefices) {
         if (connectedUser == null ) {
@@ -63,7 +66,7 @@ public class BeneficesController {
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    // Endpoint pour supprimer un bénéfice par son ID
+   // @PreAuthorize("hasAuthority('supprimer_comptabilite')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteBenefices(Principal connectedUser,@PathVariable Integer id) {
         if (connectedUser == null ) {
@@ -73,16 +76,20 @@ public class BeneficesController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    //    @PreAuthorize("hasAuthority('lire_comptabilite')")
+
     @GetMapping("/monthly-sums")
     public Map<String, BigDecimal> getMonthlySums(Principal connectedUser) {
 
         return beneficesService.getMonthlySumsForAcademie(connectedUser);
     }
+    //    @PreAuthorize("hasAuthority('lire_comptabilite')")
 
     @GetMapping("/monthly-comparisons")
     public Map<String, BigDecimal> getMonthlyComparisons(Principal connectedUser) {
         return beneficesService.getMonthlyComparisonsForAcademie(connectedUser);
     }
+    //    @PreAuthorize("hasAuthority('lire_comptabilite')")
 
     @GetMapping("/monthBenefice")
     public Benefices monthBenefice(Principal connectedUser){
