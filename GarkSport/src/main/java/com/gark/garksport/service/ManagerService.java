@@ -376,6 +376,20 @@ public class ManagerService {
         adherent.setNiveauScolaire(adherent.getNiveauScolaire());
         adherent.setDateNaissance(adherent.getDateNaissance());
         adherent.setNationalite(adherent.getNationalite());
+        if (adherent.getInformationsParent() != null) {
+            InformationsParent informationsParent = adherent.getInformationsParent();
+            informationsParent.setAdherent(adherent); // Set the adherent for the informationsParent
+
+            // Set the fields of informationsParent
+            informationsParent.setNomParent(adherent.getInformationsParent().getNomParent());
+            informationsParent.setPrenomParent(adherent.getInformationsParent().getPrenomParent());
+            informationsParent.setTelephoneParent(adherent.getInformationsParent().getTelephoneParent());
+            informationsParent.setAdresseParent(adherent.getInformationsParent().getAdresseParent());
+            informationsParent.setEmailParent(adherent.getInformationsParent().getEmailParent());
+            informationsParent.setNationaliteParent(adherent.getInformationsParent().getNationaliteParent());
+
+            adherent.setInformationsParent(informationsParent);
+        }
 
         User user = getProfil(connectedUser);
 

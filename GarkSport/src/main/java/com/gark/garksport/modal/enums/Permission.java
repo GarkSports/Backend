@@ -8,6 +8,7 @@ public enum Permission {
 
     READ("read"),
     UPDATE("update"),
+    UPDATE_ADHERENT("update_adherent"),
     CREATE("create"),
     DELETE("delete"),
 
