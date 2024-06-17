@@ -146,12 +146,20 @@ public class ManagerController {
                 RoleName existingRoleName = existingRoleNameOptional.get();
                 if (existingRoleName.getAcademie().equals(academie)) {
                     String oldRoleName = existingRoleName.getName();
+
+                    // Find users with the role name and set roleName to null
+                    List<User> usersWithRoleName = repository.findByRoleName(existingRoleName.getName());
+                    for (User u : usersWithRoleName) {
+                        u.setRoleName(null);
+                        repository.save(u);
+                    }
+
                     academie.getRoleNames().remove(existingRoleName);
                     roleNameRepository.delete(existingRoleName);
                     academieRepository.save(academie);
 
                     Map<String, String> response = new HashMap<>();
-                    response.put("message", "Role name '" + oldRoleName + "' deleted successfully");
+                    response.put("message", "Role name '" + oldRoleName + "' deleted successfully for " + usersWithRoleName.size() + " users");
                     return ResponseEntity.ok(response);
                 } else {
                     Map<String, String> response = new HashMap<>();
@@ -169,6 +177,8 @@ public class ManagerController {
             return ResponseEntity.badRequest().body(response);
         }
     }
+
+
 
 
 
@@ -340,7 +350,7 @@ public class ManagerController {
         }
     }
 
-    @PreAuthorize("hasAuthority('update_adherent')")
+    //@PreAuthorize("hasAuthority('update_adherent')")
     @PutMapping("/update-adherent")
     public ResponseEntity<Adherent> updateAdherent(@RequestParam Integer id,
                                                    @RequestParam List<String> equipeNames,
