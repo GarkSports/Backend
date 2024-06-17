@@ -14,7 +14,9 @@ import java.util.List;
 public interface BeneficesRepository extends JpaRepository<Benefices,Integer> {
 
     @Query("SELECT b FROM Benefices b WHERE b.academie.id = :academieId AND TYPE(b) = Benefices ORDER BY b.date DESC")
-    List<Benefices> findByAcademieIdOrderByDateDesc(@Param("academieId") Integer academieId);
+    List<Benefices> findByAcademieIdAndBenefpaiementFalseOrderByDateDesc(@Param("academieId") Integer academieId);
+
+
 
 
     @Query("SELECT SUM(b.total) FROM Benefices b WHERE b.date BETWEEN :startDate AND :endDate AND b.academie.id = :academieId AND TYPE(b) = Benefices ")

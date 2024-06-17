@@ -78,7 +78,7 @@ public class BeneficesService {
         } else if (user.getRole() == Role.STAFF) {
             IdAcademie = staffRepository.findById(userId).orElse(null).getAcademie().getId();
         }
-        return beneficesRepository.findByAcademieIdOrderByDateDesc(IdAcademie);
+        return beneficesRepository.findByAcademieIdAndBenefpaiementFalseOrderByDateDesc(IdAcademie);
     }
 
     // Méthode pour récupérer un bénéfice par son ID
@@ -187,68 +187,70 @@ public class BeneficesService {
         return comparisons;
     }
 
-    //benefices by Paiement
-    //@Scheduled(cron = "0 0 0 * * ?") // Exécution chaque jour à minuit
-
-    public void updateallDailyBenefices() {
-        List<Academie> AllAcademies = academieRepository.findAll();
-        for( Academie academie: AllAcademies) {
-            updateDailyBenefices(academie.getId());
-            System.out.println("Exécution de la tâche planifiée...");
-        }
-    }
-
-
 
     @Transactional
-    public void updateDailyBenefices(Integer id) {
-        LocalDate yesterday = LocalDate.now().minusDays(1);
+    public Benefices monthBenefices(Principal connectedUser) {
+        Integer userId = userService.getUserId(connectedUser.getName());
+        User user = userRepository.findById(userId).orElse(null);
+        Integer academieId = null;
+        assert user != null;
+        if (user.getRole() == Role.MANAGER) {
+            academieId = managerRepository.findById(userId).orElse(null).getAcademie().getId();
+        } else if (user.getRole() == Role.STAFF) {
+            academieId = staffRepository.findById(userId).orElse(null).getAcademie().getId();
+        }
 
-        final BigDecimal PRIX_UNITE = BigDecimal.valueOf(academieRepository.findById(id).get().getFraisAdhesion());
+        LocalDate today = LocalDate.now();
+        final BigDecimal PRIX_UNITE = BigDecimal.valueOf(academieRepository.findById(academieId).get().getFraisAdhesion());
+        LocalDate now = LocalDate.now();
+        int currentMonth = now.getMonthValue();
+        int currentYear = now.getYear();
 
-        List<Paiement> paiements = paiementRepository.findByAdherentAcademieIdAndDatePaiement(id,yesterday);
+        List<Paiement> paiements = paiementRepository.findAllByDatePaiementInCurrentMonth(currentMonth, currentYear, academieId);
+
+        LocalDate monthDate = today.withDayOfMonth(1);
+        String typeBenefice = "Benefices paiement " + monthDate.getMonth() + " " + monthDate.getYear();
+        Benefices benefices = beneficesRepository.findFirstByTypeAndAcademieId(typeBenefice, academieId);
 
         if (!paiements.isEmpty()) {
-            for (Paiement paiement : paiements) {
-                int monthsToAdd = getMonthsToAdd(paiement.getTypeAbonnement());
-
-                for (int i = 0; i < monthsToAdd; i++) {
-                    LocalDate monthDate = yesterday.plusMonths(i).withDayOfMonth(1);
-                    String typeBenefice = "Benefices paiement " + monthDate.getMonth() + " " + monthDate.getYear();
-
-                    Benefices benefices = beneficesRepository.findFirstByTypeAndAcademieId(typeBenefice,id);
-                    if (benefices == null) {
-                        benefices = Benefices.builder()
-                                .type(typeBenefice)
-                                .etat(Comptabiliteetat.FIXE)
-                                .quantite(0)
-                                .prixunite(PRIX_UNITE)
-                                .total(BigDecimal.ZERO)
-                                .date(yesterday)
-                                .academie(academieRepository.findById(id).get())
-                                .user(academieRepository.findById(id).get().getManager())
-                                .build();
-                    }
-
-                    benefices.setQuantite(paiements.size());
-
-                    beneficesRepository.save(benefices);
-                }
+            if (benefices == null) {
+                benefices = Benefices.builder()
+                        .type(typeBenefice)
+                        .etat(Comptabiliteetat.FIXE)
+                        .quantite(0)
+                        .prixunite(PRIX_UNITE)
+                        .total(BigDecimal.ZERO)
+                        .date(today)
+                        .benefpaiement(true)
+                        .academie(academieRepository.findById(academieId).get())
+                        .user(academieRepository.findById(academieId).get().getManager())
+                        .build();
             }
+
+            benefices.setQuantite(paiements.size());
+            benefices.setDate(today);
+
+            benefices = beneficesRepository.save(benefices);
         }
+
+        // Initialize `month` to avoid returning null
+        if (benefices == null) {
+            benefices = Benefices.builder()
+                    .type(typeBenefice)
+                    .etat(Comptabiliteetat.FIXE)
+                    .quantite(0)
+                    .prixunite(PRIX_UNITE)
+                    .total(BigDecimal.ZERO)
+                    .date(today)
+                    .benefpaiement(true)
+                    .academie(academieRepository.findById(academieId).get())
+                    .user(academieRepository.findById(academieId).get().getManager())
+                    .build();
+            benefices = beneficesRepository.save(benefices);
+        }
+
+        return benefices;
     }
 
-    private int getMonthsToAdd(TypeAbonnement typeAbonnement) {
-        switch (typeAbonnement) {
-            case Mensuel:
-                return 1;
-            case Trimestriel:
-                return 3;
-            case Annuel:
-                return 12;
-            default:
-                throw new IllegalArgumentException("Type d'abonnement inconnu : " + typeAbonnement);
-        }
-    }
 
 }

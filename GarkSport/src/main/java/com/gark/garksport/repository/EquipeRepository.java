@@ -1,6 +1,7 @@
 package com.gark.garksport.repository;
 
 import com.gark.garksport.modal.Academie;
+import com.gark.garksport.modal.Adherent;
 import com.gark.garksport.modal.ConvocationEntrainement;
 import com.gark.garksport.modal.Equipe;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,4 +34,7 @@ public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
     @Query("SELECT e FROM Equipe e JOIN e.entraineurs a WHERE a.id = :id")
     List<Equipe> findEquipesByEntraineurId(@Param("id") Integer id);
     boolean existsByCodeEquipe(String randomCode);
+
+    @Query("SELECT e.adherents FROM Equipe e WHERE e.id = :id")
+    Set<Adherent> findAdherentsByEquipeId(@Param("id") Integer id);
 }

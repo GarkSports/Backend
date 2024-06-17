@@ -1,16 +1,20 @@
 
 r
-java:S3655E"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(È«È†üÿÿÿÿ8Áðå¢þ1
+java:S3655M"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(È«È†üÿÿÿÿ8¢æ¹“‚2
 W
-java:S18549":Remove this useless assignment to local variable "tokens".(”’×§8Çðå¢þ1
+java:S1854>":Remove this useless assignment to local variable "tokens".(”’×§8©æ¹“‚2
 W
-java:S11728":Remove this unused method parameter "notificationMessage".(½½¶“8Èðå¢þ1
+java:S1172=":Remove this unused method parameter "notificationMessage".(½½¶“8ªæ¹“‚2
 H
-java:S14819"+Remove this unused "tokens" local variable.(”’×§8Èðå¢þ1
-X	java:S125:"<This block of commented-out lines of code should be removed.(µËœ¹8Èðå¢þ1
-G	java:S106O"+Replace this use of System.err by a logger.(úèƒú8Ìðå¢þ1
-G	java:S106T"+Replace this use of System.err by a logger.(‹ÙÁÝ8Ìðå¢þ1
-L	java:S106u"+Replace this use of System.err by a logger.(ä½ÔÌþÿÿÿÿ8Ñðå¢þ1
-G	java:S106w"+Replace this use of System.err by a logger.(ë¤ê‚8Ñðå¢þ1
-M	java:S106"+Replace this use of System.err by a logger.(ä½ÔÌþÿÿÿÿ8Ôðå¢þ1
-H	java:S106‘"+Replace this use of System.err by a logger.(ë¤ê‚8Ôðå¢þ1
+java:S1481>"+Remove this unused "tokens" local variable.(”’×§8«æ¹“‚2
+X	java:S125?"<This block of commented-out lines of code should be removed.(µËœ¹8­æ¹“‚2
+G	java:S106W"+Replace this use of System.err by a logger.(úèƒú8°æ¹“‚2
+G	java:S106\"+Replace this use of System.err by a logger.(‹ÙÁÝ8±æ¹“‚2
+L	java:S106}"+Replace this use of System.err by a logger.(ä½ÔÌþÿÿÿÿ8¶æ¹“‚2
+G	java:S106"+Replace this use of System.err by a logger.(ë¤ê‚8¶æ¹“‚2
+M	java:S106—"+Replace this use of System.err by a logger.(ä½ÔÌþÿÿÿÿ8¹æ¹“‚2
+H	java:S106™"+Replace this use of System.err by a logger.(ë¤ê‚8¹æ¹“‚2
+o
+java:S1128"MRemove this unused import 'com.gark.garksport.repository.AdherentRepository'.(ï‰¾Œÿÿÿÿÿ8ƒ‹ñ¨‚2
+[
+java:S1144„"=Remove this unused private "sendNotificationToTokens" method.(ó†Æé8ºæ¹“‚2

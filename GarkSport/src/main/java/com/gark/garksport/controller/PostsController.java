@@ -22,6 +22,7 @@ public class PostsController {
     private PostsService postsService;
 
 
+
     @GetMapping("/getacademiePosts")
     public List<Posts> getacademiePosts(
             Principal connectedUser
@@ -45,6 +46,8 @@ public class PostsController {
 
 
     // Create operation
+    //    @PreAuthorize("hasAuthority('ajouter_blog')")
+
     @PostMapping("/addpost")
     public ResponseEntity<?> createPost(@RequestBody Posts post,Principal connectedUser) {
         if (post.getTitle() == null || post.getTitle().isEmpty() ||
@@ -70,13 +73,14 @@ public class PostsController {
         return postsService.getPostById(connectedUser,id);
     }
 
-    // Update operation
+    //    @PreAuthorize("hasAuthority('modifier_blog')")
+
     @PutMapping("/updatepost/{id}")
     public Posts updatePost(@PathVariable Integer id, @RequestBody Posts post) {
         return postsService.updatePost(id, post);
     }
 
-    // Delete operation
+    // @PreAuthorize("hasAuthority('supprimer_blog')")
     @DeleteMapping("/deletepost/{id}")
     public void deletePost(@PathVariable Integer id) {
         postsService.deletePost(id);

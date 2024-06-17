@@ -1,15 +1,23 @@
 
-b	java:S112#"FDefine and throw a dedicated exception instead of using a generic one.(¨Á°£8âğÍÔñ1
-g	java:S112,"FDefine and throw a dedicated exception instead of using a generic one.(áèÓüşÿÿÿÿ8ãğÍÔñ1
-g	java:S112A"FDefine and throw a dedicated exception instead of using a generic one.(ª»¬øÿÿÿÿ8ãğÍÔñ1
-g	java:S112\"FDefine and throw a dedicated exception instead of using a generic one.(íŒ´Òşÿÿÿÿ8ãğÍÔñ1
-g	java:S112e"FDefine and throw a dedicated exception instead of using a generic one.(½—çÿÿÿÿÿ8ãğÍÔñ1
-b	java:S112x"FDefine and throw a dedicated exception instead of using a generic one.(–™õ”8ãğÍÔñ1
-h	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(áèÓüşÿÿÿÿ8ãğÍÔñ1
-h	java:S112Š"FDefine and throw a dedicated exception instead of using a generic one.(íŒ´Òşÿÿÿÿ8äğÍÔñ1
-b	java:S112•"FDefine and throw a dedicated exception instead of using a generic one.(¨Œòr8äğÍÔñ1
-h	java:S112¯"FDefine and throw a dedicated exception instead of using a generic one.(À…¦Ëşÿÿÿÿ8¤ú«éõ1
+b	java:S112g"FDefine and throw a dedicated exception instead of using a generic one.(¨Á°£8âğÍÔñ1
+g	java:S112p"FDefine and throw a dedicated exception instead of using a generic one.(áèÓüşÿÿÿÿ8ãğÍÔñ1
+h	java:S112…"FDefine and throw a dedicated exception instead of using a generic one.(ª»¬øÿÿÿÿ8ãğÍÔñ1
+h	java:S112 "FDefine and throw a dedicated exception instead of using a generic one.(íŒ´Òşÿÿÿÿ8ãğÍÔñ1
+h	java:S112©"FDefine and throw a dedicated exception instead of using a generic one.(½—çÿÿÿÿÿ8ãğÍÔñ1
+c	java:S112¼"FDefine and throw a dedicated exception instead of using a generic one.(–™õ”8ãğÍÔñ1
+h	java:S112Å"FDefine and throw a dedicated exception instead of using a generic one.(áèÓüşÿÿÿÿ8ãğÍÔñ1
+h	java:S112Î"FDefine and throw a dedicated exception instead of using a generic one.(íŒ´Òşÿÿÿÿ8äğÍÔñ1
+b	java:S112Ù"FDefine and throw a dedicated exception instead of using a generic one.(¨Œòr8äğÍÔñ1
+h	java:S112ó"FDefine and throw a dedicated exception instead of using a generic one.(À…¦Ëşÿÿÿÿ8¤ú«éõ1
 t
-java:S1192"RDefine a constant instead of duplicating this literal "Manager not found" 4 times.(Ôú¬»ÿÿÿÿÿ8åğÍÔñ1
+java:S1192$"RDefine a constant instead of duplicating this literal "Manager not found" 4 times.(Ôú¬»ÿÿÿÿÿ8ĞñØ‘‚2
 p
-java:S11923"SDefine a constant instead of duplicating this literal "Academie not found" 7 times.(û½Äë8åğÍÔñ1
+java:S1192w"SDefine a constant instead of duplicating this literal "Academie not found" 7 times.(û½Äë8åğÍÔñ1
+W	java:S125b"<This block of commented-out lines of code should be removed.(°„ö8ªÆë‘‚2
+X	java:S125e"<This block of commented-out lines of code should be removed.(§†ß8×Ó¯‚2
+l
+java:S1128"JRemove this unused import 'com.gark.garksport.modal.enums.EvaluationType'.(£ÌÕúÿÿÿÿ8 Ô¯‚2
+O
+java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8¡Ô¯‚2
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8¡Ô¯‚2
