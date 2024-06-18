@@ -15,7 +15,14 @@ public enum Permission {
     Supprimer_tests("deleteTests"),
     Ajouter_blog("addBlog"),
     Modifier_blog("updateBlog"),
-    Supprimer_blog("deleteBlog");
+    Supprimer_blog("deleteBlog"),
+    Ajouter_comptabilite("addCompta"),
+    Lire_comptabilite("getCompta"),
+    Modifier_comptabilite("updateCompta"),
+    Supprimer_comptabilite("deleteCompta");
+
+//    ALTER TABLE role_permissions MODIFY COLUMN permission VARCHAR(50);
+
 
 //    READ("read"),
 //    UPDATE("update"),

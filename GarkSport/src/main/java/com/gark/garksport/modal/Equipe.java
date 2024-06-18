@@ -37,7 +37,7 @@ public class Equipe {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Adherent> adherents;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Entraineur> entraineurs;
 
     @ManyToOne

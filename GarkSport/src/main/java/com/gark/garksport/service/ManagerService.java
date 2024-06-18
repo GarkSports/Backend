@@ -268,10 +268,10 @@ public class ManagerService {
         staff.setAcademie(academie);
        // staff.setAcademieId(academieId);
 
-        if (academie == null) {
-            throw new RuntimeException("Academie not found for the current manager.");
-        }
-
+//        if (academie == null) {
+//            throw new RuntimeException("Academie not found for the current manager.");
+//        }
+//
         RoleName roleNameToAdd = roleNameRepository.findByNameAndAcademie(staff.getRoleName(), academie);
         if (roleNameToAdd == null) {
             throw new RuntimeException("RoleName not found for roleName: " + staff.getRoleName());
@@ -308,14 +308,22 @@ public class ManagerService {
         entraineur.setNationalite(entraineur.getNationalite());
         entraineur.setDateNaissance(entraineur.getDateNaissance());
 
-//        Set<Permission> permissions = entraineur.getPermissions();
-//        entraineur.setPermissions(permissions);
-
         User user = getProfil(connectedUser);
 
         Manager manager = (Manager) user;
         Academie academie = manager.getAcademie();
         entraineur.setAcademie(academie);
+
+        RoleName roleNameToAdd = roleNameRepository.findByNameAndAcademie(entraineur.getRoleName(), academie);
+        if (roleNameToAdd == null) {
+            throw new RuntimeException("RoleName not found for roleName: " + entraineur.getRoleName());
+        }
+
+        Set<Permission> permissions = roleNameToAdd.getPermissions().stream()
+                .map(permissionName -> Permission.valueOf(String.valueOf(permissionName)))
+                .collect(Collectors.toSet());
+
+        entraineur.setPermissions(permissions);
 
         Entraineur savedEntraineur = repository.save(entraineur);
 
@@ -737,14 +745,58 @@ public void deleteRoleName(Integer id, Manager manager) {
 }
 
     public String deleteUser(Integer id) {
-        var user = repository.findById(id);
-        System.out.println("id is : "+id);
-        if (user.isPresent()) {
+        Optional<User> userOptional = repository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
 
-            repository.delete(user.get()); //turn it to archive we don't want to delete any data !!!!
+            if (user instanceof Adherent) {
+                Adherent adherent = (Adherent) user;
+
+                // Remove associations with Paiement
+                Paiement paiement = adherent.getPaiement();
+                if (paiement != null) {
+                    paiement.setAdherent(null);
+                    paiementRepository.save(paiement);
+                }
+
+                // Remove adherent from Equipes
+                List<Equipe> equipes = equipeRepository.findEquipesByAdherentId(id);
+                for (Equipe equipe : equipes) {
+                    equipe.getAdherents().remove(adherent);
+                    equipeRepository.save(equipe);
+                }
+
+                // Remove adherent from Entraineurs (if needed)
+                List<Equipe> equipesAsEntraineur = equipeRepository.findEquipesByEntraineurId(id);
+                for (Equipe equipe : equipesAsEntraineur) {
+                    equipe.getEntraineurs().remove(adherent);
+                    equipeRepository.save(equipe);
+                }
+            }
+
+            if (user instanceof Entraineur) {
+                Entraineur entraineur = (Entraineur) user;
+
+                List<Equipe> equipes = equipeRepository.findEquipesByEntraineurId(id);
+                for (Equipe equipe : equipes) {
+                    equipe.getEntraineurs().remove(entraineur);
+                    equipeRepository.save(equipe);
+                }
+            }
+
+            repository.delete(user);
             return "User deleted successfully";
         } else {
             return "User not found";
+        }
+    }
+
+
+    private void removeUserFromEquipes(User user, List<Equipe> equipes) {
+        for (Equipe equipe : equipes) {
+            equipe.getAdherents().remove(user);
+            equipe.getEntraineurs().remove(user);
+            equipeRepository.save(equipe);
         }
     }
 

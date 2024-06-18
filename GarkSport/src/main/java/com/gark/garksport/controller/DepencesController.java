@@ -21,7 +21,7 @@ public class DepencesController {
 
     @Autowired
     private DepensesService depensesService;
-    //    @PreAuthorize("hasAuthority('ajouter_comptabilite')")
+    //    @PreAuthorize("hasAuthority('Ajouter_comptabilite')")
 
     @PostMapping("/add")
     public ResponseEntity<Depenses> saveDepenses(Principal connectedUser,@RequestBody Depenses depenses) {
@@ -31,7 +31,7 @@ public class DepencesController {
         Depenses savedDepenses = depensesService.saveDepenses(connectedUser,depenses);
         return new ResponseEntity<>(savedDepenses, HttpStatus.CREATED);
     }
-    //    @PreAuthorize("hasAuthority('lire_comptabilite')")
+    //    @PreAuthorize("hasAuthority('Lire_comptabilite')")
 
     @GetMapping("/all")
     public ResponseEntity<List<Depenses>> getAllDepenses(Principal connectedUser) {
@@ -42,7 +42,7 @@ public class DepencesController {
         return new ResponseEntity<>(allDepenses, HttpStatus.OK);
     }
 
-    //    @PreAuthorize("hasAuthority('lire_comptabilite')")
+    //    @PreAuthorize("hasAuthority('Lire_comptabilite')")
 
     @GetMapping("/{id}")
     public ResponseEntity<Depenses> getDepensesById(Principal connectedUser,@PathVariable Integer id) {
@@ -53,7 +53,7 @@ public class DepencesController {
         return depensesOptional.map(depenses -> new ResponseEntity<>(depenses, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-//    @PreAuthorize("hasAuthority('modifier_comptabilite')")
+//    @PreAuthorize("hasAuthority('Modifier_comptabilite')")
     @PutMapping("/update/{id}")
     public ResponseEntity<Depenses> updateDepenses(Principal connectedUser,@PathVariable Integer id, @RequestBody Depenses newDepenses) {
         if (connectedUser == null ) {
@@ -67,7 +67,7 @@ public class DepencesController {
         }
     }
 
-  //  @PreAuthorize("hasAuthority('supprimer_comptabilite')")
+  //  @PreAuthorize("hasAuthority('Supprimer_comptabilite')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteDepenses(Principal connectedUser,@PathVariable Integer id) {
         if (connectedUser == null ) {
