@@ -28,6 +28,8 @@ public interface EquipeRepository extends JpaRepository<Equipe, Integer> {
 
     //Equipe findByAdherentId(Integer adherentId);
 
+    List<Equipe> findUsersById(Integer id);
+
     @Query("SELECT e FROM Equipe e JOIN e.adherents a WHERE a.id = :id")
     List<Equipe> findEquipesByAdherentId(@Param("id") Integer id);
 

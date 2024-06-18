@@ -33,13 +33,13 @@ public class StaffController {
         return "first hello from staff controller";
     }
 
-//    @PreAuthorize("hasAuthority('READ')")
+    @PreAuthorize("hasAuthority('Supprimer_comptabilite')")
     @GetMapping("/hello2")
     public String getHello2() {
         return "second hello from staff controller";
     }
 
-//    @PreAuthorize("hasAuthority('UPDATE')")
+    @PreAuthorize("hasAuthority('Modifier_comptabilite')")
     @GetMapping("/hello3")
     public String updateHello() {
         return "update hello from staff controller";

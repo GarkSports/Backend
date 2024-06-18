@@ -21,7 +21,7 @@ public class BeneficesController {
     @Autowired
     private BeneficesService beneficesService;
 
-    //   @PreAuthorize("hasAuthority('ajouter_comptabilite')")
+    //   @PreAuthorize("hasAuthority('Ajouter_comptabilite')")
     @PostMapping("/add")
     public ResponseEntity<Benefices> saveBenefices(Principal connectedUser,@RequestBody Benefices benefices) {
         if (connectedUser == null ) {
@@ -31,7 +31,7 @@ public class BeneficesController {
         return new ResponseEntity<>(savedBenefices, HttpStatus.CREATED);
     }
 
-    //      @PreAuthorize("hasAuthority('lire_comptabilite')")
+    //      @PreAuthorize("hasAuthority('Lire_comptabilite')")
     @GetMapping("/all")
     public ResponseEntity<List<Benefices>> getAllBenefices(Principal connectedUser) {
         if (connectedUser == null ) {
@@ -41,7 +41,7 @@ public class BeneficesController {
         return new ResponseEntity<>(beneficesList, HttpStatus.OK);
     }
 
-    //    @PreAuthorize("hasAuthority('lire_comptabilite')")
+    //    @PreAuthorize("hasAuthority('Lire_comptabilite')")
 
     @GetMapping("/{id}")
     public ResponseEntity<Benefices> getBeneficesById(Principal connectedUser,@PathVariable Integer id) {
@@ -53,7 +53,7 @@ public class BeneficesController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    //    @PreAuthorize("hasAuthority('modifier_comptabilite')")
+    //    @PreAuthorize("hasAuthority('Modifier_comptabilite')")
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Benefices> updateBenefices(Principal connectedUser,@PathVariable Integer id, @RequestBody Benefices newBenefices) {
@@ -66,7 +66,7 @@ public class BeneficesController {
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-   // @PreAuthorize("hasAuthority('supprimer_comptabilite')")
+   // @PreAuthorize("hasAuthority('Supprimer_comptabilite')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteBenefices(Principal connectedUser,@PathVariable Integer id) {
         if (connectedUser == null ) {
@@ -76,20 +76,20 @@ public class BeneficesController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    //    @PreAuthorize("hasAuthority('lire_comptabilite')")
+    //    @PreAuthorize("hasAuthority('Lire_comptabilite')")
 
     @GetMapping("/monthly-sums")
     public Map<String, BigDecimal> getMonthlySums(Principal connectedUser) {
 
         return beneficesService.getMonthlySumsForAcademie(connectedUser);
     }
-    //    @PreAuthorize("hasAuthority('lire_comptabilite')")
+    //    @PreAuthorize("hasAuthority('Lire_comptabilite')")
 
     @GetMapping("/monthly-comparisons")
     public Map<String, BigDecimal> getMonthlyComparisons(Principal connectedUser) {
         return beneficesService.getMonthlyComparisonsForAcademie(connectedUser);
     }
-    //    @PreAuthorize("hasAuthority('lire_comptabilite')")
+    //    @PreAuthorize("hasAuthority('Lire_comptabilite')")
 
     @GetMapping("/monthBenefice")
     public Benefices monthBenefice(Principal connectedUser){
