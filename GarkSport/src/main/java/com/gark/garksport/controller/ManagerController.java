@@ -151,9 +151,10 @@ public class ManagerController {
                     List<User> usersWithRoleName = repository.findByRoleName(existingRoleName.getName());
                     for (User u : usersWithRoleName) {
                         u.setRoleName(null);
+                        u.setPermissions(null);
                         repository.save(u);
                     }
-
+                    
                     academie.getRoleNames().remove(existingRoleName);
                     roleNameRepository.delete(existingRoleName);
                     academieRepository.save(academie);
