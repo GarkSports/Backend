@@ -8,11 +8,29 @@ s	java:S117˜"QRename this local variable to match the regular expression '^[a
 …
 java:S1488W"cImmediately return this expression instead of assigning it to the temporary variable "savedEquipe".(É£Ù©ùÿÿÿÿ8Òö‘“€2
 m
-java:S3655-"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8—¦ô‘€2
+java:S3655K"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8»ƒÕ•€2
 m
 java:S36557"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8—¦ô‘€2
-m
-java:S3655K"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ê¬àÅ8»ƒÕ•€2
 r
 java:S3655H"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(ıªàôıÿÿÿÿ8»ƒÕ•€2
+m
+java:S3655-"PCall "Optional#isPresent()" or "!Optional#isEmpty()" before accessing the value.(’¸òÅ8—¦ô‘€2
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ãß±˜2
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8åß±˜2
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8æß±˜2
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8èß±˜2
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8êß±˜2
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ëß±˜2
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8ìß±˜2
+_
+java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄŞ8ñß±˜2
+_
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ8õß±˜2
 ^	java:S125µ"<This block of commented-out lines of code should be removed.(ğƒß™ûÿÿÿÿ8ªûú’‚2

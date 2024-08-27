@@ -154,7 +154,7 @@ public class ManagerController {
                         u.setPermissions(null);
                         repository.save(u);
                     }
-                    
+
                     academie.getRoleNames().remove(existingRoleName);
                     roleNameRepository.delete(existingRoleName);
                     academieRepository.save(academie);

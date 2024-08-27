@@ -10,9 +10,13 @@
         <module name="GarkSport" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Eureka_Server_EcoExchange" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Eureka_Server_EcoExchange" options="-parameters" />
       <module name="GarkSport" options="-parameters" />
     </option>
   </component>

@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  rtmp:
+    build: ./src/main/java/com/gark/garksport/rtmp
+    ports:
+      - "1935:1935"
+    container_name: rtmp_server

@@ -1,18 +1,29 @@
 
+d
+java:S1192Œ"FDefine a constant instead of duplicating this literal "error" 4 times.(€—‚œ8²‰Åè‚2
+_
+java:S6813+"BRemove this field injection and use constructor injection instead.(êæÄŞ8‰Åè‚2
 o
-java:S6204d"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ø­À–÷1
+java:S6204h"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹8ø­À–÷1
 e
-java:S6201r"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ù­À–÷1
+java:S6201v"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8ù­À–÷1
+f
+java:S6201†"HReplace this instanceof check and cast with 'instanceof Manager manager'(á¶Ä©8„Åè‚2
 I
-java:S1452ö"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8ü­À–÷1
-^	java:S125Ò"<This block of commented-out lines of code should be removed.(Õ§³™ùÿÿÿÿ8ü­À–÷1
-Y	java:S125â"<This block of commented-out lines of code should be removed.(Áíëí8ü­À–÷1
+java:S1452Ÿ"&Remove usage of generic wildcard type.(ãµÑ¯üÿÿÿÿ8ü­À–÷1
 I
-java:S1452€"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8ı­À–÷1
-^	java:S125È"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8®À–÷1
+java:S1452©"&Remove usage of generic wildcard type.(É¸¼“ÿÿÿÿÿ8ı­À–÷1
+^	java:S125ô"<This block of commented-out lines of code should be removed.(½«Ó®üÿÿÿÿ8®À–÷1
 a
-java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8üªƒ–ø1
+java:S1128"DRemove this unused import 'com.fasterxml.jackson.databind.JsonNode'.(–×ª8Ã¸í¨ƒ2
 p
-java:S1128"NRemove this unused import 'com.gark.garksport.dto.request.AddRoleNameRequest'.(í…Êºûÿÿÿÿ8üªƒ–ø1
+java:S1128"NRemove this unused import 'com.gark.garksport.dto.request.AddRoleNameRequest'.(í…Êºûÿÿÿÿ8Ä¸í¨ƒ2
+g
+java:S1128"KRemove this unused import 'com.gark.garksport.dto.request.AdherentRequest'.(ş¨‡O8Ä¸í¨ƒ2
 b
-java:S1128	"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8ıªƒ–ø1
+java:S1128
+"@Remove this unused import 'com.gark.garksport.modal.enums.Role'.(»ÔÕüÿÿÿÿ8Å¸í¨ƒ2
+‚
+java:S1128"`Remove this unused import 'org.springframework.data.jpa.repository.support.SimpleJpaRepository'.(è¬ó•ûÿÿÿÿ8Å¸í¨ƒ2
+w
+java:S1128"URemove this unused import 'org.springframework.security.access.prepost.PreAuthorize'.(ˆ†×ùÿÿÿÿ8Æ¸í¨ƒ2

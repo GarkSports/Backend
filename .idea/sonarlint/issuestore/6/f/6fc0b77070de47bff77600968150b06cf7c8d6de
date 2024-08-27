@@ -1,3 +1,21 @@
 
 5
-java:S1700"Rename field "permission"(ÁúŸJ8‰ã¡‹é1
+java:S1700'"Rename field "permission"(ÁúŸJ8‰ã¡‹é1
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(È‡œ¨øÿÿÿÿ8¤˜Åè‚2
+{	java:S115	"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ô‰Óúÿÿÿÿ8¤˜Åè‚2
+{	java:S115
+"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ÁÁ¦Òıÿÿÿÿ8¤˜Åè‚2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(§Ğ¨Ú8¤˜Åè‚2
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(‰Ğı£ÿÿÿÿÿ8¤˜Åè‚2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(‘†¾8¥˜Åè‚2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(öé¼˜8¥˜Åè‚2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ºŞËŸ8¥˜Åè‚2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(È«ÚÌ8¥˜Åè‚2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¬öÔ©8¥˜Åè‚2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(–È€™8¥˜Åè‚2
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Æ²¥—üÿÿÿÿ8¥˜Åè‚2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(­§·è8¥˜Åè‚2
+{	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(…¯ÄËúÿÿÿÿ8¦˜Åè‚2
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ßƒãä8¦˜Åè‚2
+X	java:S125"<This block of commented-out lines of code should be removed.(Ëƒ¥à8©˜Åè‚2
+]	java:S125$"<This block of commented-out lines of code should be removed.(ÆñÑôùÿÿÿÿ8©˜Åè‚2
